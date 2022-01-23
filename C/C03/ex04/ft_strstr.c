@@ -54,5 +54,5 @@ char	*ft_strstr(char *str, char *to_find)
 				return (str + i);
 		}
 	}
-	return ('\0');
+	return (0);
 }
