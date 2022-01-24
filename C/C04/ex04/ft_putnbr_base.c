@@ -6,16 +6,16 @@ int nonavailable_base(char *base)
     int j;
 
     i = -1;
-    while(base[++i])
+    while (base[++i])
     {
         if ((9 <= base[i] && base[i] <= 13) || 32 == base[i])
             return (1);
         if ((base[i] == '+') || (base[i] == '-'))
             return (1);
         j = i;
-        while(base[++j])
+        while (base[++j])
         {
-            if(base[i] == base[j])
+            if (base[i] == base[j])
                 return (1);
         }
     }
@@ -38,16 +38,16 @@ void  ft_putnbr_base(int nbr, char *base)
     unsigned int    unsign;
 
     numsys = cnt_numsys(base);
-    if(nonavailable_base(base) || numsys <= 1)
+    if (nonavailable_base(base) || numsys <= 1)
         return ;
-    if(nbr < 0 )
+    if (nbr < 0 )
     {
         write(1, "-", 1);
         unsign = -nbr;
     }
     else
         unsign = nbr;
-    if(unsign == 0)
+    if (unsign == 0)
         return ;
     ft_putnbr_base(unsign/numsys, base);
     write(1, (base+(unsign%numsys)), 1);
