@@ -1,1 +1,4 @@
-int ft_atoi_base(char *str, char *base);
+int ft_atoi_base(char *str, char *base)
+{
+    
+}
