@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:45:22 by juha              #+#    #+#             */
-/*   Updated: 2022/01/25 10:48:52 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/25 15:37:11 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	make_num(char *str)
 	}
 	return (num);
 }
-
+// 42:44 42-42에서 오류가 남.
 int	ft_atoi(char *str)
 {
 	long long int	num;
