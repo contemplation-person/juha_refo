@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:22:43 by juha              #+#    #+#             */
-/*   Updated: 2022/01/19 19:15:58 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/26 21:07:08 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,3 @@ void	ft_putstr_non_printable(char *str)
 		i++;
 	}
 }
-/**
-#include <stdio.h>
-
-int main (){
-    char* a = "Coucou\ntu vas bien ?";
-
-    ft_putstr_non_printable(a);
-    return 0;
-}
-*/

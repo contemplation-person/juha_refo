@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_printable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:01:53 by juha              #+#    #+#             */
-/*   Updated: 2022/01/19 12:05:37 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/26 21:07:27 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ int	ft_str_is_printable(char *str)
 	}
 	return (1);
 }
-/**
-#include <stdio.h>
- int main()
- {
-    int a = ft_str_is_printable("aaaa1ßaaaaaa");
-    printf("%d", a); 
-    return 0;
- }
- */

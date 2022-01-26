@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:46:45 by juha              #+#    #+#             */
-/*   Updated: 2022/01/19 11:48:13 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/26 21:07:29 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ int	ft_str_is_uppercase(char *str)
 	}
 	return (i);
 }
-/**
-#include <stdio.h>
- int main()
- {
-    int a = ft_str_is_uppercase("aaaaaa1aaaaaa");
-    printf("%d", a); 
-    return 0;
- }
- */

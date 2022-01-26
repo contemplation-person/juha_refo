@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_numeric.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:51:45 by juha              #+#    #+#             */
-/*   Updated: 2022/01/19 11:45:08 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/26 21:07:39 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ int	ft_str_is_numeric(char *str)
 	}
 	return (i);
 }
-/**
-#include <stdio.h>
- int main()
- {
-    int a = ft_str_is_numeric("");
-    printf("%d", a); 
-    return 0;
- }
- */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlowcase.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:07:39 by juha              #+#    #+#             */
-/*   Updated: 2022/01/19 12:08:44 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/26 21:07:21 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,3 @@ char	*ft_strlowcase(char *str)
 	}
 	return (str);
 }
-/**
-#include <stdio.h>
-int main ()
-{
-    char str[5] = {'a', '/', 'E', '1','\0'};
-    printf("%s", ft_strlowcase(str));
-
-    return 0;
-}
-*/

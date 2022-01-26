@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:08:58 by juha              #+#    #+#             */
-/*   Updated: 2022/01/19 12:21:08 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/26 21:07:17 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,3 @@ char	*ft_strcapitalize(char *str)
 	}
 	return (str);
 }
-/**
-
-int main()
-{
-    char a[13] = {'a','B','c','\t','d','E','F','G','\\','1','a','b','\0'};
-    ft_strcapitalize(a);
-    return 0;
-}
-*/
