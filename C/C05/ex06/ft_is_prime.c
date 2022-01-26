@@ -1,12 +1,21 @@
-int eratos(int n)
-
-
-int ft_is_prime(int nb)
+int	ft_sqrt(int nb)
 {
-    if (1 < nb)
-    {
-        while();
-    }
-    else
-        return (0);
+	int	i;
+
+	i = 0;
+	if (nb < 0)
+		return (0);
+	while (i++ <= nb / 2)
+	{
+		if (i * i == nb)
+			return (i);
+	}
+	return (0);
+}
+
+int	ft_is_prime(int nb)
+{
+	int	i;
+
+	i = 0;
 }
