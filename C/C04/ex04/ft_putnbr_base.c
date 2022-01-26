@@ -35,10 +35,10 @@ int	cnt_numsys(char *base)
 void	ft_putnbr_base(int nbr, char *base)
 {
 	int				numsys;
-	unsigned int	unsign;
+	long int		unsign;
 
 	numsys = cnt_numsys(base);
-	if (nonavailable_base(base) || numsys <= 1)
+	if (nonavailable_base(base) && numsys <= 1)
 		return ;
 	if (nbr < 0 )
 	{
