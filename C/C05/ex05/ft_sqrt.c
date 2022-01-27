@@ -6,18 +6,18 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 11:29:11 by juha              #+#    #+#             */
-/*   Updated: 2022/01/27 11:30:32 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/27 18:01:49 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_sqrt(int nb)
 {
-	int	i;
+	long int	i;
 
 	i = 0;
 	if (nb < 0)
 		return (0);
-	while (i <= nb / 2)
+	while (i <= (long)nb / 2)
 	{
 		if (i * i == nb)
 			return (i);

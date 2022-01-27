@@ -6,8 +6,11 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 11:30:13 by juha              #+#    #+#             */
-/*   Updated: 2022/01/27 11:30:28 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/27 18:01:52 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_ten_queens_puzzle(void);
+int	ft_ten_queens_puzzle(void)
+{
+	return (0);
+}
