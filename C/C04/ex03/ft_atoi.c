@@ -6,62 +6,45 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:45:22 by juha              #+#    #+#             */
-/*   Updated: 2022/01/26 12:59:44 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/27 17:21:24 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	check_minus(char *num)
+int	is_plus(char *str)
 {
-	int	i;
+	int	plus;
 
-	i = 0;
-	while (*num)
+	plus = 1;
+	while ((9 <= *str && *str <= 13) || 32 == *str
+		|| *str == '-' || *str == '+')
 	{
-		if ('0' <= *num && *num <= '9')
-			return (i % 2);
-		if (*num == '-')
-			i++;
-		num++;
-	}
-	return (i % 2);
-}
-
-int	make_num(char *str)
-{
-	long long int	num;
-
-	num = 0;
-	while ((9 <= *str && *str <= 13) || 32 == *str)
-		str++;
-	while (!('0' <= *str && *str <= '9'))
-	{
-		if ((9 <= *str && *str <= 13) || 32 == *str)
-			break ;
+		if (*str == '-')
+			plus *= -1;
 		str++;
 	}
-	while (*str)
-	{
-		if ('0' <= *str && *str <= '9')
-		{
-			num *= 10;
-			num += (*str) - '0';
-		}
-		else
-			break ;
-		str++;
-	}
-	return (num);
+	return (plus);
 }
 
 int	ft_atoi(char *str)
 {
-	long long int	num;
+	long long	num;
+	int			plus;
 
-	while ((9 <= *str && *str <= 13) || 32 == *str)
+	num = 0;
+	plus = is_plus(str);
+	while ((9 <= *str && *str <= 13) || 32 == *str
+		|| *str == '-' || *str == '+')
 		str++;
-	num = make_num(str);
-	if (check_minus(str))
-		return (-num);
-	else
+	if (!('0' <= *str && *str <= '9') || *str == '0')
+		return (0);
+	while ('0' <= *str && *str <= '9')
+	{
+		num *= 10;
+		num += (*str) - '0';
+		str++;
+	}
+	if (plus == 1)
 		return (num);
+	else
+		return (-num);
 }

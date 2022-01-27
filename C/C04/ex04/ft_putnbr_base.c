@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/27 09:56:26 by juha              #+#    #+#             */
+/*   Updated: 2022/01/27 17:25:15 by juha             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 int	nonavailable_base(char *base)
@@ -34,8 +46,8 @@ int	cnt_numsys(char *base)
 
 void	ft_putnbr_base(int nbr, char *base)
 {
-	int				numsys;
-	long int		unsign;
+	int					numsys;
+	unsigned int		unsign;
 
 	numsys = cnt_numsys(base);
 	if (nonavailable_base(base) && numsys <= 1)

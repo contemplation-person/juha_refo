@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 10:55:27 by juha              #+#    #+#             */
-/*   Updated: 2022/01/26 21:09:13 by juha             ###   ########.fr       */
+/*   Updated: 2022/01/27 09:56:41 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	ft_atoi_base(char *str, char *base)
 	base_len = 0;
 	while (base[++base_len])
 		number_range(str, base, range);
-	if (nonavailable_base(base) || base_len <= 1)
+	if (nonavailable_base(base) && base_len <= 1)
 		return (0);
 	return (make_num(str, base, base_len, range));
 }
