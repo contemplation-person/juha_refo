@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/09 12:11:37 by juha             ###   ########.fr       */
+/*   Created: 2022/03/09 12:27:42 by juha              #+#    #+#             */
+/*   Updated: 2022/03/10 16:11:05 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int c)
+#include <unistd.h>
+
+void	ft_bzero(void *s, size_t n)
 {
-	if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
-		|| ('0' <= c && c <= '9'))
-		return (1);
+	unsigned char	*temp;
+	size_t			t;
+
+	if (n == 0)
+	{
+		write(1, "bzero is 0\n", 11);
+		return ;
+	}
 	else
-		return (0);
+	{
+		t = 0;
+		temp = (unsigned char *)s;
+		while (t < n)
+			temp[t++] = '\0';
+	}
 }

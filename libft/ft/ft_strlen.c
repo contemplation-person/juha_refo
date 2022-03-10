@@ -6,17 +6,18 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/07 22:00:34 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/09 14:21:57 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned long int	ft_strlen(const char	*s)
+#include <unistd.h>
+
+size_t	ft_strlen(const char	*s)
 {
-	unsigned long int	cnt;
+	size_t	cnt;
 
 	cnt = 0;
 	while (s[cnt])
 		cnt++;
 	return (cnt);
 }
-
