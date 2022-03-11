@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/10 17:32:24 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/10 17:49:35 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+int	ft_isprint(int c)
 {
-	size_t	cnt;
-
-	cnt = 0;
-	while (s[cnt])
-		cnt++;
-	return (cnt);
+	if ((32 <= c && c <= 126))
+		return (1);
+	else
+		return (0);
 }

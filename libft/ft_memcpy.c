@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 20:25:26 by juha              #+#    #+#             */
-/*   Updated: 2022/03/07 20:45:03 by juha             ###   ########.fr       */
+/*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
+/*   Updated: 2022/03/11 14:23:46 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include <unistd.h>
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	if ('0' <= c && c <= '9')
-		return (1);
-	else
-		return (0);
+	unsigned char	*temp;
+	size_t			cnt;
+
+	temp = (unsigned char *)src;
+	cnt = 0;
+	while (cnt < n)
+	{
+		((unsigned char *)dst)[cnt] = temp[cnt];
+		cnt++;
+	}
+	return (dst);
 }
