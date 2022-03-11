@@ -1,13 +1,22 @@
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werorre -Wextra
-TARGET = LIBFT_A
+TARGET = libft.a
+OBJS = ft_bzero.o ft_isalnum.o ft_isalnum.o 
+SRCS = 
+CINCLUDE = 
 
-$(TARGET) : ft_bzero.c 
-all : $
+all : $(TARGET)
+
+$(TARGET): $(OBJS) 
+	$(CC) $@ $^
+
+.c.o:
+	$(CC) $(CFLAGS) -c -o $@ $< 
 
 clean:
 	rm -f *.o
 	rm -f $(TARGET)
 
-$ (TARGET) : $(OBJS)
-$ (CC) -o $@ $(OBJS)
+fclean : clean
+
+re :

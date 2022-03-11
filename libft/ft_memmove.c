@@ -6,11 +6,11 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/11 17:32:26 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/11 22:19:41 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
 void	*ft_memmove(void *dest, const void *src, size_t count)
 {
