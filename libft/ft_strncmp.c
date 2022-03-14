@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/15 03:27:28 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/15 03:54:49 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	cnt;
-	size_t	src_len;
+	size_t	i;
+	int		f;
 
-	if (!dst || !src)
-		return (0);
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	cnt = 0;
-	while (cnt < src_len && cnt + 1 < dstsize)
+	i = 0;
+	while (i < n)
 	{
-		dst[cnt] = src[cnt];
-		cnt++;
+		if (s1[i] != s2[i])
+			return (s1 - s2);
 	}
-	if (dstsize > 0)
-		dst[cnt] = '\0';
-	return (src_len);
+	return (0);
 }

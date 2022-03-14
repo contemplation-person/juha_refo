@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/15 03:27:28 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/15 04:18:46 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+int	ft_tolower(int c)
 {
-	size_t	cnt;
-	size_t	src_len;
-
-	if (!dst || !src)
-		return (0);
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	cnt = 0;
-	while (cnt < src_len && cnt + 1 < dstsize)
-	{
-		dst[cnt] = src[cnt];
-		cnt++;
-	}
-	if (dstsize > 0)
-		dst[cnt] = '\0';
-	return (src_len);
+	if ('A' <= c && c <= 'Z')
+		return (c + 32);
+	return (c);
 }
