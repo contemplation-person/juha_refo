@@ -16,12 +16,12 @@ all : $(NAME)
 	$(CC) $(CFLAGES) -c $<
 
 $(NAME) : $(OBJS)
-	ar rcus $@ $^
+	ar rsc $@ $^
 
 clean:
-	rm *.o
+	rm -f $(OBJS)
 
 fclean : clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re : fclean all
