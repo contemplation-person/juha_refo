@@ -1,22 +1,27 @@
 CC = cc
-CFLAGS = -Wall -Werorre -Wextra
+CFLAGES = -Wall -Wextra -Werror
 TARGET = libft.a
-OBJS = ft_bzero.o ft_isalnum.o ft_isalnum.o 
-SRCS = 
-CINCLUDE = 
+CINCLUDE = -I libft.h				
+SRC = ft_bzero.c ft_isalnum.c ft_isalpha.c\
+	  ft_isascii.c ft_isdigit.c ft_isprint.c\
+	  ft_memcpy.c ft_memmove.c ft_memset.c\
+	  ft_strlen.c
+OBJS = $(SRC:.c=.o)
+
+.PONY: all clean fclean re
 
 all : $(TARGET)
 
-$(TARGET): $(OBJS) 
-	$(CC) $@ $^
-
 .c.o:
-	$(CC) $(CFLAGS) -c -o $@ $< 
+	$(CC) $(CFLAGES) -c $<
+
+$(TARGET) : $(OBJS)
+	ar rcus $(TARGET) $(OBJS)
 
 clean:
-	rm -f *.o
-	rm -f $(TARGET)
+	rm *.o
+	rm $(TARGET)
 
-fclean : clean
+fclean : clean all
 
-re :
+re : fclean all

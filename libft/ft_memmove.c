@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/11 22:19:41 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/12 20:42:42 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_memmove(void *dest, const void *src, size_t count)
 	}
 	else
 	{
-		cnt = count;
+		cnt = count - 1;
 		while (0 < cnt)
 		{
 			((unsigned char *)dest)[cnt] = temp[cnt];
