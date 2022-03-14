@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/14 13:47:38 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/14 14:56:38 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	unsigned char	*temp;
-	size_t			cnt;
+	size_t	cnt;
 
-	temp = (unsigned char *)src;
 	cnt = 0;
-	while (cnt < n)
+	if (!dst || !src)
+		return (0);
+	while (src[cnt] != '\0' || cnt + 1 < dstsize)
 	{
-		((unsigned char *)dst)[cnt] = temp[cnt];
+		dst[cnt] = src[cnt];
 		cnt++;
 	}
-	return (dst);
+	if (dstsize > 0)
+		dst[cnt] = '\0';
+	return (cnt);//src길이 리턴
 }

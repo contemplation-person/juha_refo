@@ -1,18 +1,13 @@
+#include <unistd.h>
 #include <stdio.h>
-#include <string.h>
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
-void	*ft_memmove(void *dest, const void *src, size_t count);
+int main (){
+	char	*src = "123456";
+	char	dest[20];
 
-int main()
-{
-	char	dst[10] = "abcdaaaaa";
-	char	src[10] = "123456789";
+	size_t	ret	= ft_strlcpy(dest, src, 13);
+	printf("%dest = %s\nreturn = %zu\n", dest, ret);
 
-
-	printf("origin : %s\n",    memmove(dst, src, 8));
-	printf("ft     : %s\n", ft_memmove(dst, src, 8));
-
-	printf("origin : %s\n",    memmove(src + 2, src, 8));
-	printf("ft     : %s\n", ft_memmove(src + 2, src, 8));
-	return (0);
+	return 0;
 }
