@@ -1,13 +1,14 @@
 #include <unistd.h>
 #include <stdio.h>
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+#include <string.h>
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 int main (){
-	char	*src = "123456";
-	char	dest[20];
-
-	size_t	ret	= ft_strlcpy(dest, src, 13);
-	printf("%dest = %s\nreturn = %zu\n", dest, ret);
-
+	char	*s1 = "omg1||||||||||||||||";
+	char	*s2 = "omg3";
+	size_t	size = 4;
+	int	i1 = ((strncmp(s1, s2, size) > 0) ? 1 : ((strncmp(s1, s2, size) < 0) ? -1 : 0));
+	int	i2 = ((ft_strncmp(s1, s2, size) > 0) ? 1 : ((ft_strncmp(s1, s2, size) < 0) ? -1 : 0));
+	printf("s")
 	return 0;
 }

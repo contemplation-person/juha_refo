@@ -1,13 +1,11 @@
 CC = cc
 CFLAGES = -Wall -Wextra -Werror
-NAME = libft.a
-CINCLUDE = -I libft.h				
+NAME = libft.a					
 SRC = ft_bzero.c ft_isalnum.c ft_isalpha.c\
 	  ft_isascii.c ft_isdigit.c ft_isprint.c\
 	  ft_memcpy.c ft_memmove.c ft_memset.c\
 	  ft_strlen.c ft_strlcpy.c ft_toupper.c\
 	  ft_tolower.c ft_strncmp.c ft_strlcat.c\
-	  
 
 OBJS = $(SRC:.c=.o)
 
@@ -15,8 +13,8 @@ OBJS = $(SRC:.c=.o)
 
 all : $(NAME)
 
-.c.o:
-	$(CC) $(CFLAGES) -c $<
+$(OBJS):$(SRC)
+	$(CC) $(CFLAGES) -c $^
 
 $(NAME) : $(OBJS)
 	ar rcus $@ $^
