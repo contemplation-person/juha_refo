@@ -1,2 +1,2 @@
 # 42
-42 Seoul cadet
+42 Seoul
