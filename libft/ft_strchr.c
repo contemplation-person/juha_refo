@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/15 15:25:46 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/15 16:04:47 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	dst_len;
-	size_t	src_len;
+	char	first;
+	int		n;
 
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	dst_len = 0;
-	while (dst_len < src_len && dst_len < dstsize)
+	first = c;
+	n = 0;
+	while (s[n])
 	{
-		dst[dst_len] = src[dst_len];
-		dst_len++;
+		if (s[n] == c)
+			return ((char *)&s[n]);
+		n++;
 	}
-	dst[dst_len] = '\0';
-	return (dst_len);
+	if (c == '\0')
+		return ((char *)&s[n]);
+	return (0);
 }

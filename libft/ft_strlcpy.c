@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/15 11:30:10 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/15 14:26:40 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t	cnt;
 	size_t	src_len;
 
-	if (!dst || !src)
-		return (0);
 	src_len = 0;
 	while (src[src_len])
 		src_len++;
