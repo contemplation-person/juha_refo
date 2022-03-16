@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/16 13:05:34 by juha             ###   ########.fr       */
+/*   Created: 2022/03/16 17:18:30 by juha              #+#    #+#             */
+/*   Updated: 2022/03/16 20:22:15 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+int	ft_atoi(const char *str)
 {
-	size_t	dst_len;
-	size_t	src_len;
+	long int	cnt;
+	int			is_minus;
 
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	dst_len = 0;
-	while (dst_len < src_len && dst_len < dstsize)
+	while (*str == 32 || (9 <= *str && *str <= 13) || *str == '+' )
+		str++;
+	if (*str == '-')
 	{
-		dst[dst_len] = src[dst_len];
-		dst_len++;
+		str++;
+		is_minus = -1;
 	}
-	dst[dst_len] = '\0';
-	return (dst_len);
+	cnt = 0;
+	while (*str && '0' <= *str && *str <= '9')
+	{
+		cnt *= 10;
+		cnt += ((*str) - 48);
+		str++;
+	}
+	if (!str)
+		return (0);
+	if (is_minus == -1)
+		return ((int)cnt * is_minus);
+	else
+		return ((int)cnt);
 }

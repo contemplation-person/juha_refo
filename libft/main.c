@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-char	*ft_strchr(const char *s, int c);
+int	ft_atoi(const char *str);
 
 int	main(){
-	char * str = "abcd";
-	char c = 'k';
-	printf("%s\n",strchr(str,c));
-	printf("%s\n",ft_strchr(str,c));
+	printf("ft_atoi : %d\n", ft_atoi("\t\v\f\r\n \f-06050"));
+	printf("atoi    : %d\n", atoi("\t\v\f\r\n \f-06050"));
 	return 0;
 }

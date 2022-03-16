@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/16 13:05:34 by juha             ###   ########.fr       */
+/*   Created: 2022/03/16 12:36:53 by juha              #+#    #+#             */
+/*   Updated: 2022/03/16 17:17:07 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	dst_len;
-	size_t	src_len;
+	size_t	i;
+	size_t	j;
 
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	dst_len = 0;
-	while (dst_len < src_len && dst_len < dstsize)
+	i = 0;
+	j = 0;
+	while (haystack[i])
 	{
-		dst[dst_len] = src[dst_len];
-		dst_len++;
+		while (haystack[i] == needle[j] && needle[j] && (i + j < len))
+			j++;
+		if (!needle[j])
+			return ((char *)(haystack + i));
+		i++;
 	}
-	dst[dst_len] = '\0';
-	return (dst_len);
+	return (0);
 }
