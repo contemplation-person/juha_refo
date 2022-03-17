@@ -6,16 +6,14 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/15 16:21:12 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/18 00:29:27 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char	first;
 	int		n;
 
-	first = c;
 	n = 0;
 	while (s[n])
 		n++;
