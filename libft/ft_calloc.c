@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 12:27:42 by juha              #+#    #+#             */
-/*   Updated: 2022/03/17 14:37:04 by juha             ###   ########.fr       */
+/*   Created: 2022/03/17 14:22:33 by juha              #+#    #+#             */
+/*   Updated: 2022/03/17 15:48:19 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char	*temp;
-	size_t			t;
+	unsigned char	*p;
+	size_t			cnt;
 
-	if (n != 0)
-	{
-		t = 0;
-		temp = (unsigned char *)s;
-		while (t < n)
-			temp[t++] = '\0';
-	}
-	else
-		return ;
+	if (size > count)
+		return (0);
+	cnt = 0;
+	p = (unsigned char *)malloc(count * size);
+	while (cnt < count * size)
+		p[cnt++] = '\0';
+	return ((void *)p);
 }

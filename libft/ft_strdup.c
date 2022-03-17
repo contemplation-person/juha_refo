@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 12:27:42 by juha              #+#    #+#             */
-/*   Updated: 2022/03/17 14:37:04 by juha             ###   ########.fr       */
+/*   Created: 2022/03/17 15:49:39 by juha              #+#    #+#             */
+/*   Updated: 2022/03/17 17:13:47 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <strlib.c>
 
-void	ft_bzero(void *s, size_t n)
+char	*strdup(const char *s1)
 {
-	unsigned char	*temp;
-	size_t			t;
-
-	if (n != 0)
-	{
-		t = 0;
-		temp = (unsigned char *)s;
-		while (t < n)
-			temp[t++] = '\0';
-	}
-	else
-		return ;
+	
 }
