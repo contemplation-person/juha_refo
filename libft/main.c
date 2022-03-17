@@ -2,10 +2,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-int	ft_atoi(const char *str);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 int	main(){
-	printf("ft_atoi : %d\n", ft_atoi("9223372036854775807"));
-	printf("atoi    : %d\n", atoi("9223372036854775807"));
-	return 0;
+	char *str = "01234";
+	size_t size = 10;
+	char *ret = ft_substr(str, 10, size);
+	printf("ft_substr: %s\n", ret);
+	return (0);
 }
