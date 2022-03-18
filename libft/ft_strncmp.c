@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 17:17:21 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:49:01 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int	ft_strncmp(const unsigned char *s1, const unsigned char *s2, size_t n)
+int	ft_strncmp(const unsigned char *s1, const unsigned char *s2, unsigned int n)
 {
-	size_t	i;
+	unsigned int	i;
 
 	i = 0;
 	while ((s1[i] || s2[i]) && i < n)

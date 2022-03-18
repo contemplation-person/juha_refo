@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 17:16:37 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:49:09 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-void	*ft_memmove(void *dest, const void *src, size_t count)
+void	*ft_memmove(void *dest, const void *src, unsigned int count)
 {
 	unsigned char	*temp;
-	size_t			cnt;
+	unsigned int			cnt;
 
 	temp = (unsigned char *)src;
 	if (dest > src)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:04:06 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 17:16:56 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:49:04 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	j;
-	size_t	size;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	size;
 	char	*temp;
 
 	if (!s1 && s2)

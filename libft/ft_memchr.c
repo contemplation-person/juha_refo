@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:13:11 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 17:16:24 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:49:10 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, unsigned int n)
 {
 	unsigned char	*convt;
-	size_t			cnt;
+	unsigned int			cnt;
 
 	convt = (unsigned char *)s;
 	cnt = 0;

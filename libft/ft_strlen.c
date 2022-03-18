@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 17:17:08 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:49:02 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-size_t	ft_strlen(const char	*s)
+unsigned int	ft_strlen(const char	*s)
 {
-	size_t	cnt;
+	unsigned int	cnt;
 
 	cnt = 0;
 	while (s[cnt])

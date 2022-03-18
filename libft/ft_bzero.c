@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 12:27:42 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 17:15:51 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/18 22:49:16 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, unsigned int n)
 {
 	unsigned char	*temp;
-	size_t			t;
+	unsigned int			t;
 
 	if (n != 0)
 	{
