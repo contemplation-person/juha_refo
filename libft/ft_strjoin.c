@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:04:06 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 22:49:04 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 22:52:05 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	size;
-	char	*temp;
+	char			*temp;
 
 	if (!s1 && s2)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:21:11 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 22:49:10 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 22:51:34 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_memcmp(const void *s1, const void *s2, unsigned int n)
 {
 	unsigned char	*s_temp1;
 	unsigned char	*s_temp2;
-	unsigned int			i;
+	unsigned int	i;
 
 	s_temp1 = (unsigned char *)s1;
 	s_temp2 = (unsigned char *)s2;

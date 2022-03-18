@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 22:49:09 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 22:51:43 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	*ft_memmove(void *dest, const void *src, unsigned int count)
 {
 	unsigned char	*temp;
-	unsigned int			cnt;
+	unsigned int	cnt;
 
 	temp = (unsigned char *)src;
 	if (dest > src)

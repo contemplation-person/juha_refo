@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 17:49:47 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 22:48:58 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 22:52:41 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_substr(char const *s, unsigned int start, unsigned int len)
 {
 	unsigned int	i;
 	unsigned int	j;
-	char	*temp;
+	char			*temp;
 
 	if (!s)
 		return (0);

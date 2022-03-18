@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:22:33 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 22:49:15 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 22:51:15 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	*ft_calloc(unsigned int count, unsigned int size)
 {
 	unsigned char	*p;
-	unsigned int			cnt;
+	unsigned int	cnt;
 
 	if (size > count)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 12:27:42 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 22:49:08 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 22:51:47 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	*ft_memset(void *b, int c, unsigned int len)
 {
 	unsigned char	*temp;
-	unsigned int			cnt;
+	unsigned int	cnt;
 
 	cnt = 0;
 	temp = (unsigned char *)b;
