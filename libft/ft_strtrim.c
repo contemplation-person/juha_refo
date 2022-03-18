@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 17:17:05 by juha             ###   ########.fr       */
+/*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
+/*   Updated: 2022/03/18 17:43:41 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
+#include <stdlib.h>
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	cnt;
-	size_t	src_len;
+	char	*temp;
+	int		idx[2];
 
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	cnt = 0;
-	while (cnt < src_len && cnt + 1 < dstsize)
-	{
-		dst[cnt] = src[cnt];
-		cnt++;
-	}
-	if (dstsize > 0)
-		dst[cnt] = '\0';
-	return (src_len);
+	if (!s1)
+		return (0);
+	return (0);
+}
+
+static int	*cutting_sentence(const char *s1, const char *set, int idx[2])
+{
+	return ();
 }
