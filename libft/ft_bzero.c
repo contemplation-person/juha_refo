@@ -6,12 +6,11 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 12:27:42 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 23:33:39 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 23:58:22 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 void	ft_bzero(void *s, size_t n)
 {

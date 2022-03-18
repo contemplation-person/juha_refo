@@ -6,12 +6,11 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 17:49:47 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 23:02:50 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/19 00:00:31 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_substr(char const *s, size_t start, size_t len)
 {
