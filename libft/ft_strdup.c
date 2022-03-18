@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 15:49:39 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 22:51:59 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 23:03:12 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char			*temp;
-	unsigned int	i;
+	char	*temp;
+	size_t	i;
 
 	i = 0;
 	while (s1[i])

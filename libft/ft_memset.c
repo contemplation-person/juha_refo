@@ -6,17 +6,17 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 12:27:42 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 22:51:47 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/18 23:33:34 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
+#include <stdlib.h>
 
-void	*ft_memset(void *b, int c, unsigned int len)
+void	*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*temp;
-	unsigned int	cnt;
+	size_t			cnt;
 
 	cnt = 0;
 	temp = (unsigned char *)b;
