@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:44:54 by juha              #+#    #+#             */
-/*   Updated: 2022/03/18 23:58:40 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/20 02:18:56 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*ft_strchr(const char *s, int c)
 	while (s[n])
 	{
 		if (s[n] == c)
-			return ((char *)&s[n]);
+			return ((char *)(s + n));
 		n++;
 	}
 	if (c == '\0')
-		return ((char *)&s[n]);
+		return ((char *)(s + n));
 	return (0);
 }
