@@ -1,0 +1,223 @@
+ft_memset:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_bzero:      [OK] [OK] [OK] [OK] 
+ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memccpy:    [MISSING]
+ft_memmove:    [OK] [OK] [OK] [OK] [FAILED] [FAILED] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+[fail]: your memmove does not support the overlap (test 1)
+Test code:
+	char dst1[0xF0];
+	char dst2[0xF0];
+	char *data = "thiß ß\xde\xad\xbe\xeftriñg will be øvérlapéd !\r\n";
+	int size = 0xF0 - 0xF;
+
+	__builtin___memset_chk (dst1, 'A', sizeof(dst1), __builtin_object_size (dst1, 0));
+	__builtin___memset_chk (dst2, 'A', sizeof(dst2), __builtin_object_size (dst2, 0));
+	__builtin___memcpy_chk (dst1, data, strlen(data), __builtin_object_size (dst1, 0));
+	__builtin___memcpy_chk (dst2, data, strlen(data), __builtin_object_size (dst2, 0));
+	__builtin___memmove_chk (dst1 + 3, dst1, size, __builtin_object_size (dst1 + 3, 0));
+	ft_memmove(dst2 + 3, dst2, size);
+	if (!memcmp(dst1, dst2, size))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     memmove: |thithiß ßޭ��triñg will be øvérlapéd !
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO|
+  ft_memmove: |thithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithithiAAAAAAAAAAAAthithiß ßޭ��triñg will be øvérlapéd !
+AAAAAAAAAAAAAA|
+
+[fail]: your memmove does not support the overlap (test 2)
+Test code:
+	char dst1[0xF0];
+	char dst2[0xF0];
+	char *data = "thiß ß\xde\xad\xbe\xeftriñg will be øvérlapéd !\r\n";
+	int size = 0xF0 - 0xF;
+
+	__builtin___memset_chk (dst1, 'A', sizeof(dst1), __builtin_object_size (dst1, 0));
+	__builtin___memset_chk (dst2, 'A', sizeof(dst2), __builtin_object_size (dst2, 0));
+	__builtin___memcpy_chk (dst1, data, strlen(data), __builtin_object_size (dst1, 0));
+	__builtin___memcpy_chk (dst2, data, strlen(data), __builtin_object_size (dst2, 0));
+	__builtin___memmove_chk (dst1, dst1 + 3, size, __builtin_object_size (dst1, 0));
+	ft_memmove(dst2, dst2 + 3, size);
+	if (!memcmp(dst1, dst2, size))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     memmove: |ß ßޭ��triñg will be øvérlapéd !
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO|
+  ft_memmove: |AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAß ßޭ��triñg will be øvérlapéd !
+AAAAAAAAAAAAAAAAAAAA|
+
+ft_memchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memcmp:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlen:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_isalpha:    [OK] 
+ft_isdigit:    [OK] 
+ft_isalnum:    [OK] 
+ft_isascii:    [OK] 
+ft_isprint:    [OK] 
+ft_toupper:    [OK] 
+ft_tolower:    [OK] 
+ft_strchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strrchr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strncmp:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlcpy:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlcat:    [FAILED] [FAILED] [FAILED] [FAILED] [FAILED] [FAILED] [OK] [OK] [OK] [FAILED] [OK] [OK] 
+[fail]: your strlcat does not work with basic input
+Test code:
+	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = strlen("the cake is a lie !\0I'm hidden lol\r\n") + 4;
+
+	__builtin___strlcat_chk (buff1, str, max, __builtin_object_size (buff1, 2 > 1 ? 1 : 0));
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strlcat: |there is no stars in the sky|
+  ft_strlcat: |the cake is a lie !|
+
+[fail]: your strlcat does not work with basic input
+Test code:
+	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = strlen("the cake is a lie !\0I'm hidden lol\r\n") + 4;
+	size_t r1 = __builtin___strlcat_chk (buff1, str, max, __builtin_object_size (buff1, 2 > 1 ? 1 : 0));
+	size_t r2 = ft_strlcat(buff2, str, max);
+
+	if (r1 != r2)
+		exit(TEST_FAILED);
+	char s1[4] = "";
+	char s2[4] = "";
+	r1 = __builtin___strlcat_chk (s1, "thx to ntoniolo for this test !", 4, __builtin_object_size (s1, 2 > 1 ? 1 : 0))
+		;
+	r2 = ft_strlcat(s2, "thx to ntoniolo for this test !", 4)
+		;
+	if (r1 != r2)
+		exit(TEST_FAILED);
+	exit(TEST_SUCCESS);
+
+Diffs:
+     strlcat: |42|
+  ft_strlcat: |19|
+
+[fail]: your strlcat does not work with basic input
+Test code:
+	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = strlen("the cake is a lie !\0I'm hidden lol\r\n") + strlen("there is no stars in the sky");
+
+	__builtin___strlcat_chk (buff1, str, max, __builtin_object_size (buff1, 2 > 1 ? 1 : 0));
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strlcat: |there is no stars in the skythe cake is a lie |
+  ft_strlcat: |the cake is a lie !|
+
+[fail]: your strlcat does not work with over length size
+Test code:
+	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = 1000;
+
+	__builtin___strlcat_chk (buff1, str, max, __builtin_object_size (buff1, 2 > 1 ? 1 : 0));
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strlcat: |there is no stars in the skythe cake is a lie !|
+  ft_strlcat: |the cake is a lie !|
+
+[fail]: your strlcat does not work with a size of 0
+Test code:
+	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = 0;
+
+	__builtin___strlcat_chk (buff1, str, max, __builtin_object_size (buff1, 2 > 1 ? 1 : 0));
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strlcat: |there is no stars in the sky|
+  ft_strlcat: ||
+
+[fail]: your strcat does not work with empty string as first parameter
+Test code:
+	char *str = "";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = strlen("there is no stars in the sky") + 1;
+
+	__builtin___strlcat_chk (buff1, str, max, __builtin_object_size (buff1, 2 > 1 ? 1 : 0));
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strlcat: |there is no stars in the sky|
+  ft_strlcat: ||
+
+[fail]: your strlcat return value is false
+Test code:
+	char *src = "aaa";
+	char dst1[20];
+	char dst2[20];
+	int ret1;
+	int ret2;
+
+	__builtin___memset_chk (dst1, 'B', sizeof(dst1), __builtin_object_size (dst1, 0));
+	__builtin___memset_chk (dst2, 'B', sizeof(dst2), __builtin_object_size (dst2, 0));
+	__builtin___strlcat_chk (dst1, src, 20, __builtin_object_size (dst1, 2 > 1 ? 1 : 0));
+	__builtin___strlcat_chk (dst1, src, 20, __builtin_object_size (dst1, 2 > 1 ? 1 : 0));
+	ret1 = __builtin___strlcat_chk (dst1, src, 20, __builtin_object_size (dst1, 2 > 1 ? 1 : 0));
+	ft_strlcat(dst2, src, 20);
+	ft_strlcat(dst2, src, 20);
+	ret2 = ft_strlcat(dst2, src, 20);
+	if (ret1 == ret2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strlcat: |23|
+  ft_strlcat: |3|
+
+ft_strnstr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_atoi:       [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_calloc:     [OK] [OK] [OK] [OK] [OK] 
+ft_strdup:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_substr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {protected}[OK] 
+ft_strjoin:    [OK] [OK] [OK] [OK] [OK] {protected}
+ft_strtrim:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] {protected}
+ft_split:      [MISSING]
+ft_itoa:       [MISSING]
+ft_strmapi:    [MISSING]
+ft_putchar_fd: [MISSING]
+ft_putstr_fd:  [MISSING]
+ft_putendl_fd: [MISSING]
+ft_putnbr_fd:  [MISSING]
+ft_lstnew:     [MISSING]
+ft_lstadd_front: [MISSING]
+ft_lstsize:    [MISSING]
+ft_lstlast:    [MISSING]
+ft_lstadd_back:[MISSING]
+ft_lstdelone:  [MISSING]
+ft_lstclear:   [MISSING]
+ft_lstiter:    [MISSING]
+ft_lstmap:     [MISSING]
