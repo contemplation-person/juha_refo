@@ -3,10 +3,13 @@
 #include <string.h>
 
 int	main(){
-	char	*s1 = "   \t  \n\n \t\t  \n\n\nHello \t  Please\n Trim me !\n   \n \n \t\t\n  ";
-	char	*s2 = "Hello \t  Please\n Trim me !";
-	char	*ret = ft_strtrim(s1, " \n\t");
-
+	char *s1 = "  \t \t \n   \n\n\n\t";
+	char *s2 = "";
+	char *ret = ft_strtrim(s1, " \n\t");
+	int i = 0;
+	while(s1[i])
+		i++;
+	printf("i = %d\n",i);
 	printf("ft : %s\n",ret);
 	return (0);
 }

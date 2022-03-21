@@ -1,33 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
-/*   Updated: 2022/03/21 18:26:10 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/21 19:38:16 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <sys/types.h>
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	**ft_split(char const *s, char c)
 {
-	size_t	tail;
-	size_t	front;
+	char	**pp;
+	size_t	cnt;
 
-	if (!s1)
+	cnt = ft_cnt_word(s, c);
+	**pp = 0;
+	return (pp);
+}
+
+static size_t	ft_cnt_word(char const *s, char c)
+{
+	size_t	cnt;
+	ssize_t	i;
+
+	i = -1;
+	cnt = 0;
+	while (s[++i])
+	{
+		while (s[i] != c)
+			++i;
+		if (s[i] != '\0')
+			cnt++;
+	}
+	return (cnt);
+}
+
+
+static char	**make_pp(size_t cnt)
+{
+	char	**pp;
+
+	pp = (char **)malloc(sizeof(char *) * cnt);
+	if (!pp)
 		return (0);
-	front = 0;
-	while (s1[front] && ft_strchr(set, s1[front++]))
-		;
-	if (s1[front] == '\0')
-		return (ft_strdup(""));
-	tail = 0;
-	while (s1[tail++])
-		;
-	while (ft_strrchr(set, s1[--tail]))
-		;
-	return (ft_substr(s1, front - 1, tail - front + 2));
+	return (pp);
 }
