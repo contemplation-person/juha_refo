@@ -2,14 +2,27 @@
 #include "libft.h"
 #include <string.h>
 
-int	main(){
-	char *s1 = "  \t \t \n   \n\n\n\t";
-	char *s2 = "";
-	char *ret = ft_strtrim(s1, " \n\t");
-	int i = 0;
-	while(s1[i])
+static size_t	ft_cnt_word(char const *s, char c)
+{
+	size_t	cnt;
+	size_t	i;
+
+	i = 0;
+	cnt = 0;
+
+	while (s[i])
+	{
+		if (!ft_strchr(s + i, c))
+			cnt++;
 		i++;
-	printf("i = %d\n",i);
-	printf("ft : %s\n",ret);
+	}
+	return (cnt);
+}
+
+int	main(){
+	char *s1 = " how are you ";
+	int ret = ft_cnt_word(s1, 'o');
+
+	printf("ft : %d\n",ret);
 	return (0);
 }

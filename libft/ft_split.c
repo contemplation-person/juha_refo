@@ -6,45 +6,39 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
-/*   Updated: 2022/03/21 20:06:55 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/22 16:25:05 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <sys/types.h>
 
+static char	**make_pp(char const *s, char c);
+
 char	**ft_split(char const *s, char c)
 {
 	char	**pp;
-	size_t	cnt;
 
-	cnt = ft_cnt_word(s, c);
-	**pp = 0;
+	**pp = make_pp(s, c);
+	
 	return (pp);
 }
 
-static size_t	ft_cnt_word(char const *s, char c)
-{
-	size_t	cnt;
-	ssize_t	i;
-
-	i = -1;
-	cnt = 0;
-	while (s[++i])
-	{
-		while (s[i] != c)
-			++i;
-		if (s[i] != '\0')
-			cnt++;
-	}
-	return (cnt);
-}
-
-
-static char	**make_pp(size_t cnt)
+static char	**make_pp(char const *s, char c)
 {
 	char	**pp;
+	size_t	cnt;
+	size_t	i;
 
+	i = 0;
+	cnt = 0;
+
+	while (s[i])
+	{
+		if (!ft_strchr(s + i, c))
+			cnt++;
+		i++;
+	}
 	pp = (char **)malloc(sizeof(char *) * cnt);
 	if (!pp)
 		return (0);
