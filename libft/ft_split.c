@@ -6,15 +6,15 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
-/*   Updated: 2022/03/24 00:03:40 by conteng          ###   ########.fr       */
+/*   Updated: 2022/03/24 00:08:08 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <sys/types.h>
+
 static size_t	cnt_word(char const *s, char c);
 static char		**make_pp(char const *s, char c);
-static char		*make_p(char const *s, char c, size_t i);
 
 char	**ft_split(char const *s, char c)
 {
@@ -74,33 +74,4 @@ static char	**make_pp(char const *s, char c)
 	if (!pp)
 		return (0);
 	return (pp);
-}
-
-static char	*make_p(char const *s, char c, size_t i)
-{
-	char	*p;
-	size_t	tail;
-	ssize_t	front;
-
-	front = -1;
-	tail = 0;
-	while (s[++front])
-	{
-		while ((size_t)front == i && ft_strchr(s + front + tail, c))
-			tail++;
-		if ((size_t)front == i)
-			break ;
-	}
-	if (tail)
-	{
-		p = (char *)malloc(tail - front);
-		if (!p)
-			return (0);
-		while ((size_t)front <= tail)
-			p[i] = s[front++];
-		p[i] = '\0';
-	}
-	else
-		return (0);
-	return (p);
 }
