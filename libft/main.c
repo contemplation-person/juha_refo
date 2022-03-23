@@ -2,27 +2,31 @@
 #include "libft.h"
 #include <string.h>
 
-static size_t	ft_cnt_word(char const *s, char c)
+static char	*make_p(char const *s, char c, size_t cnt_tok)
 {
-	size_t	cnt;
-	size_t	i;
+	char	*p;
+	size_t	tail;
+	ssize_t	front;
+	int		cnt;
 
-	i = 0;
+	if (!s)
+		return (0);
+	front = 0;
 	cnt = 0;
-
-	while (s[i])
-	{
-		if (!ft_strchr(s + i, c))
-			cnt++;
-		i++;
-	}
-	return (cnt);
+	
 }
 
-int	main(){
-	char *s1 = " how are you ";
-	int ret = ft_cnt_word(s1, 'o');
 
-	printf("ft : %d\n",ret);
+int	main()
+{
+	char	s1[] = " h1ow 2are y3u ";
+	char	c = 'o';
+	char	**ret = ft_split(s1, c);
+
+	int i = 0;
+
+	printf("make p : %s\n",make_p(s1, c, 0));	
+	while (ret[i])
+		printf("ft : %s\n", ret[i++]);
 	return (0);
 }
