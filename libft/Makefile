@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juha <juha@student.42.fr>                  +#+  +:+       +#+         #
+#    By: conteng <conteng@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/03/24 19:43:08 by juha             ###   ########.fr        #
+#    Updated: 2022/03/25 01:02:58 by conteng          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC = 	ft_bzero.c ft_isalnum.c ft_isalpha.c\
 		ft_memcmp.c ft_strnstr.c ft_atoi.c\
 		ft_calloc.c ft_strdup.c ft_substr.c\
 		ft_strjoin.c ft_strtrim.c\
-		ft_itoa.c
+		ft_itoa.c ft_striteri.c ft_strmapi.c\
+		ft_putchar_fd.c
 		
 OBJS = $(SRC:.c=.o)
 
