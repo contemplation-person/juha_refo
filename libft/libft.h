@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 02:22:52 by conteng           #+#    #+#             */
-/*   Updated: 2022/03/21 20:07:16 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/24 19:42:25 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, size_t start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-char	**ft_split(char const *s, char c);
+//char	**ft_split(char const *s, char c);
+char	*ft_itoa(int n);
 
 #endif

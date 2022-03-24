@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/03/23 13:52:45 by juha             ###   ########.fr        #
+#    Updated: 2022/03/24 19:43:08 by juha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ SRC = 	ft_bzero.c ft_isalnum.c ft_isalpha.c\
 		ft_strchr.c ft_strrchr.c ft_memchr.c\
 		ft_memcmp.c ft_strnstr.c ft_atoi.c\
 		ft_calloc.c ft_strdup.c ft_substr.c\
-		ft_strjoin.c ft_strtrim.c ft_split.c\
-
+		ft_strjoin.c ft_strtrim.c\
+		ft_itoa.c
+		
 OBJS = $(SRC:.c=.o)
 
 .PONY: all clean fclean re
