@@ -1,0 +1,4 @@
+libft-war-machine/
+*.o
+a.out
+main.c

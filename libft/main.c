@@ -1,55 +1,57 @@
 #include "libft.h"
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
-static int	cnt_zero(int n);
+static void		write_num(int fd, long long l);
 
-char	*ft_itoa(int n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*s;
-	int		flag;
-	int		cnt;
+	long long	l;
 
-	flag = 0;
+	if (fd < 0)
+		return ;
 	if (n == 0)
-		return (ft_strdup("0"));
-	if (0 >= n)
+		write(fd, "0", 1);
+	l = n;
+	if (0 >= l)
 	{
-		flag = 1;
-		n *= -1;
+		write(fd, "-", 1);
+		l *= -1;
 	}
-	cnt = cnt_zero(n) + flag;
-	s = (char *)malloc(cnt + 1);
-	if (!s)
-		return (0);
-	s[cnt] = '\0';
-	while (--cnt > -1)
-	{
-		s[cnt] = (n % 10) + 48;
-		n /= 10;
-	}
-	if (flag)
-		s[0] = '-';
-	return (s);
+	write_num(fd, l);
 }
 
-static int	cnt_zero(int n)
+static void	write_num(int fd, long long l)
 {
-	int	cnt;
+	int			cnt;
+	long long	temp;
+	char		c;
 
-	cnt = 0;
-	while (n)
+	cnt = 1;
+	temp = l;
+	while (temp)
 	{
-		n /= 10;
-		cnt++;
+		temp /= 10;
+		if (temp)
+			cnt *= 10;
+		printf("cnt 1: %d\n",cnt);
 	}
-	return (cnt);
+	while (1 < cnt)
+	{
+		c = l / cnt + 48;
+		// printf("c : %c, cnt 2: %d\n",c, cnt);
+		write (fd, &c, 1);
+		l %= cnt;
+		cnt /= 10;
+	}
+	if (l == 0)
+		write(fd, "0", 1);
 }
 
 int	main()
 {
-	char *s = ft_itoa(-1234);
-	printf("%c\n", s[5]);
-	printf("%s\n", s);
+	int i = (3529470);
+	ft_putnbr_fd (i, 2);
 	return (0);
 }

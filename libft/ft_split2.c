@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
-/*   Updated: 2022/03/24 14:44:08 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/25 13:14:33 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,20 @@ static size_t	cnt_word(char const *s, char c)
 		i++;
 	}
 	return (cnt + 1);
+}
+
+ 방식 1::
+while (s[i])
+{
+	while (sep)
+		i++;
+	temp = i;
+	while (s[i] && !sep)
+		i++;
+	i != temp
+		make_p // substr
+	if (!p)
+		return (free_all)
 }
 */
 
