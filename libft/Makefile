@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/03/25 19:29:05 by juha             ###   ########.fr        #
+#    Updated: 2022/03/28 14:00:56 by juha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = 	ft_bzero.c ft_isalnum.c ft_isalpha.c\
 		ft_strchr.c ft_strrchr.c ft_memchr.c\
 		ft_memcmp.c ft_strnstr.c ft_atoi.c\
 		ft_calloc.c ft_strdup.c ft_substr.c\
-		ft_strjoin.c ft_strtrim.c\
+		ft_strjoin.c ft_strtrim.c ft_split.c\
 		ft_itoa.c ft_striteri.c ft_strmapi.c\
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c\
 		ft_putnbr_fd.c\
