@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
-/*   Updated: 2022/03/31 15:47:34 by juha             ###   ########.fr       */
+/*   Updated: 2022/03/31 17:14:48 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static void	free_all(char **pp, size_t cnt)
 		pp[i++] = 0;
 	}
 	free(pp);
-	pp = 0;
 }
 
 static char	**make_pp(char *s, char c, size_t cnt)
@@ -91,6 +90,7 @@ static char	**make_pp(char *s, char c, size_t cnt)
 		if (pp[i] == 0)
 		{
 			free_all(pp, i);
+			pp = 0;
 			return (0);
 		}
 		i++;

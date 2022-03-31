@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.u_c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,18 +14,20 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		n;
+	int				n;
+	unsigned char	u_c;
 
+	u_c = c;
 	n = 0;
 	while (s[n])
 		n++;
 	while (-1 < n)
 	{
-		if (s[n] == c)
+		if (s[n] == u_c)
 			return ((char *)&s[n]);
 		n--;
 	}
-	if (c == '\0')
+	if (u_c == '\0')
 		return ((char *)&s[n]);
 	return (0);
 }
