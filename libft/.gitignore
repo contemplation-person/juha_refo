@@ -2,5 +2,4 @@ libft-war-machine/
 *.o
 a.out
 main.c
-.DS_Store
-libft.h.gch
+.vscode
