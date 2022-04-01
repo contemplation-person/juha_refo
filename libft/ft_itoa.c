@@ -6,22 +6,22 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:50:25 by juha              #+#    #+#             */
-/*   Updated: 2022/03/24 21:20:47 by juha             ###   ########.fr       */
+/*   Updated: 2022/04/01 18:38:52 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <sys/types.h>
 
-static int	cnt_zero(long long l);
-static char	*change_string(char *s, int cnt, long n, int is_minus);
+static int	cnt_zero(size_t l);
+static char	*change_string(char *s, int cnt, size_t n, int is_minus);
 
 char	*ft_itoa(int n)
 {
-	char		*s;
-	int			is_minus;
-	int			cnt;
-	long long	l;
+	char	*s;
+	int		is_minus;
+	int		cnt;
+	long	l;
 
 	if (n == 0)
 		return (ft_strdup("0"));
@@ -40,7 +40,7 @@ char	*ft_itoa(int n)
 	return (s);
 }
 
-static int	cnt_zero(long long l)
+static int	cnt_zero(size_t l)
 {
 	int	cnt;
 
@@ -53,7 +53,7 @@ static int	cnt_zero(long long l)
 	return (cnt);
 }
 
-static char	*change_string(char *s, int cnt, long n, int is_minus)
+static char	*change_string(char *s, int cnt, size_t n, int is_minus)
 {
 	s[cnt] = '\0';
 	while (--cnt > -1)

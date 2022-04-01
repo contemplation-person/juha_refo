@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 02:22:52 by conteng           #+#    #+#             */
-/*   Updated: 2022/03/31 15:37:11 by juha             ###   ########.fr       */
+/*   Updated: 2022/04/01 14:27:09 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isalnum(int c);
-char	ft_isalpha(int c);
+int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);

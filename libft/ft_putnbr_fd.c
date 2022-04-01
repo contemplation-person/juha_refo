@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:27:09 by juha              #+#    #+#             */
-/*   Updated: 2022/03/31 20:54:29 by juha             ###   ########.fr       */
+/*   Updated: 2022/04/01 18:38:44 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_putnbr_fd(int n, int fd)
 static void	write_num(int fd, long long l)
 {
 	int			cnt;
-	long long	temp;
+	size_t		temp;
 	char		c;
 
 	cnt = 1;
