@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:50:25 by juha              #+#    #+#             */
-/*   Updated: 2022/04/01 18:38:52 by juha             ###   ########.fr       */
+/*   Updated: 2022/04/02 11:00:42 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <sys/types.h>
 
 static int	cnt_zero(size_t l);
 static char	*change_string(char *s, int cnt, size_t n, int is_minus);
