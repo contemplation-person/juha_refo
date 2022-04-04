@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:22:33 by juha              #+#    #+#             */
-/*   Updated: 2022/03/21 20:06:39 by juha             ###   ########.fr       */
+/*   Updated: 2022/04/04 15:48:41 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*p;
-	size_t			cnt;
 
-	if (size > count)
-		return (0);
-	cnt = 0;
 	p = (unsigned char *)malloc(count * size);
 	if (!p)
 		return (0);
-	while (cnt < count * size)
-		p[cnt++] = '\0';
+	ft_bzero(p, size * count);
 	return ((void *)p);
 }

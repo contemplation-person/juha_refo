@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
-/*   Updated: 2022/04/02 11:01:35 by conteng          ###   ########.fr       */
+/*   Updated: 2022/04/04 13:00:02 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ char	**ft_split(char const *s, char c)
 	char	*str;
 
 	str = (char *)s;
-	if (!str)
-		return (0);
 	while (*str && *str == c)
 		str++;
 	pp = make_pp(str, c, cnt_word(str, c));

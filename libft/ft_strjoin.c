@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:04:06 by juha              #+#    #+#             */
-/*   Updated: 2022/03/26 20:40:53 by juha             ###   ########.fr       */
+/*   Updated: 2022/04/04 12:59:31 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t			size;
 	char			*temp;
 
-	if (!s1 || !s2)
-		return (0);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
 	temp = (char *)malloc(size);
 	if (!temp)
