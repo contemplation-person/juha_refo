@@ -3,3 +3,5 @@ libft-war-machine/
 a.out
 main.c
 .vscode
+.DS_Store
+a.sh
