@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/09 19:33:53 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/09 23:57:57 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 typedef struct s_gnl_list
 {
 	size_t				fd;
-	unsigned char		*content;
+	unsigned char		*str;
 	struct s_gnl_list	*next;
+	struct s_gnl_list	**start_list;
 }t_list;
 
 char	*get_next_line(int fd);

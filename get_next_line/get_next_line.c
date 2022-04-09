@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/04/09 19:30:20 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/10 00:02:41 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,14 @@ char	*get_next_line(int fd)
 	unsigned char	*str;
 	int				check_zero;
 
-	if (start_l)
-		start_l->fd;
 	
 	read(fd, str, BUFFER_SIZE);
 	save_line(start_l, str);
 	return (str);
 }
 
-char	*save_line(t_list *start, unsigned char *str)
+char	*check_fd(int fd, t_list *list)
 {
-	int				check;
-	unsigned char	*cutting_str;
+	int	i;
 
-	while (str != '\n' || str > -1)
-	{
-		
-	}
-}
+	while (
