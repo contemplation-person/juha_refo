@@ -29,4 +29,4 @@ char	*check_fd(int fd, t_list *list)
 {
 	int	i;
 
-	while (
+	while()

@@ -24,7 +24,6 @@ typedef struct s_gnl_list
 	size_t				fd;
 	unsigned char		*str;
 	struct s_gnl_list	*next;
-	struct s_gnl_list	**start_list;
 }t_list;
 
 char	*get_next_line(int fd);
