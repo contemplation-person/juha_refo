@@ -45,14 +45,14 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 	return (temp);
 }
 
-static t_list	*ft_lstnew(void *content)
+static t_list	*ft_lstnew(char *str)
 {
 	t_list	*t;
 
 	t = (t_list *)malloc(sizeof(t_list));
 	if (!t)
 		return (0);
-	t->content = content;
+	t->str = str;
 	t->next = NULL;
 	return (t);
 }
@@ -66,7 +66,7 @@ static void	ft_lstclear(t_list **lst, void (*del)(void *))
 	while (*lst)
 	{
 		next_l = (*lst)->next;
-		del((*lst)->content);
+		del((*lst)->str);
 		free(lst);
 		lst = 0;
 		*lst = next_l;
