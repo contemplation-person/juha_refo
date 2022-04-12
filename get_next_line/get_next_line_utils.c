@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/09 18:59:29 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/12 15:53:18 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,36 +45,20 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 	return (temp);
 }
 
-static t_list	*ft_lstnew(char *str)
+t_list	*ft_lstnew(void *content, int fd)
 {
 	t_list	*t;
 
 	t = (t_list *)malloc(sizeof(t_list));
 	if (!t)
 		return (0);
-	t->str = str;
-	t->next = NULL;
+	t->content = content;
+	t->fd = fd;
+	t->next = t;
 	return (t);
 }
 
-static void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*next_l;
-
-	if (!lst || !del)
-		return ;
-	while (*lst)
-	{
-		next_l = (*lst)->next;
-		del((*lst)->str);
-		free(lst);
-		lst = 0;
-		*lst = next_l;
-	}
-	*lst = 0;
-}
-
-static void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd(t_list **lst, t_list *new)
 {
 	t_list	*t;
 
@@ -86,6 +70,19 @@ static void	ft_lstadd_back(t_list **lst, t_list *new)
 	t = *lst;
 	while (t->next)
 		t = t->next;
-	return (t);
 	t->next = new;
+	new->next = *lst;
+}
+
+void	ft_lstdelone(t_list **lst, void (*del)(void *))
+{
+	t_list	*temp;
+
+	temp = *lst;
+	while (temp->next == *lst)
+		temp->next;
+	del((*lst)->content);
+	temp->next = (*lst)->next;
+	free(lst);
+	lst = 0;
 }
