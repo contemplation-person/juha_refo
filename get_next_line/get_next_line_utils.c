@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/12 15:53:18 by conteng          ###   ########.fr       */
+/*   Updated: 2022/04/13 19:53:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 	size_t			size;
 	char			*temp;
 
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (s1 && s2)
+		size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	else if (!s1 && s2)
+		size = ft_strlen(s2) + 1;
 	temp = (char *)malloc(size);
 	if (!temp)
 		return (0);
