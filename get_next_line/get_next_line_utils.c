@@ -6,20 +6,39 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/13 19:53:28 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/14 16:45:25 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	ft_strlen(const char	*s)
+static size_t	ft_strlen(const char	*s, int *line)
 {
 	size_t	cnt;
 
 	cnt = 0;
-	while (s[cnt])
-		cnt++;
-	return (cnt);
+	if (!line)
+	{
+		while (s[cnt])
+			cnt++;
+		return (cnt);
+	}
+	else
+	{
+		line = 0;
+		while (s[cnt])
+		{
+			if (s[cnt] == '\n')
+			{
+				*line = cnt;
+				break ;
+			}
+			cnt++;
+		}
+		while (s[cnt])
+			cnt++;
+		return (cnt);
+	}
 }
 
 static char	*ft_strjoin(char const *s1, char const *s2)
@@ -29,9 +48,11 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 	char			*temp;
 
 	if (s1 && s2)
-		size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	else if (!s1 && s2)
-		size = ft_strlen(s2) + 1;
+		size = ft_strlen(s1, (void *)0) + ft_strlen(s2, (void *)0) + 1;
+	else if (!s2)
+		size = ft_strlen(s1, (void *)0) + 1;
+	else
+		size = ft_strlen(s2, (void *)0) + 1;
 	temp = (char *)malloc(size);
 	if (!temp)
 		return (0);
@@ -48,7 +69,7 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 	return (temp);
 }
 
-t_list	*ft_lstnew(void *content, int fd)
+static t_list	*ft_lstnew(void *content, int fd)
 {
 	t_list	*t;
 
@@ -61,7 +82,7 @@ t_list	*ft_lstnew(void *content, int fd)
 	return (t);
 }
 
-void	ft_lstadd(t_list **lst, t_list *new)
+static void	ft_lstadd(t_list **lst, t_list *new)
 {
 	t_list	*t;
 
@@ -77,15 +98,31 @@ void	ft_lstadd(t_list **lst, t_list *new)
 	new->next = *lst;
 }
 
-void	ft_lstdelone(t_list **lst, void (*del)(void *))
+char	*ft_substr(char const *s, size_t start, size_t len)
 {
-	t_list	*temp;
+	size_t	i;
+	size_t	j;
+	char	*temp;
+	size_t	k;
 
-	temp = *lst;
-	while (temp->next == *lst)
-		temp->next;
-	del((*lst)->content);
-	temp->next = (*lst)->next;
-	free(lst);
-	lst = 0;
+	if (start > ft_strlen(s, (void *)0))
+	{
+		temp = (char *)malloc(1);
+		temp[0] = '\0';
+		return (temp);
+	}
+	k = 0;
+	while (s[start + k])
+		k++;
+	if (len > k)
+		len = k;
+	temp = (char *)malloc(len + 1);
+	if (!temp)
+		return (0);
+	i = start;
+	j = 0;
+	while (j < len)
+		temp[j++] = (char)s[i++];
+	temp[j] = '\0';
+	return (temp);
 }
