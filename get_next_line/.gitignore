@@ -1,5 +1,4 @@
 *.swp
-main.c
 a.out
 *.o
 .vscode
