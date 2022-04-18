@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/15 15:52:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/18 21:36:11 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,11 @@ typedef struct s_gnl_list
 	void				*content;
 	struct s_gnl_list	*next;
 }t_list;
+
+t_list	*ft_lstnew(void *content, int fd);
+void	ft_lstclear(t_list **lst, int fd);
+size_t	ft_strlen(const char	*s);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_lstadd_back(t_list **lst, t_list *new);
 
 #endif
