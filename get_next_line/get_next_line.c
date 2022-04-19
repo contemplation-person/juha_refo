@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/04/19 18:19:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/20 02:18:21 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ char	*cut_until_null(t_list **lst, int fd)
 	put_str = 0;
 	while (check_fd(temp, fd))
 	{
-		null_idx = ft_strlen((const char)temp->content, '\n');
-		put_str = ft_strjoin(put_str, ft_substr((const char)temp->content, 0, null_idx));
+		null_idx = ft_strlen((const char *)(temp->content), '\n');
+		put_str = ft_strjoin(put_str, ft_substr((const char *)(temp->content), 0, null_idx));
 		if (!put_str)
 			return (0);
 		if (null_idx < BUFFER_SIZE)
@@ -78,7 +78,7 @@ char	*cut_until_null(t_list **lst, int fd)
 				*lst = temp->next;
 				free(temp);
 			}
-			save = ft_substr((const char)temp->content, null_idx, BUFFER_SIZE);
+			save = ft_substr((const char *)(temp->content), null_idx, BUFFER_SIZE);
 			free(temp->content);
 			temp->content = save;
 			return (put_str);

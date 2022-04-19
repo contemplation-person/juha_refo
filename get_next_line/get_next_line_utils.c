@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/19 17:06:46 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/20 02:18:16 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstnew(void *content, int fd)
 {
 	t_list	*t;
-	int		i;
 
 	if (!content)
 		return (0);
 	t = (t_list *)malloc(sizeof(t_list));
 	if (!t)
 		return (0);
-	i = 0;
 	t->fd = fd;
 	t->content = content;
 	t->next = 0;
@@ -103,6 +101,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		return ;
 	}
 	t = *lst;
-	t = ft_lstlast(t);
+	while (t->next)
+		t = t->next;
 	t->next = new;
 }
