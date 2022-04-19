@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/18 21:48:17 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/19 17:06:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 t_list	*ft_lstnew(void *content, int fd);
 void	ft_lstclear(t_list **lst, int fd);
-size_t	ft_strlen(const char	*s);
+size_t	ft_strlen(const char *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 
 t_list	*ft_lstnew(void *content, int fd)
 {
 	t_list	*t;
+	int		i;
 
 	if (!content)
 		return (0);
 	t = (t_list *)malloc(sizeof(t_list));
 	if (!t)
 		return (0);
+	i = 0;
 	t->fd = fd;
 	t->content = content;
-	t->next = t;
+	t->next = 0;
 	return (t);
 }
 
@@ -53,12 +55,12 @@ void	ft_lstclear(t_list **lst, int fd)
 	*lst = 0;
 }
 
-size_t	ft_strlen(const char	*s)
+size_t	ft_strlen(const char *s, char c)
 {
 	size_t	cnt;
 
 	cnt = 0;
-	while (s[cnt])
+	while (s[cnt] && s[cnt] != c)
 		cnt++;
 	return (cnt);
 }
@@ -69,7 +71,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t			size;
 	char			*temp;
 
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (s1 && s2)
+		size = ft_strlen(s1, 0) + ft_strlen(s2, 0) + 1;
+	else if (!s2)
+		size = ft_strlen(s1, 0) + 1;
+	else
+		size = ft_strlen(s2, 0) + 1;
 	temp = (char *)malloc(size);
 	if (!temp)
 		return (0);
