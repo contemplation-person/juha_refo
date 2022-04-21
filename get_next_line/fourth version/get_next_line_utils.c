@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/21 19:33:03 by juha             ###   ########seoul.kr  */
+/*   Created: 2022/04/12 20:43:22 by seongyle          #+#    #+#             */
+/*   Updated: 2022/04/21 16:58:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H 
+#include "get_next_line.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5000
-# endif
-
-# include <stdlib.h>
-
-typedef struct s_str_info
+size_t	ft_strlen(const char *s, char c)
 {
-	char	*str;
-	int		strlen;
-	int		cnt_line;
-}t_str_info;
+	size_t	i;
 
-typedef struct s_gnl_list
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
+}
+
+t_list	*create_node(int fd, char *line, int line_len)
 {
-	int					fd;
-	struct s_str_info	*str_info;
-	struct s_gnl_list	*next_fd;
-}t_list;
+	t_list	*node;
 
-#endif
+	node = (t_list *)malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->fd = fd;
+	node->line_len = line_len;
+	node->prev = NULL;
+	node->next = NULL;
+	node->line = line;
+}
