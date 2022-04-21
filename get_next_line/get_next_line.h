@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/21 19:33:03 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/22 00:46:24 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 typedef struct s_str_info
 {
 	char	*str;
-	int		strlen;
-	int		cnt_line;
+	int		start;
+	int		end;
 }t_str_info;
 
 typedef struct s_gnl_list
@@ -32,5 +32,7 @@ typedef struct s_gnl_list
 	struct s_str_info	*str_info;
 	struct s_gnl_list	*next_fd;
 }t_list;
+
+size_t	ft_strlen(const char *s, char c);
 
 #endif
