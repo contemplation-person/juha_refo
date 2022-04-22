@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/23 01:47:06 by conteng          ###   ########.fr       */
+/*   Updated: 2022/04/23 01:49:53 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@
 typedef struct s_str_info
 {
 	char	*buffer;
-	ssize_t	start;
 	ssize_t	end;
-	ssize_t	check_null;
 }t_str;
 
 typedef struct s_gnl_list
