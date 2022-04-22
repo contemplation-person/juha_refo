@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/22 00:46:24 by conteng          ###   ########.fr       */
+/*   Updated: 2022/04/22 22:25:17 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,29 @@
 # endif
 
 # include <stdlib.h>
+# include <sys/types.h>
 
 typedef struct s_str_info
 {
-	char	*str;
-	int		start;
-	int		end;
-}t_str_info;
+	char	*buffer;
+	ssize_t	start;
+	ssize_t	end;
+	ssize_t	check_null;
+}t_str;
 
 typedef struct s_gnl_list
 {
-	int					fd;
+	ssize_t				fd;
 	struct s_str_info	*str_info;
-	struct s_gnl_list	*next_fd;
+	struct s_gnl_list	*next_fd_lst;
 }t_list;
 
 size_t	ft_strlen(const char *s, char c);
+ssize_t	all_free(t_list	**head, ssize_t fd, char *str);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+
+char	*get_next_line(int fd);
+t_list	*chk_lst(t_list *head, ssize_t fd);
+char	*ret_line(t_list **head, ssize_t fd);
 
 #endif
