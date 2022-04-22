@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/04/23 01:21:55 by conteng          ###   ########.fr       */
+/*   Updated: 2022/04/23 01:47:17 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #include <unistd.h>
 
 char	*get_next_line(int fd);
-ssize_t	all_free(t_list	**head, ssize_t fd, char **str);
 t_list	*chk_lst(t_list *head, ssize_t fd);
-char	*ret_line(t_list **head, ssize_t fd);
+char	*ret_line(t_list **head, ssize_t fd, char **str);
 
 char	*get_next_line(int fd)
 {
@@ -46,7 +45,7 @@ char	*ret_line(t_list **head, ssize_t fd, char **str)
 
 	fd_lst = chk_lst(*head, fd);
 	if (!fd_lst)
-		retrun (all_free(head, fd, str));
+		return (all_free(head, fd, str));
 	ret_len = ft_strlen(fd_lst->str_info->buffer, 0, fd_lst->str_info->end);
 	ret_line = (char *)malloc(ret_len + 1);
 	if (!ret_len)
@@ -63,10 +62,10 @@ char	*ret_line(t_list **head, ssize_t fd, char **str)
 		return (all_free(head, fd, str));
 	}
 	ft_memcpy(ret_line, fd_lst->str_info->buffer, ret_len);//확인필요.
-	ft_memcpy(save_str, fd_lst->str_info->buffer + ret_len, end - ret_len);
+	ft_memcpy(save_str, fd_lst->str_info->buffer + ret_len, fd_lst->str_info->end - ret_len);
 	free(fd_lst->str_info->buffer);
 	fd_lst->str_info->buffer = save_str;
-	fd_lst->str_info->end = end - ret_len;
+	fd_lst->str_info->end = fd_lst->str_info->end - ret_len;
 	if (fd_lst->str_info->end <= 0)
 		all_free(head, fd, str);
 	return (save_str);
@@ -82,6 +81,6 @@ t_list	*chk_lst(t_list *head, ssize_t fd)
 
 	ret = head;
 	while (ret && ret->fd != fd)
-		ret->next_fd_lst;
+		ret = ret->next_fd_lst;
 	return (ret);
 }

@@ -6,15 +6,16 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/23 01:21:57 by conteng          ###   ########.fr       */
+/*   Updated: 2022/04/23 01:47:25 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 ssize_t	ft_strlen(const char *s, ssize_t start, ssize_t end);
-ssize_t	all_free(t_list	**head, ssize_t fd, char **str);
+char	*all_free(t_list	**head, ssize_t fd, char **str);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	new_lst(t_list **head, ssize_t fd, char **str, ssize_t read_len);
 
 ssize_t	ft_strlen(const char *s, ssize_t start, ssize_t end)
 {
@@ -26,7 +27,7 @@ ssize_t	ft_strlen(const char *s, ssize_t start, ssize_t end)
 	return (i);
 }
 
-ssize_t	all_free(t_list	**head, ssize_t fd, char **str)
+char	*all_free(t_list	**head, ssize_t fd, char **str)
 {
 	t_list	*prev_del_lst;
 	t_list	*del_lst;
@@ -77,7 +78,7 @@ void	new_lst(t_list **head, ssize_t fd, char **str, ssize_t read_len)
 	char	*temp;
 	ssize_t	end;
 
-	fd_lst = chk_lst(head, fd);
+	fd_lst = chk_lst(*head, fd);
 	if (fd_lst)
 	{
 		temp = fd_lst->str_info->buffer;
@@ -99,7 +100,7 @@ void	new_lst(t_list **head, ssize_t fd, char **str, ssize_t read_len)
 	{
 		prev_fd_lst = *head;
 		while (prev_fd_lst && (prev_fd_lst->next_fd_lst == fd_lst))
-			prev_fd_lst->next_fd_lst;
+			prev_fd_lst = prev_fd_lst->next_fd_lst;
 		fd_lst = (t_list *)malloc(sizeof(t_list));
 		if (!fd_lst)
 			all_free(head, fd, str);
