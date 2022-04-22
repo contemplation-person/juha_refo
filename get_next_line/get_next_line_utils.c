@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/23 01:18:57 by conteng          ###   ########.fr       */
+/*   Updated: 2022/04/23 01:21:57 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ void	new_lst(t_list **head, ssize_t fd, char **str, ssize_t read_len)
 		end = fd_lst->str_info->end;
 		fd_lst = (t_list *)malloc(sizeof(t_list));
 		if (!fd_lst)
-			all_free(head, fd, &str);
+			all_free(head, fd, str);
 		fd_lst->str_info->buffer = (char *)malloc(end + read_len);
 		if (!fd_lst->str_info->buffer)
 		{
 			free(fd_lst->str_info->buffer);
-			all_free(head, fd, &str);
+			all_free(head, fd, str);
 		}
 		ft_memcpy(fd_lst->str_info->buffer, temp, end);
 		ft_memcpy(fd_lst->str_info->buffer + end, *str, read_len);//확인 필요.
@@ -102,7 +102,7 @@ void	new_lst(t_list **head, ssize_t fd, char **str, ssize_t read_len)
 			prev_fd_lst->next_fd_lst;
 		fd_lst = (t_list *)malloc(sizeof(t_list));
 		if (!fd_lst)
-			all_free(head, fd, &str);
+			all_free(head, fd, str);
 		fd_lst->str_info->buffer = *str;
 		if (prev_fd_lst)
 			prev_fd_lst->next_fd_lst = fd_lst;
