@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/04/23 01:47:17 by conteng          ###   ########.fr       */
+/*   Updated: 2022/04/23 21:36:43 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 
 char	*get_next_line(int fd);
-t_list	*chk_lst(t_list *head, ssize_t fd);
+t_list	*chk_lst(t_list **head, ssize_t fd);
 char	*ret_line(t_list **head, ssize_t fd, char **str);
 
 char	*get_next_line(int fd)
@@ -30,9 +30,7 @@ char	*get_next_line(int fd)
 	if (read_len < 0)
 		return (all_free(&head, fd, &str));
 	else if (read_len != 0)
-	{
 		new_lst(&head, fd, &str, read_len);
-	}
 	return (ret_line(&head, fd, &str));
 }
 
@@ -43,31 +41,33 @@ char	*ret_line(t_list **head, ssize_t fd, char **str)
 	char	*ret_line;
 	char	*save_str;
 
-	fd_lst = chk_lst(*head, fd);
+	fd_lst = chk_lst(head, fd);
 	if (!fd_lst)
 		return (all_free(head, fd, str));
-	ret_len = ft_strlen(fd_lst->str_info->buffer, 0, fd_lst->str_info->end);
+	ret_len = ft_strlen(fd_lst->str_info->buffer, fd_lst->str_info->end);
 	ret_line = (char *)malloc(ret_len + 1);
-	if (!ret_len)
-	{
-		free(fd_lst);
+	if (!ret_line)
 		return (all_free(head, fd, str));
-	}
 	ret_line[ret_len] = '\0';
 	save_str = (char *)malloc(fd_lst->str_info->end - ret_len);
 	if (!save_str)
-	{
-		free(ret_line);
-		free(fd_lst);
 		return (all_free(head, fd, str));
-	}
 	ft_memcpy(ret_line, fd_lst->str_info->buffer, ret_len);//확인필요.
 	ft_memcpy(save_str, fd_lst->str_info->buffer + ret_len, fd_lst->str_info->end - ret_len);
-	free(fd_lst->str_info->buffer);
+	char *backup = fd_lst->str_info->buffer;
 	fd_lst->str_info->buffer = save_str;
 	fd_lst->str_info->end = fd_lst->str_info->end - ret_len;
 	if (fd_lst->str_info->end <= 0)
+	{
+		//free(save_str);
 		all_free(head, fd, str);
+	}
+	else
+	{
+		free(backup);
+	}
+	
+
 	return (save_str);
 /* 
 	fd_lst가 있으면 리스트의 str을 \n까지 반환 strInfo값을 바꿔줌, 
@@ -75,11 +75,11 @@ char	*ret_line(t_list **head, ssize_t fd, char **str)
 */
 }
 
-t_list	*chk_lst(t_list *head, ssize_t fd)
+t_list	*chk_lst(t_list **head, ssize_t fd)
 {
 	t_list	*ret;
 
-	ret = head;
+	ret = *head;
 	while (ret && ret->fd != fd)
 		ret = ret->next_fd_lst;
 	return (ret);
