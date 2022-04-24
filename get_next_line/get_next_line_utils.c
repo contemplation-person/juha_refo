@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/23 21:38:06 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/24 20:06:33 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ ssize_t	ft_strlen(const char *s, ssize_t end)
 		i++;
 	}
 	return (i);
+}
+
+void	gnl_free(void *data)
+{
+	free(data);
+	data = NULL;
 }
 
 char	*all_free(t_list	**head, ssize_t fd, char **str)
