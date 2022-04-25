@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/04/24 20:13:53 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/25 16:59:06 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,28 @@ char	*ret_line(t_list **head, ssize_t fd, char **str);
 char	*get_next_line(int fd)
 {
 	static t_list	*head;
-	ssize_t			read_len;
 	char			*str;
+	ssize_t			read_len;
+	t_list			*fd_lst;
 
+	if (fd < 0 || BUFFER_SIZE < 0)
+		return (0);
 	str = (char *)malloc(BUFFER_SIZE);
-	if (!str || fd < 0 || BUFFER_SIZE < 0)
-		return (all_free(&head, fd, &str));
+	if (!str)
+	{
+		if (check_fd(&head, fd))
+			free(check_fd(&head, fd)); /*fd안의 모든 값을 free*/
+	}
 	read_len = read(fd, str, BUFFER_SIZE);
-	if (read_len < 0)
-		return (all_free(&head, fd, &str));
-	else if (read_len != 0)
+	if (str && read_len != 0)
 		new_lst(&head, fd, &str, read_len);
-	return (ret_line(&head, fd, &str));
+	else if (read_len < 0)
+	{
+		if (check_fd(&head, fd))
+			/* if (check_fd) free(check_fd)모든 값을 free*/
+	}
+	free (str);
+	return (ret_line(&head, fd));
 }
 
 char	*ret_line(t_list **head, ssize_t fd, char **str)
