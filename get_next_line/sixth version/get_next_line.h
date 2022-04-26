@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/26 18:07:00 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/25 15:25:44 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@
 typedef struct s_gnl_list
 {
 	ssize_t				fd;
-	ssize_t				buf_len;
-	char				*buf;
-	struct s_gnl_list	*prev;
+	ssize_t				buffer_len;
+	char				*buffer;
 	struct s_gnl_list	*next;
 }t_list;
 
-t_list	*check_fd(t_list **head, int fd);
-void	free_lst(t_list **target_lst);
-t_list	*create_lst(t_list **head, int fd);
+char	*get_next_line(int fd);
+t_list	*chk_lst(t_list **head, ssize_t fd);
+char	*ret_line(t_list **head, ssize_t fd, char **str);
+
 ssize_t	ft_strlen(const char *s, ssize_t end);
+char	*all_free(t_list	**head, ssize_t fd, char **str);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+int		new_lst(t_list **head, ssize_t fd, char **str, ssize_t read_len);
 
 #endif
