@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/26 18:07:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/26 22:01:36 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,11 @@ t_list	*create_lst(t_list **head, int fd)
 	next = temp->next;
 	if (temp->fd == fd)
 		return (*head);
-	if (temp && temp->fd > fd)
+	while (temp->next != next)
 	{
-		while (temp->next != next)
-		{
-			prev = temp;
-			temp = temp->next;
-			next = temp->next;
-		}
-	}
-	else if (temp && temp->fd < fd)
-	{
-		while (temp->prev != prev)
-		{
-			next = temp;
-			temp = temp->prev;
-			prev = temp->prev;
-		}
+		prev = temp;
+		temp = temp->next;
+		next = temp->next;
 	}
 	temp = (t_list *)malloc(sizeof(t_list));
 	if (!temp)
