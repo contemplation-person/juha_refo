@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/26 22:01:36 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/27 17:22:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,14 @@ t_list	*create_lst(t_list **head, int fd)
 	t_list	*temp;
 
 	temp = *head;
-	prev = temp->prev;
-	next = temp->next;
-	if (temp->fd == fd)
+	if (temp)
+	{
+		prev = temp->prev;
+		next = temp->next;
+	}
+	if (temp && temp->fd == fd)
 		return (*head);
-	while (temp->next != next)
+	while (temp && temp->next != next)
 	{
 		prev = temp;
 		temp = temp->next;

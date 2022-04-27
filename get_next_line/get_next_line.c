@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/04/26 22:12:58 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/27 17:03:34 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 
 char	*get_next_line(int fd)
 {
-	static t_list	*head;
+	static t_list	*fd_lst;
 	char			*str;
 	ssize_t			read_len;
-	t_list			*fd_lst;
 
 	read_len = 0;
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (0);
-	fd_lst = check_fd(&head, fd);
+	fd_lst = check_fd(&fd_lst, fd);
 	str = (char *)malloc(BUFFER_SIZE);
-	if (!str || read_len < 0)
+	if (!str)
 	{
 		if (fd_lst)
 			free_lst(&fd_lst);
@@ -38,8 +37,8 @@ char	*get_next_line(int fd)
 		free(fd_lst);
 		return (0);
 	}
-	if (fd_lst && read_len != 0)
-		head = input_buf(&fd_lst, fd, &str, read_len);
+	if (read_len != 0)
+		fd_lst = input_buf(&fd_lst, fd, &str, read_len);
 	free (str);
 	str = ret_line(fd_lst); /* ret_line 에서 읽은 게 없으면 return (null) */
 	return (str);
@@ -90,7 +89,7 @@ t_list	*input_buf(t_list **fd_lst, int fd, char **read_str, ssize_t read_len)
 {
 	char	*save;
 
-	if (fd_lst)
+	if (*fd_lst)
 	{
 		save = (char *)malloc((*fd_lst)->buf_len + read_len);
 		if (!save)
