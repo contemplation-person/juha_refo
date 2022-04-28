@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/28 21:26:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/27 17:22:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,28 +71,30 @@ void	free_lst(t_list **target_lst)
 t_list	*create_lst(t_list **head, int fd)
 {
 	t_list	*prev;
+	t_list	*next;
 	t_list	*temp;
 
-	if (!(*head))
+	temp = *head;
+	if (temp)
 	{
-		*head = (t_list *)malloc(sizeof(t_list));
-		(*head)->prev = *head;
-		(*head)->next = *head;
-		(*head)->fd = fd;
+		prev = temp->prev;
+		next = temp->next;
 	}
-	else
+	if (temp && temp->fd == fd)
+		return (*head);
+	while (temp && temp->next != next)
 	{
-		temp = *head;
-		*head = (t_list *)malloc(sizeof(t_list));
 		prev = temp;
-		while (temp->next->fd < fd && temp->next != prev)
-			temp = temp->next;
-		(*head)->prev = temp;
-		(*head)->next = temp->next;
-		temp->next = *head;
-		(*head)->fd = fd;
+		temp = temp->next;
+		next = temp->next;
 	}
-	return (*head);
+	temp = (t_list *)malloc(sizeof(t_list));
+	if (!temp)
+		return (0);
+	temp->fd = fd;
+	temp->next = temp;
+	temp->prev = temp;
+	return (temp);
 }
 
 ssize_t	ft_strlen(const char *s, ssize_t end)
@@ -100,7 +102,7 @@ ssize_t	ft_strlen(const char *s, ssize_t end)
 	ssize_t	i;
 
 	i = 0;
-	while (i < end)
+	while (i != end)
 	{
 		if (s[i] == '\n')
 			return (i + 1);
@@ -111,14 +113,14 @@ ssize_t	ft_strlen(const char *s, ssize_t end)
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char	*temp;
+	unsigned char	*temp		/*존재하지 않는데 read_len == 0이 아님.*/;
 	size_t			cnt;
 
 	temp = (unsigned char *)src;
 	cnt = 0;
 	while (cnt < n)
 	{
-		((unsigned char *) dst)[cnt] = temp[cnt];
+		((unsigned char *)dst)[cnt] = temp[cnt];
 		cnt++;
 	}
 	return (dst);
