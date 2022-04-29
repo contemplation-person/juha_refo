@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/30 07:37:13 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/28 20:39:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,16 @@ typedef struct s_gnl_list
 	struct s_gnl_list	*next;
 }t_list;
 
+t_list	*check_fd(t_list **head, int fd);
+void	free_lst(t_list **target_lst);
+t_list	*create_lst(t_list **head, int fd);
+ssize_t	ft_strlen(const char *s, ssize_t end);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-t_list	*create_lst(t_list **head, int fd, char **buf, ssize_t buf_len);
-int		join_str(t_list **lst, char **save, ssize_t read_len);
 
+char	*ret_line(t_list **fd_lst);
 char	*get_next_line(int fd);
-int		input_str(t_list **fd_lst, int fd, int *is_success);
-char	*ret_line(t_list **fd_lst, int *is_success);
+int		make_ret_and_save(char **ret, char **save, \
+t_list **fd_lst, ssize_t ret_len);
+t_list	*input_buf(t_list **fd_lst, int fd, char **read_str, ssize_t read_len);
+
 #endif

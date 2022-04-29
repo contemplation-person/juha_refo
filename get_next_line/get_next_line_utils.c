@@ -6,108 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/28 21:26:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/30 07:36:31 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-t_list	*check_fd(t_list **head, int fd);
-void	free_lst(t_list **target_lst);
-t_list	*create_lst(t_list **head, int fd);
-ssize_t	ft_strlen(const char *s, ssize_t end);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-
-t_list	*check_fd(t_list **head, int fd)
-{
-	t_list	*prev;
-	t_list	*next;
-
-	if (!(*head))
-		return (0);
-	prev = (*head)->prev;
-	next = (*head)->next;
-	if (*head && (*head)->fd > fd)
-	{
-		while ((*head)->next != next)
-		{
-			prev = (*head);
-			(*head) = (*head)->next;
-			next = (*head)->next;
-		}
-		return (*head);
-	}
-	while (*head && (*head)->next != next)
-	{
-		prev = (*head);
-		(*head) = (*head)->next;
-		next = (*head)->next;
-	}
-	return ((*head));
-}
-
-void	free_lst(t_list **target_lst)
-{
-	t_list	*next;
-	t_list	*prev;
-	int		rm_pointer;
-
-	rm_pointer = 0;
-	if (*target_lst)
-	{
-		next = (*target_lst)->next;
-		prev = (*target_lst)->prev;
-		if (next == *target_lst)
-			rm_pointer = 1;
-		free((*target_lst)->buf);
-		prev->next = next;
-		next->prev = prev;
-		free(*target_lst);
-		if (rm_pointer)
-			*target_lst = 0;
-	}
-}
-
-t_list	*create_lst(t_list **head, int fd)
-{
-	t_list	*prev;
-	t_list	*temp;
-
-	if (!(*head))
-	{
-		*head = (t_list *)malloc(sizeof(t_list));
-		(*head)->prev = *head;
-		(*head)->next = *head;
-		(*head)->fd = fd;
-	}
-	else
-	{
-		temp = *head;
-		*head = (t_list *)malloc(sizeof(t_list));
-		prev = temp;
-		while (temp->next->fd < fd && temp->next != prev)
-			temp = temp->next;
-		(*head)->prev = temp;
-		(*head)->next = temp->next;
-		temp->next = *head;
-		(*head)->fd = fd;
-	}
-	return (*head);
-}
-
-ssize_t	ft_strlen(const char *s, ssize_t end)
-{
-	ssize_t	i;
-
-	i = 0;
-	while (i < end)
-	{
-		if (s[i] == '\n')
-			return (i + 1);
-		i++;
-	}
-	return (i);
-}
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -122,4 +25,45 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		cnt++;
 	}
 	return (dst);
+}
+
+t_list	*create_lst(t_list **head, int fd, char **buf, ssize_t buf_len)
+{
+	t_list	*prev;
+	t_list	*temp;
+
+	if (*head)
+	{
+		prev = *head;
+		while ((*head)->next->fd < fd && (*head)->next != prev)
+			*head = (*head)->next;
+	}
+	temp = *head;
+	*head = (t_list *)malloc(sizeof(t_list));
+	if (*head)
+		return (0);
+	temp->next->prev = *head;
+	(*head)->next = temp->next;
+	temp->next = *head;
+	(*head)->prev = temp; /*확인 필요*/
+	temp->fd = fd;
+	temp->buf = *buf;
+	temp->buf_len = buf_len;
+	return (*head);
+}
+
+int	join_str(t_list **fd_lst, char **save, ssize_t read_len)
+{
+	char	*temp;
+
+	temp = (char *)malloc(read_len + (*fd_lst)->buf_len);
+	if (!temp)
+		return (0);
+	ft_memcpy(temp, (*fd_lst)->buf, (*fd_lst)->buf_len);
+	ft_memcpy(temp + (*fd_lst)->buf_len, save, read_len);
+	free((*fd_lst)->buf);
+	free(*save);
+	(*fd_lst)->buf = temp;
+	(*fd_lst)->buf_len = (*fd_lst)->buf_len + read_len;
+	return (1);
 }

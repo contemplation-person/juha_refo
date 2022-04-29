@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/04/26 22:12:58 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/29 13:22:58 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_list	*create_lst(t_list **head, int fd);
 ssize_t	ft_strlen(const char *s, ssize_t end);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
-char	*ret_line(t_list *fd_lst);
+char	*ret_line(t_list **fd_lst);
 char	*get_next_line(int fd);
-void	make_ret_and_save(char **ret, char **save, \
+int		make_ret_and_save(char **ret, char **save, \
 t_list **fd_lst, ssize_t ret_len);
 t_list	*input_buf(t_list **fd_lst, int fd, char **read_str, ssize_t read_len);
 

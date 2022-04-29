@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/04/28 21:25:30 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/04/30 07:37:15 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,82 +15,118 @@
 
 char	*get_next_line(int fd)
 {
-	static t_list	*fd_lst;
+	static t_list	*lst;
 	char			*str;
-	ssize_t			read_len;
+	int				is_success;
+	t_list			*temp;
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (0);
-	fd_lst = check_fd(&fd_lst, fd);
-	str = (char *)malloc(BUFFER_SIZE);
-	if (!str)
+	if (lst)
 	{
-		if (fd_lst)
-			free_lst(&fd_lst);
-		return (0);
+		temp = lst;
+		while (lst->next != temp && lst->fd != fd)
+			lst = lst->next;
 	}
-	read_len = read(fd, str, BUFFER_SIZE);
-	if (read_len < 0)
-	{
-		free(str);
-		free(fd_lst);
+	input_str(&lst, fd, &is_success);
+	if (is_success)
+		str = ret_line(&lst, &is_success);
+	if (!is_success)
 		return (0);
-	}
-	if (read_len != 0)
-		fd_lst = input_buf(&fd_lst, fd, &str, read_len);
-	free (str);
-	return (ret_line(&fd_lst));
+	return (str);
 }
 
-char	*ret_line(t_list **fd_lst)
+int	input_str(t_list **fd_lst, int fd, int *is_success)
 {
-	int		ret_len;
+	ssize_t	read_len;
+	ssize_t	i;
+	char	*temp;
+
+	temp = (char *)malloc(BUFFER_SIZE);
+	if (!temp)
+	{
+		free((*fd_lst)->buf);
+		free((*fd_lst));
+		return (0);
+	}
+	read_len = read(fd, temp, BUFFER_SIZE);
+	if (read_len < 0)
+		return (0);
+	if (read_len == 0)
+		return (1);
+	if (*fd_lst && (*fd_lst)->fd == fd)
+		join_str(fd_lst, &temp, read_len);
+	else
+		create_lst(fd_lst, fd, &temp, read_len);
+	i = -1;
+	while (++i < read_len)
+	{
+		if ((temp)[i] == '\n')
+			return (1);
+	}
+	*is_success = input_str(fd_lst, fd, is_success);
+	return (1);
+}
+
+char	*ret_line(t_list **fd_lst, int *is_success)
+{
 	char	*ret;
 	char	*save;
+	ssize_t	ret_len;
 
+	ret_len = 0;
 	if (!(*fd_lst))
 		return (0);
-	ret_len = ft_strlen((*fd_lst)->buf, (*fd_lst)->buf_len);
-	if (ret_len)
+	while ((*fd_lst)->buf_len >= ret_len)
 	{
-		ret = (char *)malloc(ret_len);
-		ft_memcpy((*fd_lst)->buf, ret, ret_len);
+		if ((*fd_lst)->buf[ret_len] == '\n')
+		{
+			ret_len++;
+			break ;
+		}
+		ret_len++;
 	}
-	else
-		return (0);
 	if ((*fd_lst)->buf_len - ret_len)
 	{
-		save = (char *)malloc((*fd_lst)->buf_len - ret_len);
-		ft_memcpy((*fd_lst)->buf + ret_len, save, (*fd_lst)->buf_len - ret_len);
-		free((*fd_lst)->buf);
-		(*fd_lst)->buf = save;
-	}
-	return (ret);
-}
-
-t_list	*input_buf(t_list **fd_lst, int fd, char **read_str, ssize_t read_len)
-{
-	char	*save;
-	ssize_t	buf_len;
-
-	if (*fd_lst)
-	{
-		buf_len = (*fd_lst)->buf_len;
-		save = (char *)malloc(buf_len + read_len + 1);
-		save[buf_len + read_len] = 0;
-		if (!save)
+		ret = (char *)malloc(ret_len + 1);
+		if (!ret)
+		{
+			free((*fd_lst)->buf);
+			free(*fd_lst);
+			is_success = 0;
 			return (0);
-		save = ft_memcpy(save, (*fd_lst)->buf, buf_len);
-		ft_memcpy((save + (*fd_lst)->buf_len), *read_str, read_len);
+		}
+		save = (char *)malloc((*fd_lst)->buf_len - ret_len);
+		if (!save)
+		{
+			free(ret);
+			free((*fd_lst)->buf);
+			free(*fd_lst);
+			is_success = 0;
+			return (0);
+		}
+		ft_memcpy(ret, (*fd_lst)->buf, ret_len);
+		ret[ret_len] = '\0';
+		ft_memcpy(save, (*fd_lst)->buf + ret_len, (*fd_lst)->buf_len - ret_len);
 		free((*fd_lst)->buf);
 		(*fd_lst)->buf = save;
-		(*fd_lst)->buf_len = (*fd_lst)->buf_len + read_len;
+		(*fd_lst)->buf_len = (*fd_lst)->buf_len - ret_len;
+		/*save 와 ret을 분할.*/ /*join_str함수 활용방안 고민*/
 	}
 	else
 	{
-		*fd_lst = create_lst(fd_lst, fd);
-		(*fd_lst)->buf = *read_str;
-		(*fd_lst)->buf_len = read_len;
+		ret = (char *)malloc((*fd_lst)->buf_len + 1);
+		if (!ret)
+		{
+			free((*fd_lst)->buf);
+			free((*fd_lst));
+			is_success = 0;
+			return (0);
+		}
+		ft_memcpy(ret, (*fd_lst)->buf, (*fd_lst)->buf_len);
+		ret[(*fd_lst)->buf_len] = '\0';
+		free((*fd_lst)->buf);
+		free((*fd_lst));
 	}
-	return (*fd_lst);
+	return (ret);
 }
