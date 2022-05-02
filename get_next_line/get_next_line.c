@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/04/30 07:37:15 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/03 02:47:34 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,39 @@ int	input_str(t_list **fd_lst, int fd, int *is_success)
 	ssize_t	read_len;
 	ssize_t	i;
 	char	*temp;
+	int		is_join;
 
+	is_join = 0;
 	temp = (char *)malloc(BUFFER_SIZE);
 	if (!temp)
-	{
-		free((*fd_lst)->buf);
-		free((*fd_lst));
 		return (0);
-	}
 	read_len = read(fd, temp, BUFFER_SIZE);
-	if (read_len < 0)
-		return (0);
-	if (read_len == 0)
-		return (1);
-	if (*fd_lst && (*fd_lst)->fd == fd)
-		join_str(fd_lst, &temp, read_len);
-	else
-		create_lst(fd_lst, fd, &temp, read_len);
-	i = -1;
-	while (++i < read_len)
+	if (read_len < 0 || read_len == 0)
 	{
-		if ((temp)[i] == '\n')
+		free(temp);
+		return (read_len == 0);
+	}
+	if (*fd_lst && (*fd_lst)->fd == fd)
+	{
+		is_join = join_str(fd_lst, &temp, read_len);
+		if (!is_join)
+		{
+			free(temp);
+			return (0);
+		}
+	}
+	else
+	{
+		if (!create_lst(fd_lst, fd, &temp, read_len))
+		{
+			free(temp);
+			return (0);
+		}
+	}
+	i = -1;
+	while (++i < (*fd_lst)->buf_len)
+	{
+		if ((*fd_lst)->buf[i] == '\n')
 			return (1);
 	}
 	*is_success = input_str(fd_lst, fd, is_success);
@@ -74,10 +86,11 @@ char	*ret_line(t_list **fd_lst, int *is_success)
 	char	*save;
 	ssize_t	ret_len;
 
+	*is_success = 1;
 	ret_len = 0;
 	if (!(*fd_lst))
 		return (0);
-	while ((*fd_lst)->buf_len >= ret_len)
+	while ((*fd_lst)->buf_len > ret_len)
 	{
 		if ((*fd_lst)->buf[ret_len] == '\n')
 		{
@@ -93,7 +106,7 @@ char	*ret_line(t_list **fd_lst, int *is_success)
 		{
 			free((*fd_lst)->buf);
 			free(*fd_lst);
-			is_success = 0;
+			*is_success = 0;
 			return (0);
 		}
 		save = (char *)malloc((*fd_lst)->buf_len - ret_len);
@@ -102,7 +115,7 @@ char	*ret_line(t_list **fd_lst, int *is_success)
 			free(ret);
 			free((*fd_lst)->buf);
 			free(*fd_lst);
-			is_success = 0;
+			*is_success = 0;
 			return (0);
 		}
 		ft_memcpy(ret, (*fd_lst)->buf, ret_len);
@@ -120,13 +133,14 @@ char	*ret_line(t_list **fd_lst, int *is_success)
 		{
 			free((*fd_lst)->buf);
 			free((*fd_lst));
-			is_success = 0;
+			*is_success = 0;
 			return (0);
 		}
 		ft_memcpy(ret, (*fd_lst)->buf, (*fd_lst)->buf_len);
 		ret[(*fd_lst)->buf_len] = '\0';
 		free((*fd_lst)->buf);
 		free((*fd_lst));
+		*fd_lst = 0;
 	}
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/04/30 07:36:31 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/03 02:29:52 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,36 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		((unsigned char *) dst)[cnt] = temp[cnt];
 		cnt++;
 	}
-	return (dst);
+	return (dst);/*good*/
 }
 
 t_list	*create_lst(t_list **head, int fd, char **buf, ssize_t buf_len)
 {
 	t_list	*prev;
-	t_list	*temp;
 
-	if (*head)
+	prev = *head;
+	if (prev)
 	{
-		prev = *head;
-		while ((*head)->next->fd < fd && (*head)->next != prev)
-			*head = (*head)->next;
+		while (prev->next->fd < fd && prev->next != prev)
+			*head = prev->next;
 	}
-	temp = *head;
 	*head = (t_list *)malloc(sizeof(t_list));
-	if (*head)
+	if (!*head)
 		return (0);
-	temp->next->prev = *head;
-	(*head)->next = temp->next;
-	temp->next = *head;
-	(*head)->prev = temp; /*확인 필요*/
-	temp->fd = fd;
-	temp->buf = *buf;
-	temp->buf_len = buf_len;
-	return (*head);
+	(*head)->fd = fd;
+	(*head)->buf = *buf;
+	(*head)->buf_len = buf_len;
+	if (!prev)
+	{
+		(*head)->next = *head;
+		(*head)->prev = *head;
+		return (*head);
+	}
+	prev->next->prev = *head;
+	(*head)->next = prev->next;
+	(*head)->prev = prev;
+	prev->next = *head;
+	return (*head); /*good*/
 }
 
 int	join_str(t_list **fd_lst, char **save, ssize_t read_len)
@@ -60,10 +64,10 @@ int	join_str(t_list **fd_lst, char **save, ssize_t read_len)
 	if (!temp)
 		return (0);
 	ft_memcpy(temp, (*fd_lst)->buf, (*fd_lst)->buf_len);
-	ft_memcpy(temp + (*fd_lst)->buf_len, save, read_len);
+	ft_memcpy(temp + (*fd_lst)->buf_len, *save, read_len);
 	free((*fd_lst)->buf);
 	free(*save);
 	(*fd_lst)->buf = temp;
 	(*fd_lst)->buf_len = (*fd_lst)->buf_len + read_len;
-	return (1);
+	return (1); /*good*/
 }
