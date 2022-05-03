@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/05/03 01:00:43 by conteng          ###   ########.fr       */
+/*   Updated: 2022/05/03 16:57:39 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_gnl_list
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 t_list	*create_lst(t_list **head, int fd, char **buf, ssize_t buf_len);
 int		join_str(t_list **lst, char **save, ssize_t read_len);
+char	*ft_strdup(const char *s1);
 
 char	*get_next_line(int fd);
 int		input_str(t_list **fd_lst, int fd, int *is_success);

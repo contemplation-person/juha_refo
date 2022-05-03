@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/05/03 02:29:52 by conteng          ###   ########.fr       */
+/*   Updated: 2022/05/03 16:57:38 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		((unsigned char *) dst)[cnt] = temp[cnt];
 		cnt++;
 	}
-	return (dst);/*good*/
+	return (dst);
 }
 
 t_list	*create_lst(t_list **head, int fd, char **buf, ssize_t buf_len)
@@ -53,7 +53,7 @@ t_list	*create_lst(t_list **head, int fd, char **buf, ssize_t buf_len)
 	(*head)->next = prev->next;
 	(*head)->prev = prev;
 	prev->next = *head;
-	return (*head); /*good*/
+	return (*head);
 }
 
 int	join_str(t_list **fd_lst, char **save, ssize_t read_len)
@@ -69,5 +69,26 @@ int	join_str(t_list **fd_lst, char **save, ssize_t read_len)
 	free(*save);
 	(*fd_lst)->buf = temp;
 	(*fd_lst)->buf_len = (*fd_lst)->buf_len + read_len;
-	return (1); /*good*/
+	return (1);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*temp;
+	size_t	i;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	temp = (char *)malloc(i + 1);
+	if (!temp)
+		return (0);
+	i = 0;
+	while (s1[i])
+	{
+		temp[i] = s1[i];
+		i++;
+	}
+	temp[i] = '\0';
+	return (temp);
 }

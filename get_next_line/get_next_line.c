@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/05/03 02:47:34 by conteng          ###   ########.fr       */
+/*   Updated: 2022/05/03 18:19:38 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*get_next_line(int fd)
 	int				is_success;
 	t_list			*temp;
 
+	is_success = 1;
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (0);
 	if (lst)
@@ -36,14 +37,36 @@ char	*get_next_line(int fd)
 	return (str);
 }
 
+int	check_fd(t_list **fd_lst, int fd, char **temp, int read_len)
+{
+	int	is_join;
+
+	if (*fd_lst && (*fd_lst)->fd == fd)
+	{
+		is_join = join_str(fd_lst, temp, read_len);
+		if (!is_join)
+		{
+			free(*temp);
+			return (0);
+		}
+	}
+	else
+	{
+		if (!create_lst(fd_lst, fd, temp, read_len))
+		{
+			free(*temp);
+			return (0);
+		}
+	}
+	return (1);
+}
+
 int	input_str(t_list **fd_lst, int fd, int *is_success)
 {
 	ssize_t	read_len;
 	ssize_t	i;
 	char	*temp;
-	int		is_join;
 
-	is_join = 0;
 	temp = (char *)malloc(BUFFER_SIZE);
 	if (!temp)
 		return (0);
@@ -53,23 +76,8 @@ int	input_str(t_list **fd_lst, int fd, int *is_success)
 		free(temp);
 		return (read_len == 0);
 	}
-	if (*fd_lst && (*fd_lst)->fd == fd)
-	{
-		is_join = join_str(fd_lst, &temp, read_len);
-		if (!is_join)
-		{
-			free(temp);
-			return (0);
-		}
-	}
-	else
-	{
-		if (!create_lst(fd_lst, fd, &temp, read_len))
-		{
-			free(temp);
-			return (0);
-		}
-	}
+	if (!check_fd(fd_lst, fd, &temp, read_len))
+		return (0);
 	i = -1;
 	while (++i < (*fd_lst)->buf_len)
 	{
