@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/05/03 16:57:38 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/03 22:14:30 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <unistd.h>
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -72,23 +73,53 @@ int	join_str(t_list **fd_lst, char **save, ssize_t read_len)
 	return (1);
 }
 
-char	*ft_strdup(const char *s1)
+int	check_fd(t_list **fd_lst, int fd, char **temp, int read_len)
 {
-	char	*temp;
-	size_t	i;
+	int	is_join;
 
-	i = 0;
-	while (s1[i])
-		i++;
-	temp = (char *)malloc(i + 1);
+	if (*fd_lst && (*fd_lst)->fd == fd)
+	{
+		is_join = join_str(fd_lst, temp, read_len);
+		if (!is_join)
+		{
+			free(*temp);
+			return (0);
+		}
+	}
+	else
+	{
+		if (!create_lst(fd_lst, fd, temp, read_len))
+		{
+			free(*temp);
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int	input_str(t_list **fd_lst, int fd, int *is_success)
+{
+	ssize_t	read_len;
+	ssize_t	i;
+	char	*temp;
+
+	temp = (char *)malloc(BUFFER_SIZE);
 	if (!temp)
 		return (0);
-	i = 0;
-	while (s1[i])
+	read_len = read(fd, temp, BUFFER_SIZE);
+	if (read_len < 0 || read_len == 0)
 	{
-		temp[i] = s1[i];
-		i++;
+		free(temp);
+		return (read_len == 0);
 	}
-	temp[i] = '\0';
-	return (temp);
+	if (!check_fd(fd_lst, fd, &temp, read_len))
+		return (0);
+	i = -1;
+	while (++i < (*fd_lst)->buf_len)
+	{
+		if ((*fd_lst)->buf[i] == '\n')
+			return (1);
+	}
+	*is_success = input_str(fd_lst, fd, is_success);
+	return (1);
 }

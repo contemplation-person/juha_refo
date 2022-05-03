@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: conteng <conteng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:00:51 by juha              #+#    #+#             */
-/*   Updated: 2022/05/03 16:57:39 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/03 22:14:33 by conteng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@ typedef struct s_gnl_list
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 t_list	*create_lst(t_list **head, int fd, char **buf, ssize_t buf_len);
-int		join_str(t_list **lst, char **save, ssize_t read_len);
-char	*ft_strdup(const char *s1);
+int		join_str(t_list **fd_lst, char **save, ssize_t read_len);
+int		check_fd(t_list **fd_lst, int fd, char **temp, int read_len);
+int		input_str(t_list **fd_lst, int fd, int *is_success);
 
 char	*get_next_line(int fd);
-int		input_str(t_list **fd_lst, int fd, int *is_success);
+int		create_ret_save(t_list **fd_lst, char **ret, \
+	ssize_t ret_len, char **save);
+ssize_t	check_line(t_list *fd_lst, ssize_t ret_len);
+char	*split_line(t_list **fd_lst, ssize_t *ret_len, int *is_success);
 char	*ret_line(t_list **fd_lst, int *is_success);
 #endif
