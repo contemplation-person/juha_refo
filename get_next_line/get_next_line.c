@@ -3,29 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/05/10 02:23:40 by conteng          ###   ########seoul.kr  */
+/*   Updated: 2022/05/11 13:09:21 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
-{
-	static t_list	*head;
-	t_list			*fd_lst;
-	t_success		chk_success;
+t_success	get_list(t_list **head, t_list **fd_lst, int fd);
+t_success	free_lst(t_list **fd_lst);
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	if (!get_list(&head, &fd_lst, fd))
-		return (0);
-	if (!read_str(&fd_lst, fd)) /*리드를 했으면 리드 반환 아니면 error반환*/
-		return (0);
-	return (ret_str(&fd_lst));
-}
+
+// char	*get_next_line(int fd)
+// {
+// 	static t_list	*head;
+// 	t_list			*fd_lst;
+// 	t_success		chk_success;
+
+// 	if (fd < 0 || BUFFER_SIZE <= 0)
+// 		return (0);
+// 	if (!get_list(&head, &fd_lst, fd))
+// 		return (0);
+// 	if (!read_str(&fd_lst, fd)) /*리드를 했으면 리드 반환 아니면 error반환*/
+// 		return (free_lst(fd_lst) >> 1);
+// 	return (ret_str(&fd_lst));
+// }
+
 
 t_success	free_lst(t_list **fd_lst)
 {
@@ -41,12 +46,9 @@ t_success	free_lst(t_list **fd_lst)
 	if (next)
 		next->prev = prev;
 	free(*fd_lst);
+	if (!prev || !next)
+		*fd_lst = 0;
 	return (SUCCESS);
-}
-
-t_success	read_str(t_list **fd_lst, int fd)
-{
-	
 }
 
 t_success	get_list(t_list **head, t_list **fd_lst, int fd)
@@ -62,7 +64,7 @@ t_success	get_list(t_list **head, t_list **fd_lst, int fd)
 			prev = *fd_lst;
 			*fd_lst = (*fd_lst)->next;
 		}
-		if ((*fd_lst)->fd == fd)
+		if (*fd_lst && (*fd_lst)->fd == fd)
 			return (CONTINUE);
 	}
 	*fd_lst = (t_list *)malloc(sizeof(t_list));
@@ -73,9 +75,28 @@ t_success	get_list(t_list **head, t_list **fd_lst, int fd)
 	(*fd_lst)->next = NULL;
 	(*fd_lst)->buf_len = 0;
 	(*fd_lst)->buf = 0;
-	if (*head)
+	if (prev)
 		prev->next = *fd_lst;
 	else
 		*head = *fd_lst;
 	return (SUCCESS);
 }
+
+t_success	read_str(t_list **fd_lst, int fd)
+{
+	char	*str;
+	int		read_len;
+
+	str = (char *)malloc(BUFFER_SIZE);
+	if (!str)
+		return (ERROR);
+	read_len = read(fd, str, BUFFER_SIZE);
+	if (read_len < 0 || (read_len == 0 && (*fd_lst)->buf_len == 0))
+	{
+		free(str);
+		return (ERROR);
+	}
+	if ()
+}
+/*
+*/
