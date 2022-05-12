@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/05/12 01:00:59 by conteng          ###   ########seoul.kr  */
+/*   Updated: 2022/05/12 11:49:42 by conteng          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,38 @@ char	*ret_str(t_list **fd_lst)
 	}
 	ret = (char *)malloc(ret_len + 1);
 	if (!ret)
-		return (ERROR);
-/*ret 복사 + 끝에 \0*/
+		return (free_lst(fd_lst));
+	ft_memcpy(ret, (*fd_lst)->buf, ret_len);
+	ret[ret_len] = '\0';
 	if ((*fd_lst)->buf_len - ret_len)
 	{
 		save = (char *)malloc((*fd_lst)->buf_len - ret_len);
 		if (!save)
 		{
 			free(ret);
-			return (ERROR);
+			return (free_lst(fd_lst));
 		}
-		/*save 복사 (*fd_list)->buf = save & (*fd_lst)->buf_len 넣기*/
+		ft_memcpy(save, (*fd_lst)->buf[ret_len], (*fd_lst)->buf_len - ret_len);
+		free((*fd_lst)->buf);
+		(*fd_lst)->buf = save;
+		(*fd_lst)->buf_len = (*fd_lst)->buf_len - ret_len;
 	}
 	else
 		free_lst(fd_lst);
 	return (ret);
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	unsigned char	*temp;
+	size_t			cnt;
+
+	temp = (unsigned char *)src;
+	cnt = 0;
+	while (cnt < n)
+	{
+		((unsigned char *)dst)[cnt] = temp[cnt];
+		cnt++;
+	}
+	return (dst);
 }

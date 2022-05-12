@@ -6,7 +6,7 @@
 /*   By: conteng <conteng@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/05/11 23:50:46 by conteng          ###   ########seoul.kr  */
+/*   Updated: 2022/05/12 11:48:45 by conteng          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_next_line(int fd)
 		return (0);
 	if (!get_list(&head, &fd_lst, fd))
 		return (0);
-	if (!read_str(&fd_lst, fd)) /*리드를 했으면 리드 반환 아니면 error반환*/
+	if (!read_str(&fd_lst, fd))
 		return (free_lst(fd_lst) >> 1);
 	return (ret_str(&fd_lst));
 }
