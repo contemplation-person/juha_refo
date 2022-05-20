@@ -13,21 +13,12 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 
-int ft_printf(const char *format, ...)
+int ft_printf(const char *form, ...)
 {
-    va_list ap;
-    int     args;
-    int     i;
-
-    i = 0;
-    while (format[i])
-        i++;
-    --i;
-    while (--i > -1)
-    {
-        if (format[i] == '%')
-        {
-            if (format[i + 1] == 'c')
-        }
-    }
-    va_start(ap, args);
+/*
+    1. 문자열에서 %의 위치를 찾는다.
+    2. 문자열에서 %뒤의 문자를 확인한다.
+    3. 문자열에서 %뒤의 문자가 나타날때마다 문자를 출력.
+    4. 문자열에서 
+*/
+}
