@@ -2,3 +2,4 @@ a.out
 a.exe
 *.h.gch
 t.c
+.vscode/
