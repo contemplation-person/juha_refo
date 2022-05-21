@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: conteng <conteng@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 16:04:34 by juha              #+#    #+#             */
-/*   Updated: 2022/05/20 03:00:25 by conteng          ###   ########seoul.kr  */
+/*   Created: 2022/05/20 03:00:15 by conteng           #+#    #+#             */
+/*   Updated: 2022/05/20 03:01:19 by conteng          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
+#include <stdarg.h>
+#include <unistd.h>
 
-#include <sys/types.h>
-#include <stdlib.h>
-
-typedef struct s_format
+void	write_str(va_list *ap, char c_or_str)
 {
-	size_t			idx;
-	char			change_char;
-	struct s_format	*top;
-	struct s_format	*bottom;
-}t_format;
+	int		address;
+	char 	*c;
+	int		cnt;
 
-typedef enum e_success
-{
-	error = 0,
-	success,
-	exclusion = 0,
-	inclusion,
-	empty = 0
-}t_success;
-
-size_t	ft_strlen(const char	*s);
-
-#endif
+	cnt = 1;
+	if (c_or_str == 'c')
+	{
+		*c = va_arg(*ap, int);
+		printf("va_c : %c\n", *c);
+		write(1, c, cnt);
+	}
+	else
+	{
+		while (cnt > 0)
+		{
+			c = va_arg(*ap, int);
+			cnt = 0;
+			printf("va_s : %s\n", *c);
+			write(1, c, 1);
+			cnt++;
+		}
+	}
+}
