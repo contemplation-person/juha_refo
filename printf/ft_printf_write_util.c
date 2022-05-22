@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_write_util.c                                   :+:      :+:    :+:   */
+/*   ft_printf_write_util.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 03:00:15 by conteng           #+#    #+#             */
-/*   Updated: 2022/05/20 03:01:19 by conteng          ###   ########seoul.kr  */
+/*   Created: 2022/05/22 23:03:12 by juha              #+#    #+#             */
+/*   Updated: 2022/05/22 23:03:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	write_str(va_list *ap, char c_or_str)
 {
 	int		address;
-	char 	*c;
+	char	*c;
 	int		cnt;
 
 	cnt = 1;

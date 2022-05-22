@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 03:00:07 by conteng           #+#    #+#             */
-/*   Updated: 2022/05/20 03:00:28 by conteng          ###   ########seoul.kr  */
+/*   Updated: 2022/05/22 23:02:25 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
 
-int ft_printf(const char *form, ...)
+int	ft_printf(const char *form, ...)
 {
-    int 		form_len;
-    t_format	*stack;
+	int			form_len;
+	t_format	*stack;
 	size_t		va_cnt;
 	va_list		ap;
 
@@ -37,8 +37,9 @@ int ft_printf(const char *form, ...)
 t_format	*write_format(va_list ap, t_format *top)
 {
 	t_format	*new_top;
-	char		*conversion_c = "cspdiuxX";
+	char		*conversion_c;
 
+	conversion_c = "cspdiuxX";
 	if (top->change_char == 'c' && top->change_char == 's')
 		write_str(ap, top->change_char);
 	if (top->change_char == 'p')
@@ -76,9 +77,10 @@ int	print_char(va_list ap, t_format *top, char *form, size_t va_cnt)
 
 t_success	chk_format(char c)
 {
-	char	*conversion_c = "cspdiuxX";
+	char	*conversion_c;
 	int		size;
 
+	conversion_c = "cspdiuxX";
 	while (*conversion_c)
 		if (c == *conversion_c++)
 			return (inclusion);
@@ -96,9 +98,10 @@ size_t	set_va_arr(t_format	**stack, char *form, size_t form_len)
 	va_cnt = 0;
 	while (-1 < --form_len)
 	{
-		if (form_len != max && form[form_len] == '%' && chk_format(form[form_len + 1]))
+		if (form_len != max && form[form_len] == '%' \
+		&& chk_format(form[form_len + 1]))
 		{
-			top_node = push_node(top_node, form[form_len + 1], form_len); //top node
+			top_node = push_node(top_node, form[form_len + 1], form_len);
 			if (!top_node)
 				return (free_stack(stack));
 			va_cnt++;

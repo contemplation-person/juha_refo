@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:04:34 by juha              #+#    #+#             */
-/*   Updated: 2022/05/20 03:00:25 by conteng          ###   ########seoul.kr  */
+/*   Updated: 2022/05/22 22:53:12 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <sys/types.h>
-#include <stdlib.h>
+# include <sys/types.h>
+# include <stdlib.h>
 
 typedef struct s_format
 {

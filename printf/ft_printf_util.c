@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: conteng <conteng@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 03:00:15 by conteng           #+#    #+#             */
-/*   Updated: 2022/05/20 03:01:19 by conteng          ###   ########seoul.kr  */
+/*   Updated: 2022/05/22 23:04:56 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ t_format	*push_node(t_format *bottom_node, char conversion_c, size_t idx)
 
 t_success	free_stack(t_format *top)
 { //check
-	t_format *bottom_node;
+	t_format	*bottom_node;
 
+	bottom_node = 0;
 	while (top)
 	{
 		bottom_node = top->bottom;
