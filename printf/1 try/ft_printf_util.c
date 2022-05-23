@@ -6,21 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 03:00:15 by conteng           #+#    #+#             */
-/*   Updated: 2022/05/22 23:04:56 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/23 20:52:41 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-size_t	ft_strlen(const char	*s)
-{
-	size_t	cnt;
-
-	cnt = 0;
-	while (s[cnt])
-		cnt++;
-	return (cnt);
-}
 
 t_format	*push_node(t_format *bottom_node, char conversion_c, size_t idx)
 {
@@ -28,7 +18,7 @@ t_format	*push_node(t_format *bottom_node, char conversion_c, size_t idx)
 
 	top_node = (t_format *)malloc(sizeof(t_format));
 	if (!top_node)
-		return (error);
+		return (0);
 	if (bottom_node)
 	{
 		top_node->top = NULL;
@@ -48,9 +38,9 @@ t_format	*push_node(t_format *bottom_node, char conversion_c, size_t idx)
 }
 
 t_success	free_stack(t_format *top)
-{ //check
+{
 	t_format	*bottom_node;
-
+//check
 	bottom_node = 0;
 	while (top)
 	{

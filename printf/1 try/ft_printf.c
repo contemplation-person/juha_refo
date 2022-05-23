@@ -6,12 +6,12 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 03:00:07 by conteng           #+#    #+#             */
-/*   Updated: 2022/05/22 23:02:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/23 20:52:39 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
+#include "unistd.h"
 
 int	ft_printf(const char *form, ...)
 {
@@ -24,86 +24,92 @@ int	ft_printf(const char *form, ...)
 		return (-1);
 	stack = NULL;
 	form_len = ft_strlen(form);
-	va_cnt = set_va_arr(&stack, form, form_len - 1);
+	va_cnt = set_va_stack(&stack, (char *)form, form_len - 1);
 	if (va_cnt)
 	{
-		va_start(ap, va_cnt);
-		return (print_char(ap, stack, form, va_cnt));
+		va_start(ap, form);
+		return (print_char(&ap, stack, (char *)form, va_cnt));
 		// 구조체를 return 하면서 free를 해야함. / var_end// form_len - (var_cnt * 2)
+	}
+	if (form)
+	{
+		write(1, form, form_len);
+		return (form_len);
 	}
 	return (-1);
 }
 
-t_format	*write_format(va_list ap, t_format *top)
+t_format	*write_format(va_list *ap, t_format *top)
 {
 	t_format	*new_top;
 	char		*conversion_c;
+	char		input_c;
 
+	input_c = top->change_char;
 	conversion_c = "cspdiuxX";
-	if (top->change_char == 'c' && top->change_char == 's')
-		write_str(ap, top->change_char);
-	if (top->change_char == 'p')
-		write_ponter(ap);
-	if (top->change_char == 'd' && top->change_char == 'i')
-		write_int(ap);
-	if (top->change_char == 'u')
+	if (input_c == 'c' || input_c == 's' || input_c == '%')
+		write_str(ap, input_c);
+	else if (input_c == 'u')
 		write_unsigned_int(ap);
-	if (top->change_char == 'x' && top->change_char == 'X')
-		write_Hexa_num(ap);
+	else if (input_c == 'x' || input_c == 'X')
+		write_hexa_num(ap, input_c);
+	else if (input_c == 'd' || input_c == 'i' \
+	&& input_c == 'p')
+		write_int(ap);
 	new_top = top->bottom;
 	free(top);
 	return (new_top);
 }
 
-int	print_char(va_list ap, t_format *top, char *form, size_t va_cnt)
+int	print_char(va_list *ap, t_format *top, char *form, size_t va_cnt)
 {
 	size_t	form_len;
-
+//check ap? *ap
 	form_len = 0;
 	while (*form)
 	{
 		if (top && form_len == top->idx)
 		{
 			form_len += 2;
-			form + 2;
+			form += 2;
 			top = write_format(ap, top);
 			continue ;
 		}
 		write(1, form++, 1);
 		form_len++;
 	}
+	va_end(*ap);
 	return (form_len - (va_cnt * 2));
 }
 
 t_success	chk_format(char c)
 {
 	char	*conversion_c;
-	int		size;
 
-	conversion_c = "cspdiuxX";
+	conversion_c = "cspdiuxX%";
 	while (*conversion_c)
 		if (c == *conversion_c++)
 			return (inclusion);
 	return (exclusion);
 }
 
-size_t	set_va_arr(t_format	**stack, char *form, size_t form_len)
+size_t	set_va_stack(t_format	**stack, char *form, size_t form_len)
 {
 	t_format	*top_node;
 	size_t		va_cnt;
 	size_t		max;
 
-	top_node = stack;
+	top_node = *stack;
 	max = form_len;
 	va_cnt = 0;
-	while (-1 < --form_len)
+	while (0 < --form_len + 1)
 	{
 		if (form_len != max && form[form_len] == '%' \
 		&& chk_format(form[form_len + 1]))
 		{
 			top_node = push_node(top_node, form[form_len + 1], form_len);
 			if (!top_node)
-				return (free_stack(stack));
+				return (free_stack(*stack));
 			va_cnt++;
 		}
 		else

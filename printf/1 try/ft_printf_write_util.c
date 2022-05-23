@@ -6,36 +6,80 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 23:03:12 by juha              #+#    #+#             */
-/*   Updated: 2022/05/22 23:03:28 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/23 20:52:42 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
 #include <unistd.h>
 
 void	write_str(va_list *ap, char c_or_str)
 {
-	int		address;
 	char	*c;
-	int		cnt;
+	int		i;
 
-	cnt = 1;
-	if (c_or_str == 'c')
+	c = 0;
+	if (c_or_str == '%')
 	{
-		*c = va_arg(*ap, int);
-		printf("va_c : %c\n", *c);
-		write(1, c, cnt);
+		
+	}
+	else if (c_or_str == 'c')
+	{
+		i = 1;
+		*c = va_arg(*ap, char);
+		write(1, c, i);
 	}
 	else
 	{
-		while (cnt > 0)
-		{
-			c = va_arg(*ap, int);
-			cnt = 0;
-			printf("va_s : %s\n", *c);
-			write(1, c, 1);
-			cnt++;
-		}
+		c = va_arg(*ap, char *);
+		i = 0;
+		while (c[i])
+			i++;
+		write(1, c, i);
+	}
+}
+
+void	write_unsigned_int(va_list *ap)
+{
+	long long	num;
+	char		*str;
+	int			i;
+
+	num = va_arg(*ap, unsigned int);
+	str = ft_itoa(num);
+	i = 0;
+	while (str[num])
+		num++;
+	write(1, str, num);
+}
+
+void	write_int(va_list *ap)
+{
+	long long	num;
+	char		*str;
+	int			i;
+
+	num = va_arg(*ap, int);
+	str = ft_itoa(num);
+	i = 0;
+	while (str[num])
+		num++;
+	write(1, str, num);
+}
+
+void	write_hexa_num(va_list *ap, char c)
+{
+	long long	num;
+	char		*form;
+
+	num = va_arg(*ap, unsigned int);
+	if (c == 'x')
+		form = "0123456789abcdef";
+	else
+		form = "0123456789ABCDEF";
+	while (1 < num)
+	{
+		write(1, form + (num % 16), 1);
+		num /= 16;
 	}
 }
