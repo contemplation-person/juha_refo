@@ -31,7 +31,7 @@ int	ft_printf(const char *form, ...)
 		va_start(ap, form);
 		return (print_char(&ap, stack, (char *)form));
 	}
-	while (va_cnt != '%')
+	if (chk_persent(form))
 		return (-1);
 	if (form)
 	{
@@ -88,12 +88,14 @@ t_success	chk_format(char c)
 
 	conversion_c = "cspdiuxX%";
 	while (*conversion_c)
+	{
 		if (c == *conversion_c++)
-			return (inclusion);
-	return (exclusion);
+			return (INCLUSION);
+	}
+	return (EXCLUSION);
 }
 
-size_t	set_va_stack(t_format	**stack, char *form, size_t form_len)
+size_t	set_va_stack(t_format	**stack, char *form, int form_len)
 {
 	t_format	*top_node;
 	size_t		va_cnt;
@@ -102,12 +104,13 @@ size_t	set_va_stack(t_format	**stack, char *form, size_t form_len)
 	top_node = *stack;
 	max = form_len;
 	va_cnt = 0;
-	while (1 <= --form_len + 1)
+	while (-1 < --form_len)
 	{
 		if (form_len != max && form[form_len] == '%' \
 		&& chk_format(form[form_len + 1]))
 		{
 			top_node = push_node(top_node, form[form_len + 1], form_len);
+			printf("node : %d %c\n",top_node->idx,top_node->change_char ); //////
 			if (!top_node)
 				return (free_stack(*stack));
 			va_cnt++;

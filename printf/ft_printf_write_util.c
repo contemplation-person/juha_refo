@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 23:03:12 by juha              #+#    #+#             */
-/*   Updated: 2022/05/25 16:52:17 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/26 00:56:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 
 void	write_str(va_list *ap, char c_or_str, size_t *form_len)
 {
-	char	*str;
-	char	c;
+	char	*c;
 	int		i;
 
-	str = NULL;
 	if (c_or_str == '%')
 	{
 		(*form_len)++;
@@ -28,17 +26,17 @@ void	write_str(va_list *ap, char c_or_str, size_t *form_len)
 	else if (c_or_str == 'c')
 	{
 		(*form_len)++;
-		c = (char)va_arg(*ap, int);
+		*c = (char)va_arg(*ap, int);
 		write(1, &c, 1);
 	}
 	else
 	{
-		str = va_arg(*ap, char *);
+		c = va_arg(*ap, char *);
 		i = 0;
-		while (str[i])
+		while (c[i])
 			i++;
 		(*form_len) += i;
-		write(1, str, i);
+		write(1, c, i);
 	}
 }
 

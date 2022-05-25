@@ -48,5 +48,19 @@ t_success	free_stack(t_format *top)
 		free(top);
 		top = bottom_node;
 	}
-	return (empty);
+	return (EMPTY);
+}
+
+t_success	chk_persent(const char *form)
+{
+	int	i;
+
+	i = 0;
+	while (form[i])
+	{
+		if (form[i] == '%')
+			return (SUCCESS);
+		i++;
+	}
+	return (ERROR);
 }

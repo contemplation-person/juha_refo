@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:04:34 by juha              #+#    #+#             */
-/*   Updated: 2022/05/25 16:49:15 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/26 01:16:05 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ typedef struct s_format
 
 typedef enum e_success
 {
-	error = 0,
-	success,
-	exclusion = 0,
-	inclusion,
-	empty = 0
+	ERROR = 0,
+	SUCCESS,
+	EXCLUSION= 0,
+	INCLUSION,
+	EMPTY = 0
 }t_success;
 
-size_t		set_va_stack(t_format	**stack, char *form, size_t form_len);
+size_t		set_va_stack(t_format	**stack, char *form, int form_len);
 t_success	chk_format(char c);
 t_format	*write_format(va_list *ap, t_format *top, size_t *form_len);
 int			print_char(va_list *ap, t_format *top, char *form);
@@ -42,6 +42,7 @@ int			ft_printf(const char *form, ...);
 
 t_success	free_stack(t_format *top);
 t_format	*push_node(t_format *bottom_node, char conversion_c, size_t idx);
+t_success	chk_persent(const char *form);
 
 void		write_hexa_num(va_list *ap, char c, size_t *form_len);
 void		write_int(va_list *ap, size_t *form_len);

@@ -10,7 +10,7 @@ int	main(void)
 	char	*str;
 
 	cnt = 0;
-	str = "sdf %% sdf%c %s %d %i %u %x %X sadf";
+	str = "sdf %% sdf%c %s %d %i %u %x %X sadf\n";
 	ft_cnt = ft_printf(str, 'c', "ttt", 0xfff, 0xfff, 0xfff, 0xfff, 0xfff);
 	cnt = printf(str, 'c', "ttt", 0xfff, 0xfff, 0xfff, 0xfff, 0xfff);
 
