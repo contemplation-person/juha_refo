@@ -1,0 +1,14 @@
+{
+      "version": "2.0.0",
+      "tasks": [
+          {
+              "label": "make test",
+              "type": "shell",
+              "command": "make test",
+              "options": {
+                  "cwd": "${workspaceFolder}/printf/1 try"
+              },
+              "problemMatcher": ["$gcc"]
+          }
+      ]
+}
