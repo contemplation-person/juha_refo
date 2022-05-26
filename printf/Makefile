@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/05/25 16:57:20 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/05/26 16:55:45 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,5 +38,5 @@ fclean : clean
 re : fclean all
 
 t: $(NAME) test.c
-	$(CC) $(CPPFLAGS) test.c $(SRC) -g3 -fsanitize=address
+	$(CC) $(CPPFLAGS)test.c $(SRC) -g3 -fsanitize=address
 	rm -f *.o *.a

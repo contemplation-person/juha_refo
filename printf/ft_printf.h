@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:04:34 by juha              #+#    #+#             */
-/*   Updated: 2022/05/26 01:16:05 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/26 17:24:56 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		write_hexa_num(va_list *ap, char c, size_t *form_len);
 void		write_int(va_list *ap, size_t *form_len);
 void		write_unsigned_int(va_list *ap, size_t *form_len);
 void		write_str(va_list *ap, char c_or_str, size_t *form_len);
+void		write_pointer(va_list *ap, size_t *form_len);
 
 size_t		ft_strlen(const char	*s);
 char		*change_string(char *s, int cnt, size_t n, int is_minus);

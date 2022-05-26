@@ -31,9 +31,9 @@ int	ft_printf(const char *form, ...)
 		va_start(ap, form);
 		return (print_char(&ap, stack, (char *)form));
 	}
-	if (chk_persent(form))
+	else if (chk_persent(form))
 		return (-1);
-	if (form)
+	else if (form)
 	{
 		write(1, form, form_len);
 		return (form_len);
@@ -55,8 +55,10 @@ t_format	*write_format(va_list *ap, t_format *top, size_t *form_len)
 		write_unsigned_int(ap, form_len);
 	else if (input_c == 'x' || input_c == 'X')
 		write_hexa_num(ap, input_c, form_len);
-	else if (input_c == 'd' || input_c == 'i' || input_c == 'p')
+	else if (input_c == 'd' || input_c == 'i')
 		write_int(ap, form_len);
+	else if (input_c == 'p')
+		write_pointer(ap, form_len);
 	new_top = top->bottom;
 	free(top);
 	return (new_top);
@@ -65,14 +67,20 @@ t_format	*write_format(va_list *ap, t_format *top, size_t *form_len)
 int	print_char(va_list *ap, t_format *top, char *form)
 {
 	size_t	form_len;
+	size_t	i;
 
+	i = 0;
 	form_len = 0;
 	while (*form)
 	{
-		if (top && form_len == top->idx)
+		if (top && i++ == top->idx)
+		{
+			top = write_format(ap, top, &form_len);
+			continue ;
+		}
+		else if (*form == '%')
 		{
 			form += 2;
-			top = write_format(ap, top, &form_len);
 			continue ;
 		}
 		write(1, form++, 1);
@@ -99,7 +107,7 @@ size_t	set_va_stack(t_format	**stack, char *form, int form_len)
 {
 	t_format	*top_node;
 	size_t		va_cnt;
-	size_t		max;
+	int			max;
 
 	top_node = *stack;
 	max = form_len;
@@ -110,13 +118,12 @@ size_t	set_va_stack(t_format	**stack, char *form, int form_len)
 		&& chk_format(form[form_len + 1]))
 		{
 			top_node = push_node(top_node, form[form_len + 1], form_len);
-			printf("node : %d %c\n",top_node->idx,top_node->change_char ); //////
 			if (!top_node)
 				return (free_stack(*stack));
 			va_cnt++;
 		}
-		else if ((form_len == max && form[form_len] == '%') || (form_len != max \
-		&& form[form_len] == '%' && !chk_format(form[form_len + 1])))
+		else if (form[max] == '%' || \
+		(!form_len && form[form_len] == '%' && form[form_len - 1] == '%'))
 			return (free_stack(*stack));
 		else
 			continue ;
