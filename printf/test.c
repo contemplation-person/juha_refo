@@ -19,6 +19,7 @@ int	main(void)
 
 	printf("\nft_cnt : %d", ft_cnt);
 	printf("\ncnt    : %d", cnt);
+	system("leaks a.out");
 	return (0);
 } //32 % 33x
     /*test(1, -1 , 0Xf, 0xffff);//longlong범위가 넘어가면 break;*/
