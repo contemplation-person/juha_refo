@@ -14,8 +14,8 @@ int	main(void)
 	// str = "8.%p\n";
 	// ft_cnt = ft_printf(str, str);
 	// cnt = printf(str, str);
-	ft_cnt = ft_printf(str, 'c', "ttt", 0xfff, 0xfff, 0xfff, 0xfff, 0xfff,0xa1f);
-	cnt = printf(str, 'c', "ttt", 0xfff, 0xfff, 0xfff, 0xfff, 0xfff, 0xa1f);
+	ft_cnt = ft_printf(str, 'c', "ttt", 0xfff, 0xfff, 0xfff, (void *)0, 0xfff,0xa1f);
+	cnt = printf(str, 'c', "ttt", 0xfff, 0xfff, 0xfff, (void *)0, 0xfff, 0xa1f);
 
 	printf("\nft_cnt : %d", ft_cnt);
 	printf("\ncnt    : %d", cnt);

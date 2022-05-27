@@ -44,21 +44,19 @@ int	ft_printf(const char *form, ...)
 t_format	*write_format(va_list *ap, t_format *top, size_t *form_len)
 {
 	t_format	*new_top;
-	char		*conversion_c;
 	char		input_c;
 
 	input_c = top->change_char;
-	conversion_c = "cspdiuxX";
 	if (input_c == 'c' || input_c == 's' || input_c == '%')
 		write_str(ap, input_c, form_len);
 	else if (input_c == 'u')
 		write_unsigned_int(ap, form_len);
 	else if (input_c == 'x' || input_c == 'X')
-		write_hexa_num(ap, input_c, form_len);
+		write_hexa_num(ap, input_c, form_len, -1);
 	else if (input_c == 'd' || input_c == 'i')
 		write_int(ap, form_len);
 	else if (input_c == 'p')
-		write_pointer(ap, form_len);
+		write_pointer(ap, form_len, -1);
 	new_top = top->bottom;
 	free(top);
 	return (new_top);
@@ -74,17 +72,14 @@ int	print_char(va_list *ap, t_format *top, char *form)
 	while (*form)
 	{
 		if (top && i++ == top->idx)
-		{
 			top = write_format(ap, top, &form_len);
-			continue ;
-		}
 		else if (*form == '%')
-		{
 			form += 2;
-			continue ;
+		else
+		{
+			write(1, form++, 1);
+			form_len++;
 		}
-		write(1, form++, 1);
-		form_len++;
 	}
 	va_end(*ap);
 	return (form_len);
@@ -119,12 +114,12 @@ size_t	set_va_stack(t_format	**stack, char *form, int form_len)
 		{
 			top_node = push_node(top_node, form[form_len + 1], form_len);
 			if (!top_node)
-				return (free_stack(*stack));
+				return (free_stack(stack));
 			va_cnt++;
 		}
 		else if (form[max] == '%' || \
 		(!form_len && form[form_len] == '%' && form[form_len - 1] == '%'))
-			return (free_stack(*stack));
+			return (free_stack(stack));
 		else
 			continue ;
 		*stack = top_node;

@@ -37,17 +37,20 @@ t_format	*push_node(t_format *bottom_node, char conversion_c, size_t idx)
 	return (top_node);
 }
 
-t_success	free_stack(t_format *top)
+t_success	free_stack(t_format **top)
 {
 	t_format	*bottom_node;
 
+	if (!*top)
+		return (ERROR);
 	bottom_node = 0;
-	while (top)
+	while (*top)
 	{
-		bottom_node = top->bottom;
-		free(top);
-		top = bottom_node;
+		bottom_node = (*top)->bottom;
+		free(*top);
+		*top = bottom_node;
 	}
+	*top = NULL;
 	return (EMPTY);
 }
 

@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 03:00:07 by conteng           #+#    #+#             */
-/*   Updated: 2022/05/25 14:37:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/27 14:40:34 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ t_success	chk_format(char c)
 	conversion_c = "cspdiuxX%";
 	while (*conversion_c)
 		if (c == *conversion_c++)
-			return (inclusion);
-	return (exclusion);
+			return (INCLUSION);
+	return (EXCLUSION);
 }
 
 size_t	set_va_stack(t_format	**stack, char *form, size_t form_len)
@@ -108,7 +108,7 @@ size_t	set_va_stack(t_format	**stack, char *form, size_t form_len)
 		{
 			top_node = push_node(top_node, form[form_len + 1], form_len);
 			if (!top_node)
-				return (free_stack(*stack));
+				return (free_stack(stack));
 			va_cnt++;
 		}
 		else
