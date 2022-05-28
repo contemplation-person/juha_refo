@@ -7,13 +7,13 @@ int	main(void)
 {
 	int		ft_cnt;
 	int		cnt;
-	char	*str;
+//	char	*str;
 
 	cnt = 0;
-	str = "%%p is how you print a pointer in printf";
+//	str = "%%p is how you print a pointer in printf";
 	// str = "8.%p\n";
-	ft_cnt = ft_printf("%c%c%c*", '\0', '1', 1);
-	cnt = printf("%c%c%c*", '\0', '1', 1);
+	ft_cnt = ft_printf("ft : %c%c%c*\n", '\0', '1', 1);
+	cnt = printf("or : %c%c%c*\n", '\0', '1', 1);
 	// ft_cnt = ft_printf(str, 0, "\0", 0xfff, 0xfff, 0xfff, (void *)0, 0xfff,0xa1f);
 	// cnt = printf(str, 0, "\0", 0xfff, 0xfff, 0xfff, (void *)0, 0xfff, 0xa1f);
 

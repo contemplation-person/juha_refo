@@ -62,16 +62,6 @@ char	*change_string(char *s, int cnt, size_t n, int is_minus)
 	return (s);
 }
 
-size_t	ft_strlen(const char	*s)
-{
-	size_t	cnt;
-
-	cnt = 0;
-	while (s[cnt])
-		cnt++;
-	return (cnt);
-}
-
 char	*ft_strdup(const char *s1)
 {
 	char	*temp;
@@ -91,4 +81,14 @@ char	*ft_strdup(const char *s1)
 	}
 	temp[i] = '\0';
 	return (temp);
+}
+
+size_t	ft_strlen(const char	*s)
+{
+	size_t	cnt;
+
+	cnt = 0;
+	while (s[cnt])
+		cnt++;
+	return (cnt);
 }

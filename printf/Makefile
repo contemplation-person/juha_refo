@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/05/28 15:57:02 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/05/29 01:12:54 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ NAME		= 	libftprintf.a
 SRC 		= 	ft_printf.c \
 				ft_printf_num_util.c \
 				ft_printf_str_util.c \
-				ft_printf_util.c \
 				ft_printf_libft_util.c \
 				
 AR			= 	ar
