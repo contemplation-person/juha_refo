@@ -12,15 +12,15 @@
 
 #include "ft_printf.h"
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long long n)
 {
-	char	*s;
-	int		is_minus;
-	int		cnt;
-	long	l;
+	char		*s;
+	int			is_minus;
+	long long	cnt;
+	long long	l;
 
 	if (n == 0)
-		return ("0");
+		return (ft_strdup("0"));
 	is_minus = 0;
 	l = n;
 	if (0 >= l)
@@ -70,4 +70,25 @@ size_t	ft_strlen(const char	*s)
 	while (s[cnt])
 		cnt++;
 	return (cnt);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*temp;
+	size_t	i;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	temp = (char *)malloc(i + 1);
+	if (!temp)
+		return (0);
+	i = 0;
+	while (s1[i])
+	{
+		temp[i] = s1[i];
+		i++;
+	}
+	temp[i] = '\0';
+	return (temp);
 }

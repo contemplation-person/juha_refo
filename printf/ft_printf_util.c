@@ -12,45 +12,45 @@
 
 #include "ft_printf.h"
 
-t_format	*push_node(t_format *bottom_node, char conversion_c, size_t idx)
+t_format	*insert_deque(t_format *rear_node, char conversion_c, size_t idx)
 {
-	t_format	*top_node;
+	t_format	*front_node;
 
-	top_node = (t_format *)malloc(sizeof(t_format));
-	if (!top_node)
+	front_node = (t_format *)malloc(sizeof(t_format));
+	if (!front_node)
 		return (0);
-	if (bottom_node)
+	if (rear_node)
 	{
-		top_node->top = NULL;
-		top_node->bottom = bottom_node;
-		bottom_node->top = top_node;
-		top_node->idx = idx;
-		top_node->change_char = conversion_c;
+		front_node->front = NULL;
+		front_node->rear = rear_node;
+		rear_node->front = front_node;
+		front_node->idx = idx;
+		front_node->change_char = conversion_c;
 	}
 	else
 	{
-		top_node->top = NULL;
-		top_node->bottom = NULL;
-		top_node->idx = idx;
-		top_node->change_char = conversion_c;
+		front_node->rear = NULL;
+		front_node->front = NULL;
+		front_node->idx = idx;
+		front_node->change_char = conversion_c;
 	}
-	return (top_node);
+	return (front_node);
 }
 
-t_success	free_stack(t_format **top)
+t_success	free_deque(t_format **front)
 {
-	t_format	*bottom_node;
+	t_format	*rear_node;
 
-	if (!*top)
+	if (!*front)
 		return (ERROR);
-	bottom_node = 0;
-	while (*top)
+	rear_node = 0;
+	while (*front)
 	{
-		bottom_node = (*top)->bottom;
-		free(*top);
-		*top = bottom_node;
+		rear_node = (*front)->rear;
+		free(*front);
+		*front = rear_node;
 	}
-	*top = NULL;
+	*front = NULL;
 	return (EMPTY);
 }
 
