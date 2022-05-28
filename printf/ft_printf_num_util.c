@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 23:03:12 by juha              #+#    #+#             */
-/*   Updated: 2022/05/28 16:36:45 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/29 01:38:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	write_unsigned_int(va_list *ap, size_t *form_len)
 	num = va_arg(*ap, unsigned int);
 	if (num < 0)
 		num *= -1;
-	str = ft_itoa(num);
+	str = ft_itoa(num);// null guard
 	i = 0;
 	while (str[i])
 		i++;
@@ -38,7 +38,7 @@ void	write_int(va_list *ap, size_t *form_len)
 	int			i;
 
 	num = va_arg(*ap, int);
-	str = ft_itoa(num);
+	str = ft_itoa(num);// null guard
 	i = 0;
 	while (str[i])
 		i++;
@@ -81,7 +81,7 @@ void	write_pointer(va_list *ap, size_t *form_len, long long is_last)
 		if (!num)
 		{
 			write(1, "0", 1);
-			*form_len += 1; // 맥에서 확인필요.
+			*form_len += 1;
 			return ;
 		}
 	}
