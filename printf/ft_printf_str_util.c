@@ -6,12 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 23:03:12 by juha              #+#    #+#             */
-/*   Updated: 2022/05/28 16:32:40 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/30 15:47:22 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
 
 void	write_c(va_list *ap, char c, size_t *form_len)
 {

@@ -12,8 +12,8 @@ int	main(void)
 	cnt = 0;
 //	str = "%%p is how you print a pointer in printf";
 	// str = "8.%p\n";
-	ft_cnt = ft_printf("ft : %c%c%c*\n", '\0', '1', 1);
-	cnt = printf("or : %c%c%c*\n", '\0', '1', 1);
+	ft_cnt = ft_printf("ft : %u\n", (unsigned int)2147483648);
+	cnt = printf("or : %u\n", (unsigned int)2147483648);
 	// ft_cnt = ft_printf(str, 0, "\0", 0xfff, 0xfff, 0xfff, (void *)0, 0xfff,0xa1f);
 	// cnt = printf(str, 0, "\0", 0xfff, 0xfff, 0xfff, (void *)0, 0xfff, 0xa1f);
 

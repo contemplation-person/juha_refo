@@ -6,45 +6,53 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 23:03:12 by juha              #+#    #+#             */
-/*   Updated: 2022/05/29 01:38:29 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/05/30 17:21:45 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
 
 void	write_unsigned_int(va_list *ap, size_t *form_len)
 {
 	long long	num;
-	char		*str;
-	int			i;
+	long long	len;
 
+	len = 0;
 	num = va_arg(*ap, unsigned int);
 	if (num < 0)
+	{
+		len = 1;
 		num *= -1;
-	str = ft_itoa(num);// null guard
-	i = 0;
-	while (str[i])
-		i++;
-	(*form_len) += i;
-	write(1, str, i);
-	free(str);
+	}
+	else if (num == 0)
+		len = 1;
+	ft_putnbr_fd(num, 1);
+	while (num)
+	{
+		num /= 10;
+		len++;
+	}
+	*form_len += len;
 }
 
 void	write_int(va_list *ap, size_t *form_len)
 {
 	long long	num;
-	char		*str;
-	int			i;
+	long long	len;
 
+	len = 0;
 	num = va_arg(*ap, int);
-	str = ft_itoa(num);// null guard
-	i = 0;
-	while (str[i])
-		i++;
-	write(1, str, i);
-	(*form_len) += i;
-	free(str);
+	if (num < 0)
+		len = 1;
+	else if (num == 0)
+		len = 1;
+	ft_putnbr_fd(num, 1);
+	while (num)
+	{
+		num /= 10;
+		len++;
+	}
+	*form_len += len;
 }
 
 void	write_hexa_num(va_list *ap, char c, size_t *form_len, long long is_last)
