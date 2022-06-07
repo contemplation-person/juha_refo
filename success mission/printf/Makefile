@@ -19,7 +19,7 @@ SRC 		= 	ft_printf.c \
 				ft_printf_libft_util.c \
 				
 AR			= 	ar
-ARFLAG		= 	rscu
+ARFLAG		= 	rsc
 OBJS	  	= 	$(SRC:.c=.o)
 
 .PHONY : all clean fclean re t
