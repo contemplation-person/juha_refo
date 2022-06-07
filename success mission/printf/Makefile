@@ -22,7 +22,7 @@ AR			= 	ar
 ARFLAG		= 	rscu
 OBJS	  	= 	$(SRC:.c=.o)
 
-.PHONY : all clean fclean re bonus t
+.PHONY : all clean fclean re t
 
 $(NAME) : $(OBJS)
 	$(AR) $(ARFLAG) $@ $^
