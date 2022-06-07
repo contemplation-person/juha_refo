@@ -22,14 +22,14 @@ AR			= 	ar
 ARFLAG		= 	rscu
 OBJS	  	= 	$(SRC:.c=.o)
 
-.PHONY: all clean fclean re bonus t
+.PHONY : all clean fclean re bonus t
 
 $(NAME) : $(OBJS)
 	$(AR) $(ARFLAG) $@ $^
 
-all: $(NAME)
+all : $(NAME)
 
-clean:
+clean :
 	rm -f $(OBJS) 
 
 fclean : clean
@@ -37,6 +37,6 @@ fclean : clean
 
 re : fclean all
 
-t: $(NAME) test.c
+t : $(NAME) test.c
 	$(CC) $(CPPFLAGS)test.c $(SRC) -g3 -fsanitize=address
 	rm -f *.o *.a
