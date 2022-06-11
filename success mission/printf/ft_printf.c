@@ -24,7 +24,7 @@ int	ft_printf(const char *form, ...)
 	va_cnt = cnt_persent(form, form_len);
 	if (va_cnt)
 	{
-		va_start(ap, va_cnt);
+		va_start(ap, form);
 		return (print_char(&ap, (char *)form));
 	}
 	else if (form)
