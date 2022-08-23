@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/08/24 04:51:50 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 05:07:52 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef enum e_cmd
 
 typedef struct s_stack_node
 {
-	unsigned int		num;
+	int					num;
+	unsigned int		idx;
 	struct s_stack_node	*next;
 	struct s_stack_node	*prev;
 }t_stack_node;
