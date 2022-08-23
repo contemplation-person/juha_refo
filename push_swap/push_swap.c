@@ -6,35 +6,20 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2022/08/24 00:34:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 05:06:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	create_stack(t_stack a, t_stack b, int argc)
+void	init_stack(t_stack *a, t_stack *b, int argc, char **argv)
 {
-	int	i;
-	int	size;
-
-	size = argc - 1;
-	a.stack = malloc(sizeof(int) * (size));
-	if (!a.stack)
+	a->counting_node = 0;
+	b->counting_node = 0;
+	b->stack = NULL;
+	while ((a->counting_node)++ < argc - 1)
 	{
-		write_error_message("malloc failed\n");
-		exit(1);
-	}
-	b.stack = malloc(sizeof(int) * (size));
-	if (!b.stack)
-	{
-		write_error_message("malloc failed\n");
-		exit(1);
-	}
-	i = 0;
-	while (i < size)
-	{
-		a.stack[i] = -1;
-		b.stack[i] = -1;
+		
 	}
 }
 
@@ -42,9 +27,9 @@ int	main(int argc, char **argv)
 {
 	t_stack	a;
 	t_stack	b;
+	t_ret	*ret;
 
 	check_error(argc, argv);
-	create_stack(a, b, argc);
-
+	init_stack(&a, &b, argc, argv);
 	return ();
 }
