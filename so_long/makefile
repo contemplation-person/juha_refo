@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/12 10:39:58 by juha              #+#    #+#              #
-#    Updated: 2022/08/18 15:51:10 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/08/25 16:32:29 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,8 @@ CPPFLAGS	= 	-Wall -Wextra -Werror
 NAME 		= 	so_long
 SRC 		= 	so_long.c
 OBJS		= 	$(SRC:.c=.o)
-# SRC_BONUS	=	
+LIB_DIR		=	./libft
 
-HEADER		= 	so_long.h
 
 .PHONY: all clean fclean re bonus
 
@@ -25,16 +24,20 @@ HEADER		= 	so_long.h
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-
+	@make bonus -C $(LIB_DIR)
+	@mv $(LIB_DIR)/libft.a ./libft.a
+	$(CC) $(CPPFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL \
+	-framework AppKit -o $(NAME)
+	
 all: $(NAME)
 
 bonus: $(NAME)
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	rm -f $(OBJS) $(OBJS_BONUS) libft.a
 
 fclean : clean
 	rm -f $(NAME)
+	make fclean -C $(LIB_DIR)
 
 re : fclean all

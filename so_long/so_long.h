@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:12:59 by juha              #+#    #+#             */
-/*   Updated: 2022/08/18 15:54:40 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/25 19:59:43 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@
 # define KEY_S			1
 # define KEY_D			2
 # include "mlx.h"
+# include "get_next_line.h"
+# include "libft.h"
 # include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+
+int		error_message(char *message);
+char	**parsing(int argc, char **argv, t_map map);
 
 typedef struct s_var
 {
@@ -28,19 +35,18 @@ typedef struct s_var
 	void	*win;
 }t_var;
 
-typedef struct s_data
+typedef struct s_img
 {
 	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}t_data;
+	int		x;
+	int		y;
+}t_img;
 
-typedef struct a_param
+typedef struct s_map
 {
-	int	x;
-	int	y;
-}	t_param;
+	int		x;
+	int		y;
+	char	**map;
+}t_map;
 
 #endif

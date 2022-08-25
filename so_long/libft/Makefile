@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juha <juha@student.42.fr>                  +#+  +:+       +#+         #
+#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/04/05 15:24:08 by juha             ###   ########.fr        #
+#    Updated: 2022/08/25 17:36:24 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,10 @@ OBJS_BONUS	= 	$(SRC_BONUS:.c=.o)
 
 ifeq ($(MAKECMDGOALS), bonus)	
 $(NAME): $(OBJS) $(OBJS_BONUS)
-	$(AR) $(ARFLAG) $(NAME) $^
+	@$(AR) $(ARFLAG) $(NAME) $^
 else
 $(NAME) : $(OBJS)
-	$(AR) $(ARFLAG) $@ $^
+	@$(AR) $(ARFLAG) $@ $^
 endif
 
 all: $(NAME)
@@ -50,9 +50,9 @@ all: $(NAME)
 bonus: $(NAME)
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re : fclean all
