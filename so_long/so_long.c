@@ -6,12 +6,25 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:12:57 by juha              #+#    #+#             */
-/*   Updated: 2022/08/25 17:37:29 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 21:30:21 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdio.h>
+
+int	error_message(char *message)
+{
+	int	i;
+
+	i = 0;
+	write(2, "error\n", 6);
+	while (message[i])
+		i++;
+	write(2, message, i);
+	write(2, "\n", 1);
+	return (1);
+}
 
 int	so_long()
 {
