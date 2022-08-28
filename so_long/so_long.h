@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:12:59 by juha              #+#    #+#             */
-/*   Updated: 2022/08/26 20:13:10 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 20:53:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define TRUE			-1
 # define FALSE			0
 # include "mlx.h"
-# include "get_next_line.h"
-# include "libft.h"
+# include "./libft/get_next_line.h"
+# include "./libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -32,11 +32,8 @@ enum
 {
 	PLAYER = 0,
 	COLLECTION,
-	EXIT,	
+	EXIT,
 }e_map_element;
-
-int		error_message(char *message);
-char	**parsing(int argc, char **argv, t_map map);
 
 typedef struct s_var
 {
@@ -60,5 +57,11 @@ typedef struct s_map
 	int		pos_food[2];
 	char	**map;
 }t_map;
+
+int		view_img(t_map	map, t_var vars, t_img	img);
+t_img	save_img(t_map	map, t_var vars, int x, int y);
+int		error_message(char *message);
+void	check_map_element(t_map *map);
+void	parsing(int argc, char **argv, t_map *map);
 
 #endif
