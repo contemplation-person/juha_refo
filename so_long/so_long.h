@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:12:59 by juha              #+#    #+#             */
-/*   Updated: 2022/08/28 20:53:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 15:27:08 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ enum
 	PLAYER = 0,
 	COLLECTION,
 	EXIT,
+	LOAD,
+	WALL,
 }e_map_element;
 
 typedef struct s_var
@@ -41,25 +43,48 @@ typedef struct s_var
 	void	*win;
 }t_var;
 
+typedef struct s_element
+{
+	int	x;
+	int	y;
+}t_element;
+
 typedef struct s_img
 {
-	void	*img;
-	int		x;
-	int		y;
+	void	*wall;
+	void	*load;
+	void	*c_1;
+	void	*c_2;
+	void	*c_3;
+	void	*c_4;
+	void	*e;
+	void	*v;
+	void	*p;
 }t_img;
 
 typedef struct s_map
 {
 	int		x;
 	int		y;
-	int		pos_player[2];
-	int		pos_home[2];
-	int		pos_food[2];
 	char	**map;
 }t_map;
 
-int		view_img(t_map	map, t_var vars, t_img	img);
-t_img	save_img(t_map	map, t_var vars, int x, int y);
+typedef struct s_all
+{
+	t_var		v;
+	t_img		i;
+	t_map		m;
+	t_map		cp_m;
+	t_element	p;
+}t_all;
+
+void	init_player_x_y(t_map m, t_element *player);
+int		key_press(int keycode, t_all *a);
+
+void	view_map(t_var v, t_map m, t_img img);
+void	view_element(t_var v, t_map m, t_img img);
+void	init_img(t_var var, t_img *img);
+
 int		error_message(char *message);
 void	check_map_element(t_map *map);
 void	parsing(int argc, char **argv, t_map *map);

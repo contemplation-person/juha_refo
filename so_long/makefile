@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/12 10:39:58 by juha              #+#    #+#              #
-#    Updated: 2022/08/28 20:48:55 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/08/31 15:21:36 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,10 @@ CPPFLAGS	= 	-Wall -Wextra -Werror
 NAME 		= 	so_long
 SRC 		= 	main.c \
 				./parsing/error_utils.c \
-				./parsing/parsing.c \
-				./img_utils/img.c
+				./parsing/parsing.c\
+				./img_utils/img.c\
+				./play/play.c
+				
 OBJS		= 	$(SRC:.c=.o)
 LIB_DIR		=	./libft
 
@@ -44,3 +46,9 @@ fclean : clean
 	make fclean -C $(LIB_DIR)
 
 re : fclean all
+
+test : $(OBJS)
+	@make bonus -C $(LIB_DIR)
+	@mv $(LIB_DIR)/libft.a ./libft.a
+	$(CC) -g3 $(OBJS) -L./ -lft -L./minilibx_opengl_20191021 -lmlx -framework OpenGL \
+	-framework AppKit -o $(NAME) 

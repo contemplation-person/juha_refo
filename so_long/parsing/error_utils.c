@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 18:11:47 by juha              #+#    #+#             */
-/*   Updated: 2022/08/28 20:36:07 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 15:30:49 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,56 +24,39 @@ static void	check_map_size(t_map *map, char *p_map, int flag)
 		exit(error_message("2-3 : check your map"));
 }
 
-static void	recoding_element_x(t_map *map, int pos, char c, int coordinate)
+static void	check_p_e_c(int check[], char c)
 {
-	static int	check[3];
-
-	if (c == 'C')
-	{
-		check[COLLECTION]++;
-		map->pos_food[coordinate] = pos;
-	}
-	else if (c == 'E')
-	{
-		map->pos_home[coordinate] = pos;
-		check[EXIT]++;
-	}
-	else if (c == 'P')
-	{
-		map->pos_player[coordinate] = pos;
+	if (c == 'P')
 		check[PLAYER]++;
-	}
-	if (coordinate == 3)
-	{
-		if (check[0] != 1 || check[1] != 1 || check[2] != 1)
-			exit(error_message("2-3 : check your map element"));
-	}
+	if (c == 'C')
+		check[COLLECTION]++;
+	if (c == 'E')
+		check[EXIT]++;
 }
 
-static void	exist_element(t_map *map, char *p_map, int y)
+static void	exist_element(t_map *map)
 {
-	int			i;
+	int			x;
+	int			y;
+	static int	check[4];
 
-	i = 0;
-	while (p_map[i])
+	y = -1;
+	while (++y < map->y - 1)
 	{
-		if (p_map[i] == '\n')
+		x = -1;
+		while (++x < map->x - 1)
 		{
-			i++;
-			continue ;
+			if (map->map[y][x] != 'P' && map->map[y][x] != 'C' && \
+			map->map[y][x] != 'E' && map->map[y][x] != '1' \
+			&& map->map[y][x] != '0')
+				exit(error_message("2-4 : plz check map element"));
+			check_p_e_c(check, map->map[y][x]);
 		}
-		if (p_map[i] != 'P' && p_map[i] != 'C' && \
-		p_map[i] != 'E' && p_map[i] != '1' && p_map[i] != '0')
-			exit(error_message("2-4 : plz check map element"));
-		else if (p_map[i] == 'C')
-			map->pos_food[1] = y;
-		else if (p_map[i] == 'P')
-			map->pos_player[1] = y;
-		else if (p_map[i] == 'E')
-			map->pos_home[1] = y;
-		recoding_element_x(map, i, p_map[i], 0);
-		i++;
 	}
+	map->x--;
+	map->y--;
+	if (check[0] != 1 && check[1] < 1 && check[2] != 1)
+		exit(error_message("2-5 : check your element"));
 }
 
 static void	check_wall(t_map *map, char *p_map, int y)
@@ -110,8 +93,7 @@ void	check_map_element(t_map *map)
 			check_map_size(map, map->map[i], 1);
 		else
 			check_map_size(map, map->map[i], 0);
-		exist_element(map, map->map[i], i);
 		i++;
 	}
-	recoding_element_x(map, -1, 0, 3);
+	exist_element(map);
 }
