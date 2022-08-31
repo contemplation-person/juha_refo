@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 18:11:47 by juha              #+#    #+#             */
-/*   Updated: 2022/08/31 15:30:49 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 17:11:53 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	exist_element(t_map *map)
 {
 	int			x;
 	int			y;
-	static int	check[4];
+	static int	check[3];
 
 	y = -1;
 	while (++y < map->y - 1)
@@ -55,7 +55,7 @@ static void	exist_element(t_map *map)
 	}
 	map->x--;
 	map->y--;
-	if (check[0] != 1 && check[1] < 1 && check[2] != 1)
+	if (check[PLAYER] != 1 || check[COLLECTION] < 1 || check[EXIT] != 1)
 		exit(error_message("2-5 : check your element"));
 }
 
