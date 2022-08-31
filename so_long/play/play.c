@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:48:35 by juha              #+#    #+#             */
-/*   Updated: 2022/08/31 15:34:50 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 18:11:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,15 @@ void	change_map(t_all *a, int x, int y, unsigned int *cnt_cmd)
 int	key_press(int keycode, t_all *a)
 {
 	static unsigned int	cnt_cmd;
-	static int			x;
-	static int			y;
+	static t_element	t;
 
 	view_map(a->v, a->cp_m, a->i);
 	view_element(a->v, a->m, a->i);
+	mlx_string_put(a->v.mlx, a->v.win, a->m.x / 2 * 32, a->m.y / 2 * 32, \
+	0x444444, ft_itoa(cnt_cmd));
 	if (!is_in_the_coin(a->m) && a->cp_m.map[a->p.y][a->p.x] == 'E')
 		exit(0);
-	save_p_pos(a, &x, &y, 1);
+	save_p_pos(a, &(t.x), &(t.y), 1);
 	if (keycode == KEY_W)
 		a->p.y--;
 	else if (keycode == KEY_S)
@@ -73,8 +74,8 @@ int	key_press(int keycode, t_all *a)
 	else if (keycode == KEY_ESC)
 		exit(0);
 	if (a->m.map[a->p.y][a->p.x] == '1')
-		save_p_pos(a, &x, &y, 0);
+		save_p_pos(a, &(t.x), &(t.y), 0);
 	else
-		change_map(a, x, y, &cnt_cmd);
+		change_map(a, t.x, t.y, &cnt_cmd);
 	return (0);
 }
