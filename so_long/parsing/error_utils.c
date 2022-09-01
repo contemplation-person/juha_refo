@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 18:11:47 by juha              #+#    #+#             */
-/*   Updated: 2022/09/01 19:46:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 20:13:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,20 @@ static void	check_wall(t_map *map, char *p_map, int y)
 
 	if (!p_map)
 		return ;
-	if (y != 0 && y != (map->y - 1))
+	i = 0;
+	if (y != 0 && y != (map->y))
 	{
 		if (p_map[0] != '1' || p_map[map->x - 2] != '1')
 			exit(error_message("2-6:no wall"));
 	}
-	i = 0;
-	while (p_map[i])
+	else
 	{
-		if (p_map[i] != 1)
-			exit(error_message("2-7:no wall"));
-		i++;
+		while (i < map->x - 1)
+		{
+			if (p_map[i] != '1')
+				exit(error_message("2-7:no wall"));
+			i++;
+		}
 	}
 }
 
@@ -86,7 +89,7 @@ void	check_map_element(t_map *map)
 	i = 0;
 	while (i < map->y - 1)
 	{
-		check_wall(map, map->map[i], map->y);
+		check_wall(map, map->map[i], i);
 		if (i == map->y - 2)
 			check_map_size(map, map->map[i], 1);
 		else
