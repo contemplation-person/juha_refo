@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:48:35 by juha              #+#    #+#             */
-/*   Updated: 2022/08/31 18:11:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 19:35:58 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ int	key_press(int keycode, t_all *a)
 	static unsigned int	cnt_cmd;
 	static t_element	t;
 
-	view_map(a->v, a->cp_m, a->i);
-	view_element(a->v, a->m, a->i);
-	mlx_string_put(a->v.mlx, a->v.win, a->m.x / 2 * 32, a->m.y / 2 * 32, \
-	0x444444, ft_itoa(cnt_cmd));
 	if (!is_in_the_coin(a->m) && a->cp_m.map[a->p.y][a->p.x] == 'E')
 		exit(0);
 	save_p_pos(a, &(t.x), &(t.y), 1);
@@ -77,5 +73,9 @@ int	key_press(int keycode, t_all *a)
 		save_p_pos(a, &(t.x), &(t.y), 0);
 	else
 		change_map(a, t.x, t.y, &cnt_cmd);
+	view_map(a->v, a->cp_m, a->i);
+	view_element(a->v, a->m, a->i);
+	mlx_string_put(a->v.mlx, a->v.win, a->m.x / 2 * 32, a->m.y / 2 * 32, \
+	0x444444, ft_itoa(cnt_cmd));
 	return (0);
 }

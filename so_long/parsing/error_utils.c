@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 18:11:47 by juha              #+#    #+#             */
-/*   Updated: 2022/08/31 17:11:53 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 19:09:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	check_wall(t_map *map, char *p_map, int y)
 {
 	int		i;
 
-	if (y == map->y)
+	if (!p_map)
 		return ;
 	if (y != 0 && y != (map->y - 1))
 	{
