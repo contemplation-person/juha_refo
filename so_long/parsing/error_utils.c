@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 18:11:47 by juha              #+#    #+#             */
-/*   Updated: 2022/09/01 19:09:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 19:46:02 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,12 @@ static void	check_wall(t_map *map, char *p_map, int y)
 		if (p_map[0] != '1' || p_map[map->x - 2] != '1')
 			exit(error_message("2-6:no wall"));
 	}
-	else
+	i = 0;
+	while (p_map[i])
 	{
-		i = 0;
-		while (p_map[i])
-		{
-			if (p_map[i] != 1)
-				exit(error_message("2-7:no wall"));
-		}
+		if (p_map[i] != 1)
+			exit(error_message("2-7:no wall"));
+		i++;
 	}
 }
 
