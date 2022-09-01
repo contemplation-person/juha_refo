@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:12:59 by juha              #+#    #+#             */
-/*   Updated: 2022/08/31 17:12:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 20:27:05 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
+# define BUTTON_X		17
 # define TRUE			-1
 # define FALSE			0
 # include "mlx.h"
@@ -78,6 +79,8 @@ typedef struct s_all
 	t_element	p;
 }t_all;
 
+int		check_done(int keycode, t_all *a);
+int		is_in_the_coin(t_map m);
 void	init_player_x_y(t_map m, t_element *player);
 int		key_press(int keycode, t_all *a);
 
