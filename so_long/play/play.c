@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:48:35 by juha              #+#    #+#             */
-/*   Updated: 2022/09/02 15:38:58 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 18:51:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	key_press(int keycode, t_all *a)
 		change_map(a, t.x, t.y, &cnt_cmd);
 	view_map(a->v, a->cp_m, a->i);
 	view_element(a->v, a->m, a->i);
-	mlx_string_put(a->v.mlx, a->v.win, a->m.x / 2 * 32, a->m.y / 2 * 32, \
-	0x444444, ft_itoa(cnt_cmd));
+	print_cnt(a, cnt_cmd);
 	return (0);
 }

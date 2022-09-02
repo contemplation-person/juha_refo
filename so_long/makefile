@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/12 10:39:58 by juha              #+#    #+#              #
-#    Updated: 2022/08/31 17:12:23 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/09/02 18:49:47 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRC 		= 	main.c \
 				./parsing/error_utils.c \
 				./parsing/parsing.c\
 				./img_utils/img.c\
-				./play/play.c
+				./play/play.c\
+				./play/play2.c
 				
 OBJS		= 	$(SRC:.c=.o)
 LIB_DIR		=	./libft

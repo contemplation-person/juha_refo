@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:12:59 by juha              #+#    #+#             */
-/*   Updated: 2022/09/02 15:38:31 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 18:49:37 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_all
 	t_map		cp_m;
 	t_element	p;
 }t_all;
+
+void	print_cnt(t_all *a, unsigned int cnt);
 
 int		check_done(int keycode, t_all *a);
 int		is_in_the_coin(t_map m);
