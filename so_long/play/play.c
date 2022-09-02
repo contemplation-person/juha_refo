@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:48:35 by juha              #+#    #+#             */
-/*   Updated: 2022/09/01 20:26:05 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 15:38:58 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	is_in_the_coin(t_map m)
 int	check_done(int keycode, t_all *a)
 {
 	(void)keycode;
-
 	if (!is_in_the_coin(a->m) && a->cp_m.map[a->p.y][a->p.x] == 'E')
 		exit(0);
 	return (0);
@@ -64,7 +63,6 @@ int	key_press(int keycode, t_all *a)
 {
 	static unsigned int	cnt_cmd;
 	static t_element	t;
-
 
 	save_p_pos(a, &(t.x), &(t.y), 1);
 	if (keycode == KEY_W)
