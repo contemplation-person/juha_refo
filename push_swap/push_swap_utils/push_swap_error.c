@@ -6,13 +6,13 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2022/08/24 05:07:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/06 02:02:32 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_bool	write_error_message(char *message);
+int		write_error_message(void);
 t_bool	is_int_max(char *argv);
 t_bool	is_duplicate(int argc, char **argv);
 t_bool	is_wrong_input(char *argv);
@@ -23,12 +23,11 @@ t_bool	is_duplicate(int argc, char **argv)
 	size_t	argv_len;
 	size_t	cmp_len;
 	size_t	i;
-	size_t	j;
 
 	while (--argc)
 	{
 		i = 1;
-		while (i < argc)
+		while (i < (size_t)argc)
 		{
 			argv_len = ft_strlen(argv[argc]);
 			cmp_len = ft_strlen(argv[i]);
@@ -46,7 +45,6 @@ t_bool	is_duplicate(int argc, char **argv)
 t_bool	is_int_max(char *argv)
 {
 	size_t	argv_len;
-	size_t	i;
 	long	argv_toi;
 
 	argv_len = ft_strlen(argv);
@@ -74,29 +72,28 @@ t_bool	is_wrong_input(char *argv)
 	return (FALSE);
 }
 
-t_bool	write_error_message(char *message)
+int	write_error_message(void)
 {
-	write(2, message, ft_strlen(message));
-	return (TRUE);
+	write(2, "Error\n", 6);
+	return (1);
 }
 
 t_bool	check_error(int argc, char **argv)
 {
-	int		i;
 	int		is_split;
 	t_bool	state;
 
 	is_split = 0;
 	if (argc < 2)
-		state = write_error_message("errorCode 1-1 : 인자가 없거나 적습니다.");
+		state = write_error_message();
 	if (is_duplicate(argc, argv))
-		state = write_error_message("errorCode 2-1 : 인자가 중복입니다.");
+		state = write_error_message();
 	while (*(++argv))
 	{
 		if (is_wrong_input(*argv))
-			state = write_error_message("errorCode 3-1 : 인자가 숫자가 아닙니다.");
+			state = write_error_message();
 		else if (!is_int_max(*argv))
-			state = write_error_message("errorCode 4-1 : 잘못된 인자값입니다.");
+			state = write_error_message();
 	}
 	if (state)
 		exit(1);
