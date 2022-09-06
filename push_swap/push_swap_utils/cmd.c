@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 19:13:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/06 19:13:19 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@
 // 	stack->cnt_b--;
 // }
 
-void	pb(t_stack *stack, t_ret *ret)
-{
-	if (stack->cnt_a == 0)
-		return ;
-	new_ret(ret, PB);
-	stack->b_top = stack->a_top;
-	if (stack->cnt_b == 0)
-	{
-		stack->b_top->next = NULL;
-		stack->b_top->prev = NULL;
-	}
-	if (stack->cnt_a == 1)
-	{
-		stack->a_top = stack->a_top->next;
-		stack->b_top->next->prev = stack->b_top;
-	}
-	stack->cnt_a--;
-	stack->cnt_b++;
-}
+// void	pb(t_stack *stack, t_ret *ret)
+// {
+// 	if (stack->cnt_a == 0)
+// 		return ;
+// 	new_ret(ret, PB);
+// 	stack->b_top = stack->a_top;
+// 	if (stack->cnt_b == 0)
+// 	{
+// 		stack->b_top->next = NULL;
+// 		stack->b_top->prev = NULL;
+// 	}
+// 	if (stack->cnt_a == 1)
+// 	{
+// 		stack->a_top = stack->a_top->next;
+// 		stack->b_top->next->prev = stack->b_top;
+// 	}
+// 	stack->cnt_a--;
+// 	stack->cnt_b++;
+// }
 
 void	r(t_stack *stack, t_ret *ret, t_cmd cmd)
 {
