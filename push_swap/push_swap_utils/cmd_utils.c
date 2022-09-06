@@ -12,3 +12,13 @@
 
 #include "../push_swap.h"
 
+/*
+a : 1    b : 
+a :      b : 1
+
+a : 1 2  b :
+
+a : 2    b : 1
+
+a : 2    b : 1
+*/
