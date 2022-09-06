@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 19:11:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/06 19:12:31 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,15 @@ void	r(t_stack *stack, t_ret *ret, t_cmd cmd)
 
 void	rr(t_stack *stack, t_ret *ret, t_cmd cmd)
 {
+	if ((cmd == RRA && stack->cnt_a == 0) || \
+		(cmd == RRB && stack->cnt_b == 0))
+		return ;
 	new_ret(ret, cmd);
-	
+	if (cmd == RRA)
+		stack->a_top = stack->a_top->prev;
+	if (cmd == RRB)
+		stack->b_top = stack->b_top->prev;
+}
 }
 
 // void	s(t_stack_node *node)
