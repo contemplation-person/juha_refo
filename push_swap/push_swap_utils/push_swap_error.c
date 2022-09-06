@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 02:02:32 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/06 15:56:42 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	write_error_message(void)
 
 t_bool	check_error(int argc, char **argv)
 {
-	int		is_split;
-	t_bool	state;
+	int				is_split;
+	static t_bool	state;
 
 	is_split = 0;
 	if (argc < 2)

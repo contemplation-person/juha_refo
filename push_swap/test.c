@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 18:55:11 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 02:13:48 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/06 16:20:25 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	view(t_stack stack, int argc)
 	b = stack.b_top;
 	cnt_a = stack.cnt_a;
 	cnt_b = stack.cnt_b;
-	printf("--------------a---------------top-------------b--------------\n");
+	printf("--------------a---------------top-------------b-----------------------\n");
 	while (i < argc)
 	{
 		if (cnt_a > 0)

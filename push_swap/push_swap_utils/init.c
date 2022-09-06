@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:56:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 02:07:08 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/06 19:06:18 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,12 @@ void	init_stack(t_stack *stack, int argc, char **argv)
 	i = 1;
 	stack->a_top = NULL;
 	stack->b_top = NULL;
-	stack->b_rear = NULL;
 	while (i < argc)
 	{
 		new = new_node(ft_atoi(argv[i]));
 		add_init_add_back(&(stack->a_top), &new);
 		i++;
 	}
-	stack->a_rear = stack->a_top->prev;
 	stack->cnt_a = argc - 1;
 	stack->cnt_b = 0;
 }

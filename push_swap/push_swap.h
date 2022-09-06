@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 01:38:55 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/06 19:06:05 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ typedef struct s_stack
 {
 	int				cnt_a;
 	t_stack_node	*a_top;
-	t_stack_node	*a_rear;
 	int				cnt_b;
 	t_stack_node	*b_top;
-	t_stack_node	*b_rear;
 }t_stack;
 
 typedef struct s_ret
@@ -66,6 +64,11 @@ typedef enum e_bool
 	FALSE = 0,
 }t_bool;
 
+
+void	new_ret(t_ret *ret, t_cmd cmd);
+
+void	pa(t_stack *stack, t_ret *ret);
+void	pb(t_stack *stack, t_ret *ret);
 
 void	view(t_stack stack, int argc);
 void	init_stack(t_stack *stack, int argc, char **argv);
