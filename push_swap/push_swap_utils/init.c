@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:56:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 19:06:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/07 17:49:13 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,23 @@ void	init_stack(t_stack *stack, int argc, char **argv)
 	}
 	stack->cnt_a = argc - 1;
 	stack->cnt_b = 0;
+}
+
+t_bool	is_sorting(t_stack_node *top, int stack_size)
+{
+	int				std;
+	int				i;
+	t_stack_node	*node;
+
+	i = 0;
+	std = -1;
+	node = top;
+	while (i++ < stack_size)
+	{
+		if (node->idx < std)
+			return (FALSE);
+		std = node->idx;
+		node = node->next;
+	}
+	return (TRUE);
 }

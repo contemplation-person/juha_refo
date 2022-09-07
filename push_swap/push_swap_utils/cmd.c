@@ -6,13 +6,13 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 15:45:33 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/07 18:38:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	p(t_stack *stack, t_ret *ret, t_cmd cmd)
+void	p(t_stack *stack, t_ret **ret, t_cmd cmd)
 {
 	if (cmd == PA && stack->cnt_b > 0)
 	{
@@ -29,7 +29,7 @@ void	p(t_stack *stack, t_ret *ret, t_cmd cmd)
 	return ;
 }
 
-void	r(t_stack *stack, t_ret *ret, t_cmd cmd)
+void	r(t_stack *stack, t_ret **ret, t_cmd cmd)
 {
 	if ((cmd == RA && stack->cnt_a == 0) || \
 		(cmd == RB && stack->cnt_b == 0) || \
@@ -43,7 +43,7 @@ void	r(t_stack *stack, t_ret *ret, t_cmd cmd)
 		stack->b_top = stack->b_top->next;
 }
 
-void	rr(t_stack *stack, t_ret *ret, t_cmd cmd)
+void	rr(t_stack *stack, t_ret **ret, t_cmd cmd)
 {
 	if ((cmd == RRA && stack->cnt_a == 0) || \
 		(cmd == RRB && stack->cnt_b == 0) || \
@@ -57,7 +57,7 @@ void	rr(t_stack *stack, t_ret *ret, t_cmd cmd)
 		stack->b_top = stack->b_top->prev;
 }
 
-void	s(t_stack *stack, t_ret *ret, t_cmd cmd)
+void	s(t_stack *stack, t_ret **ret, t_cmd cmd)
 {
 	t_stack_node	*swap_top;
 	t_stack_node	*swap_next;

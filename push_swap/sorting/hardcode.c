@@ -6,36 +6,43 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 16:41:32 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/07 18:50:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_bool	is_sorting(t_stack_node *top, int stack_size)
+void	two(t_stack *stack, t_stack_node *top_a, t_ret **ret)
 {
-	int				std;
-	int				i;
-	t_stack_node	*node;
-
-	i = 0;
-	std = -1;
-	node = top;
-	while (i < stack_size)
-	{
-		if (node->idx < std)
-			return (FALSE);
-		std = node->idx;
-		node = node->next;
-	}
+	if (is_sorting(top_a, 2))
+		return ;
+	s(stack, ret, SA);
 }
 
-// void	two(t_stack *stack, t_stack_node **top, t_ret *ret, t_cmd cmd)
-// {
-	
-// }
-
-// void	tree(t_stack *stack, t_stack_node **top, t_ret *ret, t_cmd cmd)
-// {
-	
-// }
+void	three(t_stack *stack, t_stack_node *top_a, t_ret **ret)
+{
+	if (is_sorting(top_a, 3))
+		return ;
+	else if (top_a->idx == 0)
+	{
+		rr(stack, ret, RRA);
+		s(stack, ret, SA);
+	}
+	else if (top_a->idx == 1)
+	{
+		if (top_a->next->idx == 2)
+			rr(stack, ret, RRA);
+		else
+			s(stack, ret, SA);
+	}
+	else
+	{
+		if (top_a->next->idx == 1)
+		{
+			s(stack, ret, SA);
+			rr(stack, ret, RRA);
+		}
+		else
+			r(stack, ret, RA);
+	}
+}

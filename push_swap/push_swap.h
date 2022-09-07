@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 16:41:35 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/07 18:50:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,24 @@ typedef enum e_bool
 	FALSE = 0,
 }t_bool;
 
-t_bool			is_sorting(t_stack_node *top, int stack_size);
-
 t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
 
-void			new_ret(t_ret *ret, t_cmd cmd);
+void			new_ret(t_ret **ret, t_cmd cmd);
+void			two(t_stack *stack, t_stack_node *top_a, t_ret **ret);
+void			three(t_stack *stack, t_stack_node *top_a, t_ret **ret);
 
-void			p(t_stack *stack, t_ret *ret, t_cmd cmd);
-void			r(t_stack *stack, t_ret *ret, t_cmd cmd);
-void			s(t_stack *stack, t_ret *ret, t_cmd cmd);
-void			rr(t_stack *stack, t_ret *ret, t_cmd cmd);
+void			p(t_stack *stack, t_ret **ret, t_cmd cmd);
+void			r(t_stack *stack, t_ret **ret, t_cmd cmd);
+void			s(t_stack *stack, t_ret **ret, t_cmd cmd);
+void			rr(t_stack *stack, t_ret **ret, t_cmd cmd);
 
 void			view(t_stack stack, int argc);
+
 void			init_stack(t_stack *stack, int argc, char **argv);
+t_bool			is_sorting(t_stack_node *top, int stack_size);
 
 t_bool			check_error(int argc, char **argv);
-t_bool			write_error_message(void);
 
 int				write_error_message(void);
 t_bool			is_int_max(char *argv);
