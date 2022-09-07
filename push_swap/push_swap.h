@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 15:41:40 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/07 16:41:35 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef enum e_bool
 	TRUE = -1,
 	FALSE = 0,
 }t_bool;
+
+t_bool			is_sorting(t_stack_node *top, int stack_size);
 
 t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
