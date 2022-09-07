@@ -6,56 +6,35 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 19:13:29 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/07 15:45:33 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// void	pa(t_stack *stack)
-// {
-// 	t_stack_node	*next;
-
-// 	if (stack->cnt_b == 0)
-// 		return ;
-// 	next = stack->a_top;
-
-// 	stack->a_top = stack->b_top;
-// 	stack->b_top = stack->b_top->next;
-// 	stack->a_top->next = next;
-// 	next->prev = stack->a_top;
-// 	if (stack->cnt_a == 0)
-// 		stack->b_rear = stack->a_top;
-// 	if (stack->cnt_b == 1)
-// 		stack->b_rear = NULL;
-// 	stack->cnt_a++;
-// 	stack->cnt_b--;
-// }
-
-// void	pb(t_stack *stack, t_ret *ret)
-// {
-// 	if (stack->cnt_a == 0)
-// 		return ;
-// 	new_ret(ret, PB);
-// 	stack->b_top = stack->a_top;
-// 	if (stack->cnt_b == 0)
-// 	{
-// 		stack->b_top->next = NULL;
-// 		stack->b_top->prev = NULL;
-// 	}
-// 	if (stack->cnt_a == 1)
-// 	{
-// 		stack->a_top = stack->a_top->next;
-// 		stack->b_top->next->prev = stack->b_top;
-// 	}
-// 	stack->cnt_a--;
-// 	stack->cnt_b++;
-// }
+void	p(t_stack *stack, t_ret *ret, t_cmd cmd)
+{
+	if (cmd == PA && stack->cnt_b > 0)
+	{
+		if (push(&(stack->a_top), pop(&(stack->b_top), &(stack->cnt_b)), \
+		&(stack->cnt_a)))
+			new_ret(ret, cmd);
+	}
+	else if (cmd == PB && stack->cnt_a > 0)
+	{
+		if (push(&(stack->b_top), pop(&(stack->a_top), &(stack->cnt_a)), \
+		&(stack->cnt_b)))
+			new_ret(ret, cmd);
+	}
+	return ;
+}
 
 void	r(t_stack *stack, t_ret *ret, t_cmd cmd)
 {
 	if ((cmd == RA && stack->cnt_a == 0) || \
-		(cmd == RB && stack->cnt_b == 0))
+		(cmd == RB && stack->cnt_b == 0) || \
+		(cmd == RA && stack->cnt_a == 1) || \
+		(cmd == RB && stack->cnt_b == 1))
 		return ;
 	new_ret(ret, cmd);
 	if (cmd == RA)
@@ -67,7 +46,9 @@ void	r(t_stack *stack, t_ret *ret, t_cmd cmd)
 void	rr(t_stack *stack, t_ret *ret, t_cmd cmd)
 {
 	if ((cmd == RRA && stack->cnt_a == 0) || \
-		(cmd == RRB && stack->cnt_b == 0))
+		(cmd == RRB && stack->cnt_b == 0) || \
+		(cmd == RRA && stack->cnt_a == 1) || \
+		(cmd == RRB && stack->cnt_b == 1))
 		return ;
 	new_ret(ret, cmd);
 	if (cmd == RRA)
@@ -76,7 +57,31 @@ void	rr(t_stack *stack, t_ret *ret, t_cmd cmd)
 		stack->b_top = stack->b_top->prev;
 }
 
-// void	s(t_stack_node *node)
-// {
+void	s(t_stack *stack, t_ret *ret, t_cmd cmd)
+{
+	t_stack_node	*swap_top;
+	t_stack_node	*swap_next;
+	t_stack_node	temp;
 
-// }
+	if ((cmd == SA && stack->cnt_a == 0) || \
+		(cmd == SB && stack->cnt_b == 0) || \
+		(cmd == SA && stack->cnt_a == 1) || \
+		(cmd == SB && stack->cnt_b == 1))
+		return ;
+	new_ret(ret, cmd);
+	if (cmd == SA)
+	{
+		swap_top = stack->a_top;
+		swap_next = stack->a_top->next;
+	}
+	else
+	{
+		swap_top = stack->b_top;
+		swap_next = stack->b_top->next;
+	}
+	temp = *swap_top;
+	swap_top->idx = swap_next->idx;
+	swap_top->origin_num = swap_next->origin_num;
+	swap_next->idx = temp.idx;
+	swap_next->origin_num = temp.origin_num;
+}

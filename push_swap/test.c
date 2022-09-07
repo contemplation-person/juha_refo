@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 18:55:11 by juha              #+#    #+#             */
-/*   Updated: 2022/09/06 16:20:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/07 15:45:31 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	view(t_stack stack, int argc)
 			printf("%d node|										", i);
 		if (cnt_b > 0)
 		{
-			printf("| index : %d | origin : %d \n", b->idx, a->origin_num);
+			printf("| index : %d | origin : %d \n", b->idx, b->origin_num);
 			cnt_b--;
 			b = b->next;
 			i++;
