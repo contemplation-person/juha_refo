@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 18:50:30 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/08 19:17:05 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
+
+typedef enum e_stack_name
+{
+	A = 1,
+	B = 10,
+}t_s_name;
 
 typedef enum e_cmd
 {
@@ -26,13 +32,9 @@ typedef enum e_cmd
 	SB,
 	RB,
 	RRB,
-	RRR = 100,
+	RRR = 112,
 	RR,
 	SS,
-	NEXT = 1,
-	PREV = -1,
-	FRONT = 1,
-	REAR = 2,
 }t_cmd;
 
 typedef struct s_stack_node
@@ -68,8 +70,12 @@ t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
 
 void			new_ret(t_ret **ret, t_cmd cmd);
-void			two(t_stack *stack, t_stack_node *top_a, t_ret **ret);
-void			three(t_stack *stack, t_stack_node *top_a, t_ret **ret);
+void			two(t_stack *stack, t_stack_node *top, \
+					t_ret **ret,	t_s_name name);
+void			three(t_stack *stack, t_stack_node *top, \
+					t_ret **ret, t_s_name name);
+void			four(t_stack *stack, t_stack_node *top, t_ret **ret);
+void			five(t_stack *stack, t_stack_node *top, t_ret **ret);
 
 void			p(t_stack *stack, t_ret **ret, t_cmd cmd);
 void			r(t_stack *stack, t_ret **ret, t_cmd cmd);
@@ -79,7 +85,7 @@ void			rr(t_stack *stack, t_ret **ret, t_cmd cmd);
 void			view(t_stack stack, int argc);
 
 void			init_stack(t_stack *stack, int argc, char **argv);
-t_bool			is_sorting(t_stack_node *top, int stack_size);
+t_bool			is_sorting(t_stack_node *top, int stack_size, t_s_name name);
 
 t_bool			check_error(int argc, char **argv);
 

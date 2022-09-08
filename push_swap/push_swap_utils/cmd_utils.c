@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:38:59 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 15:55:52 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/08 18:52:03 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_bool	push(t_stack_node **target, t_stack_node *src, int *size)
 		src->next = (*target);
 		src->prev = (*target)->prev;
 		(*target)->prev = src;
+		(*target) = src;
 	}
 	else
 		(*target) = src;

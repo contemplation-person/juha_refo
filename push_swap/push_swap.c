@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 18:50:05 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/08 19:34:20 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int argc, char **argv)
 	ret = NULL;
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
-	if (is_sorting(stack.a_top, stack.cnt_a))
+	if (is_sorting(stack.a_top, stack.cnt_a, A))
 		return (0);
-	three(&stack, stack.a_top, &ret);
+	five(&stack, stack.a_top, &ret);
 	while (ret)
 	{
 		printf("%d\n",ret->cmd);
