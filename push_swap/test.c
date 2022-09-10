@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 18:55:11 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 15:45:31 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/10 16:30:23 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,35 @@ void	view(t_stack stack, int argc)
 			i++;
 		}
 		printf("\n----------------------------------------------------------------------\n");
+	}
+}
+
+void	print_cmd(t_ret *ret)
+{
+	while (ret)
+	{
+		if (ret->cmd == PA)
+			printf("pa\n");
+		else if (ret->cmd == PB)
+			printf("pb\n");
+		else if (ret->cmd == RA)
+			printf("ra\n");
+		else if (ret->cmd == RB)
+			printf("rb\n");
+		else if (ret->cmd == RR)
+			printf("rr\n");
+		else if (ret->cmd == RRA)
+			printf("rra\n");
+		else if (ret->cmd == RRB)
+			printf("rrb\n");
+		else if (ret->cmd == RRR)
+			printf("rrr\n");
+		else if (ret->cmd == SA)
+			printf("sa\n");
+		else if (ret->cmd == SB)
+			printf("sb\n");
+		else if (ret->cmd == SS)
+			printf("ss\n");
+		ret = ret->next;
 	}
 }

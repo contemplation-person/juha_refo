@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:56:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/08 19:16:44 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/10 19:31:41 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,19 @@ t_bool	is_sorting(t_stack_node *top, int stack_size, t_s_name name)
 	t_stack_node	*node;
 
 	i = 0;
-	std = -1;
-	if (name == A)
-		node = top;
+	if (name == B)
+		std = 2147483647;
 	else
-		node = top->prev;
+		std = -1;
+	node = top;
 	while (i++ < stack_size)
 	{
-		if (node->idx < std)
+		if (name == A && node->idx <= std)
+			return (FALSE);
+		if (name == B && node->idx >= std)
 			return (FALSE);
 		std = node->idx;
-		if (name == A)
-			node = node->next;
-		else
-		node = node->prev;
+		node = node->next;
 	}
 	return (TRUE);
 }

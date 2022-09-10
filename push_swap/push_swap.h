@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/08 19:17:05 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/10 19:41:32 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ typedef enum e_cmd
 	SA,
 	RA,
 	RRA,
-	PB = 10,
+	PB = 11,
 	SB,
 	RB,
 	RRB,
-	RRR = 112,
+	SS = 122,
 	RR,
-	SS,
+	RRR,
 }t_cmd;
 
 typedef struct s_stack_node
@@ -48,8 +48,8 @@ typedef struct s_stack_node
 typedef struct s_stack
 {
 	int				cnt_a;
-	t_stack_node	*a_top;
 	int				cnt_b;
+	t_stack_node	*a_top;
 	t_stack_node	*b_top;
 }t_stack;
 
@@ -69,6 +69,12 @@ typedef enum e_bool
 t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
 
+void			quick_hardcode(t_stack *stack, t_stack_node *top, \
+								t_ret **ret, t_s_name name);
+void			rev_quick_hardcode(t_stack *stack, t_stack_node *top, \
+								t_ret **ret, t_s_name name);
+void			sort_stack(t_stack *stack, t_ret **ret, int argc);
+
 void			new_ret(t_ret **ret, t_cmd cmd);
 void			two(t_stack *stack, t_stack_node *top, \
 					t_ret **ret,	t_s_name name);
@@ -83,6 +89,7 @@ void			s(t_stack *stack, t_ret **ret, t_cmd cmd);
 void			rr(t_stack *stack, t_ret **ret, t_cmd cmd);
 
 void			view(t_stack stack, int argc);
+void			print_cmd(t_ret *ret);
 
 void			init_stack(t_stack *stack, int argc, char **argv);
 t_bool			is_sorting(t_stack_node *top, int stack_size, t_s_name name);
