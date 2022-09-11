@@ -6,29 +6,81 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/10 19:34:16 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/11 15:06:32 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// void	go_to_b(t_stack *stack, t_ret **ret, int cnt)
-// {
-// 	if (stack->cnt_a == 0)
-// 		return ;
-// 	p(stack, ret, PB);
-// 	if (stack->a_top->idx == cnt / 2)
-// 		r(stack, ret, RB);
-// }
+void	go_to_b(t_stack *stack, t_ret **ret, int cnt)
+{
+	int	i;
 
-// void	go_to_a(t_stack *stack, t_ret **ret, int cnt)
-// {
-// 	if (stack->cnt_b == 0)
-// 		return ;
-// 	p(stack, ret, PA);
-// 	if (stack->a_top->idx == cnt / 2)
-// 		r(stack, ret, RA);
-// }
+	i = 0;
+	// if (cnt < 4)
+	// 	return ;
+	while (i < cnt)
+	{
+		if (stack->a_top->idx < cnt / 3)
+		{
+			p(stack, ret, PB);
+			r(stack, ret, RB);
+		}
+		else if (stack->a_top->idx < cnt * 2 / 3)
+			p(stack, ret, PB);
+		else
+			r(stack, ret, RA);
+	}
+	i = 0;
+	while (i++ < cnt - cnt / 3 * 2)
+	{
+		rr(stack, ret, RRB);
+		p(stack, ret, PB);
+	}
+	if (is_sorting(stack->b_top, stack->cnt_b, B))
+	{
+		while (stack->cnt_b != 0)
+			p(stack, ret, PA);
+	}
+	go_to_a(stack, ret, cnt - cnt * 2 / 3);
+	go_to_a(stack, ret, cnt * 1 / 3);
+	go_to_a(stack, ret, cnt * 1 / 3);
+}
+
+void	go_to_a(t_stack *stack, t_ret **ret, int cnt)
+{
+	int	i;
+
+	i = 0;
+	// if (cnt < 4)
+	// 	return ;
+	while (i < cnt)
+	{
+		if (stack->b_top->idx > cnt * 2 / 3)
+		{
+			p(stack, ret, PA);
+			r(stack, ret, RA);
+		}
+		else if (stack->b_top->idx > cnt / 3)
+			p(stack, ret, PA);
+		else
+			r(stack, ret, RB);
+	}
+	i = 0;
+//ㅁㅜㄴ젠  여여기기
+	while (i++ < cnt / 3)
+	{
+		rr(stack, ret, RRA);
+		p(stack, ret, PA);
+	}
+//ㅁㅜㄴ젠  여여기기
+	if (is_sorting(stack->a_top, stack->cnt_a, A))
+		return ;
+	go_to_b(stack, ret, cnt - cnt * 2 / 3);
+	go_to_b(stack, ret, cnt * 1 / 3);
+	go_to_b(stack, ret, cnt * 1 / 3);
+}
+
 void	quick_hardcode(t_stack *stack, t_stack_node *top, \
 t_ret **ret, t_s_name name)
 {
@@ -75,24 +127,10 @@ t_ret **ret, t_s_name name)
 		s(stack, ret, SA + name);
 }
 
-// void	else_sorting(t_stack *stack, t_ret **ret, int cnt)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (stack->cnt_a == 3)
-// 	{
-// 		if (stack->a_top->idx < cnt / 3)
-// 		{
-// 			p(stack, ret, PB);
-// 			r(stack, ret, RB);
-// 		}
-// 		else if (stack->a_top->idx < cnt * 2 / 3)
-// 			p(stack, ret, PB);
-// 		else
-// 			r(stack, ret, RA);
-// 	}
-// }
+void	else_sorting(t_stack *stack, t_ret **ret, int cnt)
+{
+	go_to_b(stack, ret, stack->cnt_a);
+}
 
 void	sort_stack(t_stack *stack, t_ret **ret, int argc)
 {
@@ -100,8 +138,7 @@ void	sort_stack(t_stack *stack, t_ret **ret, int argc)
 
 	cnt_num = argc - 1;
 	if (cnt_num > 5)
-		// else_sorting(stack, ret);
-	;
+		else_sorting(stack, ret, argc - 1);
 	else if (cnt_num < 2)
 		return ;
 	else if (cnt_num == 2)
