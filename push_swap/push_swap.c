@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/12 13:08:36 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/12 23:44:37 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	main(int argc, char **argv)
 		return (0);
 	sort_stack(&stack, &ret, argc);
 	print_cmd(ret);
-	view(stack, argc);
+	view(stack);
 	return (0);
 }

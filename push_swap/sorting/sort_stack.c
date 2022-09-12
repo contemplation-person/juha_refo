@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/12 13:08:36 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/13 00:53:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	a_to_b(t_stack *stack, t_ret **ret, int max, int min)
 	int			i;
 	int			pivot;
 
-	pivot = (max - min + 1) / 2;
-	if (std == stack->total || max == min)
-		return ;
+	pivot = (max + min) / 2;
 	i = min;
 	while (i++ < max)
 	{
@@ -31,15 +29,17 @@ void	a_to_b(t_stack *stack, t_ret **ret, int max, int min)
 		{
 			r(stack, ret, RA);
 			std++;
-			min++;
 			continue ;
 		}
 		p(stack, ret, PB);
-		if (pivot > stack->b_top->idx)
+		if (pivot < stack->b_top->idx)
 			r(stack, ret, RB);
 	}
-	b_to_a(stack, ret, max, min + pivot);
+	if (stack->cnt_a == stack->total)
+		return ;
+	view(*stack);
 	b_to_a(stack, ret, min + pivot - 1, min);
+	b_to_a(stack, ret, max, min + pivot);
 }
 
 void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
@@ -47,13 +47,8 @@ void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
 	int			i;
 	int			pivot;
 
-	pivot = (max - min + 1) / 2;
+	pivot = (max + min) / 2;
 	i = min;
-	if (max - min == 1)
-	{
-		p(stack, ret, PA);
-		return ;
-	}
 	while (i++ < max)
 	{
 		if (pivot < stack->b_top->idx)
@@ -66,10 +61,12 @@ void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
 		rr(stack, ret, RRB);
 		p(stack, ret, PA);
 	}
-	a_to_b(stack, ret, max, min + pivot);
+	view(*stack);
 	a_to_b(stack, ret, min + pivot - 1, min);
+	a_to_b(stack, ret, max, min + pivot);
 }
 
+/*
 // void	quick_hardcode(t_stack *stack, t_stack_node *top, \
 // t_ret **ret, t_s_name name)
 // {
@@ -115,13 +112,13 @@ void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
 // 	if ((b < a && a < c) || (a < b && b < c))
 // 		s(stack, ret, SA + name);
 // }
+*/
 
 void	else_sorting(t_stack *stack, t_ret **ret)
 {
-	if (is_sorting(stack->a_top, stack->cnt_a, A))
+	if (is_sorting(stack->a_top, stack->total, A))
 		return ;
 	a_to_b(stack, ret, stack->total, 0);
-	// sort_3
 }
 
 void	sort_stack(t_stack *stack, t_ret **ret, int argc)

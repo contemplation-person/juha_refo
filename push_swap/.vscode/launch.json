@@ -5,16 +5,27 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "(lldb) Launch",
+			"name": "(gdb) 시작",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/a.out",
-			"args": ["8", "7", "6", "5", "4", "3", "2", "1"],
+			"args": ["8","7","6","5","4","3","2","1","-1"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],
 			"externalConsole": false,
-			"MIMode": "lldb"
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "gdb에 자동 서식 지정 사용",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				},
+				{
+					"description":  "디스어셈블리 버전을 Intel(으)로 설정",
+					"text": "-gdb-set disassembly-flavor intel",
+					"ignoreFailures": true
+			]
 		}
 	]
 }

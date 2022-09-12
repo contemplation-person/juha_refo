@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/12 09:03:46 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/12 23:43:59 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			r(t_stack *stack, t_ret **ret, t_cmd cmd);
 void			s(t_stack *stack, t_ret **ret, t_cmd cmd);
 void			rr(t_stack *stack, t_ret **ret, t_cmd cmd);
 
-void			view(t_stack stack, int argc);
+void			view(t_stack stack);
 void			print_cmd(t_ret *ret);
 
 void			init_stack(t_stack *stack, int argc, char **argv);
