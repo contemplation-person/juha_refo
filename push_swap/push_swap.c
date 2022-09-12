@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/11 17:53:48 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/12 13:08:36 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	ret = NULL;
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
+	stack.total = stack.cnt_a;
 	if (is_sorting(stack.a_top, stack.cnt_a, A))
 		return (0);
 	sort_stack(&stack, &ret, argc);

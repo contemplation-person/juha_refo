@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/10 19:41:32 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/12 09:03:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_stack
 {
 	int				cnt_a;
 	int				cnt_b;
+	int				total;
 	t_stack_node	*a_top;
 	t_stack_node	*b_top;
 }t_stack;

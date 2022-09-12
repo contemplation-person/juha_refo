@@ -6,63 +6,121 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/12 08:11:42 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/12 13:08:36 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+void	b_to_a(t_stack *stack, t_ret **ret, int max, int min);
 
-void	quick_hardcode(t_stack *stack, t_stack_node *top, \
-t_ret **ret, t_s_name name)
+void	a_to_b(t_stack *stack, t_ret **ret, int max, int min)
 {
-	int	a;
-	int	b;
-	int	c;
+	static int	std;
+	int			i;
+	int			pivot;
 
-	if (is_sorting(top, 3, name))
+	pivot = (max - min + 1) / 2;
+	if (std == stack->total || max == min)
 		return ;
-	a = top->idx;
-	b = top->next->idx;
-	c = top->next->next->idx;
-	if (!((a < c && c < b) || (b < c && c < a)))
-		s(stack, ret, SA * name);
-	if (b < a && a < c)
-		return ;
-	r(stack, ret, RA * name);
-	s(stack, ret, SA * name);
-	rr(stack, ret, RRA * name);
-	if ((b < c && c < a) || (c < b && b < a))
-		s(stack, ret, SA * name);
+	i = min;
+	while (i++ < max)
+	{
+		if (std == stack->a_top->next->idx)
+			s(stack, ret, SA);
+		if (std == stack->a_top->idx)
+		{
+			r(stack, ret, RA);
+			std++;
+			min++;
+			continue ;
+		}
+		p(stack, ret, PB);
+		if (pivot > stack->b_top->idx)
+			r(stack, ret, RB);
+	}
+	b_to_a(stack, ret, max, min + pivot);
+	b_to_a(stack, ret, min + pivot - 1, min);
 }
 
-void	rev_quick_hardcode(t_stack *stack, t_stack_node *top, \
-t_ret **ret, t_s_name name)
+void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
 {
-	int	a;
-	int	b;
-	int	c;
+	int			i;
+	int			pivot;
 
-	if (is_sorting(top, 3, name))
+	pivot = (max - min + 1) / 2;
+	i = min;
+	if (max - min == 1)
+	{
+		p(stack, ret, PA);
 		return ;
-	a = top->idx;
-	b = top->next->idx;
-	c = top->next->next->idx;
-	if (!((c < a && a < b) || (b < a && a < c)))
-		s(stack, ret, SA + name);
-	if (b < c && c < a)
-		return ;
-	r(stack, ret, RA + name);
-	s(stack, ret, SA + name);
-	rr(stack, ret, RRA + name);
-	if ((b < a && a < c) || (a < b && b < c))
-		s(stack, ret, SA + name);
+	}
+	while (i++ < max)
+	{
+		if (pivot < stack->b_top->idx)
+			p(stack, ret, PA);
+		else
+			r(stack, ret, RB);
+	}
+	while (i-- > min)
+	{
+		rr(stack, ret, RRB);
+		p(stack, ret, PA);
+	}
+	a_to_b(stack, ret, max, min + pivot);
+	a_to_b(stack, ret, min + pivot - 1, min);
 }
+
+// void	quick_hardcode(t_stack *stack, t_stack_node *top, \
+// t_ret **ret, t_s_name name)
+// {
+// 	int	a;
+// 	int	b;
+// 	int	c;
+
+// 	if (is_sorting(top, 3, name))
+// 		return ;
+// 	a = top->idx;
+// 	b = top->next->idx;
+// 	c = top->next->next->idx;
+// 	if (!((a < c && c < b) || (b < c && c < a)))
+// 		s(stack, ret, SA * name);
+// 	if (b < a && a < c)
+// 		return ;
+// 	r(stack, ret, RA * name);
+// 	s(stack, ret, SA * name);
+// 	rr(stack, ret, RRA * name);
+// 	if ((b < c && c < a) || (c < b && b < a))
+// 		s(stack, ret, SA * name);
+// }
+
+// void	rev_quick_hardcode(t_stack *stack, t_stack_node *top, \
+// t_ret **ret, t_s_name name)
+// {
+// 	int	a;
+// 	int	b;
+// 	int	c;
+
+// 	if (is_sorting(top, 3, name))
+// 		return ;
+// 	a = top->idx;
+// 	b = top->next->idx;
+// 	c = top->next->next->idx;
+// 	if (!((c < a && a < b) || (b < a && a < c)))
+// 		s(stack, ret, SA + name);
+// 	if (b < c && c < a)
+// 		return ;
+// 	r(stack, ret, RA + name);
+// 	s(stack, ret, SA + name);
+// 	rr(stack, ret, RRA + name);
+// 	if ((b < a && a < c) || (a < b && b < c))
+// 		s(stack, ret, SA + name);
+// }
 
 void	else_sorting(t_stack *stack, t_ret **ret)
 {
 	if (is_sorting(stack->a_top, stack->cnt_a, A))
 		return ;
-	go_to_b(stack, ret, stack->cnt_a, stack->cnt_a / 3);
+	a_to_b(stack, ret, stack->total, 0);
 	// sort_3
 }
 
