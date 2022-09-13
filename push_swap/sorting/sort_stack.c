@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/13 00:53:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/13 17:43:54 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,52 +18,90 @@ void	a_to_b(t_stack *stack, t_ret **ret, int max, int min)
 	static int	std;
 	int			i;
 	int			pivot;
+	int			temp;
 
+	if (min >= max)
+		return ;
 	pivot = (max + min) / 2;
 	i = min;
+	temp = max + min;
 	while (i++ < max)
 	{
 		if (std == stack->a_top->next->idx)
+		{
 			s(stack, ret, SA);
+			view(*stack);
+		}
 		if (std == stack->a_top->idx)
 		{
 			r(stack, ret, RA);
+			view(*stack);
+			min++;
 			std++;
 			continue ;
 		}
 		p(stack, ret, PB);
+		view(*stack);
 		if (pivot < stack->b_top->idx)
 			r(stack, ret, RB);
 	}
-	if (stack->cnt_a == stack->total)
+	if (temp % 2)
+	{
+		if (std == stack->a_top->idx)
+		{
+			r(stack, ret, RA);
+			view(*stack);
+			min++;
+			std++;
+		}	
+	}
+	if (std == max)
 		return ;
-	view(*stack);
-	b_to_a(stack, ret, min + pivot - 1, min);
-	b_to_a(stack, ret, max, min + pivot);
+ 	b_to_a(stack, ret, pivot, min);
+	b_to_a(stack, ret, max, pivot + 1);
 }
 
 void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
 {
 	int			i;
 	int			pivot;
+	int			j;
+	int			temp;
 
 	pivot = (max + min) / 2;
 	i = min;
+	j = 0;
+	temp = (max + min);
 	while (i++ < max)
 	{
 		if (pivot < stack->b_top->idx)
 			p(stack, ret, PA);
 		else
+		{
 			r(stack, ret, RB);
+			j++;
+		}
+		view(*stack);
 	}
-	while (i-- > min)
+	if (temp % 2)
+	{
+		if (pivot < stack->b_top->idx)
+			p(stack, ret, PA);
+		else
+		{
+			r(stack, ret, RB);
+			j++;
+		}	
+	}
+	while (j-- > 0)
 	{
 		rr(stack, ret, RRB);
 		p(stack, ret, PA);
+		view(*stack);
 	}
 	view(*stack);
-	a_to_b(stack, ret, min + pivot - 1, min);
-	a_to_b(stack, ret, max, min + pivot);
+	a_to_b(stack, ret, pivot, min);
+	a_to_b(stack, ret, max, pivot + 1);
 }
 
 /*

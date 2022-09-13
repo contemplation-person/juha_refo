@@ -14,7 +14,7 @@
 			"cwd": "${fileDirname}",
 			"environment": [],
 			"externalConsole": false,
-			"MIMode": "gdb",
+			"MIMode": "lldb",
 			"setupCommands": [
 				{
 					"description": "gdb에 자동 서식 지정 사용",
@@ -25,7 +25,9 @@
 					"description":  "디스어셈블리 버전을 Intel(으)로 설정",
 					"text": "-gdb-set disassembly-flavor intel",
 					"ignoreFailures": true
-			]
+				}
+			],
+			"preLaunchTask": "make debug file"
 		}
 	]
 }

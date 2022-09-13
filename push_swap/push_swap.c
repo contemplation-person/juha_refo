@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/12 23:44:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/13 17:48:31 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int	main(int argc, char **argv)
 	sort_stack(&stack, &ret, argc);
 	print_cmd(ret);
 	view(stack);
+	system("leaks a.out");
 	return (0);
 }
