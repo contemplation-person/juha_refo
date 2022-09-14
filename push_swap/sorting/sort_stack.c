@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/14 19:47:46 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/14 23:03:18 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt);
 
+/*stack에 sort명령어 넣고 시작, 전역변수처럼 사용*/
 void	a_to_b(t_stack *stack, t_ret **ret, t_num num, int cnt)
 {
 	static int	std;
