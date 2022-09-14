@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/12 23:43:59 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/14 15:42:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ typedef struct s_ret
 	struct s_ret	*next;
 	struct s_ret	*prev;
 }t_ret;
+
+typedef struct s_num
+{
+	int	max;
+	int	min;
+}t_num;
 
 typedef enum e_bool
 {

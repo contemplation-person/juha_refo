@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:56:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/10 19:31:41 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/14 16:37:56 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ t_bool	is_sorting(t_stack_node *top, int stack_size, t_s_name name)
 			return (FALSE);
 		std = node->idx;
 		node = node->next;
+	}
+	if (name != A && name != B)
+	{
+		if (i != name)
+			return (FALSE);
 	}
 	return (TRUE);
 }

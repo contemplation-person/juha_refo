@@ -6,74 +6,66 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/13 17:43:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/14 16:52:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-void	b_to_a(t_stack *stack, t_ret **ret, int max, int min);
 
-void	a_to_b(t_stack *stack, t_ret **ret, int max, int min)
+void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt);
+
+void	a_to_b(t_stack *stack, t_ret **ret, t_num num, int cnt)
 {
 	static int	std;
-	int			i;
+	t_num		save;
 	int			pivot;
 	int			temp;
 
-	if (min >= max)
+	if (cnt < 0)
 		return ;
-	pivot = (max + min) / 2;
-	i = min;
-	temp = max + min;
-	while (i++ < max)
+	if (is_sorting(stack->a_top, stack->cnt_a, stack->total))
+		return ;
+	pivot = (num.max + num.min) / 2;
+	while (cnt--)
 	{
 		if (std == stack->a_top->next->idx)
-		{
 			s(stack, ret, SA);
-			view(*stack);
-		}
 		if (std == stack->a_top->idx)
 		{
 			r(stack, ret, RA);
-			view(*stack);
-			min++;
+			num.min++;
 			std++;
 			continue ;
 		}
 		p(stack, ret, PB);
-		view(*stack);
 		if (pivot < stack->b_top->idx)
 			r(stack, ret, RB);
 	}
-	if (temp % 2)
-	{
-		if (std == stack->a_top->idx)
-		{
-			r(stack, ret, RA);
-			view(*stack);
-			min++;
-			std++;
-		}	
-	}
-	if (std == max)
+	if (std == stack->total)
 		return ;
- 	b_to_a(stack, ret, pivot, min);
-	b_to_a(stack, ret, max, pivot + 1);
+	view(*stack);
+	save.min = num.min;
+	save.max = pivot;
+	b_to_a(stack, ret, save, pivot - 1);
+	save.min = pivot + 1;
+	save.max = num.max;
+	b_to_a(stack, ret, save, num.max - pivot);
 }
 
-void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
+void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 {
-	int			i;
+	t_num		save;
 	int			pivot;
 	int			j;
-	int			temp;
 
-	pivot = (max + min) / 2;
-	i = min;
+	if (is_sorting(stack->a_top, stack->cnt_a, stack->total))
+		return ;
+	pivot = (num.max + num.min) / 2;
 	j = 0;
-	temp = (max + min);
-	while (i++ < max)
+	while (cnt--)
 	{
+		if (stack->cnt_b == 0)
+			return ;
 		if (pivot < stack->b_top->idx)
 			p(stack, ret, PA);
 		else
@@ -81,27 +73,19 @@ void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
 			r(stack, ret, RB);
 			j++;
 		}
-		view(*stack);
 	}
-	if (temp % 2)
-	{
-		if (pivot < stack->b_top->idx)
-			p(stack, ret, PA);
-		else
-		{
-			r(stack, ret, RB);
-			j++;
-		}	
-	}
-	while (j-- > 0)
+	while (j--)
 	{
 		rr(stack, ret, RRB);
 		p(stack, ret, PA);
-		view(*stack);
 	}
 	view(*stack);
-	a_to_b(stack, ret, pivot, min);
-	a_to_b(stack, ret, max, pivot + 1);
+	save.min = num.min;
+	save.max = pivot;
+	a_to_b(stack, ret, save, pivot);
+	save.min = pivot + 1;
+	save.max = num.max;
+	a_to_b(stack, ret, save, num.max - pivot);
 }
 
 /*
@@ -154,9 +138,13 @@ void	b_to_a(t_stack *stack, t_ret **ret, int max, int min)
 
 void	else_sorting(t_stack *stack, t_ret **ret)
 {
+	t_num num;
+
+	num.max = stack->total;
+	num.min = 0;
 	if (is_sorting(stack->a_top, stack->total, A))
 		return ;
-	a_to_b(stack, ret, stack->total, 0);
+	a_to_b(stack, ret, num, num.max);
 }
 
 void	sort_stack(t_stack *stack, t_ret **ret, int argc)
