@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/14 16:52:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/14 19:47:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	a_to_b(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	int			pivot;
 	int			temp;
 
-	if (cnt < 0)
-		return ;
-	if (is_sorting(stack->a_top, stack->cnt_a, stack->total))
+	if (std == stack->total)
 		return ;
 	pivot = (num.max + num.min) / 2;
 	while (cnt--)
@@ -37,19 +35,19 @@ void	a_to_b(t_stack *stack, t_ret **ret, t_num num, int cnt)
 			std++;
 			continue ;
 		}
-		p(stack, ret, PB);
-		if (pivot < stack->b_top->idx)
-			r(stack, ret, RB);
+		if (std <= stack->a_top->idx)
+		{
+			p(stack, ret, PB);
+			if (pivot < stack->b_top->idx)
+				r(stack, ret, RB);
+		}
 	}
 	if (std == stack->total)
 		return ;
-	view(*stack);
+	// view(*stack);
 	save.min = num.min;
 	save.max = pivot;
-	b_to_a(stack, ret, save, pivot - 1);
-	save.min = pivot + 1;
-	save.max = num.max;
-	b_to_a(stack, ret, save, num.max - pivot);
+	b_to_a(stack, ret, save, pivot);
 }
 
 void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
@@ -58,11 +56,11 @@ void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	int			pivot;
 	int			j;
 
-	if (is_sorting(stack->a_top, stack->cnt_a, stack->total))
+	if (stack->cnt_b < 1)
 		return ;
 	pivot = (num.max + num.min) / 2;
 	j = 0;
-	while (cnt--)
+	while (num.min <= stack->b_top->idx && stack->b_top->idx <= num.max)
 	{
 		if (stack->cnt_b == 0)
 			return ;
@@ -74,12 +72,12 @@ void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 			j++;
 		}
 	}
-	while (j--)
+	while (j++ < cnt)
 	{
 		rr(stack, ret, RRB);
 		p(stack, ret, PA);
 	}
-	view(*stack);
+	// view(*stack);
 	save.min = num.min;
 	save.max = pivot;
 	a_to_b(stack, ret, save, pivot);

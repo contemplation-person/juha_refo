@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 18:55:11 by juha              #+#    #+#             */
-/*   Updated: 2022/09/13 00:47:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/14 19:46:51 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,27 @@ void	print_cmd(t_ret *ret)
 	while (ret)
 	{
 		if (ret->cmd == PA)
-			printf("pa\n");
+			write(1, "pa\n", 3);
 		else if (ret->cmd == PB)
-			printf("pb\n");
+			write(1, "pb\n", 3);
 		else if (ret->cmd == RA)
-			printf("ra\n");
+			write(1, "ra\n", 3);
 		else if (ret->cmd == RB)
-			printf("rb\n");
+			write(1, "rb\n", 3);
 		else if (ret->cmd == RR)
-			printf("rr\n");
+			write(1, "rr\n", 3);
 		else if (ret->cmd == RRA)
-			printf("rra\n");
+			write(1, "rra\n", 3);
 		else if (ret->cmd == RRB)
-			printf("rrb\n");
+			write(1, "rrb\n", 3);
 		else if (ret->cmd == RRR)
-			printf("rrr\n");
+			write(1, "rrr\n", 3);
 		else if (ret->cmd == SA)
-			printf("sa\n");
+			write(1, "sa\n", 3);
 		else if (ret->cmd == SB)
-			printf("sb\n");
+			write(1, "sb\n", 3);
 		else if (ret->cmd == SS)
-			printf("ss\n");
+			write(1, "ss\n", 3);
 		ret = ret->next;
 	}
 }
