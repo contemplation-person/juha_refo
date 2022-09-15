@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/14 15:42:14 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/15 17:40:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_stack
 	int				cnt_a;
 	int				cnt_b;
 	int				total;
+	int				std;
 	t_stack_node	*a_top;
 	t_stack_node	*b_top;
 }t_stack;
@@ -60,6 +61,12 @@ typedef struct s_ret
 	struct s_ret	*next;
 	struct s_ret	*prev;
 }t_ret;
+
+typedef struct s_pos
+{
+	int	top;
+	int	bottom;
+}t_pos;
 
 typedef struct s_num
 {
