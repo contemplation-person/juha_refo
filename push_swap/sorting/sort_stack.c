@@ -6,52 +6,83 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/15 23:23:47 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/16 20:39:25 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	b_to_a(t_stack *stack, t_ret **ret, t_num *num, int cnt);
+void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt);
 
 /* quick */
-void	a_to_b(t_stack *stack, t_ret **ret, t_num *num, int cnt)
+void	a_to_b(t_stack *stack, t_ret **ret, t_num num, int cnt)
 {
-	int	pivot_big;
-	int	pivot_small;
-	int	reverse;
+	int		pivot_big;
+	int		pivot_small;
+	t_num	temp;
 
-	pivot_big = num->max + num->min * 2 / 3;
-	reverse = 0;
-	pivot_small = cnt / 3;
-	if (cnt < 0 || is_sorting(stack->a_top, stack->cnt_a, stack->total))
+	if (cnt == 1)
+		return ;
+	pivot_big = num.max - (cnt / 3);
+	pivot_small = num.min + (cnt / 3);
+	if (is_sorting (stack->a_top, stack->cnt_a, stack->total))
 		return ;
 	while (cnt--)
 	{
-		if (pivot_big < stack->a_top->idx)
-		{
+		if (stack->a_top->idx >= pivot_big)
 			r(stack, ret, RA);
-			reverse++;
-			continue ;
-		}
-		p(stack, ret, PB);
-		if (pivot_small >= stack->a_top->idx)
+		else if (stack->a_top->idx >= pivot_small)
+			p(stack, ret, PB);
+		else
+		{
+			p(stack, ret, PB);
 			r(stack, ret, RB);
+		}
 	}
-	cnt = 0;
-	while (cnt++ < reverse)
-	{
-		rr(stack, ret, RRA);
-		p(stack, ret, PB);
-	}
-	b_to_a(stack, ret, num, reverse);
-	b_to_a(stack, ret, num, )
-	b_to_a()
+	temp.max = num.max;
+	temp.min = pivot_big;
+	b_to_a(stack, ret, temp, cnt / 3);
+	temp.max = pivot_big - 1;
+	temp.min = pivot_small;
+	b_to_a(stack, ret, temp, cnt - (cnt / 3 * 2));
+	temp.max = pivot_small - 1;
+	temp.max = num.min;
+	b_to_a(stack, ret, temp, cnt / 3);
 }
 
-void	b_to_a(t_stack *stack, t_ret **ret, t_num *num, int cnt)
+void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 {
+	int		pivot_big;
+	int		pivot_small;
+	t_num	temp;
 
+	if (cnt < 4)
+		return ;
+	pivot_big = num.max - (cnt / 3);
+	pivot_small = num.min + (cnt / 3);
+	if (is_sorting (stack->a_top, stack->cnt_a, stack->total))
+		return ;
+	while (cnt--)
+	{
+		if (stack->a_top->idx >= pivot_big)
+			r(stack, ret, RA);
+		else if (stack->a_top->idx >= pivot_small)
+			p(stack, ret, PB);
+		else
+		{
+			p(stack, ret, PB);
+			r(stack, ret, RB);
+		}
+	}
+	temp.max = num.max;
+	temp.min = pivot_big;
+	b_to_a(stack, ret, temp, cnt / 3);
+	temp.max = pivot_big - 1;
+	temp.min = pivot_small;
+	b_to_a(stack, ret, temp, cnt - (cnt / 3 * 2));
+	temp.max = pivot_small - 1;
+	temp.max = num.min;
+	b_to_a(stack, ret, temp, cnt / 3);
 }
 
 void	else_sorting(t_stack *stack, t_ret **ret)
@@ -61,9 +92,15 @@ void	else_sorting(t_stack *stack, t_ret **ret)
 
 	num.max = stack->total;
 	num.min = 0;
+	i = 0;
+	while (i++ < stack->total)
+	{
+		stack->a_top->origin_num = stack->a_top->idx;
+		stack->a_top = stack->a_top->next;
+	}
 	if (is_sorting(stack->a_top, stack->total, A))
 		return ;
-
+	a_to_b(stack, ret);
 }
 
 void	sort_stack(t_stack *stack, t_ret **ret, int argc)
