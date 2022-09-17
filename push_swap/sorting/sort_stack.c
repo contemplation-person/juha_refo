@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/17 15:24:26 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/17 15:27:42 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	int		pivot_big;
 	int		pivot_small;
 	t_num	temp;
+	int		i;
 
+	i = 0;
 	if (cnt < 4)
 	{
 		if (!is_sorting(stack->a_top, 3, A))
@@ -85,14 +87,9 @@ void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 		return ;
 	while (cnt--)
 	{
-		if (stack->a_top->idx >= pivot_big)
-			r(stack, ret, RA);
-		else if (stack->a_top->idx >= pivot_small)
-			p(stack, ret, PB);
-		else
+		if (pivot_small <= stack->a_top->idx)
 		{
-			p(stack, ret, PB);
-			r(stack, ret, RB);
+			
 		}
 	}
 	temp.max = num.max;
