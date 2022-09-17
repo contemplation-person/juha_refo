@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/17 16:59:09 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/17 17:01:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	a_to_b(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	temp.max = pivot_small;
 	temp.max = num.min;
 	a_to_b(stack, ret, temp, temp.max - temp.min);
+	while (cnt)
 }
 
 void	b_to_a(t_stack *stack, t_ret **ret, int pivot)
