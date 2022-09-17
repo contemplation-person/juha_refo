@@ -6,83 +6,155 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/17 17:01:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/18 02:48:56 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	b_to_a(t_stack *stack, t_ret **ret);
-
-/* quick */
-void	a_to_b(t_stack *stack, t_ret **ret, t_num num, int cnt)
+void	b_top_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 {
-	int		pivot_big;
-	int		pivot_small;
-	t_num	temp;
-	int		i;
+	int	i;
+	int	pivot;
+	int	reverse_second;
+	int	reverse_third;
 
-	if (is_sorting (stack->a_top, stack->cnt_a, stack->total))
-		return ;
-	view(*stack);
+	i = 0;
+	reverse_second = 0;
+	reverse_third = 0;
+	pivot = (num.max - num.min) / 3;
 	if (cnt < 4)
 	{
-		if (!is_sorting(stack->a_top, 3, A))
-		{
-			if (cnt == 3)
-				three(stack, stack->a_top, ret, A);
-			if (cnt == 2)
-				two(stack, stack->a_top, ret, A);
-		}
+		if (cnt == 2)
+			two_b(stack, stack->b_top, ret, B);
+		else if (cnt == 3)
+			three(stack, stack->b_top, ret, B);
+		else
+			p(stack, ret, PA);
 		return ;
 	}
-	pivot_small = num.min + (cnt / 3);
-	pivot_big = pivot_small + (cnt / 3);
-	while (cnt--)
+	while (i++ < cnt)
 	{
-		if (stack->a_top->idx < pivot_small)
+		if (stack->b_top->idx >= num.max - pivot)
+			p(stack, ret, PA);
+		if (stack->a_top->idx >= num.max - pivot * 2)
+		{
+			p(stack, ret, PA);
+			r(stack, ret, RA);
+			reverse_second++;
+		}
+		else
+		{
+			r(stack, ret, RB);
+			reverse_third++;
+		}
+	}
+	i = 0;
+	while (i++ < reverse_second)
+	{
+		rr(stack, ret, RRA);
+	}
+	while (i++ < reverse_third)
+	{
+		rr(stack, ret, RRB);
+		p(stack, ret, PA);
+	}
+}
+
+void	b_bottom_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
+{
+	int	i;
+	int	pivot;
+	int	reverse_second;
+	int	reverse_third;
+
+	if (cnt < 4)
+	{
+		if (cnt == 2)
+			two_b(stack, stack->b_top, ret, B);
+		else if (cnt == 3)
+			three(stack, stack->b_top, ret, B);
+		else
+			p(stack, ret, PA);
+		return ;
+	}
+	i = 0;
+	reverse_second = 0;
+	reverse_third = 0;
+	pivot = (num.max - num.min) / 3;
+	while (i++ < cnt)
+	{
+		if (stack->b_top->idx >= num.max - pivot)
+			p(stack, ret, PA);
+		if (stack->a_top->idx >= num.max - pivot * 2)
+		{
+			p(stack, ret, PA);
+			r(stack, ret, RA);
+			reverse_second++;
+		}
+		else
+		{
+			r(stack, ret, RB);
+			reverse_third++;
+		}
+	}
+	i = 0;
+	while (i++ < reverse_second)
+	{
+		rr(stack, ret, RRA);
+	}
+	while (i++ < reverse_third)
+	{
+		rr(stack, ret, RRB);
+		p(stack, ret, PA);
+	}
+}
+
+void	divide(t_stack *stack, t_ret **ret, t_num num, int cnt)
+{
+	int		i;
+	int		pivot;
+	t_num	temp;
+
+	if (cnt < 4)
+		return ;
+	i = 0;
+	pivot = (num.max - num.min) / 3;
+	while (i++ < cnt)
+	{
+		if (stack->a_top->idx > num.max - pivot)
+			r(stack, ret, RA);
+		if (stack->a_top->idx > num.max - pivot * 2)
+			p(stack, ret, PB);
+		else
 		{
 			p(stack, ret, PB);
 			r(stack, ret, RB);
 		}
-		else if (stack->a_top->idx < pivot_big)
-			p(stack, ret, PB);
-		else
-			r(stack, ret, RA);
 	}
 	temp.max = num.max;
-	temp.min = pivot_big;
-	a_to_b(stack, ret, temp, cnt - pivot_big);
-	temp.max = pivot_big;
-	temp.min = pivot_small;
-	a_to_b(stack, ret, temp, temp.max - temp.min);
-	temp.max = pivot_small;
-	temp.max = num.min;
-	a_to_b(stack, ret, temp, temp.max - temp.min);
-	while (cnt)
-}
-
-void	b_to_a(t_stack *stack, t_ret **ret, int pivot)
-{
-	if (pivot == b_stack)
+	temp.min = num.max - pivot;
+	view(*stack);
+	divide(stack, ret, temp, pivot);
+	temp.max = num.max - pivot - 1;
+	temp.min = num.max - pivot * 2;
+	divide(stack, ret, temp, pivot);
+	temp.max = num.max - pivot * 2 - 1;
+	temp.min = num.min;
+	divide(stack, ret, temp, cnt - pivot * 2);
+	b_top_to_a(stack, ret, temp, pivot);
+	b_bottom_to_a(stack, ret, temp, pivot);
 }
 
 void	else_sorting(t_stack *stack, t_ret **ret)
 {
 	t_num	num;
-	int		i;
 
-	num.max = stack->total;
-	num.min = 0;
-	i = 0;
-	while (i++ < stack->total)
-	{
-		stack->a_top->origin_num = stack->a_top->idx;
-		stack->a_top = stack->a_top->next;
-	}
 	if (is_sorting(stack->a_top, stack->total, A))
 		return ;
-	a_to_b(stack, ret, num, stack->total);
+	num.max = stack->total;
+	num.min = 0;
+	divide(stack, ret, num, stack->total);
 }
 
 void	sort_stack(t_stack *stack, t_ret **ret, int argc)

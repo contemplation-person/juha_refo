@@ -50,10 +50,11 @@ static void	case_3(t_stack *stack, t_ret **ret, t_s_name name)
 	p(stack, ret, PA);
 }
 
-void	three_b(t_stack *stack, t_stack_node *top, t_ret **ret, t_s_name name)
+void	three_b(t_stack *stack, t_ret **ret)
 {
 	t_stack_node	*b;
 
+	b = stack->b_top;
 	if (is_sorting(b, 3, A))
 		case_2(stack, ret, A);
 	else if (is_sorting(b, 3, B))
