@@ -20,7 +20,7 @@ void	two_b(t_stack *stack, t_stack_node *top, t_ret **ret, t_s_name name)
 	p(stack, ret, PA);
 }
 
-void	case_2(t_stack *stack, t_ret **ret, t_s_name name)
+static void	case_2(t_stack *stack, t_ret **ret, t_s_name name)
 {
 	if (name == A)
 	{
@@ -36,7 +36,7 @@ void	case_2(t_stack *stack, t_ret **ret, t_s_name name)
 	}
 }
 
-void	case_3(t_stack *stack, t_ret **ret, t_s_name name)
+static void	case_3(t_stack *stack, t_ret **ret, t_s_name name)
 {
 	if (name == A)
 	{
