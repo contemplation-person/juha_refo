@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/16 20:39:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/17 15:24:26 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,21 @@ void	a_to_b(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	int		pivot_small;
 	t_num	temp;
 
-	if (cnt == 1)
-		return ;
-	pivot_big = num.max - (cnt / 3);
-	pivot_small = num.min + (cnt / 3);
 	if (is_sorting (stack->a_top, stack->cnt_a, stack->total))
 		return ;
+	if (cnt < 4)
+	{
+		if (!is_sorting(stack->a_top, 3, A))
+		{
+			if (cnt == 3)
+				three(stack, stack->a_top, ret, A);
+			if (cnt == 2)
+				two(stack, stack->a_top, ret, A);
+		}
+		return ;
+	}
+	pivot_big = num.max - (cnt / 3);
+	pivot_small = num.min + (cnt / 3);
 	while (cnt--)
 	{
 		if (stack->a_top->idx >= pivot_big)
@@ -57,7 +66,19 @@ void	b_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	t_num	temp;
 
 	if (cnt < 4)
+	{
+		if (!is_sorting(stack->a_top, 3, A))
+		{
+			if (cnt == 3)
+				three_b(stack, stack->a_top, ret, A);
+			else if (cnt == 2)
+				two_b(stack, stack->a_top, ret, A);
+			else
+				p(stack, ret, PA);
+		}
 		return ;
+	}
+	/*ㅇㅏ래  로로직  다다시  짜짜라라*/
 	pivot_big = num.max - (cnt / 3);
 	pivot_small = num.min + (cnt / 3);
 	if (is_sorting (stack->a_top, stack->cnt_a, stack->total))
@@ -100,7 +121,7 @@ void	else_sorting(t_stack *stack, t_ret **ret)
 	}
 	if (is_sorting(stack->a_top, stack->total, A))
 		return ;
-	a_to_b(stack, ret);
+	a_to_b(stack, ret, num, stack->total);
 }
 
 void	sort_stack(t_stack *stack, t_ret **ret, int argc)
