@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/09/15 16:45:08 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/09/19 18:28:05 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC 		= 	push_swap_utils/init.c \
 				push_swap_utils/push_swap_pre_code.c \
 				push_swap_utils/ret.c \
 				sorting/hardcode.c \
+				sorting/quick_hardcode.c \
 				sorting/sort_stack.c \
 				push_swap.c
 				

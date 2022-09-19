@@ -3,6 +3,8 @@
 		"__locale": "c",
 		"stdio.h": "c",
 		"algorithm": "c",
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"locale": "c",
+		"string": "c"
 	}
 }
