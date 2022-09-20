@@ -6,95 +6,80 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:25:22 by juha              #+#    #+#             */
-/*   Updated: 2022/09/20 18:38:13 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/21 00:04:54 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	cnt_total_radix(int total, int *check_bin)
+int	cnt_total_radix(int total, int *check_bin, int std)
 {
 	int	radix;
 
-	radix = 0;
+	radix = 1;
+	*check_bin = 1;
 	while (total)
 	{
-		radix++;
-		if (total % 3 == 1)
-			*check_bin = 1;
-		else
+		if (total % std > 1)
 			*check_bin = 0;
-		total = total / 3;
+		radix++;
+		total = total / std;
 	}
 	return (radix);
 }
 
-t_bool	is_persent_zero(t_stack stack)
+void	b_to_a(t_stack *stack, t_ret **ret, int radix, int std)
 {
-	t_stack_node	*b;
-	int				i;
+	int	cnt;
 
-	i = stack.cnt_b;
-	b = stack.b_top;
+	cnt = stack->cnt_b;
+	while (cnt--)
+	{
+		if (stack->b_top->idx % std == radix)
+		{
+			stack->b_top->idx /= std;
+			p(stack, ret, PA);
+		}
+		else
+			r(stack, ret, RB);
+	}
+}
+
+void	n_nary(t_stack *stack, t_ret **ret, int cnt, int std)
+{
+	int	i;
+
+	while (cnt--)
+	{
+		if (stack->a_top->idx % std == std - 1)
+		{
+			stack->a_top->idx /= std;
+			r(stack, ret, RA);
+		}
+		else
+			p(stack, ret, PB);
+	}
+	i = std - 1;
 	while (i--)
-	{
-		if (b->idx % 3 != 0)
-			return (FALSE);
-		b = b->next;
-	}
-	return (TRUE);
+		b_to_a(stack, ret, i, std);
 }
 
-void	ternary(t_stack *stack, t_ret **ret, int cnt)
+void	binary(t_stack *stack, t_ret **ret, int cnt, int std)
 {
 	while (cnt--)
 	{
-		if (stack->a_top->idx % 3 == 2)
+		if (stack->a_top->idx % std == 1)
 		{
-			stack->a_top->idx /= 3;
+			stack->a_top->idx /= std;
 			r(stack, ret, RA);
 		}
 		else
 			p(stack, ret, PB);
 	}
-	cnt = stack->cnt_b;
-	while (stack->cnt_b)
-	{
-		if (is_persent_zero(*stack))
-			break ;
-		if (stack->b_top->idx % 3 == 1)
-		{
-			stack->a_top->idx /= 3;
-			p(stack, ret, PA);
-		}
-	}
-	while (stack->cnt_b)
-	{
-		stack->a_top->idx /= 3;
-		p(stack, ret, PA);
-	}
-}
-
-void	binary(t_stack *stack, t_ret **ret, int cnt)
-{
+	cnt = 2;
 	while (cnt--)
 	{
-		if (stack->a_top->idx % 2 == 1)
-		{
-			stack->a_top->idx /= 3;
-			r(stack, ret, RA);
-		}
-		else
-			p(stack, ret, PB);
-	}
-	cnt = stack->cnt_b;
-	while (stack->cnt_b)
-	{
-		if (stack->b_top->idx % 3 == 0)
-		{
-			stack->a_top->idx /= 3;
-			p(stack, ret, PA);
-		}
+		b_to_a(stack, ret, cnt, 2);
 	}
 }
 
@@ -102,34 +87,37 @@ void	radix_sort(t_stack *stack, t_ret **ret)
 {
 	int	radix;
 	int	check_bin;
+	int	std;
 
-	radix = cnt_total_radix(stack->total, &check_bin);
-	while (radix--)
+	std = 5;
+	radix = cnt_total_radix(stack->total - 1, &check_bin, std);
+	while (--radix)
 	{
 		if (radix == 0 && check_bin == 1)
 		{
-			binary(stack, ret, stack->total);
+			binary(stack, ret, stack->total, std);
 		}
 		else
 		{
-			ternary(stack, ret, stack->total);
+			n_nary(stack, ret, stack->total, std);
 		}
-		ternary(stack, ret, stack->total);
 	}
 }
 
 void	sort_stack(t_stack *stack, t_ret **ret, int argc)
 {
-	if (argc < 2)
+	if (argc == 1 || argc == 2)
 		exit(1);
 	else if (is_sorting(stack->a_top, stack->total, A))
 		exit(1);
-	else if (argc > 5)
+	else if (argc > 6)
 		radix_sort(stack, ret);
 	else if (argc == 3)
-		three(stack, stack->a_top, ret, A);
+		two(stack, stack->a_top, ret, A);
 	else if (argc == 4)
-		four(stack, stack->a_top, ret);
+		three(stack, stack->a_top, ret, A);
 	else if (argc == 5)
+		four(stack, stack->a_top, ret);
+	else if (argc == 6)
 		five(stack, stack->a_top, ret);
 }

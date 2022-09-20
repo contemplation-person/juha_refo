@@ -9,6 +9,7 @@
 		"new": "c",
 		"ostream": "c",
 		"functional": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"limits": "c"
 	}
 }
