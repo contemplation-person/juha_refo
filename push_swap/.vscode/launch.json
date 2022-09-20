@@ -9,12 +9,12 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/a.out",
-			"args": ["-929","817","-316","-40","134","924","-764","-959","-706","-670"],
+			"args": ["3","5","4","1","2"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],
 			"externalConsole": false,
-			"MIMode": "lldb",
+			"MIMode": "gdb",
 			"setupCommands": [
 				{
 					"description": "gdb에 자동 서식 지정 사용",
@@ -26,8 +26,9 @@
 					"text": "-gdb-set disassembly-flavor intel",
 					"ignoreFailures": true
 				}
-			],
-			"preLaunchTask": "make debug file"
+			]
 		}
+
 	]
+	
 }

@@ -5,6 +5,10 @@
 		"algorithm": "c",
 		"push_swap.h": "c",
 		"locale": "c",
-		"string": "c"
+		"string": "c",
+		"new": "c",
+		"ostream": "c",
+		"functional": "c",
+		"typeinfo": "c"
 	}
 }

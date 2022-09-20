@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/20 14:14:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/20 15:55:55 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@ void	b_top_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	t_num	temp;
 	int		small;
 
-	if (cnt == 1)
-		p(stack, ret, PA);
-	else if (cnt == 2)
-		two_b(stack, stack->b_top, ret, B);
-	else if (cnt == 3)
-		three_b(stack, ret);
-	if (cnt < 4)
+	if (cnt < 1)
 		return ;
 	pivot = cnt / 3;
 	small = 0;
@@ -68,13 +62,7 @@ void	b_bottom_to_a(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	t_num	temp;
 	int		small;
 
-	if (cnt == 1)
-		p(stack, ret, PA);
-	else if (cnt == 2)
-		two_b(stack, stack->b_top, ret, B);
-	else if (cnt == 3)
-		three_b(stack, ret);
-	if (cnt < 4)
+	if (cnt < 1)
 		return ;
 	pivot = cnt / 3;
 	small = 0;
@@ -115,7 +103,7 @@ void	divide(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	t_num	temp;
 
 	if (cnt == 2)
-		two_b(stack, stack->a_top, ret, A);
+		two(stack, stack->a_top, ret, A);
 	else if (cnt == 3)
 		three(stack, stack->a_top, ret, A);
 	if (cnt < 4)
@@ -135,7 +123,7 @@ void	divide(t_stack *stack, t_ret **ret, t_num num, int cnt)
 	}
 	temp.max = num.max;
 	temp.min = num.min + pivot * 2;
-	view(*stack);
+	// view(*stack);
 	divide(stack, ret, temp, cnt - pivot * 2);
 	temp.max = num.min + pivot * 2 - 1;
 	temp.min = num.min + pivot;

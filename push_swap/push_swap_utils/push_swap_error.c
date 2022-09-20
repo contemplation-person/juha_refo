@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2022/09/07 17:57:44 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/20 16:22:34 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_bool	is_wrong_input(char *argv)
 int	write_error_message(void)
 {
 	write(2, "Error\n", 6);
-	return (1);
+	exit(1);
 }
 
 t_bool	check_error(int argc, char **argv)
