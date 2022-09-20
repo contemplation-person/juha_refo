@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/20 00:18:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/20 14:15:38 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
 
 void			two_b(t_stack *stack, t_stack_node *top, t_ret **ret, t_s_name name);
+void			three_b(t_stack *stack, t_ret **ret);
 void			divide(t_stack *stack, t_ret **ret, t_num num, int cnt);
 
 void			quick_hardcode(t_stack *stack, t_stack_node *top, \
