@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/20 15:33:31 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/20 18:37:02 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,12 @@ typedef enum e_bool
 t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
 
-void			three_b(t_stack *stack, t_ret **ret);
-void			two_b(t_stack *stack, t_stack_node *top, t_ret **ret, t_s_name name);
-void			divide(t_stack *stack, t_ret **ret, t_num num, int cnt);
-
-void			quick_hardcode(t_stack *stack, t_stack_node *top, \
-								t_ret **ret, t_s_name name);
-void			rev_quick_hardcode(t_stack *stack, t_stack_node *top, \
-								t_ret **ret, t_s_name name);
-void			sort_stack(t_stack *stack, t_ret **ret, int argc);
+void			sort_stack(t_stack *stack, t_num **ret, int argc);
+// void			quick_hardcode(t_stack *stack, t_stack_node *top, \
+// 								t_ret **ret, t_s_name name);
+// void			rev_quick_hardcode(t_stack *stack, t_stack_node *top, \
+// 								t_ret **ret, t_s_name name);
+// void			sort_stack(t_stack *stack, t_ret *ret, int argc);
 
 void			new_ret(t_ret **ret, t_cmd cmd);
 void			two(t_stack *stack, t_stack_node *top, \

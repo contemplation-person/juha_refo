@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/09/20 14:41:38 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/09/20 18:39:04 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,7 @@ SRC 		= 	push_swap_utils/init.c \
 				push_swap_utils/push_swap_pre_code.c \
 				push_swap_utils/ret.c \
 				sorting/hardcode.c \
-				sorting/quick_hardcode.c \
-				sorting/sort_stack.c \
+				sorting/radix_sort.c \
 				push_swap.c
 				
 OBJS	  	= 	$(SRC:.c=.o) 
