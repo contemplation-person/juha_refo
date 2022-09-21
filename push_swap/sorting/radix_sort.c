@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:25:22 by juha              #+#    #+#             */
-/*   Updated: 2022/09/21 00:25:19 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/21 12:53:34 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	radix_sort(t_stack *stack, t_ret **ret)
 	radix = cnt_total_radix(stack->total - 1, &check_bin, std);
 	while (--radix)
 	{
+		if (is_sorting(stack->a_top, stack->cnt_a, A))
+			return ;
 		if (radix == 0 && check_bin == 1)
 		{
 			binary(stack, ret, stack->total, std);

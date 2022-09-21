@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/20 18:37:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/21 12:53:35 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef enum e_bool
 t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
 
-void			sort_stack(t_stack *stack, t_num **ret, int argc);
+void			sort_stack(t_stack *stack, t_ret **ret, int argc);
 // void			quick_hardcode(t_stack *stack, t_stack_node *top, \
 // 								t_ret **ret, t_s_name name);
 // void			rev_quick_hardcode(t_stack *stack, t_stack_node *top, \
