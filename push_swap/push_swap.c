@@ -6,13 +6,27 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/20 19:19:39by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/21 16:38:33 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-#include <stdio.h>
+int	cnt_total_radix(int total, int *check_bin, int std)
+{
+	int	radix;
+
+	radix = 1;
+	*check_bin = 1;
+	while (total)
+	{
+		if (total % std > 1)
+			*check_bin = 0;
+		radix++;
+		total = total / std;
+	}
+	return (radix);
+}
 
 static void	change_idx(t_stack *stack)
 {
@@ -42,7 +56,5 @@ int	main(int argc, char **argv)
 	change_idx(&stack);
 	sort_stack(&stack, &ret, argc);
 	print_cmd(ret);
-	// view(stack);
-	// system("leaks a.out");
 	return (0);
 }

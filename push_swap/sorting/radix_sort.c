@@ -6,27 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:25:22 by juha              #+#    #+#             */
-/*   Updated: 2022/09/21 12:53:34 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/21 15:30:57 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-int	cnt_total_radix(int total, int *check_bin, int std)
-{
-	int	radix;
-
-	radix = 1;
-	*check_bin = 1;
-	while (total)
-	{
-		if (total % std > 1)
-			*check_bin = 0;
-		radix++;
-		total = total / std;
-	}
-	return (radix);
-}
 
 void	b_to_a(t_stack *stack, t_ret **ret, int radix, int std)
 {

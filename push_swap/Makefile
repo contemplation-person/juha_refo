@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/09/20 18:39:04 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/09/21 15:45:11 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,12 @@ SRC 		= 	push_swap_utils/init.c \
 				
 OBJS	  	= 	$(SRC:.c=.o) 
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re 
 
-
-all:$(OBJS)
+$(NAME): $(OBJS)
 	$(CC) $(CPPFLAGS) $^ -o $(NAME)
 
-bonus: $(NAME)
+all: $(NAME)
 
 clean:
 	rm -f $(OBJS) $(OBJS_BONUS)
@@ -40,6 +39,3 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean	all
-
-test : $(OBJS_TEST) 
-	$(CC) $(CPPFLAGS) $^ 
