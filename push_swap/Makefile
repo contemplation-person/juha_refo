@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/09/21 15:45:11 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/09/21 22:08:28 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS	  	= 	$(SRC:.c=.o)
 .PHONY: all clean fclean re 
 
 $(NAME): $(OBJS)
-	$(CC) $(CPPFLAGS) $^ -o $(NAME)
+	$(CC) $(CPPFLAGS) $^ push_swap.h -o $(NAME)
 
 all: $(NAME)
 
