@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2022/09/21 15:31:43 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 18:59:10 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_bool	check_error(int argc, char **argv)
 	static t_bool	state;
 
 	is_split = 0;
-	if (argc < 2)
+	if (argc < 1)
 		state = write_error_message();
 	if (is_duplicate(argc, argv))
 		state = write_error_message();
