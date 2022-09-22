@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:40:12 by juha              #+#    #+#             */
-/*   Updated: 2022/09/21 15:31:32 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 12:52:40 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void	print_cmd(t_ret *ret)
 			write(1, "rra\n", 4);
 		else if (ret->cmd == RRB)
 			write(1, "rrb\n", 4);
-		else if (ret->cmd == RRR)
-			write(1, "rrr\n", 4);
+		else if (ret->cmd == SA)
+			write(1, "sa\n", 3);
+		else if (ret->cmd == SB)
+			write(1, "sb\n", 3);
 		ret = ret->next;
 	}
 }

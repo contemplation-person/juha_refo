@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/09/21 22:08:28 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/09/22 12:16:40 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,16 @@ SRC 		= 	push_swap_utils/init.c \
 				sorting/hardcode.c \
 				sorting/radix_sort.c \
 				push_swap.c
-				
-OBJS	  	= 	$(SRC:.c=.o) 
 
-.PHONY: all clean fclean re 
+OBJS		=	$(SRC:.c=.o)
 
-$(NAME): $(OBJS)
-	$(CC) $(CPPFLAGS) $^ push_swap.h -o $(NAME)
+.PHONY: all clean fclean re 	
 
-all: $(NAME)
+$(NAME) : $(OBJS)
+	$(CC) $(CPPFLAGS) $^ -o $(NAME)
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	rm -f $(OBJS)
 
 fclean : clean
 	rm -f $(NAME)
