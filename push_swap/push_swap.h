@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/21 22:01:59 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 19:40:58 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,6 @@ typedef struct s_stack
 	t_stack_node	*b_top;
 }t_stack;
 
-typedef struct s_ret
-{
-	int				cmd;
-	struct s_ret	*next;
-	struct s_ret	*prev;
-}t_ret;
-
 typedef struct s_pos
 {
 	int	top;
@@ -84,22 +77,17 @@ t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
 
 int				cnt_total_radix(int total, int *check_bin, int std);
-void			sort_stack(t_stack *stack, t_ret **ret, int argc);
+void			sort_stack(t_stack *stack, int argc);
 
-void			new_ret(t_ret **ret, t_cmd cmd);
-void			two(t_stack *stack, t_stack_node *top, \
-					t_ret **ret,	t_s_name name);
-void			three(t_stack *stack, t_stack_node *top, \
-					t_ret **ret, t_s_name name);
-void			four(t_stack *stack, t_stack_node *top, t_ret **ret);
-void			five(t_stack *stack, t_stack_node *top, t_ret **ret);
+void			two(t_stack *stack, t_stack_node *top, t_s_name name);
+void			three(t_stack *stack, t_stack_node *top, t_s_name name);
+void			four(t_stack *stack, t_stack_node *top);
+void			five(t_stack *stack, t_stack_node *top);
 
-void			p(t_stack *stack, t_ret **ret, t_cmd cmd);
-void			r(t_stack *stack, t_ret **ret, t_cmd cmd);
-void			s(t_stack *stack, t_ret **ret, t_cmd cmd);
-void			rr(t_stack *stack, t_ret **ret, t_cmd cmd);
-
-void			print_cmd(t_ret *ret);
+void			p(t_stack *stack, t_cmd cmd);
+void			r(t_stack *stack, t_cmd cmd);
+void			s(t_stack *stack, t_cmd cmd);
+void			rr(t_stack *stack, t_cmd cmd);
 
 void			init_stack(t_stack *stack, int argc, char **argv);
 t_bool			is_sorting(t_stack_node *top, int stack_size, t_s_name name);

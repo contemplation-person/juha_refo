@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 10:43:18 by juha              #+#    #+#             */
-/*   Updated: 2022/07/11 17:32:28 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 19:55:15 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,4 @@ long	ft_atoi(const char *str)
 			return (-1);
 	}
 	return (cnt * is_minus);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*temp;
-	size_t			t;
-
-	if (n > 0)
-	{
-		t = 0;
-		temp = (unsigned char *)s;
-		while (t < n)
-			temp[t++] = '\0';
-	}
-	else
-		return ;
 }

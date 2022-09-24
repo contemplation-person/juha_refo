@@ -6,20 +6,20 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/22 12:56:27 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 19:55:15 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	two(t_stack *stack, t_stack_node *top, t_ret **ret, t_s_name name)
+void	two(t_stack *stack, t_stack_node *top, t_s_name name)
 {
 	if (is_sorting(top, 2, name))
 		return ;
-	s(stack, ret, SA * name);
+	s(stack, SA * name);
 }
 
-void	three(t_stack *stack, t_stack_node *top, t_ret **ret, t_s_name name)
+void	three(t_stack *stack, t_stack_node *top, t_s_name name)
 {
 	if (is_sorting(top, 3, name))
 		return ;
@@ -27,22 +27,22 @@ void	three(t_stack *stack, t_stack_node *top, t_ret **ret, t_s_name name)
 	{
 		if (top->idx < top->next->next->idx)
 		{
-			s(stack, ret, SA * name);
-			r(stack, ret, RA * name);
+			s(stack, SA * name);
+			r(stack, RA * name);
 		}
 		else
-			rr(stack, ret, RRA * name);
+			rr(stack, RRA * name);
 	}
 	else
 	{
 		if (top->next->idx < top->next->next->idx && \
 		top->idx > top->next->next->idx)
-			r(stack, ret, RA * name);
+			r(stack, RA * name);
 		else
 		{
-			s(stack, ret, SA * name);
+			s(stack, SA * name);
 			if (top->idx > top->next->next->idx)
-				rr(stack, ret, RRA * name);
+				rr(stack, RRA * name);
 		}
 	}
 }
@@ -62,46 +62,46 @@ int	find_node(t_stack_node *top, int idx)
 	return (pos_min);
 }
 
-void	four(t_stack *stack, t_stack_node *top, t_ret **ret)
+void	four(t_stack *stack, t_stack_node *top)
 {
 	int	pos_min;
 
 	pos_min = find_node(top, 0);
 	if (pos_min == 1)
-		s(stack, ret, SA);
+		s(stack, SA);
 	if (pos_min == 2)
 	{
-		rr(stack, ret, RRA);
-		rr(stack, ret, RRA);
+		rr(stack, RRA);
+		rr(stack, RRA);
 	}
 	if (pos_min == 3)
-		rr(stack, ret, RRA);
-	p(stack, ret, PB);
-	three(stack, stack->a_top, ret, A);
-	p(stack, ret, PA);
+		rr(stack, RRA);
+	p(stack, PB);
+	three(stack, stack->a_top, A);
+	p(stack, PA);
 }
 
-void	five(t_stack *stack, t_stack_node *top, t_ret **ret)
+void	five(t_stack *stack, t_stack_node *top)
 {
 	int				pos_min;
 
 	pos_min = find_node(top, 4);
 	if (pos_min == 1)
-		s(stack, ret, SA);
+		s(stack, SA);
 	if (pos_min == 2)
 	{
-		r(stack, ret, RA);
-		r(stack, ret, RA);
+		r(stack, RA);
+		r(stack, RA);
 	}
 	if (pos_min == 3)
 	{
-		rr(stack, ret, RRA);
-		rr(stack, ret, RRA);
+		rr(stack, RRA);
+		rr(stack, RRA);
 	}
 	if (pos_min == 4)
-		rr(stack, ret, RRA);
-	p(stack, ret, PB);
-	four(stack, stack->a_top, ret);
-	p(stack, ret, PA);
-	r(stack, ret, RA);
+		rr(stack, RRA);
+	p(stack, PB);
+	four(stack, stack->a_top);
+	p(stack, PA);
+	r(stack, RA);
 }

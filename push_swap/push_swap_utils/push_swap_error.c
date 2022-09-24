@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2022/09/22 18:59:10 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 19:55:11 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ t_bool	is_int_max(char *argv)
 t_bool	is_wrong_input(char *argv)
 {
 	if (*argv == '-' || *argv == '+')
+	{
 		argv++;
+		if (*argv == '\0')
+			write_error_message();
+	}
 	while (*argv)
 	{
 		if (!('0' <= *argv && *argv <= '9'))

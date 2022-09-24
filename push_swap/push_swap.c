@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/21 23:58:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 19:55:18 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,13 @@ static void	change_idx(t_stack *stack)
 int	main(int argc, char **argv)
 {
 	t_stack	stack;	
-	t_ret	*ret;
 
-	ret = NULL;
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
 	stack.total = stack.cnt_a;
 	if (is_sorting(stack.a_top, stack.cnt_a, A))
 		return (0);
 	change_idx(&stack);
-	sort_stack(&stack, &ret, argc);
-	print_cmd(ret);
+	sort_stack(&stack, argc);
 	return (0);
 }
