@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/09/22 12:16:40 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/09/24 17:55:19 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,14 @@ OBJS		=	$(SRC:.c=.o)
 $(NAME) : $(OBJS)
 	$(CC) $(CPPFLAGS) $^ -o $(NAME)
 
+all : $(NAME)
+
 clean:
 	rm -f $(OBJS)
 
 fclean : clean
 	rm -f $(NAME)
 
-re : fclean	all
+re :
+	make fclean
+	make all
