@@ -6,13 +6,13 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:16:46 by juha              #+#    #+#             */
-/*   Updated: 2022/05/19 16:06:06 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/09/28 21:03:36 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*set_save(t_list **fd_lst, char **ret, ssize_t ret_len)
+char	*set_save(t_g_list **fd_lst, char **ret, ssize_t ret_len)
 {
 	char	*save;
 
@@ -29,7 +29,7 @@ char	*set_save(t_list **fd_lst, char **ret, ssize_t ret_len)
 	return (save);
 }
 
-char	*ret_str(t_list **head, t_list **fd_lst)
+char	*ret_str(t_g_list **head, t_g_list **fd_lst)
 {
 	char	*ret;
 	char	*save;
@@ -70,10 +70,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-t_success	free_lst(t_list **head, t_list **fd_lst)
+t_success	free_lst(t_g_list **head, t_g_list **fd_lst)
 {
-	t_list	*fd_prev;
-	t_list	*fd_next;
+	t_g_list	*fd_prev;
+	t_g_list	*fd_next;
 
 	fd_prev = (*fd_lst)->prev;
 	fd_next = (*fd_lst)->next;
@@ -91,9 +91,9 @@ t_success	free_lst(t_list **head, t_list **fd_lst)
 	return (SUCCESS);
 }
 
-t_success	get_list(t_list **head, t_list **fd_lst, int fd)
+t_success	get_g_list(t_g_list **head, t_g_list **fd_lst, int fd)
 {
-	t_list	*prev;
+	t_g_list	*prev;
 
 	prev = NULL;
 	if (*head)
@@ -107,7 +107,7 @@ t_success	get_list(t_list **head, t_list **fd_lst, int fd)
 		if (*fd_lst && (*fd_lst)->fd == fd)
 			return (CONTINUE);
 	}
-	*fd_lst = (t_list *)malloc(sizeof(t_list));
+	*fd_lst = (t_g_list *)malloc(sizeof(t_g_list));
 	if (!(*fd_lst))
 		return (ERROR);
 	set_fd_list(fd_lst, prev, fd);

@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/05/12 21:40:46 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 19:23:42 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*get_next_line(int fd)
 {
-	static t_list	*head;
-	t_list			*fd_lst;
+	static t_g_list	*head;
+	t_g_list		*fd_lst;
 
 	fd_lst = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	if (!get_list(&head, &fd_lst, fd))
+	if (!get_g_list(&head, &fd_lst, fd))
 		return (0);
 	if (!read_str(&fd_lst, fd))
 	{
@@ -30,7 +30,7 @@ char	*get_next_line(int fd)
 	return (ret_str(&head, &fd_lst));
 }
 
-t_success	join_str(t_list **fd_lst, char **str, ssize_t read_len)
+t_success	join_str(t_g_list **fd_lst, char **str, ssize_t read_len)
 {
 	char		*temp;
 	ssize_t		i;
@@ -54,7 +54,7 @@ t_success	join_str(t_list **fd_lst, char **str, ssize_t read_len)
 	return (CONTINUE);
 }
 
-t_success	read_str(t_list **fd_lst, int fd)
+t_success	read_str(t_g_list **fd_lst, int fd)
 {
 	char		*str;
 	ssize_t		read_len;
@@ -82,7 +82,7 @@ t_success	read_str(t_list **fd_lst, int fd)
 	return (ERROR);
 }
 
-void	set_fd_list(t_list **fd_lst, t_list *prev, int fd)
+void	set_fd_list(t_g_list **fd_lst, t_g_list *prev, int fd)
 {
 	(*fd_lst)->fd = fd;
 	(*fd_lst)->prev = prev;
@@ -91,7 +91,7 @@ void	set_fd_list(t_list **fd_lst, t_list *prev, int fd)
 	(*fd_lst)->buf = 0;
 }
 
-ssize_t	get_ret_len(t_list **fd_lst)
+ssize_t	get_ret_len(t_g_list **fd_lst)
 {
 	ssize_t	ret_len;
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juha <juha@student.42.fr>                  +#+  +:+       +#+         #
+#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/04/05 15:24:08 by juha             ###   ########.fr        #
+#    Updated: 2022/10/13 14:20:03 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,15 @@ SRC 		= 	ft_bzero.c ft_isalnum.c ft_isalpha.c\
 				ft_strjoin.c ft_strtrim.c ft_split.c\
 				ft_itoa.c ft_strmapi.c ft_putchar_fd.c\
 				ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
-				ft_striteri.c get_next_line.c get_next_line_utils.c
+				ft_striteri.c get_next_line.c get_next_line_utils.c\
+				ft_isspace.c
 				
 SRC_BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c\
 				ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c\
 				ft_lstclear.c ft_lstiter.c ft_lstmap.c\
 				
 AR			= 	ar
-ARFLAG		= 	rscu
+ARFLAG		= 	rsc
 OBJS	  	= 	$(SRC:.c=.o)
 OBJS_BONUS	= 	$(SRC_BONUS:.c=.o)
 
@@ -50,9 +51,11 @@ all: $(NAME)
 bonus: $(NAME)
 
 clean:
-	rm -f $(OBJS) $(OBJS_BONUS)
+	@rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
-re : fclean all
+re : 
+	@make fclean 
+	@make all

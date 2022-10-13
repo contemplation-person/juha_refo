@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 12:17:35 by juha              #+#    #+#             */
-/*   Updated: 2022/10/06 17:20:17 by juha             ###   ########seoul.kr  */
+/*   Created: 2022/10/05 12:51:09 by juha              #+#    #+#             */
+/*   Updated: 2022/10/13 14:20:47 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_is_space(char c)
 {
-	size_t	len;
-
-	len = ft_strlen(s);
-	write(fd, s, len);
+	return ((8 < c && c < 14) || c == 32);
 }
