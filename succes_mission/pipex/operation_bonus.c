@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2022/10/13 13:39:47 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/10/14 13:31:55 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	start_child(t_pipe *p, t_using_pipe *channel)
 
 	close(channel->fd[READ]);
 	fd = open(p->argv[1], O_RDONLY);
-	check_error(dup2(fd, STDIN_FILENO), "operate.c - 42");
+	dup2(fd, STDIN_FILENO);
 	close(fd);
-	check_error(dup2(channel->fd[WRITE], STDOUT_FILENO), "operate.c - 44");
+	dup2(channel->fd[WRITE], STDOUT_FILENO);
 	close(channel->fd[WRITE]);
 	file = access_file(p, channel, F_OK);
 	if (!file)
@@ -69,9 +69,9 @@ void	other_child(t_pipe *p, t_using_pipe *channel)
 	char	*file;
 
 	close(channel->fd[READ]);
-	check_error(dup2(channel->prev_fd, STDIN_FILENO), "operate.c - 67");
+	dup2(channel->prev_fd, STDIN_FILENO);
 	close(channel->prev_fd);
-	check_error(dup2(channel->fd[WRITE], STDOUT_FILENO), "operate.c - 69");
+	dup2(channel->fd[WRITE], STDOUT_FILENO);
 	close(channel->fd[WRITE]);
 	file = access_file(p, channel, F_OK);
 	if (!file)
