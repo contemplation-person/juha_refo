@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:57:00 by juha              #+#    #+#              #
-#    Updated: 2022/10/14 13:36:02 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/10/11 16:16:09 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,10 @@ BONUS_OBJS	=	$(BONUS_SRC:.c=.o)
 
 .PHONY: all clean fclean re bonus
 
+$(LIBFT) : 
+		make bonus -C $(LIB_DIR)
+		mv $(LIB_DIR)/$(LIBFT) ./$(LIBFT)
+
 ifeq ($(MAKECMDGOALS), bonus)	
 $(NAME) : $(BONUS_OBJS) $(LIBFT)
 		$(CC) $(CFLAGES) -L./ -lft -Ipipex $^ -o $(NAME)
@@ -29,10 +33,6 @@ else
 $(NAME) : $(OBJS) $(LIBFT)
 		$(CC) $(CFLAGES) -L./ -lft -Ipipex $^ -o $(NAME)
 endif
-
-$(LIBFT) : 
-		make bonus -C $(LIB_DIR)
-		mv $(LIB_DIR)/$(LIBFT) ./$(LIBFT)
 
 all : $(NAME)
 

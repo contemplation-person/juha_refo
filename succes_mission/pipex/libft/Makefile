@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/10/13 14:20:03 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/10/05 16:40:50 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,11 +51,9 @@ all: $(NAME)
 bonus: $(NAME)
 
 clean:
-	@rm -f $(OBJS) $(OBJS_BONUS)
+	rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean : clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
-re : 
-	@make fclean 
-	@make all
+re : fclean all

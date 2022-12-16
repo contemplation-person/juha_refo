@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2022/10/13 14:13:53 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 20:29:53 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ enum e_cmd
 {
 	READ,
 	WRITE,
+	EVEN = 0,
+	ODD,
+	START = 0,
+	END,
+	FIRST = 0,
+	SECOND,
+	parent = 0,
+	child,
 };
 
 typedef struct s_using_pipe
@@ -45,11 +53,13 @@ typedef struct s_using_pipe
 typedef struct s_pipe
 {
 	char	**path;
+	char	*pwd;
 	int		argc;
 	char	**argv;
 	char	**envp;
 	pid_t	pid_num;
 	int		operator_cmd;
+	int		checking_family;
 	int		status;
 }t_pipe;
 

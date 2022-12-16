@@ -6,13 +6,13 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:51:09 by juha              #+#    #+#             */
-/*   Updated: 2022/10/13 14:20:47 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/10/05 12:53:57 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_is_space(char c)
+int	ft_isspace(char c)
 {
 	return ((8 < c && c < 14) || c == 32);
 }
