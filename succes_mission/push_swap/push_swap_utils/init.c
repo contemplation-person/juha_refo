@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:56:29 by juha              #+#    #+#             */
-/*   Updated: 2022/09/21 15:32:17 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 04:04:58 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init_stack(t_stack *stack, int argc, char **argv)
 	int				i;
 	t_stack_node	*new;
 
-	i = 1;
+	i = 0;
 	stack->a_top = NULL;
 	stack->b_top = NULL;
 	while (i < argc)
@@ -70,35 +70,41 @@ void	init_stack(t_stack *stack, int argc, char **argv)
 		i++;
 	}
 	stack->std = 0;
-	stack->cnt_a = argc - 1;
+	stack->cnt_a = argc;
 	stack->cnt_b = 0;
+	stack->total = argc;
 }
 
 t_bool	is_sorting(t_stack_node *top, int stack_size, t_s_name name)
 {
-	int				std;
-	int				i;
 	t_stack_node	*node;
+	int				prev_idx;
+	int				i;
 
-	i = 0;
-	if (name == B)
-		std = 2147483647;
-	else
-		std = -1;
 	node = top;
-	while (i++ < stack_size)
+	i = 0;
+	prev_idx = -1;
+	if (name == A)
 	{
-		if (name == A && node->idx <= std)
-			return (FALSE);
-		if (name == B && node->idx >= std)
-			return (FALSE);
-		std = node->idx;
-		node = node->next;
+		while (i++ < stack_size)
+		{
+			if (prev_idx < node->idx)
+				prev_idx = node->idx;
+			else
+				return (FALSE);
+			node = node->next;
+		}
 	}
-	if (name != A && name != B)
+	else
 	{
-		if (i != (int)name)
-			return (FALSE);
+		while (i++ < stack_size)
+		{
+			if (prev_idx > node->idx)
+				prev_idx = node->idx;
+			else
+				return (FALSE);
+			node = node->next;
+		}
 	}
 	return (TRUE);
 }

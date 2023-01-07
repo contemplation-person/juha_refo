@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2022/09/24 19:57:24 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/08 04:08:11 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC 			= 	cc
 CPPFLAGS	= 	-Wall -Wextra -Werror 
 NAME		= 	push_swap	
 SRC 		= 	push_swap_utils/init.c \
+				push_swap_utils/ft_split.c \
 				push_swap_utils/cmd.c \
 				push_swap_utils/cmd_utils.c \
 				push_swap_utils/push_swap_error.c \
@@ -24,17 +25,20 @@ SRC 		= 	push_swap_utils/init.c \
 
 OBJS		=	$(SRC:.c=.o)
 
-.PHONY: all clean fclean re 	
+.PHONY: all clean fclean re
+
+all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(CC) $(CPPFLAGS) $^ -o $(NAME)
 
-all : $(NAME)
-
 clean:
 	rm -f $(OBJS)
 
-fclean : clean
+fclean : 
+	make clean
 	rm -f $(NAME)
 
-re : fclean	all
+re : 
+	make fclean
+	make all

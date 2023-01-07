@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2022/09/24 19:55:11 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 04:04:56 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,23 @@ int	write_error_message(void)
 
 t_bool	check_error(int argc, char **argv)
 {
-	int				is_split;
 	static t_bool	state;
 
-	is_split = 0;
 	if (argc < 1)
 		state = write_error_message();
 	if (is_duplicate(argc, argv))
 		state = write_error_message();
-	while (*(++argv))
+	while (*argv)
 	{
 		if (is_wrong_input(*argv))
+		{
 			state = write_error_message();
+		}
 		else if (!is_int_max(*argv))
 			state = write_error_message();
+		argv++;	
 	}
 	if (state)
 		exit(1);
-	return (is_split);
+	return (0);
 }

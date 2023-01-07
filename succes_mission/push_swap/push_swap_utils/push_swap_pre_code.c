@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 10:43:18 by juha              #+#    #+#             */
-/*   Updated: 2022/09/24 19:55:15 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 04:04:54 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ size_t			change_size_t(const char *str);
 size_t			ft_strlen(const char	*s);
 long			ft_atoi(const char	*str);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
-void			ft_bzero(void *s, size_t n);
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

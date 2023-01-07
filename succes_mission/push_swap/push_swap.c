@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/24 19:55:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 04:13:33 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	cnt_total_radix(int total, int *check_bin, int std)
 	return (radix);
 }
 
+#include <stdio.h>
 static void	change_idx(t_stack *stack)
 {
 	int				cnt;
@@ -42,15 +43,70 @@ static void	change_idx(t_stack *stack)
 	}
 }
 
-int	main(int argc, char **argv)
+int	cnt_split_str(char **argv)
+{
+	int i;
+
+	if (!argv)
+		return (0);
+	i = 0;
+	while (argv[i])
+		i++;
+	return (i);
+}
+
+char	**make_char_pp(int argc, char **argv)
+{
+	char	**ret;
+	char	**temp1;
+	char	**temp2;
+	int		i;
+	int		j;
+
+	ret = NULL;
+	j = 1;
+	while (j < argc)
+	{
+		temp2 = ft_split(argv[j++], ' ');
+		if (!temp2)
+			exit(1);
+		temp1 = ret;
+		if (ret == NULL)
+			ret = temp2;
+		else
+		{
+			i = 0;
+			ret = malloc(sizeof(char *) * (cnt_split_str(temp1) + cnt_split_str(temp2) + 1));
+			if (!ret)
+				exit(1);
+			while (i < cnt_split_str(temp1) + cnt_split_str(temp2))
+			{
+				if (i < cnt_split_str(temp1))
+					ret[i] = temp1[i];
+				else
+					ret[i] = temp2[i - cnt_split_str(temp1)];
+				i++;
+			}
+			free(temp1);
+			free(temp2);
+			ret[i] = NULL;
+		}
+	}
+	return (ret);
+}
+
+int	main(int argc, char **v)
 {
 	t_stack	stack;	
+	char	**argv;
 
+	argv = make_char_pp(argc, v);
+	argc = cnt_split_str(argv);
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
-	stack.total = stack.cnt_a;
 	if (is_sorting(stack.a_top, stack.cnt_a, A))
 		return (0);
+	// done
 	change_idx(&stack);
 	sort_stack(&stack, argc);
 	return (0);
