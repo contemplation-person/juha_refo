@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:04:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 12:15:21 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef enum e_stack_name
 	A = 1,
 	B = 10,
 }t_s_name;
+
+typedef enum e_cheker
+{
+	SORTED,
+	UNSORTED,
+}t_checker;
 
 typedef enum e_cmd
 {
