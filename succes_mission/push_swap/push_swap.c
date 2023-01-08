@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:13:33 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 10:12:55 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	cnt_total_radix(int total, int *check_bin, int std)
 	return (radix);
 }
 
-#include <stdio.h>
 static void	change_idx(t_stack *stack)
 {
 	int				cnt;
@@ -95,6 +94,7 @@ char	**make_char_pp(int argc, char **argv)
 	return (ret);
 }
 
+#include <stdio.h>
 int	main(int argc, char **v)
 {
 	t_stack	stack;	
@@ -105,8 +105,9 @@ int	main(int argc, char **v)
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
 	if (is_sorting(stack.a_top, stack.cnt_a, A))
+		printf("adsf\n");
+	if (is_sorting(stack.a_top, stack.cnt_a, A))
 		return (0);
-	// done
 	change_idx(&stack);
 	sort_stack(&stack, argc);
 	return (0);

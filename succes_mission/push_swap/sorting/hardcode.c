@@ -6,12 +6,13 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2022/09/24 19:55:15 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 10:10:02 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+#include <stdio.h>
 void	two(t_stack *stack, t_stack_node *top, t_s_name name)
 {
 	if (is_sorting(top, 2, name))

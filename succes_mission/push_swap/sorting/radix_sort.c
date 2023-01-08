@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:25:22 by juha              #+#    #+#             */
-/*   Updated: 2022/09/24 19:55:16 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 10:15:25 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,16 @@ void	radix_sort(t_stack *stack)
 
 void	sort_stack(t_stack *stack, int argc)
 {
-	if (argc == 1 || argc == 2)
-		exit(1);
-	else if (is_sorting(stack->a_top, stack->total, A))
-		exit(1);
-	else if (argc > 6)
+	if (argc > 5)
 		radix_sort(stack);
-	else if (argc == 3)
+	else if (argc == 1)
+		exit(0);
+	else if (argc == 2)
 		two(stack, stack->a_top, A);
-	else if (argc == 4)
+	else if (argc == 3)
 		three(stack, stack->a_top, A);
-	else if (argc == 5)
+	else if (argc == 4)
 		four(stack, stack->a_top);
-	else if (argc == 6)
+	else if (argc == 5)
 		five(stack, stack->a_top);
 }
