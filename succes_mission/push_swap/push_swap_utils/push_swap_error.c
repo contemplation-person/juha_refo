@@ -6,17 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:04:56 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 04:04:55 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-int		write_error_message(void);
-t_bool	is_int_max(char *argv);
-t_bool	is_duplicate(int argc, char **argv);
-t_bool	is_wrong_input(char *argv);
-t_bool	check_error(int argc, char **argv);
 
 t_bool	is_duplicate(int argc, char **argv)
 {
@@ -87,17 +81,17 @@ t_bool	check_error(int argc, char **argv)
 	static t_bool	state;
 
 	if (argc < 1)
-		state = write_error_message();
+		state = write_error_message(__FILE__, __LINE__);
 	if (is_duplicate(argc, argv))
-		state = write_error_message();
+		state = write_error_message(__FILE__, __LINE__);
 	while (*argv)
 	{
 		if (is_wrong_input(*argv))
 		{
-			state = write_error_message();
+			state = write_error_message(__FILE__, __LINE__);
 		}
 		else if (!is_int_max(*argv))
-			state = write_error_message();
+			state = write_error_message(__FILE__, __LINE__);
 		argv++;	
 	}
 	if (state)

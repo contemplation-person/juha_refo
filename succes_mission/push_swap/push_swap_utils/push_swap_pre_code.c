@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 10:43:18 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:04:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 04:17:48 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,10 @@ long	ft_atoi(const char *str)
 			return (-1);
 	}
 	return (cnt * is_minus);
+}
+
+int	write_error(char *error_file)
+{
+	write(2, error_file, ft_strlen(error_file));
+	exit(1);
 }

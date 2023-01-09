@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2023/01/09 21:32:26 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 04:13:15 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef enum e_cmd
 	RR,
 	RRR,
 }t_cmd;
+
+typedef struct s_archive
+{
+	t_cmd					cmd;
+	struct s_cmd_archive	*next;
+}t_archive;
+
 
 typedef struct s_stack_node
 {
@@ -80,27 +87,29 @@ typedef enum e_bool
 	FALSE = 0,
 }t_bool;
 
-t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
-t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
+void			sort_stack(t_stack *stack, t_archive *archive);
 
-int				cnt_total_radix(int total, int *check_bin, int std);
-void			sort_stack(t_stack *stack, int argc);
+void			two(t_stack *stack, t_s_name name, t_archive *archive);
+void			three(t_stack *stack, t_archive *archive);
+void			four(t_stack *stack, t_stack_node *top, t_archive *archive);
+void			five(t_stack *stack, t_stack_node *top, t_archive *archive);
 
-void			two(t_stack *stack, t_stack_node *top, t_s_name name);
-void			three(t_stack *stack, t_stack_node *top, t_s_name name);
-void			four(t_stack *stack, t_stack_node *top);
-void			five(t_stack *stack, t_stack_node *top);
+t_bool			pa(t_stack *stack, t_archive *archive);
+t_bool			ra(t_stack *stack, t_archive *archive);
+t_bool			rra(t_stack *stack, t_archive *archive);
+t_bool			sa(t_stack *stack, t_archive *archive);
 
-void			p(t_stack *stack, t_cmd cmd);
-void			r(t_stack *stack, t_cmd cmd);
-void			s(t_stack *stack, t_cmd cmd);
-void			rr(t_stack *stack, t_cmd cmd);
+t_bool			pb(t_stack *stack, t_archive *archive);
+t_bool			rb(t_stack *stack, t_archive *archive);
+t_bool			rrb(t_stack *stack, t_archive *archive);
+t_bool			sb(t_stack *stack, t_archive *archive);
 
 void			init_stack(t_stack *stack, int argc, char **argv);
 t_bool			is_sorting(t_stack_node *top, int stack_size, t_s_name name);
 
 t_bool			check_error(int argc, char **argv);
 
+void			write_error(char *error_file);
 int				write_error_message(void);
 t_bool			is_int_max(char *argv);
 t_bool			is_duplicate(int argc, char **argv);

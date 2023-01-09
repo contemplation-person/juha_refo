@@ -6,44 +6,59 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:14 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 10:10:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 03:30:03 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-#include <stdio.h>
-void	two(t_stack *stack, t_stack_node *top, t_s_name name)
+void	two(t_stack *stack, t_s_name name, t_archive *archive)
 {
-	if (is_sorting(top, 2, name))
-		return ;
-	s(stack, SA * name);
-}
+	t_stack_node	*target_node;
+	int				cnt;
 
-void	three(t_stack *stack, t_stack_node *top, t_s_name name)
-{
-	if (is_sorting(top, 3, name))
-		return ;
-	else if (top->idx < top->next->idx)
+	if (name == A)
 	{
-		if (top->idx < top->next->next->idx)
-		{
-			s(stack, SA * name);
-			r(stack, RA * name);
-		}
-		else
-			rr(stack, RRA * name);
+		target_node = stack->a_top;
+		cnt = stack->cnt_a;
 	}
 	else
 	{
-		if (top->next->idx < top->next->next->idx && \
-		top->idx > top->next->next->idx)
-			r(stack, RA * name);
+		target_node = stack->b_top;
+		cnt = stack->cnt_b;
+	}
+	if (is_sorting(target_node, cnt, name))
+		return ;
+	if (name == A)
+		sa(stack, archive);
+	else
+		sb(stack, archive);
+}
+
+void	three(t_stack *stack, t_archive *archive)
+{
+	if (is_sorting(stack->a_top, stack->cnt_a, A))
+		return ;
+	if (stack->a_top->idx < stack->a_top->next->idx)
+	{
+		if (stack->a_top->idx < stack->a_top->next->next->idx)
+		{
+			sa(stack, archive);
+			ra(stack, archive);
+		}
+		else
+			rra(stack, archive);
+	}
+	else
+	{
+		if (stack->a_top->next->idx < stack->a_top->next->next->idx && \
+		stack->a_top->idx > stack->a_top->next->next->idx)
+			ra(stack, archive);
 		else
 		{
-			s(stack, SA * name);
-			if (top->idx > top->next->next->idx)
-				rr(stack, RRA * name);
+			sa(stack, archive);
+			if (stack->a_top->idx > stack->a_top->next->next->idx)
+				rra(stack, archive);
 		}
 	}
 }
@@ -63,46 +78,46 @@ int	find_node(t_stack_node *top, int idx)
 	return (pos_min);
 }
 
-void	four(t_stack *stack, t_stack_node *top)
+void	four(t_stack *stack, t_stack_node *top, t_archive *archive)
 {
 	int	pos_min;
 
 	pos_min = find_node(top, 0);
 	if (pos_min == 1)
-		s(stack, SA);
+		sa(stack, archive);
 	if (pos_min == 2)
 	{
-		rr(stack, RRA);
-		rr(stack, RRA);
+		rra(stack, archive);
+		rra(stack, archive);
 	}
 	if (pos_min == 3)
-		rr(stack, RRA);
-	p(stack, PB);
-	three(stack, stack->a_top, A);
-	p(stack, PA);
+		rra(stack, archive);
+	pb(stack, archive);
+	three(stack, archive);
+	pa(stack, archive);
 }
 
-void	five(t_stack *stack, t_stack_node *top)
+void	five(t_stack *stack, t_stack_node *top, t_archive *archive)
 {
 	int				pos_min;
 
 	pos_min = find_node(top, 4);
 	if (pos_min == 1)
-		s(stack, SA);
+		sa(stack, archive);
 	if (pos_min == 2)
 	{
-		r(stack, RA);
-		r(stack, RA);
+		ra(stack, archive);
+		ra(stack, archive);
 	}
 	if (pos_min == 3)
 	{
-		rr(stack, RRA);
-		rr(stack, RRA);
+		rra(stack, archive);
+		rra(stack, archive);
 	}
 	if (pos_min == 4)
-		rr(stack, RRA);
-	p(stack, PB);
-	four(stack, stack->a_top);
-	p(stack, PA);
-	r(stack, RA);
+		rra(stack, archive);
+	pb(stack, archive);
+	four(stack, stack->a_top, archive);
+	pa(stack, archive);
+	ra(stack, archive);
 }
