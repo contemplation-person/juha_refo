@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 04:04:55 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 04:19:54 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,18 @@ t_bool	check_error(int argc, char **argv)
 	static t_bool	state;
 
 	if (argc < 1)
-		state = write_error_message(__FILE__, __LINE__);
+		state = write_error_message();
 	if (is_duplicate(argc, argv))
-		state = write_error_message(__FILE__, __LINE__);
+		state = write_error_message();
 	while (*argv)
 	{
 		if (is_wrong_input(*argv))
 		{
-			state = write_error_message(__FILE__, __LINE__);
+			state = write_error_message();
 		}
 		else if (!is_int_max(*argv))
-			state = write_error_message(__FILE__, __LINE__);
-		argv++;	
+			state = write_error_message();
+		argv++;
 	}
 	if (state)
 		exit(1);
