@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 12:15:21 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 21:32:26 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_stack_node
 {
 	int					idx;
 	int					origin_num;
+	t_checker			checker;
 	struct s_stack_node	*next;
 	struct s_stack_node	*prev;
 }t_stack_node;

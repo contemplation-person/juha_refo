@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 14:56:29 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 12:14:03 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 21:39:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static t_stack_node	*new_node(int num)
 		exit(write_error_message());
 	ret->next = ret;
 	ret->prev = ret;
+	ret->idx = 0;
+	ret->checker = 0;
 	ret->origin_num = num;
 	return (ret);
 }

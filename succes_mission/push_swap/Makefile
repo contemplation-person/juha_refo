@@ -6,13 +6,13 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2023/01/08 12:39:59 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/09 21:38:40 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 CC 			= 	cc
 CPPFLAGS	= 	-Wall -Wextra -Werror
-TESTFLAGS	=	-Wall -Wextra -Werror -g3~
+TESTFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address
 NAME		= 	push_swap
 SRC 		= 	push_swap_utils/init.c \
 				push_swap_utils/ft_split.c \
@@ -28,14 +28,13 @@ OBJS		=	$(SRC:.c=.o)
 
 .PHONY: all clean fclean re test
 
-all : $(NAME)
-	
 test : $(OBJS)
 	$(CC) $(TESTFLAGS) $^ -o $(NAME)
+	
+all : $(NAME)
 
 $(NAME) : $(OBJS)
 	$(CC) $(CPPFLAGS) $^ -o $@
-
 
 clean:
 	rm -f $(OBJS)
