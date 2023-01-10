@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 18:55:28 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 19:00:08 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	pa(t_stack *stack, t_archive *archive)
 	{
 		stack->a_top = pop_node;
 		pop_node->prev = pop_node;
-		pop_node->next = pop_node;
+		pop_node->next = pop_node; 
 	}
 	else
 	{
