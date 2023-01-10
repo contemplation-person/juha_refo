@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:25:22 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 18:57:55 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 00:06:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	a_to_b(t_stack *stack, t_archive *archive)
 		temp = stack->a_top;
 		if (temp->idx > chunk + stack->cnt_b)
 			ra(stack, archive);
-		else if (stack->cnt_b > temp->idx)
+		else if (temp->idx > stack->cnt_b)
 		{
 			pb(stack, archive);
 			rb(stack, archive);
@@ -60,14 +60,14 @@ void	a_to_b(t_stack *stack, t_archive *archive)
 
 		sleep(1);
 		printf("temp : %d, stack->cnt_a : %d, stack->cnt_b %d\n", temp->idx, stack->cnt_a, stack->cnt_b);
+		print_stack(stack);
 	}
-	print_stack(stack);
 }
 
 void	sort(t_stack *stack, t_archive *archive)
 {
 
-	//if (stack->cnt_a == stack->total && \
+	//if (stack->cnt_a == stack->total && 
 	//	is_sorting(stack->a_top, stack->cnt_a, A))
 	//	break ;
 	a_to_b(stack, archive);

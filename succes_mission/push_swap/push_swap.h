@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 18:00:21 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 23:44:27 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ void			three(t_stack *stack, t_archive *archive);
 void			four(t_stack *stack, t_stack_node *top, t_archive *archive);
 void			five(t_stack *stack, t_stack_node *top, t_archive *archive);
 
+t_stack_node	*pop(t_stack *stack, t_s_name name);
 t_bool			pa(t_stack *stack, t_archive *archive);
 t_bool			ra(t_stack *stack, t_archive *archive);
 t_bool			rra(t_stack *stack, t_archive *archive);
 t_bool			sa(t_stack *stack, t_archive *archive);
 
+t_stack_node	*push(t_stack *stack, t_s_name name, t_stack_node *target);
 t_bool			pb(t_stack *stack, t_archive *archive);
 t_bool			rb(t_stack *stack, t_archive *archive);
 t_bool			rrb(t_stack *stack, t_archive *archive);

@@ -6,36 +6,51 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 19:00:08 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 00:29:52 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_bool	pa(t_stack *stack, t_archive *archive)
+t_stack_node	*pop(t_stack *stack, t_s_name name)
 {
-	t_stack_node	*pop_node;
+	t_stack_node	*target;
 
-	if (!(stack->cnt_b))
-		return (FALSE);
-	pop_node = stack->b_top;
-	pop_node->prev->next = pop_node->next;
-	pop_node->next->prev = pop_node->prev;
-	if (stack->cnt_a == 0)
+	if ((name == A && !stack->cnt_a) || (name == B && !stack->cnt_b))
+		return (NULL);
+	if (name == A)
 	{
-		stack->a_top = pop_node;
-		pop_node->prev = pop_node;
-		pop_node->next = pop_node; 
+		target = stack->a_top;
+		stack->a_top = stack->a_top->next;
+		target->prev->next = target->next;
+		target->next->prev = target->prev;
+		target->next = target;
+		target->prev = target;
+		if (stack->cnt_a == 1)
+			stack->a_top = NULL;
+		stack->cnt_a--;
 	}
 	else
 	{
-		pop_node->next = stack->a_top->next;
-		pop_node->prev = stack->a_top;
-		stack->a_top = pop_node;
+		target = stack->b_top;
+		stack->b_top = stack->b_top->next;
+		target->prev->next = target->next;
+		target->next->prev = target->prev;
+		target->next = target;
+		target->prev = target;
+		if (stack->cnt_b == 1)
+			stack->b_top = NULL;
+		stack->cnt_b--;
 	}
+	return (target);
+}
+
+t_bool	pa(t_stack *stack, t_archive *archive)
+{
+	if (!(stack->cnt_b))
+		return (FALSE);
+	push(stack, A, pop(stack, B));
 	add_back_archive(archive, PA);
-	stack->cnt_b--;
-	stack->cnt_a++;
 	return (TRUE);
 }
 

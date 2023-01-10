@@ -6,36 +6,47 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 18:57:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 23:58:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_bool	pb(t_stack *stack, t_archive *archive)
+t_stack_node	*push(t_stack *stack, t_s_name name, t_stack_node *target)
 {
-	t_stack_node	*pop_node;
-
-	if (!(stack->cnt_a))
-		return (FALSE);
-	pop_node = stack->a_top;
-	pop_node->prev->next = pop_node->next;
-	pop_node->next->prev = pop_node->prev;
-	if (stack->cnt_b == 0)
+	if (name == A && stack->cnt_a == 0)
+		stack->a_top = target;
+	else if (name == B && stack->cnt_b == 0)
+		stack->b_top = target;
+	else if (name == A)
 	{
-		stack->b_top = pop_node;
-		pop_node->prev = pop_node;
-		pop_node->next = pop_node;
+		target->next = stack->a_top;
+		target->prev = stack->a_top->prev;
+		stack->a_top->prev->next = target;
+		stack->a_top->prev = target;
+		stack->a_top = target;
 	}
 	else
 	{
-		pop_node->next = stack->b_top->next;
-		pop_node->prev = stack->b_top;
-		stack->b_top = pop_node;
+		target->next = stack->b_top;
+		target->prev = stack->b_top->prev;
+		stack->b_top->prev->next = target;
+		stack->b_top->prev = target;
+		stack->b_top = target;
 	}
+	if (name == A)
+		stack->cnt_a++;
+	else if (name == B)
+		stack->cnt_b++;
+	return (target);
+}
+
+t_bool	pb(t_stack *stack, t_archive *archive)
+{
+	if (!(stack->cnt_a))
+		return (FALSE);
+	push(stack, B, pop(stack, A));
 	add_back_archive(archive, PB);
-	stack->cnt_a--;
-	stack->cnt_b++;
 	return (TRUE);
 }
 
