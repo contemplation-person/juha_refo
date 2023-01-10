@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 13:02:42 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 18:57:02 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_bool	pb(t_stack *stack, t_archive *archive)
 		stack->b_top = pop_node;
 	}
 	add_back_archive(archive, PB);
+	stack->cnt_a--;
 	stack->cnt_b++;
 	return (TRUE);
 }
