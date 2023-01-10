@@ -6,13 +6,12 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:57:34 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 01:59:58 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 13:02:42 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// b->a
 t_bool	pb(t_stack *stack, t_archive *archive)
 {
 	t_stack_node	*pop_node;
@@ -34,6 +33,7 @@ t_bool	pb(t_stack *stack, t_archive *archive)
 		pop_node->prev = stack->b_top;
 		stack->b_top = pop_node;
 	}
+	add_back_archive(archive, PB);
 	stack->cnt_b++;
 	return (TRUE);
 }
@@ -43,6 +43,7 @@ t_bool	rb(t_stack *stack, t_archive *archive)
 	if (stack->cnt_b == 0 || stack->cnt_b == 1)
 		return (FALSE);
 	stack->b_top = stack->b_top->next;
+	add_back_archive(archive, RB);
 	return (TRUE);
 }
 
@@ -51,6 +52,7 @@ t_bool	rrb(t_stack *stack, t_archive *archive)
 	if (stack->cnt_b == 0 || stack->cnt_b == 1)
 		return (FALSE);
 	stack->b_top = stack->b_top->prev;
+	add_back_archive(archive, RRB);
 	return (TRUE);
 }
 
@@ -74,5 +76,6 @@ t_bool	sb(t_stack *stack, t_archive *archive)
 	temp_prev->next = target;
 	temp_next->prev = top;
 	top->next = temp_next;
+	add_back_archive(archive, SB);
 	return (TRUE);
 }

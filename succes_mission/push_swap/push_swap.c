@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 02:39:24 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 13:35:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ char	**make_char_pp(int argc, char **argv)
 
 int	main(int argc, char **v)
 {
-	t_stack		stack;
-	t_archive	archive;
-	char		**argv;
+	t_stack				stack;
+	static t_archive	archive;
+	char				**argv;
 
 	argv = make_char_pp(argc, v);
 	argc = cnt_split_str(argv);
@@ -91,9 +91,8 @@ int	main(int argc, char **v)
 	if (is_sorting(stack.a_top, stack.cnt_a, A))
 		return (0);
 	change_idx(&stack);
-	archive.cmd = NULL;
-	archive.next = NULL;
 	sort_stack(&stack, &archive);
+	print_archive(&archive);
 	// system("leaks push_swap");
 	return (0);
 }

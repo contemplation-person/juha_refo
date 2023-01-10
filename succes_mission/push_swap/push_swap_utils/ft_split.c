@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:05:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 13:14:23 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_substr(char const *s, size_t start, size_t len)
 		len = k;
 	temp = (char *)malloc(len + 1);
 	if (!temp)
-		return (0);
+		exit(1);
 	i = start;
 	j = 0;
 	while (j < len)

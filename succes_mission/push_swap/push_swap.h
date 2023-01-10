@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 04:13:15 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 13:51:03 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ typedef enum e_cmd
 typedef struct s_archive
 {
 	t_cmd					cmd;
-	struct s_cmd_archive	*next;
+	struct s_archive		*next;
 }t_archive;
-
 
 typedef struct s_stack_node
 {
@@ -109,16 +108,21 @@ t_bool			is_sorting(t_stack_node *top, int stack_size, t_s_name name);
 
 t_bool			check_error(int argc, char **argv);
 
-void			write_error(char *error_file);
 int				write_error_message(void);
 t_bool			is_int_max(char *argv);
 t_bool			is_duplicate(int argc, char **argv);
 t_bool			is_wrong_input(char *argv);
 t_bool			check_error(int argc, char **argv);
 
+void			write_error(char *error_file);
 size_t			change_size_t(const char *str);
 size_t			ft_strlen(const char	*s);
 long			ft_atoi(const char	*str);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			**ft_split(char const *s, char c);
+
+t_archive		*add_back_archive(t_archive *start, t_cmd cmd);
+t_archive		*del_archive(t_archive *start, t_archive *target_prev, \
+							t_archive *target);
+void			print_archive(t_archive *archive);
 #endif
