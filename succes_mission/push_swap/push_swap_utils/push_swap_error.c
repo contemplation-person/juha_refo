@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 01:05:10 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 06:55:00 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_bool	check_error(int argc, char **argv)
 		state = write_error_message();
 	if (is_duplicate(argc, argv))
 		state = write_error_message();
+	argv++;
 	while (*argv)
 	{
 		if (is_wrong_input(*argv))
