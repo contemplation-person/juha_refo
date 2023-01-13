@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2023/01/14 06:47:47 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 08:00:08 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,20 @@ char	**make_char_pp(int argc, char **argv)
 	return (ret);
 }
 
+#include <stdio.h>//
+
 int	main(int argc, char **v)
 {
 	t_stack	stack;	
 	char	**argv;
 
 	argv = make_char_pp(argc, v);
+
+	for(int i = 0; argv[i]; i++)
+	{
+		printf("%s\n", argv[i]);
+	}
+
 	argc = cnt_split_str(argv);
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
