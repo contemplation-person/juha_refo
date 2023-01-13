@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2023/01/09 21:32:09 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 06:47:47 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ int	main(int argc, char **v)
 	}
 	change_idx(&stack);
 	sort_stack(&stack, argc);
-	// system("leaks push_swap");
+	system("leaks push_swap");
 	return (0);
 }
