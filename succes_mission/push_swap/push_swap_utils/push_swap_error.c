@@ -80,9 +80,9 @@ t_bool	check_error(int argc, char **argv)
 {
 	static t_bool	state;
 
-	if (argc < 1)
+	if (argc < 2)
 		state = write_error_message();
-	if (is_duplicate(argc - 1, argv + 1))
+	if (is_duplicate(argc, argv))
 		state = write_error_message();
 	argv++;
 	while (*argv)

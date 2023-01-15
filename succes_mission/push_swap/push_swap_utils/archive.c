@@ -12,10 +12,12 @@
 
 #include "../push_swap.h"
 
-static t_archive	*new_archive(t_cmd cmd)
+t_archive	*new_archive(t_cmd cmd)
 {
 	t_archive	*archive;
 
+	if (cmd == 0)
+		return (NULL);
 	archive = malloc(sizeof(t_archive));
 	if (!archive)
 		write_error(__FILE__);
@@ -24,15 +26,15 @@ static t_archive	*new_archive(t_cmd cmd)
 	return (archive);
 }
 
-t_archive	*add_back_archive(t_archive *start, t_cmd cmd)
+t_archive	*add_back_archive(t_archive **start, t_cmd cmd)
 {
 	t_archive	*temp;
 
-	temp = start;
+	temp = *start;
 	if (!temp)
 	{
-		start = new_archive(cmd);
-		return (start);
+		(*start) = new_archive(cmd);
+		return (*start);
 	}
 	while (temp->next)
 		temp = temp->next;

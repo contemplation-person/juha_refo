@@ -65,16 +65,16 @@ void	init_stack(t_stack *stack, int argc, char **argv)
 	i = 0;
 	stack->a_top = NULL;
 	stack->b_top = NULL;
-	while (i < argc)
+	while (i < argc - 1)
 	{
 		new = new_node(ft_atoi(argv[i]));
 		add_init_add_back(&(stack->a_top), &new);
 		i++;
 	}
 	stack->std = 0;
-	stack->cnt_a = argc;
+	stack->cnt_a = argc - 1;
 	stack->cnt_b = 0;
-	stack->total = argc;
+	stack->total = argc - 1;
 }
 
 t_bool	is_sorting(t_stack_node *top, int stack_size, t_s_name name)

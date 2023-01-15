@@ -41,16 +41,17 @@ int	cnt_split_str(char **argv)
 int	main(int argc, char **argv)
 {
 	t_stack				stack;
-	static t_archive	archive;
+	t_archive			*archive;
 
 	//argv[1]번부터 돌려야함. 
 	//"1 2 3"바꿔야함.
+	archive = NULL;
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
 	change_idx(&stack);
 cmd_test(&stack, &archive);
-	// if (is_sorting(stack.a_top, stack.cnt_a, A))
-	// 	return (0);
+	 if (is_sorting(stack.a_top, stack.cnt_a, A))
+	 	return (0);
 	// sort_stack(&stack, &archive);
 
 

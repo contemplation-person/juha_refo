@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void	two(t_stack *stack, t_s_name name, t_archive *archive)
+void	two(t_stack *stack, t_s_name name, t_archive **archive)
 {
 	t_stack_node	*target_node;
 	int				cnt;
@@ -35,7 +35,7 @@ void	two(t_stack *stack, t_s_name name, t_archive *archive)
 		sb(stack, archive);
 }
 
-void	three(t_stack *stack, t_archive *archive)
+void	three(t_stack *stack, t_archive **archive)
 {
 	if (is_sorting(stack->a_top, stack->cnt_a, A))
 		return ;
@@ -78,7 +78,7 @@ int	find_node(t_stack_node *top, int idx)
 	return (pos_min);
 }
 
-void	four(t_stack *stack, t_stack_node *top, t_archive *archive)
+void	four(t_stack *stack, t_stack_node *top, t_archive **archive)
 {
 	int	pos_min;
 
@@ -97,7 +97,7 @@ void	four(t_stack *stack, t_stack_node *top, t_archive *archive)
 	pa(stack, archive);
 }
 
-void	five(t_stack *stack, t_stack_node *top, t_archive *archive)
+void	five(t_stack *stack, t_stack_node *top, t_archive **archive)
 {
 	int				pos_min;
 

@@ -14,7 +14,7 @@
 
 t_stack_node	*push(t_stack *stack, t_s_name name, t_stack_node *pop_target)
 {
-	t_stack_node *top_node;
+	t_stack_node	*top_node;
 
 	if (name == A)
 		top_node = stack->a_top;
@@ -38,7 +38,7 @@ t_stack_node	*push(t_stack *stack, t_s_name name, t_stack_node *pop_target)
 	return (pop_target);
 }
 
-t_bool	pb(t_stack *stack, t_archive *archive)
+t_bool	pb(t_stack *stack, t_archive **archive)
 {
 	if (!(stack->cnt_a))
 		return (FALSE);
@@ -47,7 +47,7 @@ t_bool	pb(t_stack *stack, t_archive *archive)
 	return (TRUE);
 }
 
-t_bool	rb(t_stack *stack, t_archive *archive)
+t_bool	rb(t_stack *stack, t_archive **archive)
 {
 	if (stack->cnt_b < 2)
 		return (FALSE);
@@ -56,7 +56,7 @@ t_bool	rb(t_stack *stack, t_archive *archive)
 	return (TRUE);
 }
 
-t_bool	rrb(t_stack *stack, t_archive *archive)
+t_bool	rrb(t_stack *stack, t_archive **archive)
 {
 	if (stack->cnt_b < 2)
 		return (FALSE);
@@ -65,7 +65,7 @@ t_bool	rrb(t_stack *stack, t_archive *archive)
 	return (TRUE);
 }
 
-t_bool	sb(t_stack *stack, t_archive *archive)
+t_bool	sb(t_stack *stack, t_archive **archive)
 {
 	t_stack_node	*temp_next;
 	t_stack_node	*top;
@@ -85,6 +85,6 @@ t_bool	sb(t_stack *stack, t_archive *archive)
 	temp_prev->next = target;
 	temp_next->prev = top;
 	top->next = temp_next;
-	add_back_archive(archive, SA);
+	add_back_archive(archive, SB);
 	return (TRUE);
 }

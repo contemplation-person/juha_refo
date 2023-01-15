@@ -86,24 +86,24 @@ typedef enum e_bool
 	FALSE = 0,
 }t_bool;
 
-void			sort_stack(t_stack *stack, t_archive *archive);
+void			sort_stack(t_stack *stack, t_archive **archive);
 
-void			two(t_stack *stack, t_s_name name, t_archive *archive);
-void			three(t_stack *stack, t_archive *archive);
-void			four(t_stack *stack, t_stack_node *top, t_archive *archive);
-void			five(t_stack *stack, t_stack_node *top, t_archive *archive);
+void			two(t_stack *stack, t_s_name name, t_archive **archive);
+void			three(t_stack *stack, t_archive **archive);
+void			four(t_stack *stack, t_stack_node *top, t_archive **archive);
+void			five(t_stack *stack, t_stack_node *top, t_archive **archive);
 
 t_stack_node	*pop(t_stack *stack, t_s_name name);
-t_bool			pa(t_stack *stack, t_archive *archive);
-t_bool			ra(t_stack *stack, t_archive *archive);
-t_bool			rra(t_stack *stack, t_archive *archive);
-t_bool			sa(t_stack *stack, t_archive *archive);
+t_bool			pa(t_stack *stack, t_archive **archive);
+t_bool			ra(t_stack *stack, t_archive **archive);
+t_bool			rra(t_stack *stack, t_archive **archive);
+t_bool			sa(t_stack *stack, t_archive **archive);
 
 t_stack_node	*push(t_stack *stack, t_s_name name, t_stack_node *target);
-t_bool			pb(t_stack *stack, t_archive *archive);
-t_bool			rb(t_stack *stack, t_archive *archive);
-t_bool			rrb(t_stack *stack, t_archive *archive);
-t_bool			sb(t_stack *stack, t_archive *archive);
+t_bool			pb(t_stack *stack, t_archive **archive);
+t_bool			rb(t_stack *stack, t_archive **archive);
+t_bool			rrb(t_stack *stack, t_archive **archive);
+t_bool			sb(t_stack *stack, t_archive **archive);
 
 void			init_stack(t_stack *stack, int argc, char **argv);
 t_bool			is_sorting(t_stack_node *top, int stack_size, t_s_name name);
@@ -123,11 +123,11 @@ long			ft_atoi(const char	*str);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			**ft_split(char const *s, char c);
 
-t_archive		*add_back_archive(t_archive *start, t_cmd cmd);
+t_archive		*add_back_archive(t_archive **start, t_cmd cmd);
 t_archive		*del_archive(t_archive *start, t_archive *target_prev, \
 							t_archive *target);
 void			print_archive(t_archive *archive);
 
-void cmd_test(t_stack *stack, t_archive *archive);
+void cmd_test(t_stack *stack, t_archive **archive);
 void	print_stack(t_stack *stack);
 #endif

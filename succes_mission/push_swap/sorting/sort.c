@@ -13,7 +13,7 @@
 #include "../push_swap.h"
 
 //chunk = 0.000000053 * x * x + 0.03 * x + 14.5;
-void	a_to_b(t_stack *stack, t_archive *archive)
+void	a_to_b(t_stack *stack, t_archive **archive)
 {
 	t_stack_node	*temp;
 	float			chunk;
@@ -38,7 +38,7 @@ void	a_to_b(t_stack *stack, t_archive *archive)
 	}
 }
 
-void	sort(t_stack *stack, t_archive *archive)
+void	sort(t_stack *stack, t_archive **archive)
 {
 
 	//if (stack->cnt_a == stack->total && 
@@ -49,7 +49,7 @@ void	sort(t_stack *stack, t_archive *archive)
 	print_stack(stack);
 }
 
-void	sort_stack(t_stack *stack, t_archive *archive)
+void	sort_stack(t_stack *stack, t_archive **archive)
 {
 	(void) stack;
 	(void) archive;

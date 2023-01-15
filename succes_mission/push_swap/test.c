@@ -8,16 +8,14 @@ void	print_stack(t_stack *stack)
 	a = stack->a_top;
 	b = stack->b_top;
 	printf("stack a\tstack b\n");
-	int total;
-	total = stack->cnt_a > stack->cnt_b ? stack->cnt_a : stack->cnt_b;
-	for(int i = 0; i < total; i++)
+	for(int i = 1; i < stack->total + 1; i++)
 	{
-		if (stack->a_top && i < stack->cnt_a)
+		if (i < stack->cnt_a)
 		{
 			printf("%d", a->idx);
 			a = a->next;
 		}
-		if (stack->b_top && i < stack->cnt_b)
+		if (i < stack->cnt_b)
 		{
 			printf("\t%d", b->idx);
 			b = b->next;
@@ -26,8 +24,9 @@ void	print_stack(t_stack *stack)
 	}
 }
 
-void cmd_test(t_stack *stack, t_archive *archive)
+void cmd_test(t_stack *stack, t_archive **archive)
 {
+	(void)archive;
 	static int	i;
 	char		*cmd;
 	// print_stack(stack);
@@ -40,7 +39,6 @@ void cmd_test(t_stack *stack, t_archive *archive)
 	// print_stack(stack);
 
 	
-
 	pb(stack, archive);
 	print_stack(stack);
 	pb(stack, archive);
@@ -80,7 +78,7 @@ void cmd_test(t_stack *stack, t_archive *archive)
 		print_stack(stack);
 
 		printf("\narchive\n");
-		print_archive(archive);
+		print_archive(*archive);
 		printf("\n");
 		i++;
 	}

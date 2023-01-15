@@ -44,7 +44,7 @@ t_stack_node	*pop(t_stack *stack, t_s_name name)
 	return (target);
 }
 
-t_bool	pa(t_stack *stack, t_archive *archive)
+t_bool	pa(t_stack *stack, t_archive **archive)
 {
 	if (!(stack->cnt_b))
 		return (FALSE);
@@ -53,7 +53,7 @@ t_bool	pa(t_stack *stack, t_archive *archive)
 	return (TRUE);
 }
 
-t_bool	ra(t_stack *stack, t_archive *archive)
+t_bool	ra(t_stack *stack, t_archive **archive)
 {
 	if (stack->cnt_a == 0 || stack->cnt_a == 1)
 		return (FALSE);
@@ -62,7 +62,7 @@ t_bool	ra(t_stack *stack, t_archive *archive)
 	return (TRUE);
 }
 
-t_bool	rra(t_stack *stack, t_archive *archive)
+t_bool	rra(t_stack *stack, t_archive **archive)
 {
 	if (stack->cnt_a == 0 || stack->cnt_a == 1)
 		return (FALSE);
@@ -71,7 +71,7 @@ t_bool	rra(t_stack *stack, t_archive *archive)
 	return (TRUE);
 }
 
-t_bool	sa(t_stack *stack, t_archive *archive)
+t_bool	sa(t_stack *stack, t_archive **archive)
 {
 	t_stack_node	*temp_next;
 	t_stack_node	*top;
