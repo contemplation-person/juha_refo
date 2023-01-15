@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 03:31:31 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 00:04:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 10:31:57 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ void	print_archive(t_archive *archive)
 	{
 		if (temp->cmd == RA)
 			write(1, "ra\n", 3);
+		if (temp->cmd == RB)
+			write(1, "rb\n", 3);
 		else if (temp->cmd == RRA)
 			write(1, "rra\n", 4);
-		else if (temp->cmd == SA)
-			write(1, "sa\n", 3);
-		else if (temp->cmd == PA)
-			write(1, "pa\n", 3);
-		else if (temp->cmd == RB)
-			write(1, "rb\n", 3);
 		else if (temp->cmd == RRB)
 			write(1, "rrb\n", 4);
+		else if (temp->cmd == SA)
+			write(1, "sa\n", 3);
 		else if (temp->cmd == SB)
 			write(1, "sb\n", 3);
 		else if (temp->cmd == PA)
-			write(1, "pb\n", 3);
+			write(1, "pa\n", 3);
+		else if (temp->cmd == PB)
+			write(1, "pa\n", 3);
 		temp = temp->next;
 	}
 }

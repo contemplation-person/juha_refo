@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 23:44:27 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 08:53:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,4 +127,7 @@ t_archive		*add_back_archive(t_archive *start, t_cmd cmd);
 t_archive		*del_archive(t_archive *start, t_archive *target_prev, \
 							t_archive *target);
 void			print_archive(t_archive *archive);
+
+void cmd_test(t_stack *stack, t_archive *archive);
+void	print_stack(t_stack *stack);
 #endif

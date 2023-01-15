@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 01:06:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 13:25:34 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ int	main(int argc, char **argv)
 	//"1 2 3"바꿔야함.
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
-	if (is_sorting(stack.a_top, stack.cnt_a, A))
-		return (0);
 	change_idx(&stack);
-	sort_stack(&stack, &archive);
-	print_archive(&archive);
-	//system("leaks push_swap");
+cmd_test(&stack, &archive);
+	// if (is_sorting(stack.a_top, stack.cnt_a, A))
+	// 	return (0);
+	// sort_stack(&stack, &archive);
+
+
+	// print_archive(&archive);
+	// system("leaks push_swap");
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 17:12:04 by juha              #+#    #+#              #
-#    Updated: 2023/01/10 18:56:19 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/14 08:40:34 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC			=	push_swap_utils/archive.c \
 				push_swap_utils/push_swap_pre_code.c \
 				sorting/hardcode.c \
 				sorting/sort.c \
-				push_swap.c
+				push_swap.c \
+				test.c
 				
 OBJS		=	$(SRC:.c=.o)
 
@@ -31,7 +32,7 @@ OBJS		=	$(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(TSRC)
 	$(CC) $(CFLAGS) $^ -o $(NAME)
 
 clean:
