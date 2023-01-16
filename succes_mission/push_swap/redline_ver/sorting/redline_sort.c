@@ -14,22 +14,20 @@
 
 void	b_to_a(t_stack *stack)
 {
-	int	chunk;
-	int	x;
+	int		chunk;
 
-	x = get_chunk(stack);
-	chunk = 0.000000053 * x * x + 0.03 * x + 14.5 + stack->cnt_b;
+	chunk = get_chunk(stack);
 	while (stack->cnt_a)
 	{
-		if (stack->a_top->idx > chunk)
+		if (stack->a_top->idx > chunk + stack->cnt_b)
 			r(stack, RA);
-		else if (stack->a_top->idx < chunk)
+		else if (stack->a_top->idx > stack->cnt_b)
+			p(stack, PB);
+		else
 		{
 			p(stack, PB);
 			r(stack, RB);
 		}
-		else
-			p(stack, PB);
 	}
 }
 
@@ -39,12 +37,12 @@ void	a_to_b(t_stack *stack)
 	int				direction;
 	t_stack_node	*target_node;
 
-	direction = RB;
+	direction = 1;
 	while (stack->cnt_b)
 	{
 		std = 0;
 		target_node = get_target_node(stack, &std);
-		direction = std > stack->cnt_b / 2;
+		direction = std < stack->cnt_b / 2;
 		if (direction)
 			do_rb_n_pa(stack, target_node);
 		else

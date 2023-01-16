@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:38:59 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 11:13:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:51:19 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,35 +51,28 @@ t_bool	push(t_stack_node **target, t_stack_node *src, int *size)
 	return (TRUE);
 }
 
-char	*ft_substr(char const *s, size_t start, size_t len)
+char	**make_char_pp_utils(char ***ret, char ***temp1, char ***temp2)
 {
-	size_t	i;
-	size_t	j;
-	char	*temp;
-	size_t	k;
+	int	i;
 
-	if (start > ft_strlen(s))
+	i = 0;
+	*ret = malloc(sizeof(char *) * (cnt_split_str(*temp1) + \
+	cnt_split_str(*temp2) + 1));
+	if (!(*ret))
+		exit(1);
+	while (i < cnt_split_str(*temp1) + cnt_split_str(*temp2))
 	{
-		temp = malloc(1);
-		if (!temp)
-			exit(1);
-		*temp = '\0';
-		return (temp);
+		if (i < cnt_split_str(*temp1))
+			(*ret)[i] = (*temp1)[i];
+		else
+			(*ret)[i] = (*temp2)[i - cnt_split_str(*temp1)];
+		i++;
 	}
-	k = 0;
-	while (s[start + k])
-		k++;
-	if (len > k)
-		len = k;
-	temp = (char *)malloc(len + 1);
-	if (!temp)
-		return (0);
-	i = start;
-	j = 0;
-	while (j < len)
-		temp[j++] = (char)s[i++];
-	temp[j] = '\0';
-	return (temp);
+	free(*temp1);
+	free(*temp2);
+	(*ret)[i] = NULL;
+
+	return (*ret);
 }
 
 char	**make_char_pp(int argc, char **argv)
@@ -87,7 +80,6 @@ char	**make_char_pp(int argc, char **argv)
 	char	**ret;
 	char	**temp1;
 	char	**temp2;
-	int		i;
 	int		j;
 
 	ret = NULL;
@@ -101,24 +93,7 @@ char	**make_char_pp(int argc, char **argv)
 		if (ret == NULL)
 			ret = temp2;
 		else
-		{
-			i = 0;
-			ret = malloc(sizeof(char *) * (cnt_split_str(temp1) + \
-			cnt_split_str(temp2) + 1));
-			if (!ret)
-				exit(1);
-			while (i < cnt_split_str(temp1) + cnt_split_str(temp2))
-			{
-				if (i < cnt_split_str(temp1))
-					ret[i] = temp1[i];
-				else
-					ret[i] = temp2[i - cnt_split_str(temp1)];
-				i++;
-			}
-			free(temp1);
-			free(temp2);
-			ret[i] = NULL;
-		}
+			ret = make_char_pp_utils(&ret, &temp1, &temp2);
 	}
 	return (ret);
 }

@@ -15,11 +15,11 @@
 t_stack_node	*get_target_node(t_stack *stack, int *std)
 {
 	t_stack_node	*top;
+	int				i;
 
+	i = 0;
 	top = stack->b_top;
-	if (!top)
-		return (NULL);
-	while (top->idx == stack->cnt_b - 1)
+	while (top->idx != stack->cnt_b - 1)
 	{
 		(*std)++;
 		top = top->next;
@@ -44,20 +44,18 @@ int	get_chunk(t_stack *stack)
 
 void	do_rb_n_pa(t_stack *stack, t_stack_node *target)
 {
-	t_stack_node	*b_top;
-
-	b_top = stack->b_top;
-	while (b_top == target)
+	while (stack->b_top->idx != target->idx)
+	{
 		r(stack, RB);
+	}
 	p(stack, PA);
 }
 
 void	do_rrb_n_pa(t_stack *stack, t_stack_node *target)
 {
-	t_stack_node	*b_top;
-
-	b_top = stack->b_top;
-	while (b_top == target)
-		rr(stack, RB);
+	while (stack->b_top->idx != target->idx)
+	{
+		rr(stack, RRB);
+	}
 	p(stack, PA);
 }
