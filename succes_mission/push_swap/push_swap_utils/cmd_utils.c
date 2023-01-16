@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:38:59 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:05:05 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 18:43:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,50 @@ t_bool	push(t_stack_node **target, t_stack_node *src, int *size)
 		(*target) = src;
 	(*size)++;
 	return (TRUE);
+}
+
+char	**make_char_pp_utils(char ***ret, char ***temp1, char ***temp2)
+{
+	int	i;
+
+	i = 0;
+	*ret = malloc(sizeof(char *) * (cnt_split_str(*temp1) + \
+	cnt_split_str(*temp2) + 1));
+	if (!(*ret))
+		exit(1);
+	while (i < cnt_split_str(*temp1) + cnt_split_str(*temp2))
+	{
+		if (i < cnt_split_str(*temp1))
+			(*ret)[i] = (*temp1)[i];
+		else
+			(*ret)[i] = (*temp2)[i - cnt_split_str(*temp1)];
+		i++;
+	}
+	free(*temp1);
+	free(*temp2);
+	(*ret)[i] = NULL;
+	return (*ret);
+}
+
+char	**make_char_pp(int argc, char **argv)
+{
+	char	**ret;
+	char	**temp1;
+	char	**temp2;
+	int		j;
+
+	ret = NULL;
+	j = 1;
+	while (j < argc)
+	{
+		temp2 = ft_split(argv[j++], ' ');
+		if (!temp2)
+			exit(1);
+		temp1 = ret;
+		if (ret == NULL)
+			ret = temp2;
+		else
+			ret = make_char_pp_utils(&ret, &temp1, &temp2);
+	}
+	return (ret);
 }

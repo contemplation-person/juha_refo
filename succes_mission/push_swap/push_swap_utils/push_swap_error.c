@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 13:14:58 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:04:56 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 18:44:02 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	is_duplicate(int argc, char **argv)
 
 	while (--argc)
 	{
-		i = 1;
+		i = 0;
 		while (i < (size_t)argc)
 		{
 			argv_len = ft_strlen(argv[argc]);
@@ -93,12 +93,10 @@ t_bool	check_error(int argc, char **argv)
 	while (*argv)
 	{
 		if (is_wrong_input(*argv))
-		{
 			state = write_error_message();
-		}
 		else if (!is_int_max(*argv))
 			state = write_error_message();
-		argv++;	
+		argv++;
 	}
 	if (state)
 		exit(1);

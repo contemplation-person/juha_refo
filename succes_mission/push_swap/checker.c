@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:20:14 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 15:33:23 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:24:07 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	cnt_total_radix(int total, int *check_bin, int std)
+void	check_stack(t_stack *stack)
 {
-	int	radix;
+	char	*cmd;
 
-	radix = 1;
-	*check_bin = 1;
-	while (total)
+	while (42)
 	{
-		if (total % std > 1)
-			*check_bin = 0;
-		radix++;
-		total = total / std;
+		cmd = get_next_line(STDIN_FILENO);
+		if (!cmd)
+			break ;
+		if (!do_cmd(stack, cmd))
+			return ;
+		free(cmd);
 	}
-	return (radix);
+	if (stack->cnt_a == stack->total \
+	&& is_sorting(stack->a_top, stack->cnt_a, A))
+		write(STDOUT_FILENO, "OK\n", 3);
+	else
+		write(STDOUT_FILENO, "KO\n", 3);
 }
 
 int	main(int argc, char **v)
@@ -38,8 +42,11 @@ int	main(int argc, char **v)
 	check_error(argc, argv);
 	init_stack(&stack, argc, argv);
 	if (is_sorting(stack.a_top, stack.cnt_a, A))
+	{
+		write(STDOUT_FILENO, "OK\n", 3);
 		return (0);
+	}
 	change_idx(&stack);
-	sort_stack(&stack, argc);
+	check_stack(&stack);
 	return (0);
 }

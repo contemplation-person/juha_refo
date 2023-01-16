@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 10:43:18 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:04:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 11:14:59 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ size_t	ft_strlen(const char	*s)
 {
 	size_t	cnt;
 
+	if (!s)
+		return (0);
 	cnt = 0;
 	while (s[cnt])
 		cnt++;

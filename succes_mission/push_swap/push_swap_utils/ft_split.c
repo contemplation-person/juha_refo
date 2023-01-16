@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:41:05 by juha              #+#    #+#             */
-/*   Updated: 2023/01/08 04:05:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:22:00 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,6 @@ static char		**make_pp(char *s, char c, size_t cnt);
 static void		free_all(char **pp, size_t cnt);
 static size_t	cnt_word(char *str, char c);
 static char		*make_p(char *s, char c);
-
-char	*ft_substr(char const *s, size_t start, size_t len)
-{
-	size_t	i;
-	size_t	j;
-	char	*temp;
-	size_t	k;
-
-	if (start > ft_strlen(s))
-	{
-		temp = malloc(1);
-		if (!temp)
-			exit(1);
-		*temp = '\0';
-		return (temp);
-	}
-	k = 0;
-	while (s[start + k])
-		k++;
-	if (len > k)
-		len = k;
-	temp = (char *)malloc(len + 1);
-	if (!temp)
-		return (0);
-	i = start;
-	j = 0;
-	while (j < len)
-		temp[j++] = (char)s[i++];
-	temp[j] = '\0';
-	return (temp);
-}
 
 char	**ft_split(char const *s, char c)
 {

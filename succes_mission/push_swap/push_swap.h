@@ -6,12 +6,13 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:29 by juha              #+#    #+#             */
-/*   Updated: 2023/01/09 21:32:26 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:13:13 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# include "./push_swap_utils/get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
@@ -82,6 +83,7 @@ typedef enum e_bool
 
 t_bool			push(t_stack_node **target, t_stack_node *src, int *size);
 t_stack_node	*pop(t_stack_node **top, int *cnt_stack);
+char			*ft_substr(char const *s, size_t start, size_t len);
 
 int				cnt_total_radix(int total, int *check_bin, int std);
 void			sort_stack(t_stack *stack, int argc);
@@ -112,4 +114,14 @@ size_t			ft_strlen(const char	*s);
 long			ft_atoi(const char	*str);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			**ft_split(char const *s, char c);
+
+char			**make_char_pp(int argc, char **argv);
+int				cnt_split_str(char **argv);
+void			change_idx(t_stack *stack);
+
+t_stack_node	*get_target_node(t_stack *stack, int *std);
+int				get_chunk(t_stack *stack);
+void			do_rb_n_pa(t_stack *stack, t_stack_node *target);
+void			do_rrb_n_pa(t_stack *stack, t_stack_node *target);
+
 #endif
