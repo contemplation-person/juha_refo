@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void	b_to_a(t_stack *stack)
+void	a_to_b(t_stack *stack)
 {
 	int		chunk;
 
@@ -31,7 +31,7 @@ void	b_to_a(t_stack *stack)
 	}
 }
 
-void	a_to_b(t_stack *stack)
+void	b_to_a(t_stack *stack)
 {
 	int				std;
 	int				direction;
@@ -52,8 +52,8 @@ void	a_to_b(t_stack *stack)
 
 void	red_sort(t_stack *stack)
 {
-	b_to_a(stack);
 	a_to_b(stack);
+	b_to_a(stack);
 }
 
 void	sort_stack(t_stack *stack, int argc)
