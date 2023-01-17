@@ -30,7 +30,8 @@ BONUS_SRC	=	push_swap_utils/gnl_utils_bonus.c\
 				push_swap_utils/cmd_bonus.c \
 				push_swap_utils/gnl_bonus.c \
 				push_swap_utils/ft_strncmp_bonus.c \
-				checker.c
+				checker.c \
+				checker2.c
 
 COMMON_OBJS	=	$(COMMON_SRC:.c=.o)
 SORTING_OBJS=	$(SORTING_SRC:.c=.o)

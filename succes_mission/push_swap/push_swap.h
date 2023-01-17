@@ -124,4 +124,6 @@ int				get_chunk(t_stack *stack);
 void			do_rb_n_pa(t_stack *stack, t_stack_node *target);
 void			do_rrb_n_pa(t_stack *stack, t_stack_node *target);
 
+t_bool			do_cmd(t_stack *stack, char *cmd);
+
 #endif
