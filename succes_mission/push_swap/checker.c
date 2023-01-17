@@ -37,6 +37,8 @@ int	main(int argc, char **v)
 	t_stack	stack;	
 	char	**argv;
 
+	if (argc == 1)
+		return (0);
 	argv = make_char_pp(argc, v);
 	argc = cnt_split_str(argv);
 	check_error(argc, argv);
