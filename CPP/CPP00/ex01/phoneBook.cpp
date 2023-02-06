@@ -46,6 +46,7 @@ int main() {
         printEndl("ADD | SEARCH | EXIT");
         phoneBook._setCmd();
         phoneBook.doCmd();
+        printEndl("-----------------------");
     }
     return (0);
 }

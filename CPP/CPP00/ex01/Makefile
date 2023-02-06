@@ -4,7 +4,8 @@ TARGET		= phoneBook
 LIBCPPDIR = ../libCPP/
 LIBCPP		= libCPP.a
 OBJS			= $(SRCS:.c=.o)
-	SRCS 			= phoneBook.cpp
+SRCS 			= phoneBook.cpp
+TESTFLAGS = -g3 -fsanitize=address
 
 
 $(TARGET) : $(OBJS)
@@ -23,8 +24,13 @@ clean :
 fclean : 
 	@make fclean -sC $(LIBCPPDIR)
 	@make clean
-	@rm $(TARGET)
+	@rm -f $(TARGET)
+	@rm -rf *.dSYM
 
 re :
 	@make fclean
 	@make 
+
+test : $(OBJS)
+	@make -j4 -sC $(LIBCPPDIR)
+	$(CXX) $(CXXFLAGS) $(TESTFLAGS) $^ -o $(TARGET) $(LIBCPPDIR)$(LIBCPP)

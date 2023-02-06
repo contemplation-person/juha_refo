@@ -113,7 +113,6 @@ class PhoneBook {
             else if (!_cmd.compare("SEARCH")) searchPhoneBook();
             else if (!_cmd.compare ("EXIT")) exitPhoneBook();
             else { printEndl("wrong cmd"); }
-            printEndl("-----------------------");
         }
 
 };
