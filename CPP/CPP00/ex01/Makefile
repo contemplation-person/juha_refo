@@ -3,8 +3,8 @@ CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
 TARGET		= phoneBook 
 LIBCPPDIR = ../libCPP/
 LIBCPP		= libCPP.a
-SRCS 			= phoneBook.cpp
 OBJS			= $(SRCS:.c=.o)
+	SRCS 			= phoneBook.cpp
 
 
 $(TARGET) : $(OBJS)
@@ -26,6 +26,5 @@ fclean :
 	@rm $(TARGET)
 
 re :
-	@make re -sC $(LIBCPPDIR)
 	@make fclean
-	@make all
+	@make 

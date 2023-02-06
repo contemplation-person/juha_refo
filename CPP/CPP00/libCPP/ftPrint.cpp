@@ -1,4 +1,4 @@
-#include "libCPP.hpp"
+#include "LibCPP.hpp"
 
 void print(char c) { std::cout << c; }
 void print(double d) { std::cout << d; }
