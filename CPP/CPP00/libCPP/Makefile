@@ -2,7 +2,7 @@ CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
 AR				=	ar
 TARGET		=	libCPP.a
 ARFLAG		=	-rsc
-SRCS			=	ftPrint.cpp
+SRCS			=	ftPrint.cpp ftCin.cpp
 OBJS			=	$(SRCS:.cpp=.o)
 
 $(TARGET) : $(OBJS)
