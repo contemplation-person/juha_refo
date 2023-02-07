@@ -79,15 +79,6 @@ void addPhoneBook() {
 }
 
 void printPhoneBook(int idx) {
-    std::cout << std::setw(10); 
-    print(phoneBook[idx].num);
-    print("|");
-    print(phoneBook[idx].name);
-    print("|");
-    print(phoneBook[idx].firstName);
-    print("|");
-    print(phoneBook[idx].phoneNumber);
-    print("|");
     return ;       
 }
 

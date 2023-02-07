@@ -1,5 +1,5 @@
 #pragma once
-#include "../libcpp/LibCPP.hpp"
+#include "../libCPP/LibCPP.hpp"
 
 class Contact {
 private:
@@ -19,6 +19,9 @@ public:
     int         getNum();
     std::string getName();
     std::string getFirstName();
-    std::string getPhoneBook();
+    std::string getPhoneNumber();
     std::string getSecreatMemo();
+
+    void        printAllContact();
+    void        setAllContact(int num);
 };
