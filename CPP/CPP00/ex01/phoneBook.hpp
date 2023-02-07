@@ -14,62 +14,63 @@ class PhoneBook {
         } t_phoneBook;
 
         int cnt;
-        t_phoneBook phonebook[8];
+        t_phoneBook phoneBook[8];
         std::string _cmd;
 
         int findArrayNum() {
             int i = 0;
 
             while (i < 8) {
-                if (this->phonebook[i++].num == 0) return (i);
+                if (this->phoneBook[i].num == 0) return (i);
+                i++;
             }
             return (-1);
         }
 
         void addPhoneBook() {
-            if (cnt < 8) {
-                this->cnt++;
-            } else {
+            if (cnt == 8) {
                 for (int i = 0; i < 8; i++) {
-                    this->phonebook[i].num--;
+                    this->phoneBook[i].num--;
                 }
             }
             int emptyArrayNum = findArrayNum();
 
             print("Name : ");
-            std::cin >> this->phonebook[emptyArrayNum].name;
+            std::cin >> this->phoneBook[emptyArrayNum].name;
             if (std::cin.eof()) exit(0);
             print("first_name : ");
-            std::cin >> this->phonebook[emptyArrayNum].firstName;
+            std::cin >> this->phoneBook[emptyArrayNum].firstName;
             if (std::cin.eof()) exit(0);
             print("nick_name : ");
-            std::cin >> this->phonebook[emptyArrayNum].nickName;
+            std::cin >> this->phoneBook[emptyArrayNum].nickName;
             if (std::cin.eof()) exit(0);
             print("phone_number : ");
-            std::cin >> this->phonebook[emptyArrayNum].phoneNumber;
+            std::cin >> this->phoneBook[emptyArrayNum].phoneNumber;
             if (std::cin.eof()) exit(0);
             print("secreat_memo : ");
-            std::cin >> this->phonebook[emptyArrayNum].secreatMemo;
+            std::cin >> this->phoneBook[emptyArrayNum].secreatMemo;
             if (std::cin.eof()) exit(0);
-            this->phonebook[emptyArrayNum].num = this->cnt;
+            if (cnt < 8)
+                cnt++;
+            this->phoneBook[emptyArrayNum].num = this->cnt;
         }
 
         void printPhoneBook(int idx) {
             std::cout << std::setw(10); 
-            print(phonebook[idx].num);
+            print(phoneBook[idx].num);
             print("|");
-            print(phonebook[idx].name);
+            print(phoneBook[idx].name);
             print("|");
-            print(phonebook[idx].firstName);
+            print(phoneBook[idx].firstName);
             print("|");
-            print(phonebook[idx].phoneNumber);
+            print(phoneBook[idx].phoneNumber);
             print("|");
             return ;       
         }
 
         void searchPhoneBook() {
             if (this->cnt == 0) {
-                printEndl("empty phonebook");
+                printEndl("empty phoneBook");
                 return ;
             }
             int searchNumber;
@@ -81,8 +82,8 @@ class PhoneBook {
             } else if (searchNumber < 1) {
                 printEndl("too small");
             } else {
-                for (int i = 0; i < this->cnt; i++) {
-                    if (phonebook[i].num == searchNumber) printPhoneBook(i);
+                for (int i = 0; i < 8; i++) {
+                    if (this->phoneBook[i].num == searchNumber) printPhoneBook(i);
                 }
             }
         }
@@ -94,7 +95,7 @@ class PhoneBook {
 
     public:
         void _setCmdInit() { 
-            std::memset(phonebook, 0, sizeof(t_phoneBook) * 8); 
+            std::memset(phoneBook, 0, sizeof(t_phoneBook) * 8); 
             this->cnt = 0;
         }
 

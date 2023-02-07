@@ -6,11 +6,9 @@ SRCS			=	ftPrint.cpp
 OBJS			=	$(SRCS:.cpp=.o)
 
 $(TARGET) : $(OBJS)
-	$(AR) $(ARFLAG) $@ $^
+	@$(AR) $(ARFLAG) $@ $^
 
 all: $(TARGET)
-
-bonus: $(TARGET)
 
 clean:
 	@rm -f $(OBJS) 
