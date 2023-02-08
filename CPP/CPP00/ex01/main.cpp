@@ -1,13 +1,50 @@
 #include "PhoneBook.hpp"
+#include <cstring>
+#include <cstdlib>
+
+void printIndex(PhoneBook phonebook, std::string strIndex){
+    char c; 
+
+    for (int i = 0; i < 8; i++) {
+        c = phonebook.getContact(i).getNum() + '0';
+        if (c == strIndex[0] && strIndex.size() == 1) {
+            phonebook.getContact(i).printAllContact();
+            return ; 
+        } 
+    }
+    printEndl("no search idx");
+}
 
 int main() {
-    PhoneBook phoneBook;
+    PhoneBook   phoneBook;
+    std::string str;
+
     while (1) {
         printEndl("ADD | SEARCH | EXIT");
-        phoneBook._setCmd();
+        std::cin >> str;
+        if (isCinErr()) {
+            printEndl("wrong cmd");
+            continue;
+        }
         printEndl("----------------------------------------------------");
-        phoneBook.doCmd();
-//        phoneBook.display();
+        if (!str.compare("ADD")) { phoneBook.setContact(); }
+        else if (!str.compare("SEARCH")) {
+            print("Index : ");
+            std::cin >> str;
+            printEndl("====================================================");
+            if (isCinErr()) {
+                printEndl("wrong cmd");
+                continue;
+            }
+            printIndex(phoneBook, str);
+            printEndl("");
+        } else if (!str.compare("EXIT")) {
+            exit(1);
+        } else {
+            printEndl("wrong input");
+        }
+        //phoneBook.contactAll();
+        //system("leaks ./phoneBook");
         printEndl("----------------------------------------------------");
     }
     return (0);

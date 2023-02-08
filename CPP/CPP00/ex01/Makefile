@@ -4,7 +4,7 @@ TARGET		= phoneBook
 LIBCPPDIR = ../libCPP/
 LIBCPP		= libCPP.a
 OBJS			= $(SRCS:.c=.o)
-SRCS 			= phoneBook.cpp contact.cpp
+SRCS 			= phoneBook.cpp contact.cpp main.cpp
 TESTFLAGS = -g3 -fsanitize=address
 
 
