@@ -37,13 +37,14 @@
         실행 파일에 관련 이름을 지정합니다.
 */
 #include "PhoneBook.hpp"
+#include <ostream>
 #include <string>
+#include <iomanip>
 
 //생성자
 PhoneBook::PhoneBook() : _saveIndex(0) {};
-
+// 한줄함수
 void    PhoneBook::increaseSaveIndex() { _saveIndex++; }
-Contact PhoneBook::getContact(int num) { return (_contact[num]); }
 
 void    PhoneBook::setContact() {
     std::string str;
@@ -78,19 +79,37 @@ void    PhoneBook::setContact() {
     increaseSaveIndex();
 }
 
-//void Contact::printAllContact() {
-//    std::cout << std::setw(10); print(getNum()); print("|");
-//    std::cout << std::setw(10); print(getName()); print("|");
-//    std::cout << std::setw(10); print(getFirstName()); print("|");
-//    std::cout << std::setw(10); print(getPhoneNumber()); print("|");
-//}
-
-void PhoneBook::contactAll() {
-    printEndl("====================================================");
-    for (int i = 0; i < 8; i++) {
-        std::cout << std::setw(10) << getContact((i + _saveIndex) % 8).getNum();
-        printEndl("");
+void    PhoneBook::displayContactOne(int num) {
+    if (num < 0 || num > 7) {
+        printEndl("Wrong input");
+        return ;
     }
-    printEndl("====================================================");
+    if (_contact[num].getNum() == 0) return ;
+    std::cout << "index : " << _contact[num].getNum() << std::endl;
+    std::cout << "Frist Name : " << _contact[num].getFirstName() << std::endl;
+    std::cout << "Name : " << _contact[num].getName() << std::endl;
+    std::cout << "Nickname : " << _contact[num].getNickName() << std::endl;
+    std::cout << "secret memo: " << _contact[num].getSecretMemo() << std::endl;
+};
+
+static std::string strForm(std::string str) {
+    if (str.size() > 10) {
+        str.erase(10);
+        str[9] = '.';
+    }
+    return (str);
 }
 
+static void displayContact(Contact contact) {
+    if (contact.getNum() == 0) return ;
+    std::cout << std::setw(10) << contact.getNum() << "|";
+    std::cout << std::setw(10) << strForm(contact.getFirstName()) << "|";
+    std::cout << std::setw(10) << strForm(contact.getName()) << "|";
+    std::cout << std::setw(10) << strForm(contact.getNickName()) << "|" << std::endl;
+}
+
+void    PhoneBook::displayContactList() {
+    for (int i = 0; i < 8; i++) {
+        displayContact(_contact[(i + _saveIndex) % 8]);
+    }
+};

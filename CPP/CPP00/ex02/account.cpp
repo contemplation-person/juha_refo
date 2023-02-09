@@ -79,23 +79,23 @@ int	Account::getNbDeposits( void ) {
 }
 
 int	Account::getNbWithdrawals( void ) {
-
+    return (Account::_totalNbWithdrawals);
 }
 
 void Account::displayAccountsInfos( void ) {
-
 }
 
 void Account::makeDeposit( int deposit ) {
-
+    _nbDeposits = deposit;
 }
 
 bool Account::makeWithdrawal( int withdrawal ) {
-
+    _nbWithdrawals = withdrawal;
+    return (true);
 }
 
 int Account::checkAmount( void ) const {
-
+    return (_amount);
 }
 
 void Account::displayStatus( void ) const {

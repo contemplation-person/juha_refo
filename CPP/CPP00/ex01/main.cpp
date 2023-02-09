@@ -2,19 +2,6 @@
 #include <cstring>
 #include <cstdlib>
 
-void printIndex(PhoneBook phonebook, std::string strIndex){
-    char c; 
-
-    for (int i = 0; i < 8; i++) {
-        c = phonebook.getContact(i).getNum() + '0';
-        if (c == strIndex[0] && strIndex.size() == 1) {
-            phonebook.getContact(i).printAllContact();
-            return ; 
-        } 
-    }
-    printEndl("no search idx");
-}
-
 int main() {
     PhoneBook   phoneBook;
     std::string str;
@@ -26,13 +13,13 @@ int main() {
         printEndl("----------------------------------------------------");
         if (!str.compare("ADD")) { phoneBook.setContact(); }
         else if (!str.compare("SEARCH")) {
-            phoneBook.contactAll();
+            printEndl("====================================================");
+            phoneBook.displayContactList();
+            printEndl("====================================================");
             print("Index : ");
             std::cin >> str;
-            printEndl("====================================================");
-            if (isCinErr("wrong cmd")) continue;
-            printIndex(phoneBook, str);
-            printEndl("");
+            if (isCinErr("wrong cmd") || str.size() != 1) continue;
+            phoneBook.displayContactOne(str[0] - '0' - 1); 
         } else if (!str.compare("EXIT")) {
             exit(1);
         } else {

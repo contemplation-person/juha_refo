@@ -10,10 +10,9 @@ private:
 public:
     PhoneBook();
 
-    void    printAllContact();
+    void    displayContactOne(int num);
     void    increaseSaveIndex();
-    Contact getContact(int num);
     void    setContact();
-    void    contactAll();
+    void    displayContactList();
 };
 

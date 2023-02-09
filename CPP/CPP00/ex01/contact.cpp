@@ -1,5 +1,4 @@
 #include "Contact.hpp"
-#include <iomanip>
 
 Contact::Contact() : _num(0), _name(""), _firstName(""), _phoneNumber(""), _secretMemo(""), _nickName("") {};
 
