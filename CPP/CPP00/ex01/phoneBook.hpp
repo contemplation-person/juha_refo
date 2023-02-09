@@ -8,8 +8,9 @@ private:
     unsigned int     _saveIndex;
 
 public:
-    PhoneBook() {_saveIndex = 0;}
+    PhoneBook();
 
+    void    printAllContact();
     void    increaseSaveIndex();
     Contact getContact(int num);
     void    setContact();

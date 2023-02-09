@@ -15,4 +15,4 @@ void printEndl(int i);
 void printEndl(std::string str);
 void printEndl(const char *arrC);
 
-int isCinErr(std::string errorMessage);
+int isCinErr();

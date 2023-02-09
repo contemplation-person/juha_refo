@@ -1,10 +1,10 @@
 #include "LibCPP.hpp"
 
-int isCinErr(std::string errorMessage) {
+int isCinErr() {
     if (!std::cin.good()) {
         std::cin.clear();
         std::clearerr(stdin);
-        printEndl(errorMessage);
+        printEndl("EOF or Error");
         return (true);
     }
     return (false);

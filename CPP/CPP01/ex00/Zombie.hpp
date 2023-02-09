@@ -1,0 +1,6 @@
+class Zombie {
+private:
+    
+
+public:
+};

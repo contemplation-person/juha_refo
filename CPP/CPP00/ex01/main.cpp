@@ -22,20 +22,15 @@ int main() {
     while (1) {
         printEndl("ADD | SEARCH | EXIT");
         std::cin >> str;
-        if (isCinErr()) {
-            printEndl("wrong cmd");
-            continue;
-        }
+        if (isCinErr("wrong cmd")) continue;
         printEndl("----------------------------------------------------");
         if (!str.compare("ADD")) { phoneBook.setContact(); }
         else if (!str.compare("SEARCH")) {
+            phoneBook.contactAll();
             print("Index : ");
             std::cin >> str;
             printEndl("====================================================");
-            if (isCinErr()) {
-                printEndl("wrong cmd");
-                continue;
-            }
+            if (isCinErr("wrong cmd")) continue;
             printIndex(phoneBook, str);
             printEndl("");
         } else if (!str.compare("EXIT")) {
@@ -43,7 +38,6 @@ int main() {
         } else {
             printEndl("wrong input");
         }
-        //phoneBook.contactAll();
         //system("leaks ./phoneBook");
         printEndl("----------------------------------------------------");
     }

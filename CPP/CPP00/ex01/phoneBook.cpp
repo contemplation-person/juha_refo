@@ -39,6 +39,9 @@
 #include "PhoneBook.hpp"
 #include <string>
 
+//생성자
+PhoneBook::PhoneBook() : _saveIndex(0) {};
+
 void    PhoneBook::increaseSaveIndex() { _saveIndex++; }
 Contact PhoneBook::getContact(int num) { return (_contact[num]); }
 
@@ -47,32 +50,24 @@ void    PhoneBook::setContact() {
 
     print("name : ");
     std::cin >> str;
-    if (isCinErr()) {
-        printEndl("plz input the correct cmd");
-        return ;
-    }
+    if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setName(str);
+    print("nick name : ");
+    std::cin >> str;
+    if (isCinErr("plz input the correct cmd")) return;
+    _contact[_saveIndex % 8].setNickName(str);
     print("first name : ");
     std::cin >> str;
-    if (isCinErr()) {
-        printEndl("plz input the correct cmd");
-        return ;
-    }
+    if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setFirstName(str);
     print("phone number : ");
     std::cin >> str;
-    if (isCinErr()) {
-        printEndl("plz input the correct cmd");
-        return ;
-    }
+    if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setPhoneNumber(str);
-    print("secreat memo : ");
+    print("secret memo : ");
     std::cin >> str;
-    if (isCinErr()) {
-        printEndl("plz input the correct cmd");
-        return ;
-    }
-    _contact[_saveIndex % 8].setSecreatMemo(str);
+    if (isCinErr("plz input the correct cmd")) return;
+    _contact[_saveIndex % 8].setSecretMemo(str);
     if (_saveIndex < 8)
         _contact[_saveIndex % 8].setNum(_saveIndex + 1);
     else {
@@ -83,10 +78,19 @@ void    PhoneBook::setContact() {
     increaseSaveIndex();
 }
 
+//void Contact::printAllContact() {
+//    std::cout << std::setw(10); print(getNum()); print("|");
+//    std::cout << std::setw(10); print(getName()); print("|");
+//    std::cout << std::setw(10); print(getFirstName()); print("|");
+//    std::cout << std::setw(10); print(getPhoneNumber()); print("|");
+//}
+
 void PhoneBook::contactAll() {
     printEndl("====================================================");
     for (int i = 0; i < 8; i++) {
-        getContact(i).printAllContact();
+        std::cout << std::setw(10) << getContact((i + _saveIndex) % 8).getNum();
         printEndl("");
     }
+    printEndl("====================================================");
 }
+
