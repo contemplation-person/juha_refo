@@ -8,7 +8,7 @@ int main() {
 
     while (1) {
         printEndl("ADD | SEARCH | EXIT");
-        std::cin >> str;
+        std::getline(std::cin, str);
         if (isCinErr("wrong cmd")) continue;
         printEndl("----------------------------------------------------");
         if (!str.compare("ADD")) { phoneBook.setContact(); }
@@ -17,7 +17,8 @@ int main() {
             phoneBook.displayContactList();
             printEndl("====================================================");
             print("Index : ");
-            std::cin >> str;
+            std::getline(std::cin, str);
+            printEndl("====================================================");
             if (isCinErr("wrong cmd") || str.size() != 1) continue;
             phoneBook.displayContactOne(str[0] - '0' - 1); 
         } else if (!str.compare("EXIT")) {

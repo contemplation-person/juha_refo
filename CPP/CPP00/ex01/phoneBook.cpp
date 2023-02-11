@@ -50,23 +50,23 @@ void    PhoneBook::setContact() {
     std::string str;
 
     print("name : ");
-    std::cin >> str;
+    std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setName(str);
     print("nick name : ");
-    std::cin >> str;
+    std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setNickName(str);
     print("first name : ");
-    std::cin >> str;
+    std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setFirstName(str);
     print("phone number : ");
-    std::cin >> str;
+    std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setPhoneNumber(str);
     print("secret memo : ");
-    std::cin >> str;
+    std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setSecretMemo(str);
     if (_saveIndex < 8)
