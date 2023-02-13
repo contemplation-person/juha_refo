@@ -5,7 +5,7 @@ int isCinErr(std::string errorMessage) {
     if (!std::cin.good()) {
         std::cin.clear();
         std::clearerr(stdin);
-        printEndl(errorMessage);
+        std::cout << errorMessage << std::endl;
         return (true);
     }
     return (false);

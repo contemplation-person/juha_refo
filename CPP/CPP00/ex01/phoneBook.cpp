@@ -49,23 +49,23 @@ void    PhoneBook::increaseSaveIndex() { _saveIndex++; }
 void    PhoneBook::setContact() {
     std::string str;
 
-    print("name : ");
+    std::cout << "name : ";
     std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setName(str);
-    print("nick name : ");
+    std::cout << "nick name : ";
     std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setNickName(str);
-    print("first name : ");
+    std::cout << "first name : ";
     std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setFirstName(str);
-    print("phone number : ");
+    std::cout << "phone number : ";
     std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setPhoneNumber(str);
-    print("secret memo : ");
+    std::cout << "secret memo : ";
     std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setSecretMemo(str);
@@ -81,7 +81,7 @@ void    PhoneBook::setContact() {
 
 void    PhoneBook::displayContactOne(int num) {
     if (num < 0 || num > 7) {
-        printEndl("Wrong input");
+        std::cout << "Wrong input" << std::endl;
         return ;
     }
     if (_contact[num].getNum() == 0) return ;

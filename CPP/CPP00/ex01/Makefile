@@ -1,11 +1,11 @@
 CXX 			= c++
-CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
-TARGET		= phoneBook 
-LIBCPPDIR = ../libCPP/
-LIBCPP		= libCPP.a
+CXXFLAGS		= -Wall -Werror -Wextra -std=c++98
+TARGET			= phoneBook 
+LIBCPPDIR 		= ../libCPP/
+LIBCPP			= libCPP.a
 OBJS			= $(SRCS:.c=.o)
 SRCS 			= phoneBook.cpp contact.cpp main.cpp
-TESTFLAGS = -g3 -fsanitize=address
+TESTFLAGS 		= -g3 -fsanitize=address
 
 
 $(TARGET) : $(OBJS)
