@@ -42,10 +42,16 @@
 #include <iomanip>
 
 //생성자
-PhoneBook::PhoneBook() : _saveIndex(0) {};
+PhoneBook::PhoneBook() : _saveIndex(0) {
+    for (int i = 0; i < 8; i++) {
+        _contact[i].setNum(i + 1);
+    }
+};
+
 // 한줄함수
 void    PhoneBook::increaseSaveIndex() { _saveIndex++; }
 
+//여러줄 함수
 void    PhoneBook::setContact() {
     std::string str;
 
@@ -69,13 +75,6 @@ void    PhoneBook::setContact() {
     std::getline(std::cin, str);
     if (isCinErr("plz input the correct cmd")) return;
     _contact[_saveIndex % 8].setSecretMemo(str);
-    if (_saveIndex < 8)
-        _contact[_saveIndex % 8].setNum(_saveIndex + 1);
-    else {
-        for (int i = 0; i < 8; i++)
-            _contact[i].setNum(_contact[i].getNum() - 1);
-        _contact[_saveIndex % 8].setNum(8);
-    }
     increaseSaveIndex();
 }
 
@@ -109,7 +108,7 @@ static void displayContact(Contact contact) {
 }
 
 void    PhoneBook::displayContactList() {
-    for (int i = 0; i < 8; i++) {
-        displayContact(_contact[(i + _saveIndex) % 8]);
+    for (int i = 0; i < 8; i++) { 
+        displayContact(_contact[(i)]);
     }
 };
