@@ -1,14 +1,13 @@
 CXX 				= c++
 CXXFLAGS		= -Wall -Werror -Wextra -std=c++98
-TARGET			= Zombie 
 LIBCPPDIR 	= ../libCPP/
+TARGET			= Zombie 
 LIBCPP			= libCPP.a
-OBJS				= $(SRCS:.c=.o)
+OBJS				= $(SRCS:.cpp=.o)
 SRCS 				= main.cpp \
-						  Zombie.cpp Zombie.hpp newZombie.cpp \
+						  Zombie.cpp newZombie.cpp \
 			  			randomChump.cpp
 TESTFLAGS 	= -g3 -fsanitize=address
-
 
 $(TARGET) : $(OBJS)
 	@make -j4 -sC $(LIBCPPDIR)
