@@ -7,5 +7,6 @@ int main() {
     zom->announce();
     randomChump("random");
     delete zom;
+//    system("leaks Zombie");
     return 0;
 }
