@@ -1,12 +1,11 @@
 CXX 				= c++
 CXXFLAGS		= -Wall -Werror -Wextra -std=c++98
 LIBCPPDIR 	= ../libCPP/
-TARGET			= Zombie 
+TARGET			= Brain 
 LIBCPP			= libCPP.a
 OBJS				= $(SRCS:.cpp=.o)
 SRCS 				= main.cpp \
-						  Zombie.cpp NewZombie.cpp \
-			  			RandomChump.cpp
+
 TESTFLAGS 	= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)

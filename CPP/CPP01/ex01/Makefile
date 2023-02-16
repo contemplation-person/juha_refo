@@ -5,8 +5,7 @@ TARGET			= Zombie
 LIBCPP			= libCPP.a
 OBJS				= $(SRCS:.cpp=.o)
 SRCS 				= main.cpp \
-						  Zombie.cpp NewZombie.cpp \
-			  			RandomChump.cpp
+						  Zombie.cpp zombieHorde.cpp
 TESTFLAGS 	= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)

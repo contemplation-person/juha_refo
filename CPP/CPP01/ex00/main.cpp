@@ -3,9 +3,9 @@
 int main() {
     Zombie *zom;
 
+    randomChump("random");
     zom = newZombie("newzom");
     zom->announce();
-    randomChump("random");
     delete zom;
 //    system("leaks Zombie");
     return 0;

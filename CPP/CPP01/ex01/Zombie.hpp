@@ -1,7 +1,7 @@
 #pragma once
+
 #ifndef ZOMBIE_HPP
 #define ZOMBIE_HPP
-
 #include "../libCPP/LibCPP.hpp"
 #include <string>
 
@@ -14,14 +14,12 @@ public:
     Zombie(std::string name);
     ~Zombie();
 
-    void        setName(std::string name);
     std::string getName(void);
+    void        setName(std::string name);
     
     void        announce(void);
 };
 
-Zombie*     newZombie(std::string name);
-void        randomChump(std::string name);
+Zombie* zombieHorde(int N, std::string name);
 
 #endif
-
