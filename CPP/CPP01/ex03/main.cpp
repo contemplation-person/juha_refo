@@ -1,17 +1,42 @@
+#include "HumanA.hpp"
+#include "HumanB.hpp"
+
 #include <iostream>
 #include <string>
 
-int main() {
-    std::string   str = "HI THIS IS BRAIN";
-    std::string  *strptr = &str;
-    std::string  &ref = str;
+int main()
+{
+    {
+        Weapon club = Weapon("crude spiked club1");
+        HumanA bob("Bob", club);
+        bob.attack();
+        club.setType("some other type of club2");
+        bob.attack();
+    }
+    {
+        Weapon club = Weapon("crude spiked club3");
+        HumanB jim("Jim");
+        jim.setWeapon(club);
+        jim.attack();
+        club.setType("some other type of club4");
+        jim.attack();
+    }
 
-    std::cout << "str : " << str << std::endl;
-    std::cout << "ptr : " << *strptr << std::endl;
-    std::cout << "ref : " << ref << std::endl;
+/*
+    std::cout << "* etc" << std::endl;
+    Weapon club = Weapon("crude spiked club1");
+    HumanA bob("Bob", club);
+    bob.attack();
+    club.setType("some other type of club2");
+    bob.attack();
 
-    std::cout << "str address : " << &str << std::endl;
-    std::cout << "ptr address : " << strptr << std::endl;
-    std::cout << "ref address : " << &ref << std::endl;
+    club = Weapon("crude spiked club3");
+    HumanB jim("Jim");
+    jim.setWeapon(club);
+    jim.attack();
+    club.setType("some other type of club4");
+    jim.attack();
+*/
+//    system("leaks Human");
     return 0;
 }

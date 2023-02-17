@@ -1,12 +1,11 @@
 CXX 				= c++
-CXXFLAGS			= -Wall -Werror -Wextra -std=c++98
-LIBCPPDIR 			= ../libCPP/
-TARGET				= Human
-LIBCPP				= libCPP.a
+CXXFLAGS		= -Wall -Werror -Wextra -std=c++98
+LIBCPPDIR 	= ../libCPP/
+TARGET			= Replace
+LIBCPP			= libCPP.a
 OBJS				= $(SRCS:.cpp=.o)
 SRCS 				= main.cpp \
-							HumanA.cpp HumanB.cpp Weapon.cpp
-
+						= Sed.cpp
 TESTFLAGS 	= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)
