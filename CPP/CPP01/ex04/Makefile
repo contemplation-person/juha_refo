@@ -5,7 +5,7 @@ TARGET			= Replace
 LIBCPP			= libCPP.a
 OBJS				= $(SRCS:.cpp=.o)
 SRCS 				= main.cpp \
-						= Sed.cpp
+						 	Sed.cpp
 TESTFLAGS 	= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)

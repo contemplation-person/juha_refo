@@ -11,10 +11,11 @@ private:
     std::string _s2;   
 
 public:
-    Sed();
     Sed(std::string fileName, std::string s1, std::string s2);
+    Sed();
     ~Sed();
 
+    void    replace();
 };
 
 #endif
