@@ -1,5 +1,5 @@
 #include "Zombie.hpp"
-#include <ostream>
+#include <iostream>
 #include <string>
 
 Zombie::Zombie() : _name("") {};

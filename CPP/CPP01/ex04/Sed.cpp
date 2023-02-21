@@ -12,9 +12,9 @@ void    Sed::replace() {
     std::ofstream   ofs;
     std::string     str;
 
-    ifs.open(_fileName);
+    ifs.open(_fileName.c_str());
     if (!ifs.is_open()) return ;
-    ofs.open(_fileName.append(".replace"));
+    ofs.open(_fileName.append(".replace").c_str());
     if (!ofs.is_open()) return ;
 
     int pos = 0;

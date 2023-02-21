@@ -2,7 +2,7 @@
 
 #ifndef ZOMBIE_HPP
 #define ZOMBIE_HPP
-#include "../libCPP/LibCPP.hpp"
+#include <iostream>
 #include <string>
 
 class Zombie {

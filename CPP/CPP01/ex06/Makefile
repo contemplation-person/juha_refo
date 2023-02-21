@@ -1,13 +1,13 @@
-CXX 				= c++
-CXXFLAGS		= -Wall -Werror -Wextra -std=c++98
-TARGET			= Zombie 
-OBJS				= $(SRCS:.cpp=.o)
-SRCS 				= main.cpp \
-						  Zombie.cpp zombieHorde.cpp
+CXX 		= c++
+CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
+TARGET		= Harl	 
+OBJS		= $(SRCS:.cpp=.o)
+SRCS 		= main.cpp \
+			  Harl.cpp
 TESTFLAGS 	= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
 
 .PHONY : all clean fclean re
 
