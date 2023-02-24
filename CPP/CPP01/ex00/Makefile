@@ -1,11 +1,11 @@
 CXX 				= c++
-CXXFLAGS		= -Wall -Werror -Wextra -std=c++98
-TARGET			= Zombie 
+CXXFLAGS			= -Wall -Werror -Wextra -std=c++98
+TARGET				= Zombie 
 OBJS				= $(SRCS:.cpp=.o)
 SRCS 				= main.cpp \
-						  Zombie.cpp newZombie.cpp \
-			  			randomChump.cpp
-TESTFLAGS 	= -g3 -fsanitize=address
+					Zombie.cpp newZombie.cpp \
+					randomChump.cpp
+TESTFLAGS 			= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET)
