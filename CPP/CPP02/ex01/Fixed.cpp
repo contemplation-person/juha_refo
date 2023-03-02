@@ -8,12 +8,12 @@ Fixed::Fixed() : raw(0) {
 
 // new default constructor
 Fixed::Fixed(int i) : raw(i * (1 << this->fractionalBit)) {
-    std::cout << "Default" << std::endl;
+    std::cout << "i Default" << std::endl;
 }
 
 // new default constructor
 Fixed::Fixed(float f) : raw(roundf(f * (1 << this->fractionalBit))) {
-    std::cout << "Default" << std::endl;
+    std::cout << "f Default" << std::endl;
 }
 
 Fixed::~Fixed(){
@@ -22,13 +22,13 @@ Fixed::~Fixed(){
 
 Fixed::Fixed(const Fixed& fixed) {
     std::cout << "copy constructor" << std::endl;
-    this->raw = fixed.getRawBits();
+    *this=fixed;
 }
 
-Fixed& Fixed::operator=(const Fixed &fixed) {
+Fixed& Fixed::operator=(const Fixed& fixed) {
     std::cout << "copy assignment operator" << std::endl;
     if (this != &fixed){
-        this->raw = fixed.getRawBits();
+        this->setRawBits(fixed.getRawBits());
     }
     return *this; 
 }
