@@ -7,12 +7,12 @@ Fixed::Fixed() : raw(0) {
 }
 
 // new default constructor
-Fixed::Fixed(int i) : raw(i) {
+Fixed::Fixed(int i) : raw(i * (1 << this->fractionalBit)) {
     std::cout << "Default" << std::endl;
 }
 
 // new default constructor
-Fixed::Fixed(float f) : raw(f) {
+Fixed::Fixed(float f) : raw(roundf(f * (1 << this->fractionalBit))) {
     std::cout << "Default" << std::endl;
 }
 
@@ -27,17 +27,23 @@ Fixed::Fixed(const Fixed& fixed) {
 
 Fixed& Fixed::operator=(const Fixed &fixed) {
     std::cout << "copy assignment operator" << std::endl;
-    this->raw = fixed.getRawBits();
+    if (this != &fixed){
+        this->raw = fixed.getRawBits();
+    }
     return *this; 
 }
 
-//i don't know
-int Fixed::operator<<(const Fixed &fixed) {
-   return this->toInt()<<8; 
+//new float
+float Fixed::toFloat() const {
+    return (((float)this->getRawBits()) / (1 << fractionalBit));
+}
+//new operator
+std::ostream& operator<<(std::ostream& o, const Fixed &fixed) {
+    o << fixed.toFloat(); //static cast << 찾기
+    return o;
 }
 
 int Fixed::getRawBits(void) const {
-    std::cout << "getRawBits" << std::endl;
     return this->raw;
 }
 
@@ -46,6 +52,6 @@ void Fixed::setRawBits(int const raw) {
 }
 
 //output int
-int Fixed::toInt() {
-    return this->raw;   
+int Fixed::toInt() const {
+    return this->raw >> 8;
 }
