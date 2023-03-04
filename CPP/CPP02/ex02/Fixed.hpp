@@ -22,7 +22,30 @@ public:
     int     getRawBits(void) const;
     void    setRawBits(int const raw);
     int     toInt() const ;
-    bool    operator>(const Fixed& fixed);
+
+    //new operator
+    bool    operator>(const Fixed& lhs);
+    bool    operator<(const Fixed& lhs);
+    bool    operator>=(const Fixed& lhs);
+    bool    operator<=(const Fixed& lhs);
+    bool    operator==(const Fixed& lhs);
+    bool    operator!=(const Fixed& lhs);
+
+    Fixed operator+(const Fixed& lhs);
+    Fixed operator-(const Fixed& lhs);
+    Fixed operator*(const Fixed& lhs);
+    Fixed operator/(const Fixed& lhs);
+
+    Fixed& operator++();
+    Fixed& operator--();
+    Fixed operator++(int);
+    Fixed operator--(int);
+
+    // new max min
+    static Fixed& min(Fixed& lhs, Fixed& rhs);
+    static const Fixed& min(const Fixed& lhs, const Fixed& rhs);
+    static Fixed& max(Fixed& lhs, Fixed& rhs);
+    static const Fixed& max(const Fixed& lhs, const Fixed& rhs);
 };
 
 //프로토 타입은 파라미터 값을 선언하지 않아도 선언해줌
