@@ -3,92 +3,87 @@
 #include <sys/wait.h>
 #include <string.h>
 
-int ft_strlen(char *str) {
+enum micro {
+    READ,
+    WRITE,
+    IN = 0,
+    OUT,
+    ERROR,
+};
+
+int count_cmd(char **cmd) {
     int i = 0;
-
-    while (str[i]) i++;
-    return (i);
-}
-
-void errorMessage(int i) {
-    //wrong num 
-    if (i == 1) write(2, "error: cd: bad arguments", ft_strlen("error: cd: bad arguments"));
-    //cd fail
-    if (i == 2) write(2, "error: cd: cannot change directory to path_to_change", ft_strlen("error: cd: cannot change directory to path_to_change"));
-    if (i == 3) write(2, "error: fatal", ft_strlen("error: fatal"));
-    if (i == 4) write(2, "error: cannot execute executable_that_faile", ft_strlen("error: cannot execute executable_that_faile"));
-    write(2,"\n",1);
-}
-
-int ft_cd(char *path) {
-    int i = chdir(path);
-
-    if (i == -1) errorMessage(2); 
-    return (i);
-}
-
-void do_cd(int start, int end, char **v) {
-    if (end - start == 2) ft_cd(v[start + 1]);
-    else errorMessage(1);
-}
-
-// ls -a | cd .. ;
-//"error: fatal" -> failed system call, chdir and exact
-//"error: cannot execute executable_that_failed" execute print system call
-
-int cmd_str(int c, char **v, char *target) {
-    int cnt = 0;
-
-    for (int i = 0; i < c; i++) {
-        if (!strncmp(";", v[i], 2)) cnt++;
+    int pipe_cmd = 0;
+    while (cmd[i]) {
+        if (!strncmp("|", cmd[i], 2)) pipe_cmd++;
+        i++;
     }
-    return (cnt);
+    return (pipe_cmd + 1);
 }
 
-int findEndLine(int start, char **v) {
-    int i = start;
+void use_cmd(char **cmd, char **envp) {
+    pid_t   pid;
+    int     counting_cmd = count_cmd(cmd);
+    int     stop_child = 0;
+    int     checking_error = 0;
+    int     prev_fd = -1;
+    int     pipe_fd[2];
+
+    if (counting_cmd == 1) { execve(cmd[0], cmd, envp); }
+    //parent
+    for (int i = 0; i < counting_cmd; i++) {
+        checking_error = pipe(pipe_fd);
+        if (checking_error) exit(1);
+        pid = fork();
+        if (pid == 0) {
+            stop_child = i;
+            break;
+        }
+        if (prev_fd != -1) close(prev_fd);
+        close(pipe_fd[WRITE]);
+        prev_fd = pipe_fd[READ];
+    }
+    //child
+    if (pid == 0) {
+        if (stop_child != 0) {
+            dup2(IN, pipe_fd[READ]); 
+            close(IN);
+        }
+        if (stop_child != counting_cmd) {
+            dup2(OUT, pipe_fd[WRITE]); 
+            close(OUT);
+        }
+        if (prev_fd != -1) close(prev_fd);
+        int x = 0;
+        char **do_cmd = cmd;
+        while (cmd[x]) {
+            if (x != 0 && cmd[x - 1] == NULL) do_cmd = &(cmd[x]); 
+            if (!strncmp("|", cmd[x], 2)) {
+                cmd[x] = NULL;
+                execve(do_cmd[0],do_cmd,envp);
+            }
+            x++;
+        }
+        
+    }
+    //waitpid
+    close(prev_fd);
+    for (int i = 0; i < counting_cmd; i++) {
+        if (waitpid(-1, &stop_child, 0))
+            exit(stop_child);
+    }
+}
+
+int main(int c, char **v, char **envp){
+    int i = 0;
+    v[0] = NULL;
 
     while (v[i]) {
-        if (v[i] == NULL || strncmp(v[i], ";", 2)) break;
+        if (!strncmp(";", v[i], 2)) v[i] = NULL;
         i++;
     }
-    return (i);
-}
-
-int findPipe(int start, int end, char **v) {
-    int i = start;
-
-    while (i < end) {
-        if (v[i] == NULL || strncmp(v[i], "|", 2)) break;
-        i++;
-    }
-    return (i);
-}
-
-void do_len(int start, int end, char **v) {
-    int pid;
-    int prev_fd = -1;
-    int pipe[2];
-    int find_pipe = 
-
-    while () {
-
-    }
-
-
-}
-
-int main(int c, char **v, char **envp) {
-    int     iter = cmd_str(c, v);
-    int     start;
-    int     end = 0;
-
-    while (iter--) {
-        start = end;
-        end = findEndLine(start, v);
-        if (end == 0) continue;
-        do_len(start, end, v);
+    for (int i = 1; i < c; i++) {
+        if (v[i - 1] == NULL && v[i]) use_cmd(&(v[i]), envp);
     }
     return 0;
 }
-
