@@ -1,38 +1,26 @@
-#include <iostream>
-#include "Fixed.hpp"
+#include "ClapTrap.hpp"
 
-/*
-    $> ./a.out
-    Default constructor called
-    Copy constructor called
-    Copy assignment operator called // <-- This line may be missing depending on your implementation
-    getRawBits member function called
-    Default constructor called
-    Copy assignment operator called
-    getRawBits member function called
-    getRawBits member function called
-    0
-    getRawBits member function called
-    0
-    getRawBits member function called
-    0
-    Destructor called
-    Destructor called
-    Destructor called
-    $>
-*/
+int main() {
+    ClapTrap attack("test_attack");
+    ClapTrap damage("test_damage");
+    ClapTrap repaire("test_repaire");
 
-int main( void ) {
-    Fixed a;
-    Fixed b(a);
-    Fixed c;
-
-    c = b;
-//    c.operator=(b);
-
-    std::cout << a.getRawBits() << std::endl;
-    std::cout << b.getRawBits() << std::endl;
-    std::cout << c.getRawBits() << std::endl;
-//  std::cout << a.getFractionalBit() << std::endl;
-    return 0;
+    for (int i = 0; i < 11; i++) {
+        attack.attack("aaaa");
+        std::cout << "============" << std::endl;
+        damage.takeDamage(1);
+        std::cout << "============" << std::endl;
+        if (i == 8) {
+            repaire.beRepaired(1);
+            std::cout << "============" << std::endl;
+        } 
+    }
+    for (int i = 0; i < 11; i++) {
+        repaire.takeDamage(1);
+        std::cout << "============" << std::endl;
+        repaire.attack("ttt");
+        std::cout << "============" << std::endl;
+        repaire.beRepaired(1);
+        std::cout << "============" << std::endl;
+    }
 }
