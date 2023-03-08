@@ -1,9 +1,9 @@
-#include "test.hpp"
+#include "ScavTrap.hpp"
 
 int main() {
-    Test attack("test_attack");
-    Test damage("test_damage");
-    Test repaire("test_repaire");
+    ScavTrap attack("ScavTrap_attack");
+    ScavTrap damage("ScavTrap_damage");
+    ScavTrap repaire("ScavTrap_repaire");
 
     for (int i = 0; i < 11; i++) {
         attack.attack("aaaa");

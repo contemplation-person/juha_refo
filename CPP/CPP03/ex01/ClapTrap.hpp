@@ -5,6 +5,13 @@
 
 class ClapTrap {
 private:
+
+    enum e_point {
+        HITPOINT = 10,
+        ENERGYPOINT = 10,
+        ATTACKDAMAGE = 0
+    };
+
     std::string     name;
     unsigned int    hitPoint;
     unsigned int    energyPoint;

@@ -1,9 +1,10 @@
 CXX 		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
-TARGET		= ClapTrap
+TARGET		= ScavTrap 
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \
-			  ClapTrap.cpp
+			  ClapTrap.cpp \
+			  ScavTrap.cpp
 TESTFLAGS 	= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)

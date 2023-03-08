@@ -1,13 +1,26 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : name("ScavTrap"), hitPoint(100), energyPoint(50), attackDamage(20) {
+ScavTrap::ScavTrap() : 
+    name("ScavTrap"), 
+    hitPoint(HITPOINT), 
+    energyPoint(ENERGYPOINT), 
+    attackDamage(ATTACKDAMAGE) 
+{
     std::cout << "create : " << this->name << std::endl;
 }
-ScavTrap::ScavTrap(std::string clapName) : name(clapName), hitPoint(100), energyPoint(50), attackDamage(20) {}
+
+ScavTrap::ScavTrap(std::string clapName) : 
+    name(clapName), 
+    hitPoint(HITPOINT), 
+    energyPoint(ENERGYPOINT), 
+    attackDamage(ATTACKDAMAGE) 
+{}
+
 ScavTrap::~ScavTrap() {
     std::cout << "delete : " << this->name << std::endl;
 }
-ScavTrap::ScavTrap(const ScavTrap& scavTrap) {
+
+ScavTrap::ScavTrap(const ScavTrap& scavTrap) : ClapTrap() {
     *this = scavTrap;
 }
 
