@@ -1,10 +1,12 @@
 CXX 		= c++
-CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -pedantic #-pedantic : 표준이 아닌 것을 컴파일 하지 않는 옵션
+CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
 TARGET		= ScavTrap 
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \
 			  ClapTrap.cpp \
-			  ScavTrap.cpp
+			  ScavTrap.cpp \
+			  FragTrap.cpp \
+			  DiamondTrap.cpp 
 TESTFLAGS 	= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)

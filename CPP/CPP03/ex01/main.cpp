@@ -2,7 +2,7 @@
 
 int main() {
     ScavTrap attack("ScavTrap_attack");
-    ScavTrap damage("ScavTrap_damage");
+    ClapTrap damage("ScavTrap_damage");
     ScavTrap repaire("ScavTrap_repaire");
 
     for (int i = 0; i < 11; i++) {
