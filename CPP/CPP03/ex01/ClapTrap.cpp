@@ -1,12 +1,27 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : name("ClapTrap"), hitPoint(10), energyPoint(10), attackDamage(0) {
+ClapTrap::ClapTrap() 
+    : name("ClapTrap"), hitPoint(HITPOINT), energyPoint(ENERGYPOINT), attackDamage(ATTACKDAMAGE) 
+{
     std::cout << "create : " << this->name << std::endl;
 }
-ClapTrap::ClapTrap(std::string clapName) : name(clapName), hitPoint(10), energyPoint(10), attackDamage(0) {}
+
+ClapTrap::ClapTrap(std::string clapName) 
+    : name(clapName), hitPoint(HITPOINT), energyPoint(ENERGYPOINT), attackDamage(ATTACKDAMAGE) 
+{
+    std::cout << "create : " << this->name << std::endl;
+}
+
+ClapTrap::ClapTrap(std::string clapName, int hp, int ep, int ad) : 
+    name(clapName), hitPoint(hp), energyPoint(ep), attackDamage(ad) 
+{
+    std::cout << "create : " << this->name << std::endl;
+}
+
 ClapTrap::~ClapTrap() {
     std::cout << "delete : " << this->name << std::endl;
 }
+
 ClapTrap::ClapTrap(const ClapTrap& clapTrap) {
     *this = clapTrap;
 }
@@ -26,9 +41,9 @@ void    ClapTrap::attack(const std::string& target) {
         std::cout << "empty point" <<std::endl;
         return ;
     }
-    std::cout << name << " attack " << target << " : " << attackDamage << std::endl;
+    std::cout << this->name << " attack " << target << " : " << attackDamage << std::endl;
     energyPoint--;
-    std::cout << name << " have energy point : " << energyPoint << std::endl;
+    std::cout << this->name << " have energy point : " << energyPoint << std::endl;
 }
 
 void    ClapTrap::takeDamage(unsigned int amount) {
@@ -39,7 +54,7 @@ void    ClapTrap::takeDamage(unsigned int amount) {
     if (hitPoint < amount) hitPoint = 0;
     else hitPoint -= amount;
     std::cout << "take Damage : " << amount << std::endl;
-    std::cout << name << " have hp : " << hitPoint << std::endl;
+    std::cout << this->name << " have hp : " << hitPoint << std::endl;
 }
 
 void    ClapTrap::beRepaired(unsigned int amount) {
@@ -47,10 +62,17 @@ void    ClapTrap::beRepaired(unsigned int amount) {
         std::cout << "empty point" <<std::endl;
         return ;
     }
-    if (0 < this->hitPoint && this->hitPoint < 10) {
+    if (0 < this->hitPoint && this->hitPoint < HITPOINT) {
         hitPoint += amount;
-        if (hitPoint > 10) hitPoint = 10;
+        if (hitPoint > HITPOINT) hitPoint = HITPOINT;
     }
     energyPoint--;
-    std::cout << name << " have energy point : " << energyPoint << std::endl;
+    std::cout << this->name << " have energy point : " << energyPoint << std::endl;
+}
+
+void    ClapTrap::checkValue() {
+    std::cout << "this name : " << this->name << ", " \
+    << "this hitPoint : " << this->hitPoint << ", " \
+    << "this energyPoint : " << this->energyPoint << ", " \
+    << "this attackDamage : " << this->attackDamage << std::endl;
 }
