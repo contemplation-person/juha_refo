@@ -18,16 +18,20 @@ ClapTrap::ClapTrap(std::string clapName, int hp, int ep, int ad) :
     std::cout << "create : " << this->name << std::endl;
 }
 
-ClapTrap::~ClapTrap() {
+ClapTrap::~ClapTrap() 
+{
     std::cout << "delete : " << this->name << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& clapTrap) {
+ClapTrap::ClapTrap(const ClapTrap& clapTrap) 
+{
     *this = clapTrap;
 }
 
-ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap) {
-    if (this != &clapTrap) {
+ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap) 
+{
+    if (this != &clapTrap)
+    {
         this->name = clapTrap.name;
         this->hitPoint = clapTrap.hitPoint;
         this->energyPoint = clapTrap.energyPoint;
@@ -36,8 +40,10 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap) {
     return (*this);
 }
 
-void    ClapTrap::attack(const std::string& target) {
-    if (energyPoint == 0 || hitPoint == 0) {
+void    ClapTrap::attack(const std::string& target) 
+{
+    if (energyPoint == 0 || hitPoint == 0)
+    {
         std::cout << "empty point" <<std::endl;
         return ;
     }
@@ -46,8 +52,10 @@ void    ClapTrap::attack(const std::string& target) {
     std::cout << this->name << " have energy point : " << energyPoint << std::endl;
 }
 
-void    ClapTrap::takeDamage(unsigned int amount) {
-    if (energyPoint == 0 || hitPoint == 0) {
+void    ClapTrap::takeDamage(unsigned int amount) 
+{
+    if (energyPoint == 0 || hitPoint == 0)
+    {
         std::cout << "empty point" <<std::endl;
         return ;
     }
@@ -57,12 +65,15 @@ void    ClapTrap::takeDamage(unsigned int amount) {
     std::cout << this->name << " have hp : " << hitPoint << std::endl;
 }
 
-void    ClapTrap::beRepaired(unsigned int amount) {
-    if (energyPoint == 0 || hitPoint == 0) {
+void    ClapTrap::beRepaired(unsigned int amount) 
+{
+    if (energyPoint == 0 || hitPoint == 0)
+    {
         std::cout << "empty point" <<std::endl;
         return ;
     }
-    if (0 < this->hitPoint && this->hitPoint < HITPOINT) {
+    if (0 < this->hitPoint && this->hitPoint < HITPOINT)
+    {
         hitPoint += amount;
         if (hitPoint > HITPOINT) hitPoint = HITPOINT;
     }
@@ -70,7 +81,8 @@ void    ClapTrap::beRepaired(unsigned int amount) {
     std::cout << this->name << " have energy point : " << energyPoint << std::endl;
 }
 
-void    ClapTrap::checkValue() {
+void    ClapTrap::checkValue() 
+{
     std::cout << "this name : " << this->name << ", " \
     << "this hitPoint : " << this->hitPoint << ", " \
     << "this energyPoint : " << this->energyPoint << ", " \

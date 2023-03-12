@@ -1,6 +1,7 @@
 #include "ScavTrap.hpp"
 
-int main() {
+int main() 
+{
 
     std::cout << "--------C_a------------ " << std::endl;
     ClapTrap C_a("C");

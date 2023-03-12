@@ -5,7 +5,8 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : public ClapTrap
+{
 private:
     enum
     {
@@ -21,6 +22,5 @@ public:
     ScavTrap& operator=(const ScavTrap& scavTrap);
     ~ScavTrap();
 };
-
 
 #endif

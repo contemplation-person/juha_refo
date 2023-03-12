@@ -3,7 +3,8 @@
 #define CLAPTRAP_HPP
 #include <iostream>
 
-class ClapTrap {
+class ClapTrap 
+{
 private:
     enum 
     {
