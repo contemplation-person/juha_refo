@@ -17,7 +17,8 @@ ScavTrap::~ScavTrap()
     std::cout << this->name << " : distructor" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& scavTrap) : ClapTrap(scavTrap) 
+ScavTrap::ScavTrap(const ScavTrap& scavTrap) 
+    : ClapTrap(scavTrap) 
 { }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
@@ -32,3 +33,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
     return (*this);
 }
 
+void ScavTrap::guardGate()
+{
+    std::cout << name << " : guard gate mode" <<  std::endl;
+}

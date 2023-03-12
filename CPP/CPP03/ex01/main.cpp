@@ -15,5 +15,6 @@ int main()
     S_a.attack("t"); 
     S_a.takeDamage(0);
     S_a.beRepaired(0);
+    S_a.guardGate();
     std::cout << "----------------------- " << std::endl;
 }

@@ -21,6 +21,7 @@ public:
     ScavTrap(const ScavTrap& scavTrap);
     ScavTrap& operator=(const ScavTrap& scavTrap);
     ~ScavTrap();
+    void guardGate();
 };
 
 #endif
