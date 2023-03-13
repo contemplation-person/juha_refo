@@ -1,89 +1,105 @@
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
 #include <string.h>
+#include <sys/wait.h>
 
-enum micro {
-    READ,
-    WRITE,
-    IN = 0,
-    OUT,
-    ERROR,
-};
-
-int count_cmd(char **cmd) {
+int ft_strlen(char *s)
+{
     int i = 0;
-    int pipe_cmd = 0;
-    while (cmd[i]) {
-        if (!strncmp("|", cmd[i], 2)) pipe_cmd++;
+
+    if (!s) return -1;
+    while (s[i])
+    {
         i++;
     }
-    return (pipe_cmd + 1);
+    return i;
 }
 
-void use_cmd(char **cmd, char **envp) {
-    pid_t   pid;
-    int     counting_cmd = count_cmd(cmd);
-    int     stop_child = 0;
-    int     checking_error = 0;
-    int     prev_fd = -1;
-    int     pipe_fd[2];
-
-    if (counting_cmd == 1) { execve(cmd[0], cmd, envp); }
-    //parent
-    for (int i = 0; i < counting_cmd; i++) {
-        checking_error = pipe(pipe_fd);
-        if (checking_error) exit(1);
-        pid = fork();
-        if (pid == 0) {
-            stop_child = i;
-            break;
-        }
-        if (prev_fd != -1) close(prev_fd);
-        close(pipe_fd[WRITE]);
-        prev_fd = pipe_fd[READ];
-    }
-    //child
-    if (pid == 0) {
-        if (stop_child != 0) {
-            dup2(IN, pipe_fd[READ]); 
-            close(IN);
-        }
-        if (stop_child != counting_cmd) {
-            dup2(OUT, pipe_fd[WRITE]); 
-            close(OUT);
-        }
-        if (prev_fd != -1) close(prev_fd);
-        int x = 0;
-        char **do_cmd = cmd;
-        while (cmd[x]) {
-            if (x != 0 && cmd[x - 1] == NULL) do_cmd = &(cmd[x]); 
-            if (!strncmp("|", cmd[x], 2)) {
-                cmd[x] = NULL;
-                execve(do_cmd[0],do_cmd,envp);
-            }
-            x++;
-        }
-        
-    }
-    //waitpid
-    close(prev_fd);
-    for (int i = 0; i < counting_cmd; i++) {
-        if (waitpid(-1, &stop_child, 0))
-            exit(stop_child);
-    }
-}
-
-int main(int c, char **v, char **envp){
+#include <stdio.h>
+int check_cmd(char **v)
+{
+    if (!v) return -1;
+    
     int i = 0;
+    while (v[i])
+    {
+        printf("%d. %s\n", i, v[i]);
+        i++;
+    }
+    printf("---------------------\n");
+    return i;
+}
+
+int check_pipe(char **v)
+{
+    int i = 0;
+    int pipe = 0;
+
+    if (!v) return -1;
+    while (v[i])
+    {
+        if (!strncmp("|", v[i], 2)) pipe++;
+        i++;
+    }
+    return (pipe);
+}
+
+void do_cd(char **v)
+{
+    int c = check_cmd(v); 
+
+    if (c == 2)
+    {
+        int check = chdir(v[1]);
+
+        if (check)
+        {
+            write(2, "cd error\n", 9);
+            exit(-1);
+        }
+    }
+    else 
+    {
+        write(2, "too many arg\n", 13);
+        exit(-1);
+    }
+}
+
+void excute_sentence(char **v, char **envp) 
+{
+    int c = check_cmd(v);
+    int cnt_pipe = check_pipe(v);
+
+    int error = 0;
+
+    if (cnt_pipe == -1) exit(-1);
+    else if (cnt_pipe == 0 && !strncmp("cd", v[0], 3))
+        do_cd(v);
+    else
+    {
+
+    }
+}
+
+int main(int c, char **v, char **envp)
+{
+    if (c == 1) return 1;
     v[0] = NULL;
 
-    while (v[i]) {
-        if (!strncmp(";", v[i], 2)) v[i] = NULL;
-        i++;
+    int save_cmd = 0;
+
+    for (int i = 1; i < c; i++)
+    {
+        if (v[i - 1] == NULL) save_cmd = i; 
+        if (!strncmp(";", v[i], 2)) 
+        {
+            v[i] = NULL;
+            excute_sentence(&(v[save_cmd]), envp);
+        }
+        if (i + 1 == c)
+            excute_sentence(&(v[save_cmd]), envp);
     }
-    for (int i = 1; i < c; i++) {
-        if (v[i - 1] == NULL && v[i]) use_cmd(&(v[i]), envp);
-    }
-    return 0;
+    //check_cmd(v);
+    return (0);
 }
+
