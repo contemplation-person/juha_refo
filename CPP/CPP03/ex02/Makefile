@@ -4,7 +4,8 @@ TARGET		= ScavTrap
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \
 			  ClapTrap.cpp \
-			  ScavTrap.cpp
+			  ScavTrap.cpp \
+			  FragTrap.cpp
 TESTFLAGS 	= -g3 -fsanitize=address
 
 $(TARGET) : $(OBJS)

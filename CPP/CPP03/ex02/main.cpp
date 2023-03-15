@@ -1,4 +1,5 @@
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main() 
 {
@@ -11,10 +12,14 @@ int main()
     ScavTrap S_a("S_attac");
 
     S_a.checkValue();
+    std::cout << "--------F_a------------ " << std::endl;
+    FragTrap F_a("F_attac");
+
+    F_a.checkValue();
     std::cout << "----------------------- " << std::endl;
-    S_a.attack("t"); 
-    S_a.takeDamage(0);
-    S_a.beRepaired(0);
-    S_a.guardGate();
+    F_a.attack("t"); 
+    F_a.takeDamage(0);
+    F_a.beRepaired(0);
+    F_a.highFivesGuys();
     std::cout << "----------------------- " << std::endl;
 }
