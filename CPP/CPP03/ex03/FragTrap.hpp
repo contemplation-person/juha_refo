@@ -24,4 +24,6 @@ public:
     void highFivesGuys();
 };
 
+std::ostream& operator<<(std::ostream& o, FragTrap& fragTrap);
+
 #endif

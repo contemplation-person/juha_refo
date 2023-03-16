@@ -24,4 +24,6 @@ public:
 
 };
 
+std::ostream& operator<<(std::ostream& o, DiamondTrap& diamondTrap);
+
 #endif

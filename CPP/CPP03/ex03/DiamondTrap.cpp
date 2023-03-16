@@ -1,5 +1,4 @@
 #include "DiamondTrap.hpp"
-#include "FragTrap.hpp"
 
 DiamondTrap::DiamondTrap() 
     : FragTrap("dia")
@@ -21,6 +20,13 @@ DiamondTrap::~DiamondTrap()
 DiamondTrap::DiamondTrap(const DiamondTrap& diamondTrap) 
     : ClapTrap(diamondTrap),FragTrap(diamondTrap), ScavTrap(diamondTrap)
 { }
+
+#define B "\033[34m"
+std::ostream& operator<<(std::ostream& o, DiamondTrap& diamondTrap)
+{
+    o << B << diamondTrap;
+    return o;
+}
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& diamondTrap)
 {

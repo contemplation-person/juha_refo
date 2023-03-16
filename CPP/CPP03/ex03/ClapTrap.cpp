@@ -28,6 +28,14 @@ ClapTrap::ClapTrap(const ClapTrap& clapTrap)
     *this = clapTrap;
 }
 
+#define Y "\033[33m"
+#define N "\033[0m"
+std::ostream& operator<<(std::ostream& o, const ClapTrap& clapTrap)
+{
+    o << N << clapTrap;
+    return o;
+}
+
 ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap) 
 {
     if (this != &clapTrap)
@@ -88,3 +96,4 @@ void    ClapTrap::checkValue()
     << "this energyPoint : " << this->energyPoint << ", " \
     << "this attackDamage : " << this->attackDamage << std::endl;
 }
+

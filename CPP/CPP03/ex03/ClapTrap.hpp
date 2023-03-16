@@ -1,6 +1,7 @@
 #pragma once
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
+
 #include <iostream>
 
 class ClapTrap 
@@ -32,5 +33,6 @@ public:
     void    checkValue();
 };
 
+std::ostream& operator<<(std::ostream& o, const ClapTrap& clapTrap);
 
 #endif
