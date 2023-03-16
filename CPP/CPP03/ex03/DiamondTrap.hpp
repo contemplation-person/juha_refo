@@ -5,7 +5,7 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-class DiamondTrap : virtual FragTrap, virtual ScavTrap {
+class DiamondTrap : virtual ClapTrap, virtual FragTrap, virtual ScavTrap {
 private:
     std::string name;
     enum

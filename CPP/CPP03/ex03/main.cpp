@@ -19,7 +19,7 @@ int main()
 
     D_a.checkValue();
     std::cout << "----------------------- " << std::endl;
-    D_a.attack("t"); 
+    D_a.ScavTrap::attack("t"); 
     D_a.takeDamage(0);
     D_a.beRepaired(0);
     D_a.highFivesGuys();
