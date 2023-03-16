@@ -1,13 +1,14 @@
 #include "DiamondTrap.hpp"
+#include "FragTrap.hpp"
 
 DiamondTrap::DiamondTrap() 
-    : name("Dia"), ClapTrap("DiamondTrap", HITPOINT, ENERGYPOINT, ATTACKDAMAGE) 
+    : FragTrap("dia")
 {
-    std::cout << this->name << " : default" << std::endl;
+    std::cout << this->DiamondTrap::name << " : default" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(std::string d_name) 
-    : name(d_name), ClapTrap("null", HITPOINT, ENERGYPOINT, ATTACKDAMAGE) 
+    : FragTrap(d_name)
 {
     std::cout << this->name << " : default" << std::endl;
 }
@@ -18,7 +19,7 @@ DiamondTrap::~DiamondTrap()
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& diamondTrap) 
-    : ClapTrap(diamondTrap) 
+    : ClapTrap(diamondTrap),FragTrap(diamondTrap), ScavTrap(diamondTrap)
 { }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& diamondTrap)

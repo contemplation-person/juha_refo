@@ -14,12 +14,12 @@ int main()
     FragTrap F_a("F_attac");
 
     F_a.checkValue();
-    std::cout << "--------F_a------------ " << std::endl;
+    std::cout << "--------D_a------------ " << std::endl;
     DiamondTrap D_a("diamond");
 
     D_a.checkValue();
     std::cout << "----------------------- " << std::endl;
-    D_a.ScavTrap::attack("t"); 
+    D_a.attack("t"); 
     D_a.takeDamage(0);
     D_a.beRepaired(0);
     D_a.highFivesGuys();
