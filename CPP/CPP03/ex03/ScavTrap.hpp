@@ -8,6 +8,7 @@
 class ScavTrap : virtual public ClapTrap
 {
 private:
+protected:
     enum
     {
         HITPOINT = 100,

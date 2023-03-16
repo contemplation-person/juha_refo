@@ -21,13 +21,6 @@ ScavTrap::ScavTrap(const ScavTrap& scavTrap)
     : ClapTrap(scavTrap) 
 { }
 
-#define R "\033[31m"
-#define N "\033[0m"
-std::ostream& operator<<(std::ostream& o, const ScavTrap& scavTrap)
-{
-    o << R << scavTrap << N;
-    return o;
-}
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
 {

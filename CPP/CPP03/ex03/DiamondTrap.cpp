@@ -1,15 +1,17 @@
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap() 
-    : FragTrap("dia")
+    : ClapTrap()
 {
-    std::cout << this->DiamondTrap::name << " : default" << std::endl;
+    this->name = "noname";
+    std::cout << this->DiamondTrap::name << " : default constructor" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(std::string d_name) 
-    : FragTrap(d_name)
+    : ClapTrap(d_name, FragTrap::HITPOINT, HITPOINT, HITPOINT)
 {
-    std::cout << this->name << " : default" << std::endl;
+    this->name = d_name;
+    std::cout << name << " : name constructor" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap() 
@@ -20,14 +22,6 @@ DiamondTrap::~DiamondTrap()
 DiamondTrap::DiamondTrap(const DiamondTrap& diamondTrap) 
     : ClapTrap(diamondTrap),FragTrap(diamondTrap), ScavTrap(diamondTrap)
 { }
-
-#define B "\033[34m"
-#define N "\033[0m"
-std::ostream& operator<<(std::ostream& o, DiamondTrap& diamondTrap)
-{
-    o << B << diamondTrap << N;
-    return o;
-}
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& diamondTrap)
 {

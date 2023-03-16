@@ -8,13 +8,13 @@
 class FragTrap : virtual public ClapTrap
 {
 private:
+protected:
     enum
     {
         HITPOINT = 100,
         ENERGYPOINT = 100,
         ATTACKDAMAGE = 30
     };
-
 public:
     FragTrap();
     FragTrap(std::string str);

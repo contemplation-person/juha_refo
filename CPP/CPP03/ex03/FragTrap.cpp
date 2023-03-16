@@ -21,13 +21,6 @@ FragTrap::FragTrap(const FragTrap& fragTrap)
     : ClapTrap(fragTrap) 
 { }
 
-#define G "\033[32m"
-#define N "\033[0m"
-std::ostream& operator<<(std::ostream& o, FragTrap& fragTrap)
-{
-    o << G << fragTrap;
-    return o;
-}
 
 FragTrap& FragTrap::operator=(const FragTrap& fragTrap)
 {

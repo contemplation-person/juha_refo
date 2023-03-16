@@ -7,14 +7,14 @@
 class ClapTrap 
 {
 private:
+
+protected:
     enum 
     {
         HITPOINT = 10,
         ENERGYPOINT = 10,
         ATTACKDAMAGE = 0
     };
-
-protected:
     std::string     name;
     unsigned int    hitPoint;
     unsigned int    energyPoint;

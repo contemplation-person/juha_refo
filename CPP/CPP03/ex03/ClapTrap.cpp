@@ -1,7 +1,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() 
-    : name("ClapTrap"), hitPoint(HITPOINT), energyPoint(ENERGYPOINT), attackDamage(ATTACKDAMAGE) 
+    : name("noname"), hitPoint(HITPOINT), energyPoint(ENERGYPOINT), attackDamage(ATTACKDAMAGE) 
 {
     std::cout << "create : " << this->name << std::endl;
 }
@@ -26,14 +26,6 @@ ClapTrap::~ClapTrap()
 ClapTrap::ClapTrap(const ClapTrap& clapTrap) 
 {
     *this = clapTrap;
-}
-
-#define Y "\033[33m"
-#define N "\033[0m"
-std::ostream& operator<<(std::ostream& o, const ClapTrap& clapTrap)
-{
-    o << Y << clapTrap << N;
-    return o;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap) 
