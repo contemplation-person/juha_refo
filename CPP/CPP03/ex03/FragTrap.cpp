@@ -1,7 +1,5 @@
 #include "FragTrap.hpp"
 
-#define G "\033[32m"
-
 FragTrap::FragTrap() 
     : ClapTrap("FragTrap", HITPOINT, ENERGYPOINT, ATTACKDAMAGE) 
 {
@@ -23,6 +21,8 @@ FragTrap::FragTrap(const FragTrap& fragTrap)
     : ClapTrap(fragTrap) 
 { }
 
+#define G "\033[32m"
+#define N "\033[0m"
 std::ostream& operator<<(std::ostream& o, FragTrap& fragTrap)
 {
     o << G << fragTrap;

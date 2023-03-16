@@ -32,7 +32,7 @@ ClapTrap::ClapTrap(const ClapTrap& clapTrap)
 #define N "\033[0m"
 std::ostream& operator<<(std::ostream& o, const ClapTrap& clapTrap)
 {
-    o << N << clapTrap;
+    o << Y << clapTrap << N;
     return o;
 }
 

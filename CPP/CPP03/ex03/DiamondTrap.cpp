@@ -22,9 +22,10 @@ DiamondTrap::DiamondTrap(const DiamondTrap& diamondTrap)
 { }
 
 #define B "\033[34m"
+#define N "\033[0m"
 std::ostream& operator<<(std::ostream& o, DiamondTrap& diamondTrap)
 {
-    o << B << diamondTrap;
+    o << B << diamondTrap << N;
     return o;
 }
 
