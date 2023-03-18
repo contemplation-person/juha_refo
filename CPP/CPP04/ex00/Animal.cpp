@@ -35,3 +35,6 @@ inline std::string Animal::getType() const
     return this->type;
 }
 
+void Animal::makeSound() const
+{
+}

@@ -12,5 +12,5 @@ int main()
     i->makeSound(); //will output the cat sound!
     j->makeSound();
     meta->makeSound();
-return 0;
+    return 0;
 }

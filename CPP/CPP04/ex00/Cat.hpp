@@ -6,14 +6,14 @@
 #include "Animal.hpp"
 #include <iostream>
 
-class Cat : virtual public Animal {
+class Cat : public Animal {
 private:
 public:
     Cat();
     ~Cat();
     Cat(const Cat& cat);
     Cat& operator=(const Cat& cat);
-    void makeSound();
+    void makeSound() const;
 };
 
 #endif
