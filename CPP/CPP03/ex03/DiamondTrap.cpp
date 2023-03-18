@@ -1,14 +1,14 @@
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap() 
-    : ClapTrap()
+    : ClapTrap("_clap_name", FragTrap::HITPOINT, ScavTrap::ENERGYPOINT, FragTrap::ATTACKDAMAGE)
 {
-    this->name = "noname";
+    this->name = "dia";
     std::cout << this->DiamondTrap::name << " : default constructor" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(std::string d_name) 
-    : ClapTrap(d_name, FragTrap::HITPOINT, HITPOINT, HITPOINT)
+    : ClapTrap(d_name + "_clap_name", FragTrap::HITPOINT, ScavTrap::ENERGYPOINT, FragTrap::ATTACKDAMAGE)
 {
     this->name = d_name;
     std::cout << name << " : name constructor" << std::endl;
@@ -35,3 +35,12 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& diamondTrap)
     return (*this);
 }
 
+void DiamondTrap::whoAmI() 
+{
+    std::cout << this->name << ClapTrap::name << std::endl;
+}
+
+void DiamondTrap::attack(const std::string &target)
+{
+    ScavTrap::attack(target);
+}

@@ -3,38 +3,11 @@
 
 int main()
 {
-    // ClapTrap = yello
-    // ScavTrap = purple
-    // FragTrap = aqua
-    // DiamondTrap = green
+    DiamondTrap d("hh");
 
-   	DiamondTrap diamond; //default constructor
-    std::cout << std::endl;
-
-    DiamondTrap diamond2("diamond2"); //name constructor
-    std::cout << std::endl;
-
-    DiamondTrap diamond3(diamond2); //copy constructor
-    std::cout << std::endl;
-
-    diamond = diamond3; //assignation operator
-    std::cout << std::endl;
-
-
-	//hp : fragtrap 100
-	//ep : scavtrap 50
-	//attack damege : fragtrap 30
-	//attack : scavtrap
-    diamond.attack("monster"); // call scavtrap's attack
-    std::cout << std::endl;
-    diamond.takeDamage(50); // call scavtrap's takeDamage
-    std::cout << std::endl;
-    diamond.guardGate(); //scavtrap
-    std::cout << std::endl;
-    diamond.highFivesGuys(); //fragtrap
-    std::cout << std::endl;
-    // diamond.whoAmI(); //diamond + claptrap;
-    std::cout << std::endl;
+    d.checkValue();
+    d.whoAmI();
+    d.attack("scaveTrap");
 }
 // #include "DiamondTrap.hpp"
 

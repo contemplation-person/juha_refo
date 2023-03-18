@@ -20,10 +20,9 @@ public:
     DiamondTrap(std::string str);
     DiamondTrap(const DiamondTrap& diamondTrap);
     DiamondTrap& operator=(const DiamondTrap& diamondTrap);
+    void whoAmI();
+    void attack(const std::string &target);
     ~DiamondTrap();
-
 };
-
-std::ostream& operator<<(std::ostream& o, DiamondTrap& diamondTrap);
 
 #endif
