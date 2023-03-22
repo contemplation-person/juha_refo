@@ -21,6 +21,7 @@ ScavTrap::ScavTrap(const ScavTrap& scavTrap)
     : ClapTrap(scavTrap) 
 { }
 
+
 ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
 {
     if (this != &scavTrap)
@@ -36,4 +37,18 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
 void ScavTrap::guardGate()
 {
     std::cout << name << " : guard gate mode" <<  std::endl;
+}
+
+void    ScavTrap::attack(const std::string& target)
+{
+    
+    if (energyPoint == 0 || hitPoint == 0)
+    {
+        std::cout << this->name << " : empty point" <<std::endl;
+        return ;
+    }
+    std::cout << this->name << " attack " << target << " : " << attackDamage << std::endl;
+    energyPoint--;
+    std::cout << this->name << " have energy point : " << energyPoint << std::endl;
+
 }

@@ -7,13 +7,12 @@
 
 class Animal {
 private:
-
 protected:
     std::string type;
 public:
 
     Animal();
-    ~Animal();
+    virtual ~Animal();
     Animal(const Animal& animal);
     Animal& operator=(const Animal& animal);
     void setType(std::string type);

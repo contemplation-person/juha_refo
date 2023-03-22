@@ -8,7 +8,7 @@ Animal::Animal()
 
 Animal::~Animal()
 {
-    std::cout << "call destructors" << std::endl;
+    std::cout << this->type << "call destructors" << std::endl;
 }
 
 Animal::Animal(const Animal& animal)
@@ -18,7 +18,7 @@ Animal::Animal(const Animal& animal)
 
 Animal& Animal::operator=(const Animal& animal)
 {
-   if (this != &animal)
+    if (this != &animal)
     {
         this->setType(animal.getType());
     }
@@ -35,6 +35,4 @@ inline std::string Animal::getType() const
     return this->type;
 }
 
-void Animal::makeSound() const
-{
-}
+void Animal::makeSound() const { }

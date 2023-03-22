@@ -10,10 +10,10 @@ class Dog : public Animal {
 private:
 public:
     Dog();
-    ~Dog();
+    virtual ~Dog();
     Dog(const Dog& dog);
     Dog& operator=(const Dog& dog);
-    void makeSound() const;
+    virtual void makeSound() const;
 };
 
 #endif

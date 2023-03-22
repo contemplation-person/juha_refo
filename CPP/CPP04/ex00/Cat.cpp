@@ -7,7 +7,7 @@ Cat::Cat()
 }
 Cat::~Cat()
 {
-    std::cout << getType() << " : call destructor" << std::endl;
+    std::cout << getType()  << " : call destructor" << std::endl;
 }
 
 Cat::Cat(const Cat& cat) 
