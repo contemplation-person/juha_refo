@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/wait.h>
 
 enum e_fdnum
 {
@@ -59,13 +58,13 @@ int ft_cnt_argc(char **v)
     {
         i++;
     }
-    return (i + 1);
+    // 1+1 이 아니라  return i;
+    return (i);
 }
 
 void do_pipe(char **v, char **envp)
 {
     int c = ft_cnt_argc(v);
-    write(1, v[0], ft_strlen(v[0]));
 }
 
 void do_cmd(char **v, char **envp)
@@ -76,8 +75,9 @@ void do_cmd(char **v, char **envp)
         write(2, v[j], ft_strlen(v[j]));
         j++;
     }
-    int c = ft_cnt_argc(v); 
+    int c = ft_cnt_argc(v); // 1
 
+    int check_cd = 0;
     for (int i = 0; i < c; i++)
     {
         if (!strncmp("|", v[i], 2))
@@ -85,8 +85,52 @@ void do_cmd(char **v, char **envp)
             v[i] = NULL;
         }
     }
+ 
+
     for (int i = 0; i < c; i++)
     {
+    /* juha's way
+
+    for (int i = 0; i < c; i++)
+    {
+        //부모 동작
+        if (v[i] == NULL)
+        {
+            파이프
+            포크
+            if (자식) 
+                break;
+            if (prev_fd != -1)
+                close(prev_fd);
+            prev_fd = READ;
+            close(write);
+        }
+    }
+
+
+    // 자식영역
+    {
+        if (prev_fd != -1)
+        {
+            dup2()
+            close();
+        }
+        if (자식 마지막이 아니면)
+        {
+            dup2(write)연결
+            close();
+        }
+        execve
+        return;
+    }
+
+    close(channel.prev_fd);
+    while (i--)
+    {
+        if (p->pid_num == waitpid(-1, &status, 0))
+            p->status = status;
+    }
+    */
         if (i == 0)
         {
             if (v[0])
@@ -107,6 +151,8 @@ int main(int c, char **v, char **envp)
         if (!strncmp(";", v[i], 2))
             v[i] = NULL;
     }
+    // asdf ";" test "|" done
+    // asdf NULL test "|" done
     for (int i = 1; i < c; i++)
     {
         if (v[i - 1] == NULL && v[i])
