@@ -4,8 +4,9 @@ Cat::Cat()
 {
     type = "cat";
     std::cout << this->type << "\t: call default constructor" << std::endl;
-    brain = new Brain;
+    brain = new Brain();
 }
+
 Cat::~Cat()
 {
     std::cout << type  << "\t: call destructor" << std::endl;
@@ -32,8 +33,3 @@ void Cat::makeSound() const
     std::cout << "yaong" << std::endl;
 }
 
-void Cat::printBrain()
-{
-    brain->setIdeas("cat Brain");
-    brain->printIdeas();
-}

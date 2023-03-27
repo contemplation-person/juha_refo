@@ -4,8 +4,9 @@ Dog::Dog()
 {
     type = "dog";
     std::cout << this->type <<"\t: call default constructor" << std::endl;
-    brain = new Brain;
+    brain = new Brain();
 }
+
 Dog::~Dog()
 {
     std::cout << this->type << "\t: call destructor" << std::endl;
@@ -28,10 +29,4 @@ Dog& Dog::operator=(const Dog& dog)
 void Dog::makeSound() const
 {
     std::cout << "mung mung" << std::endl;
-}
-
-void Dog::printBrain()
-{
-    brain->setIdeas("dog brain");
-    brain->printIdeas();
 }

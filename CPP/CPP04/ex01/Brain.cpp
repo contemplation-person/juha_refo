@@ -1,18 +1,28 @@
 #include "Brain.hpp"
+
 Brain::Brain() 
 { 
-    ideas[0] = "NULL";
     std::cout << "create brain" << std::endl; 
-};
-
-Brain::~Brain() { };
-
-void Brain::printIdeas()
-{
-    std::cout << ideas[0] << std::endl;
 }
 
-void Brain::setIdeas(std::string str)
+Brain::~Brain() 
+{ 
+    std::cout << "delete Brain" << std::endl;
+}
+
+Brain& Brain::operator=(const Brain& brain)
 {
-    ideas[0] = str;
+    if (this != &brain)
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            this->ideas[i] = brain.ideas[i];
+        }
+    }
+    return *this;
+}
+
+Brain::Brain(const Brain& brain)
+{
+    *this = brain;
 }

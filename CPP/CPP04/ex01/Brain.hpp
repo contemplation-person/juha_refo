@@ -2,19 +2,18 @@
 #ifndef __BRAIN_HPP__
 #define __BRAIN_HPP__
 
-#include "iostream"
+#include <iostream>
 
 class Brain
 {
 private:
     std::string ideas[100];
-    Brain(const Brain& brain);
-    Brain& operator=(const Brain& brain);
+
 public:
     Brain();
     ~Brain();
-    void setIdeas(std::string str);
-    void printIdeas();
+    Brain& operator=(const Brain& brain);
+    Brain(const Brain& brain);
 };
 
 #endif
