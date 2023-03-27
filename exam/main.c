@@ -3,103 +3,114 @@
 #include <string.h>
 #include <sys/wait.h>
 
-int ft_strlen(char *s)
+enum e_fdnum
+{
+    STDIN = 0,
+    STDOUT = 1,
+    READ = 0,
+    WRITE = 1,
+};
+
+enum e_error_message
+{
+    FAILED_CD,
+    TOO_MANY_ARGV_CD,
+    FATAL_ERROR,
+    EXECVE_ERROR,
+};
+
+int ft_strlen(char *str)
 {
     int i = 0;
 
-    if (!s) return -1;
-    while (s[i])
+    while (str[i])
     {
         i++;
     }
     return i;
 }
 
-#include <stdio.h>
-int check_cmd(char **v)
+void error_message(enum e_error_message error)
 {
-    if (!v) return -1;
-    
-    int i = 0;
-    while (v[i])
-    {
-        printf("%d. %s\n", i, v[i]);
-        i++;
-    }
-    printf("---------------------\n");
-    return i;
+    char *str;
+
+    if (error == FAILED_CD)
+        str = "FAILED_CD";
+    else if (error == TOO_MANY_ARGV_CD)
+        str = "TOO_MANY_ARGV_CD";
+    else if (error == FATAL_ERROR)
+        str = "FATAL_ERROR";
+    else
+        str = "EXECVE_ERROR";
+    write(2, str, strlen(str));
 }
 
-int check_pipe(char **v)
+int ft_cnt_argc(char **v)
 {
-    int i = 0;
-    int pipe = 0;
-
-    if (!v) return -1;
-    while (v[i])
+    if (v == NULL)
     {
-        if (!strncmp("|", v[i], 2)) pipe++;
+        error_message(FATAL_ERROR);
+        return (-1);
+    }
+
+    int i = 0;
+
+    if (v[i])
+    {
         i++;
     }
-    return (pipe);
+    return (i + 1);
 }
 
-void do_cd(char **v)
+void do_pipe(char **v, char **envp)
 {
-    int c = check_cmd(v); 
+    int c = ft_cnt_argc(v);
+    write(1, v[0], ft_strlen(v[0]));
+}
 
-    if (c == 2)
+void do_cmd(char **v, char **envp)
+{
+    int j=0;
+    while (v[j])
     {
-        int check = chdir(v[1]);
+        write(2, v[j], ft_strlen(v[j]));
+        j++;
+    }
+    int c = ft_cnt_argc(v); 
 
-        if (check)
+    for (int i = 0; i < c; i++)
+    {
+        if (!strncmp("|", v[i], 2))
         {
-            write(2, "cd error\n", 9);
-            exit(-1);
+            v[i] = NULL;
         }
     }
-    else 
+    for (int i = 0; i < c; i++)
     {
-        write(2, "too many arg\n", 13);
-        exit(-1);
-    }
-}
-
-void excute_sentence(char **v, char **envp) 
-{
-    int c = check_cmd(v);
-    int cnt_pipe = check_pipe(v);
-
-    int error = 0;
-
-    if (cnt_pipe == -1) exit(-1);
-    else if (cnt_pipe == 0 && !strncmp("cd", v[0], 3))
-        do_cd(v);
-    else
-    {
-
+        if (i == 0)
+        {
+            if (v[0])
+                do_pipe(v + i, envp);
+        }
+        else if (i != 0 && v[i - 1] == NULL && v[i])
+            do_pipe(v + i, envp);
     }
 }
 
 int main(int c, char **v, char **envp)
 {
-    if (c == 1) return 1;
+    if (c < 2)   
+        return 0;
     v[0] = NULL;
-
-    int save_cmd = 0;
-
     for (int i = 1; i < c; i++)
     {
-        if (v[i - 1] == NULL) save_cmd = i; 
-        if (!strncmp(";", v[i], 2)) 
-        {
+        if (!strncmp(";", v[i], 2))
             v[i] = NULL;
-            excute_sentence(&(v[save_cmd]), envp);
-        }
-        if (i + 1 == c)
-            excute_sentence(&(v[save_cmd]), envp);
     }
-    //check_cmd(v);
-    return (0);
+    for (int i = 1; i < c; i++)
+    {
+        if (v[i - 1] == NULL && v[i])
+            do_cmd(v + i, envp);
+    }
+    return 0;
 }
-
