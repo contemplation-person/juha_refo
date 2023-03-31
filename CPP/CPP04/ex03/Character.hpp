@@ -1,19 +1,32 @@
 #pragma once
-#ifndef __ICHARACTER_HPP__
-#define __ICHARACTER_HPP__
+#ifndef __CHARACTER__
+#define __CHARACTER__
 
+#include "ICharacter.hpp"
+#include "AMateria.hpp"
 #include <iostream>
-class AMateria;
 
-class ICharacter
+class Character : public ICharacter
 {
-
 public:
-    virtual ~ICharacter();
-    virtual std::string const & getName() const = 0;
-    virtual void equip(AMateria* m) = 0;
-    virtual void unequip(int idx) = 0;
-    virtual void use(int idx, ICharacter& target) = 0;
+    Character();
+    Character(const std::string& name);
+    ~Character();
+    Character(const Character& character);
+    Character& operator=(const Character& character);
+    
+    virtual std::string const & getName() const;
+    virtual void  equip(AMateria* m);
+    virtual void  unequip(int idx);
+    virtual void  use(int idx, ICharacter& target);
+    virtual int   emptyMateria();
+    virtual int   findMateria(std::string& str);
+protected:
+    int idx;
+    const AMateria* materia[4];
+    std::string name;
+
+private:
 };
 
 #endif

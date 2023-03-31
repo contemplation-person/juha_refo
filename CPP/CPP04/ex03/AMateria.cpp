@@ -1,12 +1,17 @@
 #include "AMateria.hpp"
 
+AMateria::AMateria()
+    : type("empty")
+{};
 AMateria::~AMateria() {};
 
-AMateria::AMateria(const AMateria& aMateria) {
+AMateria::AMateria(const AMateria& aMateria) 
+{
     *this = aMateria;
 }
 
-AMateria& AMateria::operator=(const AMateria& aMateria){
+AMateria& AMateria::operator=(const AMateria& aMateria)
+{
     if (&aMateria != this)
     {
         this->type = aMateria.type;
@@ -14,15 +19,18 @@ AMateria& AMateria::operator=(const AMateria& aMateria){
     return *this;
 }
 
-AMateria::AMateria(std::string const& type) {
+AMateria::AMateria(std::string const& type) 
+{
     this->type = type;
 }
 
-std::string const& AMateria::getType() const {
+std::string const& AMateria::getType() const 
+{
     return type;
 } //Returns the materia type
  
-void AMateria::use(ICharacter& target) {
+void AMateria::use(ICharacter& target) 
+{
     std::string message;
 
     if (!type.compare("ice"))
@@ -37,5 +45,6 @@ void AMateria::use(ICharacter& target) {
     {
         return ;
     }
+    target.equip(this);
     std::cout << message << std::endl;
 }

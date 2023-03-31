@@ -2,6 +2,11 @@
 #ifndef __MATERIASOURCE_HPP__
 #define __MATERIASOURCE_HPP__
 
+#include <iostream>
+#include "AMateria.hpp"
+
+class AMateria;
+
 class IMateriaSource
 {
 public:

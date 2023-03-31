@@ -3,17 +3,15 @@
 #define AMATERIA_HPP
 
 #include <iostream>
-#include "Character.hpp"
-class ICharacter;
+#include "ICharacter.hpp"
 
 class AMateria 
 {
-private:
-    AMateria();
 protected:
     std::string type;
 
 public:
+    AMateria();
     virtual ~AMateria();
     AMateria(const AMateria& aMateria);
     AMateria& operator=(const AMateria& aMateria);
