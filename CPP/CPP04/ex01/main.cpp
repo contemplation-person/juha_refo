@@ -31,5 +31,10 @@ int main()
         delete test[i];
     }
 
+    Cat t;
+    Cat c;
+    t = c;
+    system("leaks Animal");
+
     return 0;
 }
