@@ -1,17 +1,17 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
 int main()
 {
     std::cout << "\033[37m";
-    const Animal* j = new Dog();
+    const AAnimal* j = new Dog();
     delete j;//should not create a leak
     std::cout << "\033[31m";
-    const Animal* i = new Cat();
+    const AAnimal* i = new Cat();
     delete i;
 
-    const Animal* test[10];
+    const AAnimal* test[10];
     for (int i = 0; i < 10; i++)
     {
         if (i > 4)

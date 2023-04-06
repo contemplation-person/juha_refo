@@ -14,7 +14,7 @@ Cat::~Cat()
 }
 
 Cat::Cat(const Cat& cat) 
-    : Animal(cat)
+    : AAnimal(cat)
 {
     *this = cat;
 }
@@ -24,7 +24,7 @@ Cat& Cat::operator=(const Cat& cat)
     if (this != &cat)
     {
         this->type = cat.type;
-        this->brain = cat.brain;
+        *this->brain = *cat.brain;
     }
     return (*this);
 }

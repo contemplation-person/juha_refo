@@ -1,22 +1,22 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
-Animal::Animal() 
+AAnimal::AAnimal() 
 {
     this->type = "X";
     std::cout << this->type << "\t: call default constructors" << std::endl;
 }
 
-Animal::~Animal()
+AAnimal::~AAnimal()
 {
     std::cout << this->type << "\t: call destructors" << std::endl;
 }
 
-Animal::Animal(const Animal& animal)
+AAnimal::AAnimal(const AAnimal& animal)
 {
     *this = animal;    
 }
 
-Animal& Animal::operator=(const Animal& animal)
+AAnimal& AAnimal::operator=(const AAnimal& animal)
 {
     if (this != &animal)
     {
