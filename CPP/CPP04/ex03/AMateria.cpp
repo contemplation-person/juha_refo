@@ -3,6 +3,7 @@
 AMateria::AMateria()
     : type("empty")
 {};
+
 AMateria::~AMateria() {};
 
 AMateria::AMateria(const AMateria& aMateria) 

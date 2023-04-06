@@ -1,12 +1,9 @@
 CXX 		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow
-TARGET		= Animal
+TARGET		= Game
 OBJS		= $(SRCS:.cpp=.o)
-SRCS 		= main.cpp \
-			  Animal.cpp \
-			  Dog.cpp \
-			  Cat.cpp \
-			  Brain.cpp
+SRCS 		= $(wildcard *.cpp)
+
 			  
 TESTFLAGS 	= -g3 -fsanitize=address
 
