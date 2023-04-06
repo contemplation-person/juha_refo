@@ -1,11 +1,9 @@
 CXX 		= c++
-CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
+CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD
 TARGET		= Animal
 OBJS		= $(SRCS:.cpp=.o)
-SRCS 		= main.cpp \
-			  Animal.cpp \
-			  Dog.cpp \
-			  Cat.cpp \
+SRCS 		= $(wildcard *.cpp)
+DEPT		= $(SRCS:.cpp=.d)
 			  
 TESTFLAGS 	= -g3 -fsanitize=address
 
@@ -18,6 +16,7 @@ all :
 	$(TARGET)
 
 clean : 
+	@rm -f *.d
 	@rm -f *.o
 
 fclean : 
@@ -31,3 +30,5 @@ re :
 
 test : $(OBJS)
 	$(CXX) $(CXXFLAGS) $(TESTFLAGS) $^ -o $(TARGET)
+
+-include $(DEPT)
