@@ -25,5 +25,7 @@ int main()
     const WrongAnimal* t = new WrongCat();
     Wrongmeta->makeSound();
     t->makeSound();
+
+
     return 0;
 }
