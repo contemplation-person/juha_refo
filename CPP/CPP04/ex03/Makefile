@@ -1,7 +1,8 @@
 CXX 		= c++
-CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow
+CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow -MMD
 TARGET		= Game
 OBJS		= $(SRCS:.cpp=.o)
+DEPS		= $(SRCS:.cpp=.d)
 SRCS 		= $(wildcard *.cpp)
 
 			  
@@ -16,7 +17,7 @@ all :
 	$(TARGET)
 
 clean : 
-	@rm -f *.o
+	@rm -f *.o *.d
 
 fclean : 
 	@make clean
@@ -29,3 +30,5 @@ re :
 
 test : $(OBJS)
 	$(CXX) $(CXXFLAGS) $(TESTFLAGS) $^ -o $(TARGET)
+
+-include $(DEPS)
