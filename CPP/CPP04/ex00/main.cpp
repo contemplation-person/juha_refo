@@ -26,6 +26,5 @@ int main()
     Wrongmeta->makeSound();
     t->makeSound();
 
-
     return 0;
 }
