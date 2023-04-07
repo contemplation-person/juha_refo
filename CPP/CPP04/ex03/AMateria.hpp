@@ -1,6 +1,6 @@
 #pragma once
-#ifndef AMATERIA_HPP
-#define AMATERIA_HPP
+#ifndef __AMATERIA_HPP__
+#define __AMATERIA_HPP__
 
 #include <iostream>
 #include "ICharacter.hpp"

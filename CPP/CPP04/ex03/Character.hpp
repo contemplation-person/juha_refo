@@ -9,7 +9,6 @@
 class Character : public ICharacter
 {
 public:
-    Character();
     Character(const std::string& name);
     ~Character();
     Character(const Character& character);
@@ -27,6 +26,7 @@ protected:
     std::string name;
 
 private:
+    Character();
 };
 
 #endif

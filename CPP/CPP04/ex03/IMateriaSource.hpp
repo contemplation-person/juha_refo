@@ -1,10 +1,8 @@
 #pragma once
-#ifndef __MATERIASOURCE_HPP__
-#define __MATERIASOURCE_HPP__
+#ifndef __IMATERIA_SOURCE_HPP__
+#define __IMATERIA_SOURCE_HPP__
 
 #include <iostream>
-#include "AMateria.hpp"
-
 class AMateria;
 
 class IMateriaSource
