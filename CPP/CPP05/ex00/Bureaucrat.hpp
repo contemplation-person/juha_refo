@@ -4,25 +4,23 @@
 
 #include <iostream>
 
-class Bureaucrat
+class Bureaucrat 
 {
 public:
-	Bureaucrat(std::string name);
-	virtual ~Bureaucrat();
-	Bureaucrat(const Bureaucrat &copy);
-	const Bureaucrat& operator=(const Bureaucrat &copy);
+    Bureaucrat(std::string name);
+    virtual ~Bureaucrat();
+    Bureaucrat(const Bureaucrat &copy);
+    const Bureaucrat& operator=(const Bureaucrat &copy);
 
-	void		setGrade(int grade);
-	void		setName(std::string name);
-	int			getGrade();
-	std::string getName();
-
+    void		    setGrade(const int& grade);
+    void		    setName(const std::string& name);
+    int			    getGrade() const;
+    std::string getName() const;
 
 private:
-	Bureaucrat();
-	std::string 	_name;
-	int 			_grade;
+    Bureaucrat();
+    std::string 	_name;
+    int      			_grade;
 };
-
 
 #endif
