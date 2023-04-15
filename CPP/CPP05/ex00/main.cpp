@@ -1,4 +1,4 @@
-#include "Bureaucrat.cpp"
+#include "Bureaucrat.hpp"
 
 int main()
 {
