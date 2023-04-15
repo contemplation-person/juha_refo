@@ -8,12 +8,13 @@ class MyException {
 public:  
     MyException();
     MyException(int line, std::string file, std::string massage);
-    void print();
+    virtual void print();
 
-private:
+protected:
     int         _line;
     std::string _file;
     std::string _massage;
+private:
 };
 
 class GradeTooHighException : public MyException{

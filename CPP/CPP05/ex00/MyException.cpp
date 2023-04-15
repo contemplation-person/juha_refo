@@ -12,12 +12,16 @@ GradeTooHighException::GradeTooHighException() { }
 GradeTooHighException::GradeTooHighException(int line, std::string file, std::string _name, int _grade)
 {
     std::string massage = _name + ", bureaucrat grade " + std::to_string(_grade);
-    MyException(line, file, massage);
+    this->_file = file;
+    this->_line = line;
+    this->_massage = massage;
 }
 
 GradeTooLowException::GradeTooLowException() { }
 GradeTooLowException::GradeTooLowException(int line, std::string file, std::string _name, int _grade)
 {
     std::string massage = _name + ", bureaucrat grade " + std::to_string(_grade);
-    MyException(line, file, massage);
+    this->_file = file;
+    this->_line = line;
+    this->_massage = massage;
 }

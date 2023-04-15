@@ -5,12 +5,15 @@
 //	grade range is 1 to 150
 Bureaucrat::Bureaucrat() 
     :_name("noName"), _grade(150)
-{};
+{}
+
 Bureaucrat::Bureaucrat(std::string name)
     : _name(name), _grade(150)
-{ }
+{}
+
 Bureaucrat::~Bureaucrat() { }
 Bureaucrat::Bureaucrat(const Bureaucrat &copy) { *this = copy; }
+
 const Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy)
 {
     if (this == &copy)
@@ -49,4 +52,14 @@ int			Bureaucrat::getGrade() const
 std::string Bureaucrat::getName() const
 {
     return (this->_name);
+}
+
+void        Bureaucrat::increment()
+{
+    setGrade(getGrade() - 1);
+}
+
+void        Bureaucrat::decrement()
+{
+    setGrade(getGrade() + 1);
 }

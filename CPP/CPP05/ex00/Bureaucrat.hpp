@@ -17,6 +17,8 @@ public:
     void		setName(const std::string& name);
     int			getGrade() const;
     std::string getName() const;
+    void        increment();
+    void        decrement();
 
 private:
     std::string 	_name;
