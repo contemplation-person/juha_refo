@@ -3,6 +3,9 @@
 
 //	this subject is using try/catch for error handling
 //	grade range is 1 to 150
+Bureaucrat::Bureaucrat() 
+    :_name("noName"), _grade(150)
+{};
 Bureaucrat::Bureaucrat(std::string name)
     : _name(name), _grade(150)
 { }

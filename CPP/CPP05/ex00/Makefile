@@ -1,8 +1,10 @@
 CXX 		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow
-TARGET		= AAnimal
+TARGET		= Bureaucrat
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \
+			  MyException.cpp \
+			  Bureaucrat.cpp
 			  
 TESTFLAGS 	= -g3 -fsanitize=address
 
