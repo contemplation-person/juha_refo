@@ -1,10 +1,9 @@
 #include "Bureaucrat.hpp"
-#include "MyException.hpp"
 
 //	this subject is using try/catch for error handling
 //	grade range is 1 to 150
 Bureaucrat::Bureaucrat() 
-    :_name("noName"), _grade(150)
+    : _name("noName"), _grade(150)
 {}
 
 Bureaucrat::Bureaucrat(std::string name)
@@ -24,27 +23,25 @@ const Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy)
 	return (*this);
 }
 
-void		Bureaucrat::setGrade(const int& grade)
+void Bureaucrat::setGrade(const int& grade)
 {
     try {
         if (150 < grade)
-            throw GradeTooHighException(__LINE__, __FILE__, _name, _grade);
+            throw Bureaucrat::GradeTooHighException();
         else if (1 > grade)
-            throw GradeTooLowException(__LINE__, __FILE__, _name, _grade);
+            throw Bureaucrat::GradeTooLowException();
         this->_grade = grade;
-    } catch (GradeTooHighException& e) {
-        e.print();
-    } catch (GradeTooLowException& e) {
-        e.print();
+    } catch (std::exception& e) {
+        std::cout << "\033[31m" << e.what() << "\t: " << Bureaucrat::getName() << ", bureaucrat grade " << Bureaucrat::getGrade() << "\033[0m" << std::endl;
     }
 }
 
-void		Bureaucrat::setName(const std::string& name) 
+void Bureaucrat::setName(const std::string& name) 
 {
     this->_name = name;
 }
 
-int			Bureaucrat::getGrade() const
+int	Bureaucrat::getGrade() const
 {
     return (this->_grade);
 }
@@ -54,12 +51,20 @@ std::string Bureaucrat::getName() const
     return (this->_name);
 }
 
-void        Bureaucrat::increment()
+void Bureaucrat::increment()
 {
     setGrade(getGrade() - 1);
 }
 
-void        Bureaucrat::decrement()
+void Bureaucrat::decrement()
 {
     setGrade(getGrade() + 1);
+}
+
+const char * Bureaucrat::GradeTooHighException::what() const throw() {
+    return "grade too high";
+}
+
+const char * Bureaucrat::GradeTooLowException::what() const throw() {
+    return "grade too low";
 }

@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-class Bureaucrat 
+class Bureaucrat
 {
 public:
     Bureaucrat();
@@ -13,12 +13,22 @@ public:
     Bureaucrat(const Bureaucrat &copy);
     const Bureaucrat& operator=(const Bureaucrat &copy);
 
-    void		setGrade(const int& grade);
-    void		setName(const std::string& name);
-    int			getGrade() const;
-    std::string getName() const;
-    void        increment();
-    void        decrement();
+    void	    	setGrade(const int& grade);
+    void    		setName(const std::string& name);
+    int 			getGrade() const;
+    std::string     getName() const;
+    void            increment();
+    void            decrement();
+
+    class GradeTooHighException : public std::exception{
+    public:
+        const char *what() const throw();
+    };
+
+    class GradeTooLowException: public std::exception{
+    public:
+        const char *what() const throw();
+    };
 
 private:
     std::string 	_name;
