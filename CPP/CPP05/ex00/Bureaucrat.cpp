@@ -23,6 +23,10 @@ const Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy)
 	return (*this);
 }
 
+std::ostream& operator<<(std::ostream& out, const Bureaucrat& b)
+{
+    return out << "name\t: " << b.getName() << "grade" << b.getGrade() << std::endl;
+}
 void Bureaucrat::setGrade(const int& grade)
 {
     try {
