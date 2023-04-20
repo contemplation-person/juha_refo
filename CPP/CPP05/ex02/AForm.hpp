@@ -1,22 +1,22 @@
 #pragma once
-#ifndef __FORM__
-#define __FORM__
+#ifndef __FORM_HPP__
+#define __FORM_HPP__
 
 #include <iostream>
 class Bureaucrat;
 
-class Form 
+class AForm 
 {
 public:
-    Form();
-    Form(const std::string name, const int signedGrade, const int excuteGrade);
-    ~Form();
+    AForm();
+    AForm(const std::string name, const int signedGrade, const int excuteGrade);
+    virtual ~AForm();
 
     void                setSign(bool sign);
     int                 getSign();
     int                 getSignedGrade();
     int                 getExcuteGrade();
-    void                beSigned(Bureaucrat& bureaucrat);
+    virtual void        beSigned(Bureaucrat& bureaucrat) = 0;
     const std::string   getName();
 
     class GradeTooHighException : public std::exception
@@ -33,13 +33,13 @@ public:
 
 private:
     //All these attributes are private, not protected
-    Form(const Form& copy);
-    const Form& operator=(const Form& form);
+    AForm(const AForm& copy);
+    const AForm& operator=(const AForm& form);
     const std::string   _name;
     bool                _sign;
     const int           _signedGrade;
     const int           _excuteGrade;
 };
 
-std::ostream& operator<<(std::ostream& o, Form& f);
+std::ostream& operator<<(std::ostream& o, AForm& f);
 #endif
