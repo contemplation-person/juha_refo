@@ -11,9 +11,9 @@ public:
     ShrubberyCreationForm(const std::string name);
     virtual ~ShrubberyCreationForm();
 
-    virtual void beSigned(Bureaucrat& bureaucrat);
+    void execute(Bureaucrat const& executor) const;
 private:
+    ShrubberyCreationForm(const ShrubberyCreationForm& form);
     const ShrubberyCreationForm& operator=(const AForm& form);
-
 };
 #endif

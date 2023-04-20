@@ -4,7 +4,10 @@ TARGET		= Bureaucrat
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \
 			  Bureaucrat.cpp \
-			  Form.cpp
+			  AForm.cpp \
+			  ShrubberyCreationForm.cpp \
+			  RobotomyRequestForm.cpp \
+			  PresidentialPardonForm.cpp 
 			  
 TESTFLAGS 	= -g3 -fsanitize=address
 

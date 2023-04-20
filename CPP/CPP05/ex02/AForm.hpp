@@ -13,11 +13,12 @@ public:
     virtual ~AForm();
 
     void                setSign(bool sign);
-    int                 getSign();
-    int                 getSignedGrade();
-    int                 getExcuteGrade();
-    virtual void        beSigned(Bureaucrat& bureaucrat) = 0;
-    const std::string   getName();
+    int                 getSign() const;
+    int                 getSignedGrade() const;
+    int                 getExcuteGrade() const;
+    void                beSigned(Bureaucrat& bureaucrat);
+    const std::string   getName() const;
+    virtual void        execute(Bureaucrat const& executor) const = 0;
 
     class GradeTooHighException : public std::exception
     {

@@ -98,3 +98,8 @@ void Bureaucrat::signForm(AForm& AForm)
     }
 
 }
+
+void Bureaucrat::executeForm(AForm const& form)
+{
+    form.execute(*this);
+}

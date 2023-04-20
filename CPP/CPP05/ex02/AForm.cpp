@@ -28,7 +28,6 @@ void AForm::setSign(bool sign)
     this->_sign = sign;
 }
 
-/*
 void AForm::beSigned(Bureaucrat& bureaucrat)
 {
     try 
@@ -40,24 +39,23 @@ void AForm::beSigned(Bureaucrat& bureaucrat)
         std::cout << e.what() <<std::endl;
     }
 }
-*/
 
-int AForm::getSign()
+int AForm::getSign() const
 {
     return _sign;
 }
 
-const std::string AForm::getName()
+const std::string AForm::getName() const
 {
     return _name;
 }
 
-int AForm::getSignedGrade()
+int AForm::getSignedGrade() const
 {
     return _signedGrade;
 }
 
-int AForm::getExcuteGrade()
+int AForm::getExcuteGrade() const
 {
     return _excuteGrade;
 }
