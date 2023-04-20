@@ -23,6 +23,14 @@ const Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy)
 	return (*this);
 }
 
+std::ostream& operator<<(std::ostream& out, const Bureaucrat& b)
+{
+    return out << "=============Bureaucrat=============" << std::endl
+               << "Bureaucrat name\t\t: " << b.getName() << std::endl 
+               << "Bureaucrat grade\t: " << b.getGrade() << std::endl 
+               << "==============endl==================" << std::endl;
+}
+
 void Bureaucrat::setGrade(const int& grade)
 {
     try {
@@ -32,7 +40,9 @@ void Bureaucrat::setGrade(const int& grade)
             throw Bureaucrat::GradeTooLowException();
         this->_grade = grade;
     } catch (std::exception& e) {
-        std::cout << "\033[31m" << e.what() << "\t: " << Bureaucrat::getName() << ", bureaucrat grade " << Bureaucrat::getGrade() << "\033[0m" << std::endl;
+        std::cout << "\033[31m" << e.what() << "\t: " 
+                  << Bureaucrat::getName() << ", bureaucrat grade " << Bureaucrat::getGrade() << "\033[0m" 
+                  << std::endl;
     }
 }
 
@@ -50,7 +60,6 @@ std::string Bureaucrat::getName() const
 {
     return (this->_name);
 }
-
 void Bureaucrat::increment()
 {
     setGrade(getGrade() - 1);
@@ -62,9 +71,30 @@ void Bureaucrat::decrement()
 }
 
 const char * Bureaucrat::GradeTooHighException::what() const throw() {
-    return "grade too high";
+    return "\033[31mBur grade too high\033[0m";
 }
 
 const char * Bureaucrat::GradeTooLowException::what() const throw() {
-    return "grade too low";
+    return "\033[31mBur grade too low\033[0m";
+}
+
+#include "Form.hpp"
+
+void Bureaucrat::signForm(Form& form)
+{
+    if (form.getSign())
+        return ;
+    try
+    {
+        if (form.getSignedGrade() < this->_grade)
+            throw Bureaucrat::GradeTooLowException();
+        form.beSigned(*this);
+        std::cout << this->_name << " signed " << form.getName() 
+                  << std::endl;
+    } catch (std::exception& e) {
+        std::cout << this->_name << " couldn’t sign " << form.getName() 
+                  << " because " << e.what()
+                  << std::endl;
+    }
+
 }

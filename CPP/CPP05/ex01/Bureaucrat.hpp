@@ -3,7 +3,7 @@
 #define __BUREAUCRAT_HPP__
 
 #include <iostream>
-
+class Form;
 class Bureaucrat
 {
 public:
@@ -19,6 +19,7 @@ public:
     std::string     getName() const;
     void            increment();
     void            decrement();
+    void            signForm(Form& form);
 
     class GradeTooHighException : public std::exception{
     public:
@@ -29,10 +30,10 @@ public:
     public:
         const char *what() const throw();
     };
-
 private:
     std::string 	_name;
     int      		_grade;
 };
 
+std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);
 #endif

@@ -3,7 +3,8 @@ CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow
 TARGET		= Bureaucrat
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \
-			  Bureaucrat.cpp
+			  Bureaucrat.cpp \
+			  Form.cpp
 			  
 TESTFLAGS 	= -g3 -fsanitize=address
 
