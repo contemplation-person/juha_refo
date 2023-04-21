@@ -13,7 +13,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() { }
 #include "Bureaucrat.hpp"
 void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 {
-    if (!this->getSign()) return ;
+    if (this->getSign()) return ;
     try 
     {
         if (executor.getGrade() > this->getExcuteGrade())

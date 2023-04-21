@@ -14,7 +14,7 @@ PresidentialPardonForm::~PresidentialPardonForm()
 #include "Bureaucrat.hpp"
 void PresidentialPardonForm::execute(Bureaucrat const& executor) const
 {
-	if (!this->getSign()) return ;
+	if (this->getSign()) return ;
 	try
 	{
 		if (executor.getGrade() > this->getExcuteGrade())
