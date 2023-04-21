@@ -40,7 +40,7 @@ void Bureaucrat::setGrade(const int& grade)
             throw Bureaucrat::GradeTooLowException();
         this->_grade = grade;
     } catch (std::exception& e) {
-        std::cout << "\033[31m" << e.what() << "\t: " 
+        std::cerr << "\033[31m" << e.what() << "\t: " 
                   << Bureaucrat::getName() << ", bureaucrat grade " << Bureaucrat::getGrade() << "\033[0m" 
                   << std::endl;
     }
@@ -92,7 +92,7 @@ void Bureaucrat::signForm(AForm& AForm)
         std::cout << this->_name << " signed " << AForm.getName() 
                   << std::endl;
     } catch (std::exception& e) {
-        std::cout << this->_name << " couldn’t sign " << AForm.getName() 
+        std::cerr << this->_name << " couldn’t sign " << AForm.getName() 
                   << " because " << e.what()
                   << std::endl;
     }

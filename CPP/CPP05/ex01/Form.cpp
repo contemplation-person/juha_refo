@@ -36,7 +36,7 @@ void Form::beSigned(Bureaucrat& bureaucrat)
             throw Form::GradeTooLowException();
         this->setSign(true);
     } catch (std::exception& e) {
-        std::cout << e.what() <<std::endl;
+        std::cerr << e.what() <<std::endl;
     }
 }
 

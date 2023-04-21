@@ -24,7 +24,7 @@ void PresidentialPardonForm::execute(Bureaucrat const& executor) const
 		std::cout << executor.getName() << " Zafod Beeblebrox에 의해 사면 됨" << std::endl;
 		std:: cout << executor.getName() << " executed " << this->getName() << std::endl;
 	} catch (std::exception& e) {
-		std::cout << executor.getName() << " cannot execute " << this->getName() << " because ";
-		std::cout << e.what() << std::endl;
+		std::cerr<< executor.getName() << " cannot execute " << this->getName() << " because ";
+		std::cerr<< e.what() << std::endl;
 	}
 }

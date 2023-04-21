@@ -36,8 +36,8 @@ void AForm::beSigned(Bureaucrat& bureaucrat)
             throw AForm::GradeTooLowException();
         this->setSign(true);
     } catch (std::exception& e) {
-        std::cout << bureaucrat.getName();
-        std::cout << e.what() <<std::endl;
+        std::cerr << bureaucrat.getName()
+                  << e.what() <<std::endl;
     }
 }
 
