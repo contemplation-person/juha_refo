@@ -18,7 +18,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
     {
         if (executor.getGrade() > this->getExcuteGrade())
         {
-            std::cout << executor.getName() << " cannot execute " << this->getName() << " because ";
             throw GradeTooLowException();
         }
         std::string fileName = executor.getName() + "_shrubbery";
@@ -43,6 +42,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
         fs.close();
         std::cout << executor.getName() << " executed " << this->getName() << std::endl;
     } catch (std::exception& e) {
+        std::cout << executor.getName() << " cannot execute " << this->getName() << " because ";
         std::cout << e.what() << std::endl;
     }
 }

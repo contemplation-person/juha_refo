@@ -18,7 +18,6 @@ void RobotomyRequestForm::execute(Bureaucrat const& executor) const
 	{
 		if (executor.getGrade() > this->getExcuteGrade())
 		{
-			std::cout << executor.getName() << " cannot execute " << this->getName() << " because ";
 			throw GradeTooLowException();
 		}
 		std::cout << "drilllllllll" << std::endl;
@@ -29,6 +28,7 @@ void RobotomyRequestForm::execute(Bureaucrat const& executor) const
 			std::cout << executor.getName() << " failed" << std::endl;
 		std:: cout << executor.getName() << " executed " << this->getName() << std::endl;
 	} catch (std::exception& e) {
+		std::cout << executor.getName() << " cannot execute " << this->getName() << " because ";
 		std::cout << e.what() << std::endl;
 	}
 }

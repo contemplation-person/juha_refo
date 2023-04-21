@@ -3,12 +3,12 @@
 
 const char * AForm::GradeTooHighException::what() const throw()
 {
-    return "\033[31mAForm grade too high\033[0m";
+    return "\033[31m grade too high\033[0m";
 }
 
 const char * AForm::GradeTooLowException::what() const throw()
 {
-    return "\033[31mAForm grade too low\033[0m";
+    return "\033[31m grade too low\033[0m";
 }
 
 AForm::AForm()
@@ -36,6 +36,7 @@ void AForm::beSigned(Bureaucrat& bureaucrat)
             throw AForm::GradeTooLowException();
         this->setSign(true);
     } catch (std::exception& e) {
+        std::cout << bureaucrat.getName();
         std::cout << e.what() <<std::endl;
     }
 }
