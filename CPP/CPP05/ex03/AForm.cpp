@@ -38,7 +38,7 @@ void AForm::beSigned(Bureaucrat& bureaucrat)
     } catch (std::exception& e) {
         std::cerr << bureaucrat.getName()
                   << e.what() <<std::endl;
-    }
+    } 
 }
 
 int AForm::getSign() const

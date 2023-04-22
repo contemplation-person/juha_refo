@@ -21,8 +21,8 @@ void PresidentialPardonForm::execute(Bureaucrat const& executor) const
 		{
 			throw GradeTooLowException();
 		}
-		std::cout << executor.getName() << " Zafod Beeblebrox에 의해 사면 됨" << std::endl;
-		std:: cout << executor.getName() << " executed " << this->getName() << std::endl;
+		std::cout << executor.getName() << " Zafod Beeblebrox에 의해 사면 됨" << std::endl
+				  << executor.getName() << " executed " << this->getName() << std::endl;
 	} catch (std::exception& e) {
 		std::cerr << executor.getName() << " cannot execute " << this->getName() << " because "
 				  << e.what() << std::endl;

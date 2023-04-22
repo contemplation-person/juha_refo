@@ -12,11 +12,11 @@ AForm *Intern::makeForm(std::string formName, std::string target)
 	std::string forms[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	try
 	{
-		std::size_t i = 0; 
-		while (i < forms->length() && forms[i] != formName)
+		int i = 0; 
+		while (i < 3 && forms[i] != formName)
 			++i;
-		if (i == forms->length())
-			throw "Form not found";
+		if (i == 3)
+			throw "\033[31mForm not found\033[0m";
 		std::cout << "Intern creates " << formName << std::endl;
 		switch(i)
 		{
@@ -27,6 +27,10 @@ AForm *Intern::makeForm(std::string formName, std::string target)
 			case 2:
 				return new PresidentialPardonForm(target);
 		}
+	}
+	catch(const char* e)
+	{
+		std::cerr << e << '\n';
 	}
 	catch(const std::exception& e)
 	{

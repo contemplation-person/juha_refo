@@ -10,8 +10,10 @@ int main()
     Bureaucrat test("test");
     test.setGrade(1);
     Intern intern;
-    AForm* form;
-    form = intern.makeForm("shrubbery creation", "President");
+    AForm* form = NULL ;
+    form = intern.makeForm("bbery creation", "President");
+    // form = NULL
+    form = intern.makeForm("robotomy request", "Bender");
     form->beSigned(test);
     delete form;
     return 0;
