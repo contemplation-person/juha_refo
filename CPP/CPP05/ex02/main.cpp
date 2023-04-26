@@ -22,6 +22,7 @@ int main()
     bureaucrat.executeForm(s);
     bureaucrat.executeForm(r);
     bureaucrat.executeForm(p);
+
     admin.executeForm(s);
     admin.executeForm(r);
     admin.executeForm(p);

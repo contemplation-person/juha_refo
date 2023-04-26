@@ -32,7 +32,7 @@ void AForm::beSigned(Bureaucrat& bureaucrat)
 {
     try 
     {
-        if (bureaucrat.getGrade() < this->getSignedGrade())
+        if (bureaucrat.getGrade() > this->getSignedGrade())
             throw AForm::GradeTooLowException();
         this->setSign(true);
     } catch (std::exception& e) {

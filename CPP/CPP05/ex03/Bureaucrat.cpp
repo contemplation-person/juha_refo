@@ -35,9 +35,9 @@ void Bureaucrat::setGrade(const int& grade)
 {
     try {
         if (150 < grade)
-            throw Bureaucrat::GradeTooHighException();
-        else if (1 > grade)
             throw Bureaucrat::GradeTooLowException();
+        else if (1 > grade)
+            throw Bureaucrat::GradeTooHighException();
         this->_grade = grade;
     } catch (std::exception& e) {
         std::cerr << "\033[31m" << e.what() << "\t: " 

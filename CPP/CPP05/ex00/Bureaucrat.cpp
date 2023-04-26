@@ -15,7 +15,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &copy) { *this = copy; }
 
 const Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy)
 {
-    if (this == &copy)
+    if (this != &copy)
     {
         this->_name = copy._name;
         this->_grade = copy._grade;
@@ -31,9 +31,9 @@ void Bureaucrat::setGrade(const int& grade)
 {
     try {
         if (150 < grade)
-            throw Bureaucrat::GradeTooHighException();
-        else if (1 > grade)
             throw Bureaucrat::GradeTooLowException();
+        else if (1 > grade)
+            throw Bureaucrat::GradeTooHighException();
         this->_grade = grade;
     } catch (std::exception& e) {
         std::cerr << "\033[31m" << e.what() << "\t: " << Bureaucrat::getName() << ", bureaucrat grade " << Bureaucrat::getGrade() << "\033[0m" << std::endl;

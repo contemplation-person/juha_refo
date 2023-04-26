@@ -15,6 +15,8 @@ int main()
     // form = NULL
     form = intern.makeForm("robotomy request", "Bender");
     form->beSigned(test);
+    std::cout << *form << std::endl;
+    form->execute(test);
     delete form;
     return 0;
 }
