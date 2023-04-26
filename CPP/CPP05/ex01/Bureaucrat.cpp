@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-
+#include <string>
 //	this subject is using try/catch for error handling
 //	grade range is 1 to 150
 Bureaucrat::Bureaucrat() 

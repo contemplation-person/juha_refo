@@ -3,7 +3,6 @@
 #define __BUREAUCRAT_HPP__
 
 #include <iostream>
-
 class Bureaucrat
 {
 public:
