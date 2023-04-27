@@ -5,8 +5,6 @@ OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \
 			  Bureaucrat.cpp
 			  
-TESTFLAGS 	= -g3 -fsanitize=address
-
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
 
@@ -27,5 +25,3 @@ re :
 	@make fclean
 	@make 
 
-test : $(OBJS)
-	$(CXX) $(CXXFLAGS) $(TESTFLAGS) $^ -o $(TARGET)
