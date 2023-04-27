@@ -7,7 +7,7 @@ int main()
     d.str = "str";
     Data *dp = &d;
 
-    std::cout << "dp\t: " << dp << std::endl;
+    std::cout << "dp\t\t: " << dp << std::endl;
 
     Serializer S;
     uintptr_t t = S.serialize(dp);
@@ -15,7 +15,6 @@ int main()
     
 
     dp = S.deserialize(t);
-    std::cout << "dp2\t: " << dp << std::endl;
-    std::cout << "dp in\t: " << dp->str << std::endl;
-    system("leaks Serializer");
+    std::cout << "dp2\t\t: " << dp << std::endl;
+    std::cout << "dp in\t\t: " << dp->str << std::endl;
 }
