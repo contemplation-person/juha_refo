@@ -3,7 +3,10 @@
 ClapTrap::ClapTrap() : name("ClapTrap"), hitPoint(10), energyPoint(10), attackDamage(0) {
     std::cout << "create : " << this->name << std::endl;
 }
-ClapTrap::ClapTrap(std::string clapName) : name(clapName), hitPoint(10), energyPoint(10), attackDamage(0) {}
+ClapTrap::ClapTrap(std::string clapName) : name(clapName), hitPoint(10), energyPoint(10), attackDamage(0) {
+    std::cout << "create : " << this->name << std::endl;
+
+}
 ClapTrap::~ClapTrap() {
     std::cout << "delete : " << this->name << std::endl;
 }

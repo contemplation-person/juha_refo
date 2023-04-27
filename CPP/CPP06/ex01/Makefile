@@ -1,10 +1,10 @@
 CXX 		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow
-TARGET		= convert 
+TARGET		= Serializer 
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \
-			  ScalarConverter.cpp
-			  
+			  Serializer.cpp
+
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
 

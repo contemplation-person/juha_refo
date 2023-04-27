@@ -1,10 +1,9 @@
 CXX 		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow
-TARGET		= convert 
+TARGET		= test
 OBJS		= $(SRCS:.cpp=.o)
-SRCS 		= main.cpp \
-			  ScalarConverter.cpp
-			  
+SRCS 		= now*.cpp
+
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
 
@@ -21,7 +20,4 @@ fclean :
 	@rm -f $(TARGET)
 	@rm -rf *.dSYM
 
-re :
-	@make fclean
-	@make 
 

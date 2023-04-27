@@ -1,6 +1,11 @@
 #include "ClapTrap.hpp"
 
 int main() {
+    ClapTrap a("test_attack");
+    ClapTrap b("test_damage");
+    ClapTrap c("test_repaire");
+    ClapTrap d(c);
+/*
     ClapTrap attack("test_attack");
     ClapTrap damage("test_damage");
     ClapTrap repaire("test_repaire");
@@ -23,4 +28,5 @@ int main() {
         repaire.beRepaired(1);
         std::cout << "============" << std::endl;
     }
+    */
 }

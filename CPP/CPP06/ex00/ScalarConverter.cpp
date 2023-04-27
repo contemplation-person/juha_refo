@@ -1,48 +1,80 @@
 #include "ScalarConverter.hpp"
 #include <cstdlib>
+#include <string>
+#include <limits>
 
 ScalarConverter::ScalarConverter() { }
 ScalarConverter::~ScalarConverter() { }
 
-void ScalarConverter::convert(const char * str)
+void ScalarConverter::printChar(const int d) const
 {
-	long	l;
-	int		i;
-	char	c;
-	float	f;
+    std::cout << "char\t: ";
+    if (0 > d || 255 < d)
+        std::cout << "impossible" << std::endl;
+    else if (32 > d || 128 < d)
+        std::cout << "Non displayable" << std::endl;
+    else
+        std::cout << "\'" << static_cast<char>(d) << "\'" << std::endl;
+}
+
+void ScalarConverter::printInt(const double d) const
+{
+    if (d > INT_MAX || d < INT_MIN)
+    {
+        printChar(4242);
+        std::cout << "int\t: impossible" << std::endl;
+    } else {
+        int i = static_cast<int>(d);
+        printChar(i);
+        std::cout <<"int\t: " << i << std::endl;
+    }
+}
+
+#include <ios>
+#include <iomanip>
+void ScalarConverter::printfloat(const double d) const
+{
+    // 출력길이 인쇄
+    std::cout << "float\t: " << std::fixed << std::setprecision(2) << d << 'f' << std::endl;
+}
+
+void ScalarConverter::printDouble(const double d) const
+{
+    // 출력길이 인쇄
+    std::cout<< "double\t: "<< d << std::endl;
+}
+
+void ScalarConverter::convert(const char* str)
+{
 	double	d;
+    char    *p_end;
+    bool    isNan = false;
 
-	try 
-	{
-		l = atol(str);
-	} catch (std::exception &e) {
-		e.what();
-		return ;
-	}
-	try
-	{
-		i = static_cast<int>(l);
-		std::cout << "char: ";
-		if (i != l)
-			throw ImpossibleException();
-	} catch (std::exception &e) {
-		std::cout << "impossible" << std::endl;
+    
+    d = std::strtold(str, &p_end);
+/*
+    std::cout << "origin str\t: " << str << std::endl
+              << "double\t: " << d << std::endl
+              << "p_end\t: " << *p_end << std::endl;
+*/
+    if (*str == '.' 
+        || (*p_end != 'f' && *p_end != '\0') 
+        || strlen(p_end) > 1)
+    {
+        isNan = true;
+    }
+    if (isNan)
+    {
+        std::cout << "char\t: impossible" << std::endl
+                  << "int\t: impossible" << std::endl
+                  << "float\t: nanf" << std::endl
+                  << "double\t: nan" << std::endl;
+    } else {
+        printInt(d);
+        printfloat(d);
+        printDouble(d);
+    }
 
-	}
-	c = static_cast<char>(i);
-	f = 
-	d = static_cast<double>(i);
-	std::cout << "char: ";
-	if (static_cast<int>(i) != l || c < 32 || c > 126)
-		std::cout << "Non displayable" << std::endl;
-	else
-		std::cout << "\'"  << c << "\'" << std::endl;
-	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << f << "f" << std::endl;
-	std::cout << "double: " << d << std::endl;
 }
 
-const char* ScalarConverter::ImpossibleException::what() const throw()
-{
-	return "impossible";
-}
+
