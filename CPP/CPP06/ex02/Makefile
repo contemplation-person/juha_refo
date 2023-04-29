@@ -2,8 +2,7 @@ CXX 		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow
 TARGET		= convert 
 OBJS		= $(SRCS:.cpp=.o)
-SRCS 		= main.cpp \
-					Base.cpp
+SRCS 		= main.cpp Base.cpp
 			  
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
