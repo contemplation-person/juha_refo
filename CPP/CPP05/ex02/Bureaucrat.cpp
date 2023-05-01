@@ -87,7 +87,7 @@ void Bureaucrat::signForm(AForm& AForm)
         return ;
     try
     {
-        if (AForm.getSignedGrade() > this->_grade)
+        if (AForm.getSignedGrade() < this->_grade)
             throw Bureaucrat::GradeTooLowException();
         AForm.beSigned(*this);
         std::cout << this->_name << " signed " << AForm.getName() 
