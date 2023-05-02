@@ -2,6 +2,9 @@
 #ifndef __ARRAY_HPP__
 #define __ARRAY_HPP__
 
+#include <climits>
+#include <stdexcept>
+#include <iostream>
 #include <cstdlib>
 
 template<class T> 
@@ -9,7 +12,7 @@ class Array
 {
 public:
     Array();
-    Array(unsigned int ui); //
+    Array(std::size_t ui); //
     virtual ~Array();
     Array(const Array& arr);
     T operator=(T t);
@@ -18,7 +21,6 @@ public:
     T operator[](std::size_t ui);
     
     int size();
-
 
 private:
     T*  _arr;
@@ -35,25 +37,16 @@ Array<T>::Array(void)
 template<class T>
 Array<T>::~Array(void) { }
 
-#include <climits>
-#include <stdexcept>
-#include <iostream>
 
 template<class T>
-Array<T>::Array(unsigned int ui) 
+Array<T>::Array(std::size_t ui) 
     : _size(ui)
 {
-    try
+    this->_arr = new T[ui];
+    
+    for (int i = 0; i < ui; i++)
     {
-        if (static_cast<int>(ui) > INT_MAX)
-            throw std::out_of_range("out of range");
-        this->_arr = new T[ui];
-        for (int i = 0; i < ui; i++)
-        {
-            _arr[i] = 0;
-        }
-    } catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
+        _arr[i] = 0;
     }
 }
 
