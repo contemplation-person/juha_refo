@@ -8,6 +8,9 @@ ScalarConverter::~ScalarConverter() { }
 
 void ScalarConverter::printChar(const int d) const
 {
+    char c;
+
+    c = static_cast<char>(d);
     std::cout << "char\t: ";
     if (0 > d || 255 < d)
         std::cout << "impossible" << std::endl;
@@ -30,7 +33,6 @@ void ScalarConverter::printInt(const double d) const
     }
 }
 
-#include <ios>
 #include <iomanip>
 void ScalarConverter::printfloat(const double d) const
 {
@@ -44,6 +46,7 @@ void ScalarConverter::printDouble(const double d) const
     std::cout<< "double\t: "<< d << std::endl;
 }
 
+#include <string>
 void ScalarConverter::convert(const char* str)
 {
 	double	d;
@@ -57,7 +60,13 @@ void ScalarConverter::convert(const char* str)
               << "double\t: " << d << std::endl
               << "p_end\t: " << *p_end << std::endl;
 */
-    if (*str == '.' 
+    if (str && strlen(str) == 1)
+    {
+        printInt(*str);  
+        printfloat(*str);
+        printDouble(*str);
+        return ;
+    } else if (*str == '.' 
         || (*p_end != 'f' && *p_end != '\0') 
         || strlen(p_end) > 1)
     {

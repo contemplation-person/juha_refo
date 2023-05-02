@@ -12,6 +12,7 @@ public :
 	~ScalarConverter();
 
 	void convert(const char* str); // char, int, float, double
+	void convert(const char c); // char, int, float, double
 
 private :
     void printChar(const int d) const;
