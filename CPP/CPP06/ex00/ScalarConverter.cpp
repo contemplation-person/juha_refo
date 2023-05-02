@@ -27,8 +27,9 @@ void ScalarConverter::printInt(const double d) const
         printChar(4242);
         std::cout << "int\t: impossible" << std::endl;
     } else {
-        int i = static_cast<int>(d);
+        int i = static_cast<char>(d);
         printChar(i);
+        i = static_cast<int>(d);
         std::cout <<"int\t: " << i << std::endl;
     }
 }
@@ -37,7 +38,7 @@ void ScalarConverter::printInt(const double d) const
 void ScalarConverter::printfloat(const double d) const
 {
     // 출력길이 인쇄
-    std::cout << "float\t: " << std::fixed << std::setprecision(2) << d << 'f' << std::endl;
+    std::cout << "float\t: " << std::fixed << std::setprecision(2) << static_cast<float>(d) << 'f' << std::endl;
 }
 
 void ScalarConverter::printDouble(const double d) const
