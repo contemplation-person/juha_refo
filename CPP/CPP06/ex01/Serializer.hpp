@@ -14,13 +14,12 @@ typedef struct S_Data
 class Serializer
 {
 public:
-    Serializer();
-    ~Serializer();
-
     static uintptr_t serialize(Data* ptr);
     static Data* deserialize(uintptr_t raw);
 
 private:
+    Serializer();
+    ~Serializer();
     Serializer(const Serializer& s);
     const Serializer operator=(const Serializer& s);
 };

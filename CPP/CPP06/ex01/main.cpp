@@ -9,12 +9,11 @@ int main()
 
     std::cout << "dp\t\t: " << dp << std::endl;
 
-    Serializer S;
-    uintptr_t t = S.serialize(dp);
+    uintptr_t t = Serializer::serialize(dp);
     std::cout << "uintptr_t\t: " << dp << std::endl;
     
 
-    dp = S.deserialize(t);
+    dp = Serializer::deserialize(t);
     std::cout << "dp2\t\t: " << dp << std::endl;
     std::cout << "dp in\t\t: " << dp->str << std::endl;
 }
