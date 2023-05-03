@@ -86,4 +86,11 @@ void ScalarConverter::convert(const char* str)
     }
 }
 
+void ScalarConverter::convert(double d)
+{
+    printInt(d);
+    printfloat(d);
+    printDouble(d);
+    
+}
 
