@@ -11,14 +11,13 @@ public :
 	ScalarConverter();
 	~ScalarConverter();
 
-	void convert(const char* str); // char, int, float, double
-	void convert(const char c); // char, int, float, double
+	static void convert(const char* str); // char, int, float, double
 
 private :
-    void printChar(const int d) const;
-    void printInt(const double d) const;
-    void printfloat(const double d) const;
-    void printDouble(const double d) const;
+    static void printChar(const int d) ;
+    static void printInt(const double d) ;
+    static void printfloat(const double d) ;
+    static void printDouble(const double d) ;
 
 	ScalarConverter(const ScalarConverter &other);
 	ScalarConverter &operator=(const ScalarConverter &other);

@@ -6,7 +6,7 @@
 ScalarConverter::ScalarConverter() { }
 ScalarConverter::~ScalarConverter() { }
 
-void ScalarConverter::printChar(const int d) const
+void ScalarConverter::printChar(const int d) 
 {
     char c;
 
@@ -20,7 +20,7 @@ void ScalarConverter::printChar(const int d) const
         std::cout << "\'" << static_cast<char>(d) << "\'" << std::endl;
 }
 
-void ScalarConverter::printInt(const double d) const
+void ScalarConverter::printInt(const double d) 
 {
     if (d > INT_MAX || d < INT_MIN)
     {
@@ -35,13 +35,13 @@ void ScalarConverter::printInt(const double d) const
 }
 
 #include <iomanip>
-void ScalarConverter::printfloat(const double d) const
+void ScalarConverter::printfloat(const double d) 
 {
     // 출력길이 인쇄
     std::cout << "float\t: " << std::fixed << std::setprecision(2) << static_cast<float>(d) << 'f' << std::endl;
 }
 
-void ScalarConverter::printDouble(const double d) const
+void ScalarConverter::printDouble(const double d) 
 {
     // 출력길이 인쇄
     std::cout<< "double\t: "<< d << std::endl;
@@ -84,7 +84,6 @@ void ScalarConverter::convert(const char* str)
         printfloat(d);
         printDouble(d);
     }
-
 }
 
 
