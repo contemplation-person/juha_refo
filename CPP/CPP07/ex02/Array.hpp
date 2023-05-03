@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cstdlib>
+#include <cstring>
 
 template<class T> 
 class Array
@@ -15,16 +16,16 @@ public:
     Array(std::size_t ui); //
     virtual ~Array();
     Array(const Array& arr);
-    T operator=(T t);
-    const Array& operator=(const Array& arr) const;
+    const Array<T>& operator=(T t);
+    Array& operator=(const Array& arr) ;
     void* operator new[](std::size_t ui);
-    T operator[](std::size_t ui);
+    T& operator[](std::size_t ui);
     
-    int size();
+    std::size_t size();
 
 private:
     T*  _arr;
-    int _size;
+    std::size_t _size;
 };
 
 template<class T>
@@ -35,7 +36,9 @@ Array<T>::Array(void)
 }
 
 template<class T>
-Array<T>::~Array(void) { }
+Array<T>::~Array(void) {
+    delete [] _arr;
+}//고쳐
 
 
 template<class T>
@@ -43,62 +46,37 @@ Array<T>::Array(std::size_t ui)
     : _size(ui)
 {
     this->_arr = new T[ui];
-    
-    for (int i = 0; i < ui; i++)
-    {
-        _arr[i] = 0;
-    }
+    memset(_arr, 0, sizeof(T) * this->_size);
 }
 
 template<class T>
 Array<T>::Array(const Array& arr) 
 {
-    this = arr;
+    *this = arr;
 }
 
 template<class T>
-T Array<class T> operator=(T t)
-{
-
-}
-
-template<class T>
-const Array<T>& Array<T>::operator=(const Array& arr) const 
+Array<T>& Array<T>::operator=(const Array& arr) 
 {
     if (this != &arr)
     {
         this->_arr = new T[arr._size];
-        for (int i = 0; i < arr._size;i++)
-        {
-            this->_arr[i] = arr[i];
-        }
+        memmove(this->_arr, arr._arr, sizeof(T) * this->_size);
         this->_size = arr._size;
     }
     return *this; 
 }
     
 template<class T>
-void* Array<T>::operator new[](std::size_t ui) // std::size_t를 써야 한다고 공식문서에 나와있음.
+T& Array<T>::operator[](std::size_t ui)
 {
-    Array tmp(ui);
-    return tmp;
+    if (_size < ui)
+        throw std::out_of_range("out of range");
+    return this->_arr[ui];
 }
 
 template<class T>
-T Array<T>::operator[](std::size_t ui)
-{
-    try
-    {
-        if (static_cast<int>(ui) > INT_MAX)
-            throw std::out_of_range("out of range");
-        return this->_arr[ui];
-    } catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
-    }
-}
-
-template<class T>
-int Array<T>::size()
+std::size_t Array<T>::size()
 {
     return this->_size;
 }
