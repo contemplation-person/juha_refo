@@ -2,8 +2,23 @@
 #include "Array.hpp"
 
 #define MAX_VAL 750
+
+
+/*
+class test
+{
+public:
+    test() : t(5){ };
+    int getterTest(){ std::cout << this->t << std::endl;return this->t;};
+
+private:
+    int t;
+};
+*/
+
 int main(int, char**)
 {
+    //임의 class로 해볼것.
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     (void )mirror;
@@ -50,7 +65,11 @@ int main(int, char**)
         numbers[i] = rand();
     }
     delete [] mirror;//
+
     /*
+    Array<test> te(1);
+
+    te[0].getterTest();
     */
     return 0;
 }
