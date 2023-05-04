@@ -1,5 +1,5 @@
 CXX 		= c++
-CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -Wno-shadow
+CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
 TARGET		= iter 
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp \

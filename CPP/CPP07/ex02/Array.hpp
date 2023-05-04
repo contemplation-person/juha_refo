@@ -21,7 +21,7 @@ public:
     void* operator new[](const std::size_t ui);
     T& operator[](const std::size_t ui);
     
-    std::size_t size();
+    std::size_t size() const;
 
 private:
     T*  _arr;
@@ -84,7 +84,7 @@ T& Array<T>::operator[](const std::size_t ui)
 }
 
 template<class T>
-std::size_t Array<T>::size()
+std::size_t Array<T>::size() const
 {
     return this->_size;
 }

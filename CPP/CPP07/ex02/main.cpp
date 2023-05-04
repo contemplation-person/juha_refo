@@ -29,6 +29,9 @@ int main(int, char**)
         numbers[i] = value;
         mirror[i] = value;
     }
+
+    int * a = new int();
+    std::cout << *a << std::endl;
     //SCOPE
     {
         Array<int> tmp = numbers;
