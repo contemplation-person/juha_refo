@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include <cctype>
 #include <cstdlib>
 #include <string>
 #include <limits>
@@ -6,7 +7,7 @@
 ScalarConverter::ScalarConverter() { }
 ScalarConverter::~ScalarConverter() { }
 
-void ScalarConverter::printChar(const int d) 
+void ScalarConverter::printChar(const double d) 
 {
     char c;
 
@@ -22,75 +23,66 @@ void ScalarConverter::printChar(const int d)
 
 void ScalarConverter::printInt(const double d) 
 {
-    if (d > INT_MAX || d < INT_MIN)
-    {
-        printChar(4242);
+    int i = static_cast<int>(d);
+    if ((d > 0 && i <= 0)
+        ||(d < 0 && i <= 0))
         std::cout << "int\t: impossible" << std::endl;
-    } else {
-        int i = static_cast<char>(d);
-        printChar(i);
-        i = static_cast<int>(d);
-        std::cout <<"int\t: " << i << std::endl;
-    }
+    else
+        std::cout << "int\t: " << i << std::endl;
 }
 
 #include <iomanip>
 void ScalarConverter::printfloat(const double d) 
 {
     // 출력길이 인쇄
-    std::cout << "float\t: " << std::fixed << std::setprecision(2) << static_cast<float>(d) << 'f' << std::endl;
+    float f =  static_cast<float>(d);
+    std::cout << "float\t: " << std::setprecision(std::numeric_limits<float>::digits10) << f << 'f' << std::endl;
 }
 
 void ScalarConverter::printDouble(const double d) 
 {
-    // 출력길이 인쇄
-    std::cout<< "double\t: "<< d << std::endl;
+    std::cout << "double\t: " << std::setprecision(std::numeric_limits<double>::digits10) << d << std::endl;
 }
 
-#include <string>
 void ScalarConverter::convert(const char* str)
 {
-	double	d;
     char    *p_end;
     bool    isNan = false;
+	double  d;
+    bool    isF = false;
 
-    
-    d = std::strtold(str, &p_end);
-/*
+    if (str && str[std::strlen(str) - 1] == 'f')
+        isF = true;
+    d = std::strtod(str,  &p_end);
     std::cout << "origin str\t: " << str << std::endl
-              << "double\t: " << d << std::endl
-              << "p_end\t: " << *p_end << std::endl;
+              << "double\t\t: " << d << std::endl
+              << "p_end\t\t: " << *p_end << std::endl << std::endl;
+/*
 */
-    if (str && strlen(str) == 1)
+    if (d == 0 
+        && std::strlen(str) == 1 
+        && std::strlen(p_end) == 1
+        ) 
     {
-        printInt(*str);  
-        printfloat(*str);
-        printDouble(*str);
-        return ;
-    } else if (*str == '.' 
-        || (*p_end != 'f' && *p_end != '\0') 
-        || strlen(p_end) > 1)
+        printChar(*p_end);
+        printInt(*p_end);
+        printfloat(*p_end);
+        printDouble(*p_end);
+    } 
+    else if (std::strlen(p_end) == 0 || (*p_end == 'f' && std::strlen(p_end) == 1))
     {
-        isNan = true;
-    }
-    if (isNan)
+        (void) isNan;
+        printChar(d);
+        printInt(d);
+        printfloat(d);
+        printDouble(d);
+    } 
+    else 
     {
         std::cout << "char\t: impossible" << std::endl
                   << "int\t: impossible" << std::endl
                   << "float\t: nanf" << std::endl
                   << "double\t: nan" << std::endl;
-    } else {
-        printInt(d);
-        printfloat(d);
-        printDouble(d);
     }
-}
-
-void ScalarConverter::convert(double d)
-{
-    printInt(d);
-    printfloat(d);
-    printDouble(d);
-    
 }
 

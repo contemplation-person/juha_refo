@@ -10,11 +10,10 @@ class ScalarConverter
 public :
 
 	static void convert(const char* str); // char, int, float, double
-	static void convert(double d); // char, int, float, double
 
 
 private :
-    static void printChar(const int d) ;
+    static void printChar(const double d) ;
     static void printInt(const double d) ;
     static void printfloat(const double d) ;
     static void printDouble(const double d) ;
