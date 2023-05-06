@@ -10,7 +10,7 @@ int main()
     std::cout << "dp\t\t: " << dp << std::endl;
 
     uintptr_t t = Serializer::serialize(dp);
-    std::cout << "uintptr_t\t: " << dp << std::endl;
+    std::cout << "uintptr_t\t: " << t << std::endl;
     
 
     dp = Serializer::deserialize(t);
