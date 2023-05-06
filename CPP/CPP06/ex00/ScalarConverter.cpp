@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include <cctype>
 #include <cstdlib>
+#include <cstring>
 #include <string>
 #include <limits>
 
@@ -49,16 +50,17 @@ void ScalarConverter::convert(const char* str)
     char    *p_end;
     bool    isNan = false;
 	double  d;
-    bool    isF = false;
+    const char    *point = std::strchr(str, '.');
 
-    if (str && str[std::strlen(str) - 1] == 'f')
-        isF = true;
     d = std::strtod(str,  &p_end);
+/*
     std::cout << "origin str\t: " << str << std::endl
               << "double\t\t: " << d << std::endl
               << "p_end\t\t: " << *p_end << std::endl << std::endl;
-/*
+
 */
+    if (point && std::strlen(point) == 2 && point[1] == 'f')
+        isNan = true;
     if (d == 0 
         && std::strlen(str) == 1 
         && std::strlen(p_end) == 1
@@ -69,9 +71,8 @@ void ScalarConverter::convert(const char* str)
         printfloat(*p_end);
         printDouble(*p_end);
     } 
-    else if (std::strlen(p_end) == 0 || (*p_end == 'f' && std::strlen(p_end) == 1))
+    else if ((std::strlen(p_end) == 0 || (*p_end == 'f' && std::strlen(p_end) == 1)) && !isNan)
     {
-        (void) isNan;
         printChar(d);
         printInt(d);
         printfloat(d);
