@@ -25,8 +25,9 @@ void ScalarConverter::printChar(const double d)
 void ScalarConverter::printInt(const double d) 
 {
     int i = static_cast<int>(d);
+    //std::cout << "int : " << i << ", double : " << d << std::endl;
     if ((d > 0 && i <= 0)
-        ||(d < 0 && i <= 0))
+        ||(d > 0 && i <= 0))
         std::cout << "int\t: impossible" << std::endl;
     else
         std::cout << "int\t: " << i << std::endl;
