@@ -1,23 +1,12 @@
 #pragma once
-#ifndef __EASY_FIND__
-#define __EASY_FIND__
+#ifndef __EASYFIND_HPP__
+#define __EASYFIND_HPP__
 
+#include <algorithm>
 template <class T>
-class EasyFind {
-public:
-    EasyFind(T& t, const int& integer);
-private:
-    EasyFind();
-    ~EasyFind();
-    EasyFind(const EasyFind& e);
-    const EasyFind& operator=(const EasyFind& e);
-};
-
-template <class T>
-EasyFind<T>::EasyFind(T& t, const int& integer)
+class T::iterator easyfind(T &container, int n)
 {
-    int
-    int []
-    container
-};
+    return std::find(container.begin(), container.end(), n);
+}
+
 #endif 

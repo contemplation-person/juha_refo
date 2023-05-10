@@ -1,18 +1,17 @@
-#include "whatever.hpp"
-#include <iostream>
+#include "easyfind.hpp"
 
-int main( void ) {
-    int a = 2;
-    int b = 3;
-    ::swap( a, b );
-    std::cout << "a = " << a << ", b = " << b << std::endl;
-    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
-    std::string c = "chaine1";
-    std::string d = "chaine2";
-    ::swap(c, d);
-    std::cout << "c = " << c << ", d = " << d << std::endl;
-    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+#include <iostream>
+#include <vector>
+#include <list>
+#include <deque>
+
+int main(void) 
+{
+    std::vector<int> v;
+    std::list<int> l = {1, 2, 3, 4};
+    std::deque<int> d = {1, 2, 3, 4};
+    easyfind(v, 1);
+    std::cout << *easyfind(l, 1) << std::endl;
+    std::cout << *easyfind(d, 2) << std::endl;
     return 0;
 }
