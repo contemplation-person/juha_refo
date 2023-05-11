@@ -25,10 +25,7 @@ Span& Span::operator=(const Span& span)
 
 void Span::addNumber(int num)
 {
-	if (_numbers.size() < _numbers.capacity())
-		_numbers.push_back(num);
-	else
-		throw "Span is full";
+    _numbers.push_back(num);
 }
 
 #include <algorithm>
