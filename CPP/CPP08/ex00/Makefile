@@ -2,7 +2,7 @@ CXX 		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 TARGET		= whatever 
 OBJS		= $(SRCS:.cpp=.o)
-SRCS 		= 
+SRCS 		= main.cpp
 			  
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
