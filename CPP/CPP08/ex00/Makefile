@@ -1,6 +1,6 @@
-CXX 		= c++
+CXX				= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address
-TARGET		= whatever 
+TARGET		= easyfind
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp
 			  

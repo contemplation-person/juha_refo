@@ -3,8 +3,9 @@
 #define __EASYFIND_HPP__
 
 #include <algorithm>
-template <class T>
-class T::iterator easyfind(T &container, int n)
+
+template <typename T>
+typename T::iterator easyfind(T &container, int n)
 {
     return std::find(container.begin(), container.end(), n);
 }
