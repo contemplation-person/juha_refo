@@ -4,19 +4,11 @@
 
 #include <iostream>
 
-template<class T>
-void callArr(T* arr, int arrLen)
+template<typename T>
+void iter(T* arr, int arrLen, void(*f)(const T &))
 {
     for (int i = 0; i < arrLen; i++)
-    {
-        std::cout << arr[i] << std::endl;
-    }
-}
-
-template<class T>
-void iter(T *arr, int arrLen, void (*callArr)(T*,int))
-{
-    callArr(arr, arrLen);
+        f(arr[i]);
 };
 
 #endif

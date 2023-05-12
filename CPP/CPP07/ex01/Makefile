@@ -2,7 +2,7 @@ CXX 		= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98
 TARGET		= iter 
 OBJS		= $(SRCS:.cpp=.o)
-SRCS 		= main.cpp \
+SRCS 		= main.cpp
 			  
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
