@@ -6,8 +6,7 @@ Span::Span(unsigned int capacity)
 	_numbers.reserve(capacity);
 }
 
-Span::~Span() 
-{ }
+Span::~Span() { }
 
 Span::Span(const Span& span)
 {
