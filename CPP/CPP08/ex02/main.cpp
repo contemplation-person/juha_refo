@@ -24,5 +24,7 @@ int main()
         ++it;
     }
     std::stack<int> s(mstack);
+    if (!mstack.empty())
+        std::cout << "not empty! this sentance is for evaluating" << std::endl;
     return 0;
 }
