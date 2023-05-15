@@ -13,6 +13,7 @@ public :
 	int		shortestSpan();
 	int		longestSpan();
 	void	addNumber(int num);
+	void	addNumber(int num, int num2);
 
 private :
 	Span();

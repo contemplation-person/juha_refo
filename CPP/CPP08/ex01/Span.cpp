@@ -1,6 +1,5 @@
 #include "Span.hpp"
 
-
 Span::Span(unsigned int capacity)
 {
 	_numbers.reserve(capacity);
@@ -27,7 +26,16 @@ void Span::addNumber(int num)
     _numbers.push_back(num);
 }
 
+void Span::addNumber(int num, int num2)
+{
+    if (num > num2)
+        return ;
+    for (int i = num; i < num2; i++)
+        _numbers.push_back(i);
+}
+
 #include <algorithm>
+
 int Span::shortestSpan()
 {
 	if (_numbers.size() < 2)
