@@ -1,6 +1,6 @@
 CXX			= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address
-TARGET		= easyfind
+TARGET		= btc
 OBJS		= $(SRCS:.cpp=.o)
 SRCS 		= main.cpp
 			= BitcoinExchange.cpp

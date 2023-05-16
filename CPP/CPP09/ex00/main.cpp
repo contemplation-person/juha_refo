@@ -1,25 +1,14 @@
-#include "easyfind.hpp"
-
-#include <stdexcept>
+#include <cstdio>
 #include <iostream>
-#include <vector>
-#include <list>
-#include <deque>
+#include <cstdlib>
+#include "BitcoinExchange.hpp"
 
-int main(void) 
+int main(int argc, char **argv) 
 {
-    std::vector<int> v;
-    std::list<int> l;
-    std::deque<int> d;
-    for (int i = 0; i < 4; i++)
-    {
-        d.push_back(i);
-        l.push_back(i);
-    }
-
-    easyfind(v, 1);
-    std::cout << *easyfind(l, 1) << std::endl;
-    std::cout << *easyfind<std::deque<int> >(d, 2) << std::endl;
-    
-    return 0;
+    if (argc != 2)
+       std::cout << "\033[31m인자 갯수가 맞지 않습니다.\033[0m" << std::endl;
+    std::FILE* fp = fopen(argv[1], "r");
+    if (!fp)
+       std::cout << "\033[31mError: could not open file.\033[0m" << std::endl;
+    //
 }
