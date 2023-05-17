@@ -1,9 +1,9 @@
 #include "BitcoinExchange.hpp"
 #include <iostream>
-#include <cstdlib>
 #include <string>
 #include <fstream>
 #include <cstring>
+#include <cstdlib>
 
 static bool isLeapYear(int year) 
 {
@@ -15,7 +15,7 @@ static bool isDateNumber(std::string& date, long& year, long& month, long& day)
 {
 	date.at(4) = '0';
 	date.at(7) = '0';
-	for (long unsigned int i = 0; i < date.size(); i++)
+	for (long unsigned int i = 0; i < date.length(); i++)
 	{
 		if (date[i] < '0' || date[i] > '9')
 			return false;
@@ -28,23 +28,44 @@ static bool isDateNumber(std::string& date, long& year, long& month, long& day)
 
 static bool isValidDate(std::string date, int &i_date)
 {
-	std::cout << "comment - date : " << date << std::endl;
+	if (date.empty())
+		return false;
+	date.erase(0, date.find_first_not_of(" \t\n\r\f\v"));
+	date.erase(date.find_last_not_of(" \t\n\r\f\v") + 1);
 	if (date[4] != '-' || date[7] != '-')
 		return false;
+
 	long year;
 	long month;
 	long day;
-	if (isDateNumber(date, year, month, day) == false)
+
+	// std::cout << "comment - date : " << date << std::endl;
+	if (!isDateNumber(date, year, month, day))
+	{
+		std::cout << "\033[31mError: Bad input => " << date << "\033[0m" << std::endl;
 		return false;
+	}
 	if (isLeapYear(year) && month == 2 && day > 29)
+	{
+		std::cout << "\033[31mError: Bad input(check LeapYear) => " << date << "\033[0m" << std::endl;
 		return false;
+	}
 	else if (month == 2 && day > 28)
+	{
+		std::cout << "\033[31mError: Bad input(check LeapYear) => " << date << "\033[0m" << std::endl;
 		return false;
+	}
 	else if ((month == 4 || month == 6 || month == 9 || month == 11) 
 			&& day > 30)
+	{
+		std::cout << "\033[31mError: Bad input => " << date << "\033[0m" << std::endl;
 		return false;
+	}
 	else if (day > 31)
+	{
+		std::cout << "\033[31mError: Bad input => " << date << "\033[0m" << std::endl;
 		return false;
+	}
 	i_date = year * 10000 + month * 100 + day;
 	return true;
 }
@@ -56,63 +77,165 @@ double BitcoinExchange::getValue(const int& key)
 	return _data[key];
 }
 
-BitcoinExchange::BitcoinExchange() 
+static bool isValidValue(std::string value, double& d_value)
 {
-	FILE* fp = fopen("data.csv", "r");
-	if (!fp)
-	{
-		std::cout << "\033[31mError: could not open file.\033[0m" << std::endl;
-		return ;
-	}
+	if (value.empty())
+		return false;
+	value.erase(0, value.find_first_not_of(" \t\n\r\f\v"));
+	value.erase(value.find_last_not_of(" \t\n\r\f\v") + 1);
 
-	std::string	line;
-	char		tmp[1024];
-	int			date;
-	double		value;
+	char*	endptr;
+	long	i_value = std::strtol(value.c_str(), &endptr, 10);
 
-	while (std::fscanf(fp, "%s\n", tmp) != EOF)
+	d_value = std::strtod(value.c_str(), &endptr);
+
+	if (endptr && *endptr)
 	{
-		line = tmp;
-		std::cout << "comment - line : " << line << std::endl;
-		isValidDate(line.substr(0, 10), date);
-		value = std::strtod(line.substr(11).c_str(), NULL);
-		if (value == 0)
-			value = ZERO;
-		_data[date] = value;
-		std::cout << "\033[31mcomment - date : " << date 
-				<< ", value : \033[0m" << value << std::endl;
+		std::cout << "\033[31mError: invalid value.\033[0m" << std::endl;
+		return false;
 	}
-	fclose(fp);
+	if (static_cast<double>(i_value) == d_value)
+	{
+		// std::cout << "comment this - " << d_value << std::endl;
+		if (!(0 < d_value && d_value < 2147483648))
+		{
+			std::cout << "\033[31mError: range invalid - 0 < int number < 2147483648.\033[0m" << std::endl;
+			return false;
+		}
+	}
+	else
+	{
+		if (!(0 < d_value && d_value < 1000))
+		{
+			std::cout << "\033[31mError: range invalid - 0 < double number < 1000.\033[0m" << std::endl;
+			return false;
+		}
+	}
+	return true;
 }
 
-/*
-void BitcoinExchange::setData(char *fileName) 
+bool BitcoinExchange::calculate(const std::string& fileName)
 {
-	FILE* fp = fopen(fileName, "r");
-	if (!fp)
+	std::ifstream ifs(fileName.c_str());
+	if (!ifs.is_open())
 	{
-		std::cout << "\033[31mError: could not open file.\033[0m" << std::endl;
-		return ;
+		std::cout << "\033[31mError: could not read file.\033[0m" << std::endl;
+		return false;
 	}
+
 	std::string	line;
 	int			date;
 	double		value;
+	std::map<int, double>::iterator it;
 
-	while (std::getline(fp, line))
+	std::getline(ifs, line);
+	while (!ifs.eof())
 	{
-		
-		if(isValidDate(line.substr(0, 10), date) 
-			&& isValidValue(line.substr(11), value)
-			&& line[10] == ',')	
+		std::getline(ifs, line);
+		line.erase(0, line.find_first_not_of(" \t\n\r\f\v"));
+		line.erase(line.find_last_not_of(" \t\n\r\f\v") + 1);
+		// std::cout << "comment this line : " << line.length() << std::endl;
+		if (line.length() < 10)
 		{
-			std::cout << "comment - , : " << line[10] << std::endl;
-			_data[date] = value;
+			std::cout << "\033[31mError: Bad input. => "<< line << "\033[0m" << std::endl;
 		}
+		else if (line.length() > 12 
+				&& isValidValue(line.substr(12), value) 
+				&& isValidDate(line.substr(0, 10), date) 
+				&& line.find('|') != std::string::npos)
+		{
+			// std::cout << "comment - date : " << date 
+			// 		  << ", value : " << value << std::endl;
+			it = _data.find(date);
+			if (it != _data.end())
+			{
+				std::cout << line.substr(0, 10) << " => " 
+						  << value << " = " 
+						  << _data[it->second] * value << std::endl;
+				// std::cout << "comment 1 it->second : " << it->first << std::endl;
+				// std::cout << "comment 1 value : " << value << std::endl;
+			}
+			else
+			{
+				if (date > _data.rend().base()->second)
+				{
+					std::cout << "\033[31mError: date is out of range.\033[0m" << std::endl;
+					continue ;	
+				}
+				for (int i = date; i < _data.rend().base()->second; i++)
+				{
+					it = _data.find(i);
+					if (it != _data.end())
+					{
+						std::cout << line.substr(0, 10) << " => " 
+								  << value << " = " 
+								  << (it->second) * value << std::endl;
+						std::cout << "comment 2 it->second : " << it->first << std::endl;
+						std::cout << "comment 2 value : " << value << std::endl;
+						break ;
+					}
+				}			
+				std::cout << "\033[31mError: date is out of range.\033[0m" << std::endl;
+			}
+		} 
 		else
 		{
-			std::cout << "\033[31mError: invalid file format.\033[0m" << std::endl;
-			return ;
+			//comment
+			std::cout << "wtf" << std::endl;
+			std::cout << "line len\t: "<< (line.length() > 12) << std::endl;
+			std::cout << "isValidValue\t: " << isValidValue(line.substr(12), value)  << std::endl;
+			std::cout << "isValidDate\t: " << isValidDate(line.substr(0, 10), date) << std::endl;
+			std::cout << "line find(|)\t: " <<  ((line.find('|') !=  std::string::npos) ? "true" : "false") << std::endl;
+			std::cout << "comment this - " << line << std::endl;
+
+			std::cout << "\033[31mError: Bad input. => "<< line << "\033[0m" << std::endl;
 		}
 	}
+	ifs.close();
+	return true;	
 }
-*/
+
+BitcoinExchange::BitcoinExchange(const std::string& fileName) 
+{
+	std::ifstream ifs("data.csv");
+	if (!ifs.is_open())
+	{
+		std::cout << "\033[31mError: could not read file.\033[0m" << std::endl;
+		return ;
+	}
+
+	std::string	line;
+	int			date;
+	double		value;
+	
+	std::getline(ifs, line);
+	while (!ifs.eof())
+	{
+		std::getline(ifs, line);
+		// std::cout << "line : " << line << std::endl;
+		// std::cout << "line.length() : " << line.length() << std::endl;
+		// std::cout << "line[4] : " << line[4] << std::endl;
+		// std::cout << "line[7] : " << line[7] << std::endl;
+		// std::cout << "line[10] : " << line[10] << std::endl;
+
+		line.erase(0, line.find_first_not_of(" \t\n\r\f\v"));
+		line.erase(line.find_last_not_of(" \t\n\r\f\v") + 1);
+		if (line[4] != '-' || line[7] != '-'
+			|| line[10] != ',')
+		{
+			std::cout << "\033[31mPass date " << "\033[0m" << std::endl;
+			continue ;
+		}
+		// std::cout << "comment - line : " << line << std::endl;
+		if (!line.empty())
+		{
+			isValidDate(line.substr(0, 9), date);
+			value = std::strtod(line.substr(11).c_str(), NULL);
+			_data[date] = value;
+			// std::cout << "\033[31mcomment - date : " << date 
+				// << ", value : \033[0m" << value << std::endl;
+		}
+	}
+	ifs.close();
+	calculate(fileName);
+}

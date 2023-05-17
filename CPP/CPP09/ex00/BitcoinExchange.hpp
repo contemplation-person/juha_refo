@@ -2,16 +2,17 @@
 #define __BITCOIN_EXCHANGE_HPP__
 
 #include <map>
-#include <ctime>
-#define ZERO -1
+#include <string>
 
 class BitcoinExchange {
 public:
-    BitcoinExchange();
+    BitcoinExchange(const std::string& fileName);
     ~BitcoinExchange();
 
+    bool calculate(const std::string& fileName);
     double getValue(const int& key);
 private:
+    BitcoinExchange();
     BitcoinExchange(const BitcoinExchange& copy);
     const BitcoinExchange& operator=(const BitcoinExchange& copy);
     std::map<int, double> _data;
