@@ -157,12 +157,15 @@ bool BitcoinExchange::calculate(const std::string& fileName)
 			}
 			else
 			{
-				if (date > _data.rend().base()->second)
+				//comment
+				// std::cout << "date : " << date << std::endl;
+				// std::cout << "rbegin : " << _data.rbegin()->first << std::endl;
+				if (date > _data.rbegin()->first)
 				{
 					std::cout << "\033[31mError: date is out of range.\033[0m" << std::endl;
 					continue ;	
 				}
-				for (int i = date; i < _data.rend().base()->second; i++)
+				for (int i = date; i < _data.rbegin()->first; i++)
 				{
 					it = _data.find(i);
 					if (it != _data.end())
@@ -170,23 +173,22 @@ bool BitcoinExchange::calculate(const std::string& fileName)
 						std::cout << line.substr(0, 10) << " => " 
 								  << value << " = " 
 								  << (it->second) * value << std::endl;
-						std::cout << "comment 2 it->second : " << it->first << std::endl;
-						std::cout << "comment 2 value : " << value << std::endl;
+						// std::cout << "comment 2 it->second : " << it->first << std::endl;
+						// std::cout << "comment 2 value : " << value << std::endl;
 						break ;
 					}
 				}			
-				std::cout << "\033[31mError: date is out of range.\033[0m" << std::endl;
 			}
 		} 
 		else
 		{
 			//comment
-			std::cout << "wtf" << std::endl;
-			std::cout << "line len\t: "<< (line.length() > 12) << std::endl;
-			std::cout << "isValidValue\t: " << isValidValue(line.substr(12), value)  << std::endl;
-			std::cout << "isValidDate\t: " << isValidDate(line.substr(0, 10), date) << std::endl;
-			std::cout << "line find(|)\t: " <<  ((line.find('|') !=  std::string::npos) ? "true" : "false") << std::endl;
-			std::cout << "comment this - " << line << std::endl;
+			// std::cout << "wtf" << std::endl;
+			// std::cout << "line len\t: "<< (line.length() > 12) << std::endl;
+			// std::cout << "isValidValue\t: " << isValidValue(line.substr(12), value)  << std::endl;
+			// std::cout << "isValidDate\t: " << isValidDate(line.substr(0, 10), date) << std::endl;
+			// std::cout << "line find(|)\t: " <<  ((line.find('|') !=  std::string::npos) ? "true" : "false") << std::endl;
+			// std::cout << "comment this - " << line << std::endl;
 
 			std::cout << "\033[31mError: Bad input. => "<< line << "\033[0m" << std::endl;
 		}
@@ -229,7 +231,7 @@ BitcoinExchange::BitcoinExchange(const std::string& fileName)
 		// std::cout << "comment - line : " << line << std::endl;
 		if (!line.empty())
 		{
-			isValidDate(line.substr(0, 9), date);
+			isValidDate(line.substr(0, 10), date);
 			value = std::strtod(line.substr(11).c_str(), NULL);
 			_data[date] = value;
 			// std::cout << "\033[31mcomment - date : " << date 
@@ -237,5 +239,13 @@ BitcoinExchange::BitcoinExchange(const std::string& fileName)
 		}
 	}
 	ifs.close();
+	/*
+	std::map<int,double>::iterator it = _data.begin();
+	while (it != _data.end())
+	{
+		std::cout << it->first << " and " << it->second << std::endl;
+		it++;
+	}
+	*/
 	calculate(fileName);
 }
