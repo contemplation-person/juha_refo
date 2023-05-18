@@ -180,18 +180,18 @@ bool BitcoinExchange::calculate(const std::string& fileName)
 				}			
 			}
 		} 
-		else
-		{
+		// else
+		// {
 			//comment
-			// std::cout << "wtf" << std::endl;
+			// std::cout << "wtf" << st[K]::endl;
 			// std::cout << "line len\t: "<< (line.length() > 12) << std::endl;
 			// std::cout << "isValidValue\t: " << isValidValue(line.substr(12), value)  << std::endl;
 			// std::cout << "isValidDate\t: " << isValidDate(line.substr(0, 10), date) << std::endl;
 			// std::cout << "line find(|)\t: " <<  ((line.find('|') !=  std::string::npos) ? "true" : "false") << std::endl;
 			// std::cout << "comment this - " << line << std::endl;
 
-			std::cout << "\033[31mError: Bad input. => "<< line << "\033[0m" << std::endl;
-		}
+			// std::cout << "\033[31mError: Bad input. => "<< line << "\033[0m" << std::endl;
+		// }
 	}
 	ifs.close();
 	return true;	
