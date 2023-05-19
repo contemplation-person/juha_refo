@@ -1,25 +1,21 @@
-#include "easyfind.hpp"
-
-#include <stdexcept>
+#include "RPN.hpp"
 #include <iostream>
-#include <vector>
-#include <list>
-#include <deque>
 
-int main(void) 
+int main(int argc, char **argv) 
 {
-    std::vector<int> v;
-    std::list<int> l;
-    std::deque<int> d;
-    for (int i = 0; i < 4; i++)
+    if (argc != 2)
     {
-        d.push_back(i);
-        l.push_back(i);
+        std::cout << "제발 제대로 된 인풋을 넣어주세요." << std::endl;
+        return 0;
     }
-
-    easyfind(v, 1);
-    std::cout << *easyfind(l, 1) << std::endl;
-    std::cout << *easyfind<std::deque<int> >(d, 2) << std::endl;
+    try
+    {
+        RPN(*(argv + 1));
+    } 
+    catch(const std::exception& e) 
+    {
+        std::cout << e.what() << std::endl;
+    }
     
     return 0;
 }

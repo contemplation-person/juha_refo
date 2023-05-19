@@ -1,14 +1,17 @@
 CXX			= c++
-CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address
-TARGET		= RPN
+CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g3
+TARGET		= RPN 
 OBJS		= $(SRCS:.cpp=.o)
-SRCS 		= main.cpp\ 
+SRCS 		= main.cpp \
 			  RPN.cpp
 			  
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
 
 .PHONY : all clean fclean re
+
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 all : 
 	$(TARGET)

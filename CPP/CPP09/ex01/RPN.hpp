@@ -1,26 +1,38 @@
 #ifndef __RPN_HPP__
 #define __RPN_HPP__
 
-#include <string>
+#include <exception>
 
 class RPN {
 public:
-	RPN(std::string str);
+	RPN(const char *str);
 	~RPN();
 
 private:
-	class RPNOutofException : public std::exception {
-	public:
-		RPNOutofException() throw();
-		RPNOutofException(const RPNOutofException& rpn) throw();
-		RPNOutofException& operator=(const RPNOutofException& rpn) throw();
-		virtual ~RPNOutofException() throw();
-		virtual const char* what() const throw();
-	};
 	RPN();
 	RPN(const RPN& rpn);
 	RPN& operator=(const RPN& rpn);
 
+	const char* _str;
+
+	class OutofRange: public std::exception 
+	{
+	public:
+		virtual const char* what() const throw();
+	};
+
+
+	class BadInput: public std::exception 
+	{
+	public:
+		virtual const char* what() const throw();
+	};
+
+	class DividZero: public std::exception 
+	{
+	public:
+		virtual const char* what() const throw();
+	};
 };
 
 #endif
