@@ -1,8 +1,9 @@
 CXX			= c++
 CXXFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address
-TARGET		= easyfind
+TARGET		= PmergeMe
 OBJS		= $(SRCS:.cpp=.o)
-SRCS 		= main.cpp
+SRCS 		= main.cpp \
+			  PmergeMe.cpp
 			  
 $(TARGET) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $(TARGET) 
@@ -23,4 +24,3 @@ fclean :
 re :
 	@make fclean
 	@make 
-

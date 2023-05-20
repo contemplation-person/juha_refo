@@ -1,25 +1,44 @@
-#include "easyfind.hpp"
-
-#include <stdexcept>
+#include "PmergeMe.hpp"
 #include <iostream>
-#include <vector>
-#include <list>
-#include <deque>
 
-int main(void) 
+// using unsigned int;
+// murge insert sort
+// error input "2 2 1 4";
+// program input is  3000
+
+//print output
+//Before
+//After
+// A sort name time and range
+
+int main(int argc, char **argv) 
 {
-    std::vector<int> v;
-    std::list<int> l;
-    std::deque<int> d;
-    for (int i = 0; i < 4; i++)
+    while (argc < 2)
     {
-        d.push_back(i);
-        l.push_back(i);
+        std::cout << "Please input a number" << std::endl;
+        return 0;
     }
 
-    easyfind(v, 1);
-    std::cout << *easyfind(l, 1) << std::endl;
-    std::cout << *easyfind<std::deque<int> >(d, 2) << std::endl;
+    std::string s = makeString(argc, argv);
+    std::vector<int> v;
+    std::list<int> l;
+
+    try
+    {
+        parse(s, v);
+        parse(s, l);
+        //check time value
+        sort(v);
+        //check time value
+        //check time value
+        sort(l);
+        //check time value
+        printResult(s, v, l);
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+    }
     
-    return 0;
+
 }
