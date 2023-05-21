@@ -4,31 +4,29 @@
 #include <climits>
 #include <vector>
 #include <list>
-
-class emptyString : public std::exception
-{
-public:
-	virtual const char* what() const throw();
-};
+#include <sstream>
+#include <exception>
 
 std::string makeString(int argc, char **argv);
 void printResult(std::string const& s, std::vector<int> const& v
 				, std::list<int> const& l);
 
+/*------------------------template-------------------------------*/
+
 template <typename T>
 void sort(T& container)
 {
 	int minRun = container.size() / 32;
-	
 
+	divide(container, minRun);
 }
 
 template <typename T>
 void parse(std::string const& s, T& t)
 {
 	if (s.empty())
-		throw emptyString::emptyString();
-	if (s.find_first_not_of("0123456789 ") == std::string::npos)
+		throw std::invalid_argument("empty string");
+	if (s.find_first_not_of("0123456789 ") != std::string::npos)
 		throw std::invalid_argument("Bad input");
 
 	std::stringstream sstream(s);

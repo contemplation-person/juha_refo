@@ -1,11 +1,6 @@
 #include "PmergeMe.hpp"
 #include <iostream>
 
-const char* emptyString::what() const throw()
-{
-	return "empty string";
-}
-
 std::string makeString(int argc, char **argv)
 {
 	std::string s;
@@ -20,8 +15,10 @@ std::string makeString(int argc, char **argv)
 }
 
 void printResult(std::string const& s, std::vector<int> const& v
-				, std::list<int> const& l)
+				, std::list<int>& l)
 {
+	(void) l;
+
 	std::cout << "Before: " << s << std::endl;
 	std::cout << "After: ";
 	for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); it++)

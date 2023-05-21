@@ -20,20 +20,24 @@ int main(int argc, char **argv)
     }
 
     std::string s = makeString(argc, argv);
+    // std::cout << s << std::endl;
     std::vector<int> v;
     std::list<int> l;
 
     try
     {
-        parse(s, v);
-        parse(s, l);
         //check time value
+        parse(s, v);
         sort(v);
         //check time value
+
         //check time value
+        parse(s, l);
+/*
         sort(l);
         //check time value
         printResult(s, v, l);
+*/
     }
     catch(const std::exception& e)
     {
