@@ -3,30 +3,30 @@
 
 std::string makeString(int argc, char **argv)
 {
-	std::string s;
+	std::string str;
 
     for (int i = 1; i < argc; i++)
     {
-        s += argv[i];
+        str+= argv[i];
         if (i != argc - 1)
-            s += " ";
+            str+= " ";
     }
-	return s;
+	return str;
 }
 
-void printResult(std::string const& s, std::vector<int> const& v
-				, std::list<int>& l)
+void printResult(std::string const& input, std::vector<int> const& vector
+				, std::list<int>& list)
 {
-	(void) l;
+	(void) list;
 
-	std::cout << "Before: " << s << std::endl;
+	std::cout << "Before: " << input << std::endl;
 	std::cout << "After: ";
-	for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); it++)
+	for (std::vector<int>::const_iterator it = vector.begin(); it != vector.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
-	std::cout << "Time to process a range of \t " << v.size() << " elements with std::vector : " << std::endl;
+	std::cout << "Time to process a range of \t " << vector.size() << " elements with std::vector : " << std::endl;
 	//vector time
-	std::cout << "Time to process a range of \t " << v.size() << " elements with std::list   : " << std::endl;
+	std::cout << "Time to process a range of \t " << vector.size() << " elements with std::list   : " << std::endl;
 	//list time
 
 

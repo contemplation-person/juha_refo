@@ -19,24 +19,24 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    std::string s = makeString(argc, argv);
-    // std::cout << s << std::endl;
-    std::vector<int> v;
-    std::list<int> l;
+    std::string input = makeString(argc, argv);
+    // std::cout << input << std::endl;
+    std::vector<int> vector;
+    std::list<int> list;
 
     try
     {
         //check time value
-        parse(s, v);
-        sort(v);
+        parse(input, vector);
+        sort(vector);
         //check time value
 
         //check time value
-        parse(s, l);
+        parse(input, list);
 /*
-        sort(l);
+        sort(list);
         //check time value
-        printResult(s, v, l);
+        printResult(input, vector, list);
 */
     }
     catch(const std::exception& e)

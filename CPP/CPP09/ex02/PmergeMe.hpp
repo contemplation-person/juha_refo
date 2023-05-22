@@ -1,5 +1,7 @@
 #ifndef __PmergeMe_hpp__
 #define __PmergeMe_hpp__
+#define RUN 32
+
 #include <string>
 #include <climits>
 #include <vector>
@@ -8,28 +10,30 @@
 #include <exception>
 
 std::string makeString(int argc, char **argv);
-void printResult(std::string const& s, std::vector<int> const& v
-				, std::list<int> const& l);
+void printResult(std::string const& input, std::vector<int> const& vector
+				, std::list<int> const& list);
 
 /*------------------------template-------------------------------*/
 
 template <typename T>
 void sort(T& container)
 {
-	int minRun = container.size() / 32;
+	int minRun = container.size() / RUN;
+    int remain = container.size() % RUN;
 
-	divide(container, minRun);
+    for (int i = 0; i < RUN; i++)
+
 }
 
 template <typename T>
-void parse(std::string const& s, T& t)
+void parse(std::string const& input, T& container)
 {
-	if (s.empty())
+	if (input.empty())
 		throw std::invalid_argument("empty string");
-	if (s.find_first_not_of("0123456789 ") != std::string::npos)
+	if (input.find_first_not_of("0123456789 ") != std::string::npos)
 		throw std::invalid_argument("Bad input");
 
-	std::stringstream sstream(s);
+	std::stringstream sstream(input);
 
 	long long l;
 
@@ -39,7 +43,7 @@ void parse(std::string const& s, T& t)
 		{
 			throw std::out_of_range("Out of range");
 		}
-		t.push_back(static_cast<int>(l));
+		container.push_back(static_cast<int>(l));
 		if (sstream.peek() == ' ')
 			sstream.ignore();
 	}
