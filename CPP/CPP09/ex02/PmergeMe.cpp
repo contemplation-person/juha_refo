@@ -1,5 +1,4 @@
 #include "PmergeMe.hpp"
-#include <iostream>
 
 std::string makeString(int argc, char **argv)
 {
@@ -15,9 +14,9 @@ std::string makeString(int argc, char **argv)
 }
 
 void printResult(std::string const& input, std::vector<int> const& vector
-				, std::list<int>& list)
+				, std::deque<int>& deque)
 {
-	(void) list;
+	(void) deque;
 
 	std::cout << "Before: " << input << std::endl;
 	std::cout << "After: ";
@@ -26,8 +25,8 @@ void printResult(std::string const& input, std::vector<int> const& vector
 	std::cout << std::endl;
 	std::cout << "Time to process a range of \t " << vector.size() << " elements with std::vector : " << std::endl;
 	//vector time
-	std::cout << "Time to process a range of \t " << vector.size() << " elements with std::list   : " << std::endl;
-	//list time
+	std::cout << "Time to process a range of \t " << vector.size() << " elements with std::deque   : " << std::endl;
+	//deque time
 
 
 }

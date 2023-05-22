@@ -5,24 +5,87 @@
 #include <string>
 #include <climits>
 #include <vector>
-#include <list>
+#include <deque>
 #include <sstream>
 #include <exception>
+#include <iostream>
 
 std::string makeString(int argc, char **argv);
 void printResult(std::string const& input, std::vector<int> const& vector
-				, std::list<int> const& list);
+				, std::deque<int> const& list);
 
 /*------------------------template-------------------------------*/
+
+template <typename T>
+void insertSort(T& container, int minRun, int remain, int count)
+{
+	if (count > 1)
+	{
+		//로직 문제 있음. 자고 생각하기
+		for (int i = count * RUN; i < (count + 1) * RUN; i++)
+		{
+			for (int j = i; count * RUN < j; j--)
+			{
+				if (container[j] < container[j - 1])
+					std::swap(container[j], container[j - 1]);
+				else
+					break ;
+			}
+		}
+		insertSort(container, minRun, remain, count - 1);
+	}
+	else if (count == 1)
+	{
+		for (std::size_t i = (minRun - 1) * RUN; i < container.size(); i++)
+		{
+			for (int j = i; (minRun - 1) * RUN < j; j--)
+			{
+				if (container[j] < container[j - 1])
+					std::swap(container[j], container[j - 1]);
+				else
+					break ;
+			}
+		}
+		return ;
+	}
+	else if (minRun < 1)
+	{
+		for (std::size_t i = 0; i < container.size(); i++)
+		{
+			for (int j = i; 0 < j; j--)
+			{
+				if (container[j] < container[j - 1])
+					std::swap(container[j], container[j - 1]);
+				else
+					break ;
+			}
+		}
+		return ;
+	}
+}
+
+/*
+template <typename T>
+void mergeSort(T& container, int location, int size)
+{
+	T tmp.reserve(size);
+
+	tmp = container.begin() + location;
+
+}
+*/
 
 template <typename T>
 void sort(T& container)
 {
 	int minRun = container.size() / RUN;
-    int remain = container.size() % RUN;
+	int remain = container.size() % RUN;
 
-    for (int i = 0; i < RUN; i++)
-
+	insertSort(container, minRun, remain, minRun);
+	std::cout << "test : ";
+	for (std::size_t i = 0; i < container.size(); i++)
+		std::cout << container[i] << " ";
+//	mergeSort(container, 0, RUN);
 }
 
 template <typename T>

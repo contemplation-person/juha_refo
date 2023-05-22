@@ -1,5 +1,4 @@
 #include "PmergeMe.hpp"
-#include <iostream>
 
 // using unsigned int;
 // murge insert sort
@@ -22,7 +21,7 @@ int main(int argc, char **argv)
     std::string input = makeString(argc, argv);
     // std::cout << input << std::endl;
     std::vector<int> vector;
-    std::list<int> list;
+    std::deque<int> deque;
 
     try
     {
@@ -32,7 +31,7 @@ int main(int argc, char **argv)
         //check time value
 
         //check time value
-        parse(input, list);
+        parse(input, deque);
 /*
         sort(list);
         //check time value
