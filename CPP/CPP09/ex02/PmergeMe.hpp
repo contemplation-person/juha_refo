@@ -44,8 +44,7 @@ void insertSort(T& container, std::size_t start, std::size_t end)
 template <typename T>
 void mergeSort(T& container, int location, int size)
 {
-    T tmp;
-    tmp.reserve(32);
+	std::size_t minRun = container.size() / RUN;
 
 	tmp = container.begin() + location;
 
@@ -66,8 +65,6 @@ void sort(T& container)
     }
     for (std::size_t i = 0; i < minRun; i++)
     {
-        if (minRun - 2 == i && (minRun % 2))
-            insertSort(container, i * RUN, container.size());
         if (minRun - 1 == i)
         {
             insertSort(container, i * RUN, container.size());
@@ -75,8 +72,7 @@ void sort(T& container)
         }
         insertSort(container, i * RUN, (i + 1) * RUN);
     }
-    
-	mergeSort(container, 0, RUN);
+    void mergeSort(T& container, int location, int size);
 }
 
 template <typename T>
