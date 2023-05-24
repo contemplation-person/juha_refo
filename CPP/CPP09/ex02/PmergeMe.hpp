@@ -42,11 +42,122 @@ void insertSort(T& container, std::size_t start, std::size_t end)
 }
 
 template <typename T>
-void mergeSort(T& container, int location, int size)
+void forwardMerge(T& container, std::size_t& start, std::size_t& part1, std::size_t& part2)
 {
-	std::size_t minRun = container.size() / RUN;
+    T tmp;
 
-	tmp = container.begin() + location;
+    for (int i = start; i < part1; i++)
+        tmp.push_back(container[i]);
+    
+    std::size_t part1idx = 0;
+    std::size_t part2idx = part1;
+    std::size_t containerIdx = start;
+    bool isTmp = true;
+
+    while (part2idx != part2 && (isTmp || part1idx != part2idx))
+    {
+        if (isTmp)
+        {
+            if (tmp[part1idx] < container[part2idx])
+            {
+                container[containerIdx] = tmp[part1idx];
+                part1idx++;
+                if (part1idx == tmp.size())
+                {
+                    isTmp = false;
+                    part1idx = start;
+                }
+                containerIdx++;
+            }
+            else
+            {
+                container[containerIdx] = container[part2idx];
+                part2idx++;
+                containerIdx++;
+            }
+        }
+        else
+        {
+            if (container[part1idx] < container[part2idx])
+            {
+                container[containerIdx] = container[part1idx];
+                part1idx++;
+                containerIdx++;
+            }
+            else
+            {
+                container[containerIdx] = container[part2idx];
+                part2idx++;
+                containerIdx++;
+            }
+        }
+    }
+}
+
+template <typename T>
+void reversMerge(T& container, std::size_t& start, std::size_t& part1, std::size_t& part2)
+{
+    T tmp;
+
+    for (int i = part1; i < part2; i++)
+        tmp.push_back(container[i]);
+    
+    std::size_t part1idx = part1 - 1;
+    std::size_t part2idx = tmp.size() - 1;
+    std::size_t containerIdx = part2 - 1;
+    bool isTmp = true;
+
+    while (part1idx != start && (isTmp || part2idx != part1idx))
+    {
+        if (isTmp)
+        {
+            if (tmp[part2idx] > container[part1idx])
+            {
+                container[containerIdx] = tmp[part2idx];
+                if (part2idx != 0)
+                    part2idx--;
+                else
+                {
+                    isTmp = false;
+                    part2idx = part1 - 1;
+                }
+                containerIdx--;
+            }
+            else
+            {
+                container[containerIdx] = container[part1idx];
+                part1idx--;
+                containerIdx--;
+            }
+        }
+        else
+        {
+            if (container[part2idx] > container[part1idx])
+            {
+                container[containerIdx] = container[part2idx];
+                part2idx--;
+                containerIdx--;
+            }
+            else
+            {
+                container[containerIdx] = container[part1idx];
+                part1idx--;
+                containerIdx--;
+            }
+        }
+    }
+
+}
+template <typename T>
+void mergeSort(T& container, std::size_t start, std::size_t part1, std::size_t part2)
+{
+    bool isPart2 = part1 - start < part2 - part1;
+    std::size_t size = isPart2 ? part2 - part1 : part1 - start;
+    
+    if (isPart2)
+        forwardMerge(container, start, part1, part2, size);
+    else
+        reversMerge(container, start, part1, part2, size);
 
 	std::cout << "test : ";
 	for (std::size_t i = 0; i < container.size(); i++)
@@ -68,11 +179,30 @@ void sort(T& container)
         if (minRun - 1 == i)
         {
             insertSort(container, i * RUN, container.size());
+            if (minRun == 1)
+                return ;
             break ;
         }
         insertSort(container, i * RUN, (i + 1) * RUN);
     }
-    void mergeSort(T& container, int location, int size);
+
+// WIP mergesort implimentation
+	bool isRemain = (container.size() % RUN) != 0;
+    std::size_t remainIdx = 0;
+
+    while (!isRemain && minRun != 0)
+    {
+        if (isRemain)
+        {
+            remainIdx = container.size() / miniRun;
+        }
+        minRun /= 2;
+        for (std::size_t i = 0; i < minRun; i++)
+        {
+            
+        }
+
+    }
 }
 
 template <typename T>
