@@ -31,7 +31,7 @@ int main(int argc, char **argv)
         //check time value
 
         //check time value
-        parse(input, deque);
+        //parse(input, deque);
 /*
         sort(list);
         //check time value

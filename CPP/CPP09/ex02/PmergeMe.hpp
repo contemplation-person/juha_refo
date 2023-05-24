@@ -4,6 +4,7 @@
 
 #include <string>
 #include <climits>
+#include <cstddef>
 #include <vector>
 #include <deque>
 #include <sstream>
@@ -17,75 +18,65 @@ void printResult(std::string const& input, std::vector<int> const& vector
 /*------------------------template-------------------------------*/
 
 template <typename T>
-void insertSort(T& container, int minRun, int remain, int count)
+void insertSort(T& container, std::size_t start, std::size_t end)
 {
-	if (count > 1)
-	{
-		//로직 문제 있음. 자고 생각하기
-		for (int i = count * RUN; i < (count + 1) * RUN; i++)
-		{
-			for (int j = i; count * RUN < j; j--)
-			{
-				if (container[j] < container[j - 1])
-					std::swap(container[j], container[j - 1]);
-				else
-					break ;
-			}
-		}
-		insertSort(container, minRun, remain, count - 1);
-	}
-	else if (count == 1)
-	{
-		for (std::size_t i = (minRun - 1) * RUN; i < container.size(); i++)
-		{
-			for (int j = i; (minRun - 1) * RUN < j; j--)
-			{
-				if (container[j] < container[j - 1])
-					std::swap(container[j], container[j - 1]);
-				else
-					break ;
-			}
-		}
-		return ;
-	}
-	else if (minRun < 1)
-	{
-		for (std::size_t i = 0; i < container.size(); i++)
-		{
-			for (int j = i; 0 < j; j--)
-			{
-				if (container[j] < container[j - 1])
-					std::swap(container[j], container[j - 1]);
-				else
-					break ;
-			}
-		}
-		return ;
-	}
+    std::size_t location;
+    std::size_t swapIdx;
+
+    for(std::size_t i = start; i < end; i++)
+    {
+        if (i == 0)
+            continue;
+        location = i;
+        swapIdx = i - 1;
+        while (location != start)
+        {
+            if (container[location] < container[swapIdx])
+                std::swap(container[location], container[swapIdx]);
+            else
+                break;
+            location = swapIdx;
+            swapIdx--;
+        }
+    }
 }
 
-/*
 template <typename T>
 void mergeSort(T& container, int location, int size)
 {
-	T tmp.reserve(size);
+    T tmp;
+    tmp.reserve(32);
 
 	tmp = container.begin() + location;
 
+	std::cout << "test : ";
+	for (std::size_t i = 0; i < container.size(); i++)
+		std::cout << container[i] << " ";
 }
-*/
 
 template <typename T>
 void sort(T& container)
 {
-	int minRun = container.size() / RUN;
-	int remain = container.size() % RUN;
+	std::size_t minRun = container.size() / RUN; // RUN  == 32
 
-	insertSort(container, minRun, remain, minRun);
-	std::cout << "test : ";
-	for (std::size_t i = 0; i < container.size(); i++)
-		std::cout << container[i] << " ";
-//	mergeSort(container, 0, RUN);
+    if (minRun == 0)
+    {
+        insertSort(container, 0, container.size());
+        return ;
+    }
+    for (std::size_t i = 0; i < minRun; i++)
+    {
+        if (minRun - 2 == i && (minRun % 2))
+            insertSort(container, i * RUN, container.size());
+        if (minRun - 1 == i)
+        {
+            insertSort(container, i * RUN, container.size());
+            break ;
+        }
+        insertSort(container, i * RUN, (i + 1) * RUN);
+    }
+    
+	mergeSort(container, 0, RUN);
 }
 
 template <typename T>
