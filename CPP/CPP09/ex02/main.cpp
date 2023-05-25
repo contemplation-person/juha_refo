@@ -19,24 +19,24 @@ int main(int argc, char **argv)
     }
 
     std::string input = makeString(argc, argv);
-    // std::cout << input << std::endl;
     std::vector<int> vector;
     std::deque<int> deque;
+    std::clock_t time[2][2];
+
 
     try
     {
-        //check time value
+        time[VECTOR][T_START] = std::clock();
         parse(input, vector);
         sort(vector);
-        //check time value
+        time[VECTOR][T_END] = std::clock();
 
-        //check time value
-        //parse(input, deque);
-/*
-        sort(list);
-        //check time value
-        printResult(input, vector, list);
-*/
+
+        time[DEQUE][T_START] = std::clock();
+        parse(input, deque);
+        sort(deque);
+        time[DEQUE][T_END] = std::clock();
+        printResult(input, vector, time);
     }
     catch(const std::exception& e)
     {

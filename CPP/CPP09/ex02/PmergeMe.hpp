@@ -2,6 +2,7 @@
 #define __PmergeMe_hpp__
 #define RUN 32
 
+#include <ctime>
 #include <string>
 #include <climits>
 #include <cstddef>
@@ -11,9 +12,16 @@
 #include <exception>
 #include <iostream>
 
+enum e_time
+{
+    VECTOR,
+    DEQUE,
+    T_START = 0,
+    T_END,
+};
+
 std::string makeString(int argc, char **argv);
-void printResult(std::string const& input, std::vector<int> const& vector
-				, std::deque<int> const& list);
+void printResult(std::string const& input, std::vector<int> const& vector, std::clock_t time[2][2]);
 
 /*------------------------template-------------------------------*/
 
@@ -46,7 +54,7 @@ void forwardMerge(T& container, std::size_t& start, std::size_t& part1, std::siz
 {
     T tmp;
 
-    for (int i = start; i < part1; i++)
+    for (std::size_t i = start; i < part1; i++)
         tmp.push_back(container[i]);
     
     std::size_t part1idx = 0;
@@ -99,14 +107,13 @@ void reversMerge(T& container, std::size_t& start, std::size_t& part1, std::size
 {
     T tmp;
 
-    for (int i = part1; i < part2; i++)
+    for (std::size_t i = part1; i < part2; i++)
         tmp.push_back(container[i]);
     
     std::size_t part1idx = part1 - 1;
     std::size_t part2idx = tmp.size() - 1;
     std::size_t containerIdx = part2 - 1;
     bool isTmp = true;
-
     while (part1idx != start && (isTmp || part2idx != part1idx))
     {
         if (isTmp)
@@ -146,22 +153,17 @@ void reversMerge(T& container, std::size_t& start, std::size_t& part1, std::size
             }
         }
     }
-
 }
+
 template <typename T>
 void mergeSort(T& container, std::size_t start, std::size_t part1, std::size_t part2)
 {
     bool isPart2 = part1 - start < part2 - part1;
-    std::size_t size = isPart2 ? part2 - part1 : part1 - start;
-    
-    if (isPart2)
-        forwardMerge(container, start, part1, part2, size);
-    else
-        reversMerge(container, start, part1, part2, size);
 
-	std::cout << "test : ";
-	for (std::size_t i = 0; i < container.size(); i++)
-		std::cout << container[i] << " ";
+    if (isPart2)
+        forwardMerge(container, start, part1, part2);
+    else
+        reversMerge(container, start, part1, part2);
 }
 
 template <typename T>
@@ -186,23 +188,27 @@ void sort(T& container)
         insertSort(container, i * RUN, (i + 1) * RUN);
     }
 
-// WIP mergesort implimentation
-	bool isRemain = (container.size() % RUN) != 0;
-    std::size_t remainIdx = 0;
+    std::size_t remainIdx = RUN * minRun;
+    std::size_t mergeSize = RUN;
 
-    while (!isRemain && minRun != 0)
+    while (minRun != 0)
     {
-        if (isRemain)
+        for (std::size_t i = 0; i < minRun; i += 2)
         {
-            remainIdx = container.size() / miniRun;
+            if (minRun % 2 && minRun - 1 == i)
+            {
+                mergeSort(container, i * mergeSize, remainIdx, container.size());
+                remainIdx = i * mergeSize;
+            }
+            else
+            {
+                mergeSort(container, i * mergeSize, (i + 1) * mergeSize, (i + 2) * mergeSize);
+            }
         }
+        mergeSize *= 2;
         minRun /= 2;
-        for (std::size_t i = 0; i < minRun; i++)
-        {
-            
-        }
-
     }
+    insertSort(container, 0, container.size());
 }
 
 template <typename T>
