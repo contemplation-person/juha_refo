@@ -168,9 +168,9 @@ bool BitcoinExchange::calculate(const std::string &fileName)
     return true;
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &csvName, )
+BitcoinExchange::BitcoinExchange(const std::string &csvName, const std::string& txtName)
 {
-    std::ifstream ifs("data.csv");
+    std::ifstream ifs(csvName);
     if (!ifs.is_open())
     {
         std::cout << "\033[31mError: could not read file.\033[0m" << std::endl;
