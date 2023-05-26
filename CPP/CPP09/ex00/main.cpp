@@ -3,11 +3,18 @@
 
 int main(int argc, char **argv) 
 {
-   if (argc != 2)
+   switch (argc)
    {
-      std::cout << "usage: ./ex00 [filename]" << std::endl;
-      return 1;
+   case 3:
+   {
+      //argv[1] == filename.csv argv[2] == filename2.txt
+      if (Function::validArgv(argv + 1))
+         BitcoinExchange exchange(argv[1]);
+      return 0;
    }
-   BitcoinExchange exchange(argv[1]);
-   return 0;
+   default:
+      std::cout << "invaild " << std::endl;
+      std::cout << "usage: ./ex00 [filename].csv [filename2].txt" << std::endl;
+      return 0;
+   }
 }
