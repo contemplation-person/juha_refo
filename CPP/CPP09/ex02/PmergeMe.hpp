@@ -20,8 +20,17 @@ enum e_time
     T_END,
 };
 
-std::string makeString(int argc, char **argv);
-void printResult(std::string const& input, std::vector<int> const& vector, std::clock_t time[2][2]);
+class Function {
+public:
+    static std::string makeString(int argc, char **argv);
+    static void printResult(std::string const& input, std::vector<int> const& vector, std::clock_t time[2][2]);
+
+private:
+    Function();
+    ~Function();
+    Function(const Function& copy);
+    const Function& operator=(const Function& copy);
+};
 
 /*------------------------template-------------------------------*/
 

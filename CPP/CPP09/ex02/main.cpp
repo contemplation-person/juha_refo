@@ -18,7 +18,7 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    std::string input = makeString(argc, argv);
+    std::string input = Function::makeString(argc, argv);
     std::vector<int> vector;
     std::deque<int> deque;
     std::clock_t time[2][2];
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
         parse(input, deque);
         sort(deque);
         time[DEQUE][T_END] = std::clock();
-        printResult(input, vector, time);
+        Function::printResult(input, vector, time);
     }
     catch(const std::exception& e)
     {

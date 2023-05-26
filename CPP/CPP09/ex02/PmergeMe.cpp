@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
 
-std::string makeString(int argc, char **argv)
+std::string Function::makeString(int argc, char **argv)
 {
 	std::string str;
 
@@ -13,7 +13,7 @@ std::string makeString(int argc, char **argv)
 	return str;
 }
 
-void printResult(std::string const& input, std::vector<int> const& vector, std::clock_t time[2][2])
+void Function::printResult(std::string const& input, std::vector<int> const& vector, std::clock_t time[2][2])
 {
 
 	std::cout << "Before: " << input << std::endl;
