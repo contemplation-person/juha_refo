@@ -18,9 +18,6 @@ void Function::printResult(std::string const& input, std::vector<int> const& vec
 
 	std::cout << "Before: " << input << std::endl;
 	std::cout << "After: ";
-	for (std::size_t i = 0; i < vector.size(); i++)
-		std::cout << vector[i] << " ";
-	std::cout << std::endl;
 	for (std::vector<int>::const_iterator it = vector.begin(); it != vector.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;

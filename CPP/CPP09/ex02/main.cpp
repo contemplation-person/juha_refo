@@ -12,9 +12,9 @@
 
 int main(int argc, char **argv) 
 {
-    while (argc < 2)
+    if (argc < 2)
     {
-        std::cout << "Please input a number" << std::endl;
+        std::cout << "argc < 2" << std::endl;
         return 0;
     }
 
@@ -22,7 +22,6 @@ int main(int argc, char **argv)
     std::vector<int> vector;
     std::deque<int> deque;
     std::clock_t time[2][2];
-
 
     try
     {
