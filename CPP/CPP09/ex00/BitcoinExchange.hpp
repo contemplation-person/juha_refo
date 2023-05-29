@@ -6,7 +6,8 @@
 
 class BitcoinExchange {
 public:
-    BitcoinExchange(const std::string& csvName, const std::string& txtName);
+    BitcoinExchange(const std::string txtName);
+    BitcoinExchange(const std::string csvName, const std::string txtName);
     ~BitcoinExchange();
 
     bool calculate(const std::string& fileName);

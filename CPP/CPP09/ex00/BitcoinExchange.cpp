@@ -74,7 +74,7 @@ double BitcoinExchange::getValue(const int &key)
     return _data[key];
 }
 
-static bool isValidValue(std::string value, double &d_value)
+static bool isValidValue(std::string value, double &d_value, bool checkCsv)
 {
     if (value.empty())
         return false;
@@ -88,23 +88,26 @@ static bool isValidValue(std::string value, double &d_value)
 
     if (endptr && *endptr)
     {
-        std::cout << "\033[31mError: invalid value.\033[0m" << std::endl;
+        std::cout << "\033[31mError: invalid value. (" << value << ")\033[0m" << std::endl;
         return false;
     }
     if (static_cast<double>(i_value) == d_value)
     {
-        if (!(0 < d_value && d_value < 2147483648))
+        if (!(0 <= d_value && d_value < 2147483648))
         {
-            std::cout << "\033[31mError: range invalid - 0 < int number < 2147483648.\033[0m" << std::endl;
+            std::cout << "\033[31mError: range invalid - 0 < " << d_value << " < 2147483648.\033[0m" << std::endl;
             return false;
         }
     }
     else
     {
-        if (!(0 < d_value && d_value < 1000))
+        if (checkCsv != true)
         {
-            std::cout << "\033[31mError: range invalid - 0 < double number < 1000.\033[0m" << std::endl;
-            return false;
+            if (!(0 <= d_value && d_value < 1000))
+            {
+                std::cout << "\033[31mError: range invalid - 0 < " << d_value << " < 1000.\033[0m" << std::endl;
+                return false;
+            }
         }
     }
     return true;
@@ -125,6 +128,11 @@ bool BitcoinExchange::calculate(const std::string &fileName)
     std::map<int, double>::iterator it;
 
     std::getline(ifs, line);
+    if (line.empty())
+    {
+        std::cout << "empty file" << std::endl;
+        return false;
+    }
     while (!ifs.eof())
     {
         std::getline(ifs, line);
@@ -134,7 +142,7 @@ bool BitcoinExchange::calculate(const std::string &fileName)
         {
             std::cout << "\033[31mError: Bad input. => " << line << "\033[0m" << std::endl;
         }
-        else if (line.length() > 12 && isValidValue(line.substr(12), value) && isValidDate(line.substr(0, 10), date) && line.find('|') != std::string::npos)
+        else if (line.length() > 12 && isValidValue(line.substr(12), value, false) && isValidDate(line.substr(0, 10), date) && line.find('|') != std::string::npos)
         {
             it = _data.find(date);
             if (it != _data.end())
@@ -168,9 +176,9 @@ bool BitcoinExchange::calculate(const std::string &fileName)
     return true;
 }
 
-BitcoinExchange::BitcoinExchange(const std::string &csvName, const std::string& txtName)
+BitcoinExchange::BitcoinExchange(const std::string txtName)
 {
-    std::ifstream ifs(csvName);
+    std::ifstream ifs("data.csv");
     if (!ifs.is_open())
     {
         std::cout << "\033[31mError: could not read file.\033[0m" << std::endl;
@@ -182,6 +190,11 @@ BitcoinExchange::BitcoinExchange(const std::string &csvName, const std::string& 
     double value;
 
     std::getline(ifs, line);
+    if (line.empty())
+    {
+        std::cout << "empty file" << std::endl;
+        return ;
+    }
     while (!ifs.eof())
     {
         std::getline(ifs, line);
@@ -202,5 +215,49 @@ BitcoinExchange::BitcoinExchange(const std::string &csvName, const std::string& 
         }
     }
     ifs.close();
-    calculate(fileName);
+    calculate(txtName);
+}
+
+BitcoinExchange::BitcoinExchange(const std::string csvName, const std::string txtName)
+{
+    std::ifstream ifs(csvName);
+    if (!ifs.is_open())
+    {
+        std::cout << "\033[31mError: could not read file.\033[0m" << std::endl;
+        return;
+    }
+
+    std::string line;
+    int date;
+    double value;
+
+    std::getline(ifs, line);
+    if (line.empty())
+    {
+        std::cout << "empty file" << std::endl;
+        return ;
+    }
+    while (!ifs.eof())
+    {
+        std::getline(ifs, line);
+        line.erase(0, line.find_first_not_of(" \t\n\r\f\v"));
+        line.erase(line.find_last_not_of(" \t\n\r\f\v") + 1);
+        if (line[4] != '-' || line[7] != '-' || line[10] != ',')
+        {
+            std::cout << "\033[31mPass date "
+                      << "\033[0m" << std::endl;
+            continue;
+        }
+        if (!line.empty())
+        {
+            if (!isValidDate(line.substr(0, 10), date))
+                return ;
+            if (!isValidValue(line.substr(11), value, true))
+                return ;
+            value = std::strtod(line.substr(11).c_str(), NULL);
+            _data[date] = value;
+        }
+    }
+    ifs.close();
+    calculate(txtName);
 }
