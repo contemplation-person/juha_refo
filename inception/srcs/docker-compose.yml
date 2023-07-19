@@ -1,0 +1,73 @@
+version: '3.7'
+
+volumes:
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      device: /goinfre/juha/inception/srcs/inception_data/wordpress
+      # device: /home/mikim3/data
+      o: bind                               # 마운트 옵션 bind하겠다.
+      type: none                            # none으로 해야 그대로 bind됨
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      device: /goinfre/juha/inception/srcs/inception_data/mariadb
+      # device: /home/mikim3/data
+      o: bind
+      type: none
+
+services:
+  mariadb:
+    container_name: my_mariadb
+    # image와 build 키워드를 docker-compose에서 동시에 사용하면 image를 레지스트리에서 찾지 않고 build에서 만든 것을
+    # image로 사용하고 이름과 태그를 image키워드 옆에있는 mairadb 42로 정해버린다.
+    build: ./requirements/mariadb/.
+    image: mariadb:42
+    volumes:
+      - mariadb:/var/lib/mysql
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
+  nginx:
+    container_name: my_nginx
+    build: ./requirements/nginx/.
+    image: nginx:42
+    # 호스트 443번을 컨테이너 443에 연결
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    env_file:
+      - .env
+    restart: always
+  wordpress:
+    container_name: my_wordpress
+    build: ./requirements/wordpress/.
+    image: wordpress:42
+    # environment:
+    #   WORDPRESS_DB_HOST: ${db1_host}
+    #   WORDPRESS_DB_USER: ${db1_user}
+    #   WORDPRESS_DB_PASSWORD: ${db1_pwd}
+    #   WORDPRESS_DB_NAME: ${db1_name}
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    env_file:
+      - .env
+    tty : true
+    # restart: always
+
+networks:
+  inception:
+    name: inception
