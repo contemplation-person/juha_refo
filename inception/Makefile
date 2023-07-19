@@ -1,4 +1,4 @@
-.PHONY: all build up down start stop down-volumes erase
+.PHONY: all build up down start stop down-volumes erase fclean ls
 
 all : 
 	make build
