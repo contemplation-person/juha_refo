@@ -1,59 +1,28 @@
 version: '3'
-
 services:
   nginx:
-    image: nginx
-    build:
-      dockerfile: ./requirement/nginx/Dockerfile
-    links: mariadb
-    expose: 
-      - "443"
-    secrets:
-      - server-certificate
-    restart: always
+    build: ./requirements/nginx
+    ports:
+      - "80:80"
+      # - "443:443"
     networks:
-      - nginxne_net
-      - mariadb_net
-      - wordpress_net
+      - inception
+    command: nginx -g "daemon off;"
 
   wordpress:
-    image: wordpress
     build:
-      dockerfile: ./requirement/wordpress/Dockerfile
-    links: mariadb
-    restart: always
+      context: ./requirements/wordpress/
+      dockerfile: Dockerfile
+    ports:
+      - "9000"
     networks:
-      - nginxne_net
-      - mariadb_net
-      - wordpress_net
+      - inception
+      # - mariadb
+    command: wordpress
 
-  mariadb:
-    image: mariadb
-    build: 
-      dockerfile: ./requirement/mariadb/Dockerfile
-    env_file: .env
-    restart: always
-    networks:
-      - nginxne_net
-      - mariadb_net
-      - wordpress_net
-
-    volumes:
-      - type: volume
-        source: db-data
-        target: /data
-        volume:
-          nocopy: true
-      - type: bind
-        source: /var/run/postgres/postgres.sock
-        target: /var/run/postgres/postgres.sock
-
-# TODO change security path
-secrets:
-  server-certificate:
-    file: ./server.cert
-
-volumes:
-  db-data:
+# TODO how to do?
+# volumes:
+  # db-data:
 
 networks:
+  inception:

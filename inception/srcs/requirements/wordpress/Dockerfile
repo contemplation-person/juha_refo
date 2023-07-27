@@ -1,35 +1,13 @@
 FROM debian:bullseye
 
-RUN apt-get update -y
+RUN apt update && apt upgrade && apt install curl php7.4-fpm -y 
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+RUN mkdir -p /var/www/php_wp
+RUN wp core download --path=/var/www/php_wp --allow-root
 
-RUN apt-get install php-fpm php-mysql -y
-
-RUN apt-get install curl -y
-
-RUN apt-get install php -y
-#RUN apt-get install php7.3 -y
-RUN apt-get install php-cli -y
-RUN apt-get install wget -y
-RUN apt-get install php-mysql -y
-RUN apt-get install php-mbstring -y
-RUN apt-get install php-xml -y
-RUN apt-get install sendmail -y
-RUN apt-get install vim -y
-# COPY ./wp-assets /var/www/html
-
-# WORKDIR /usr/local/bin/
-# RUN curl -o wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# RUN chmod +x wp
-
-# RUN chmod +x wp-cli.phar
-# RUN wp-cli.phar wp
-# curl -o newfilename.html http://example.com/index.html
-
-COPY ./tools/script.sh /
-# COPY ./tools/wp-config.php /
-# COPY ./wp-config.php /var/www/html/tmp_wp-config.php
-
-CMD [ "./script.sh" ]
+# RUN mkdir -p /var/www/html
 
 EXPOSE 9000
-
+#check wp --info
