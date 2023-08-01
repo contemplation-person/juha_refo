@@ -1,28 +1,33 @@
 version: '3'
-services:
-  nginx:
-    build: ./requirements/nginx
-    ports:
-      - "80:80"
-      # - "443:443"
-    networks:
-      - inception
-    command: nginx -g "daemon off;"
 
+networks:
+  inception:
+
+services:
   wordpress:
+    # volumes:
+    #   - ./requirements/wordpress/data:/var/www
     build:
       context: ./requirements/wordpress/
-      dockerfile: Dockerfile
     ports:
       - "9000"
     networks:
       - inception
-      # - mariadb
-    command: wordpress
+    command: php-fpm7.4 -F
+
+  nginx:
+    volumes:
+      - ./requirements/wordpress/data:/var/www
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    networks:
+      - inception
+    command: nginx -g "daemon off;"
+    depends_on:
+      - wordpress 
+
 
 # TODO how to do?
 # volumes:
   # db-data:
-
-networks:
-  inception:

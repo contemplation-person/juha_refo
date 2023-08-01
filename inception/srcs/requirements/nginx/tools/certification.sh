@@ -1,13 +1,4 @@
 #! /bin/sh
-openssl genrsa -out /test/selfKey.key 1024 
-openssl req -new -key /test/selfKey.key -out /test/selfCsr.csr << done
-ko
-seoul
-seoul
-42
-unknown
-common
-empty
-
-
-done
+openssl req -newkey rsa:4096 -days 365 -nodes -x509 \
+    -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Gon/CN=localhost" \
+    -out /test/self.crt -keyout /test/self.key
