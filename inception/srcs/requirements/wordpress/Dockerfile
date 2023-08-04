@@ -8,6 +8,7 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 RUN mkdir -p /var/www/php_wp
 RUN wp core download --path=/var/www/php_wp --allow-root
 
+COPY ./www.conf /etc/php/7.4/fpm/php-fpm.conf
 # TODO docker compose copy
 # RUN mkdir -p /var/www/html
 
