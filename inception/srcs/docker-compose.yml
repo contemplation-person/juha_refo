@@ -1,7 +1,15 @@
 version: '3'
 
-
 services:
+  # mariadb:
+  #   volumes:
+  #     - ./
+  #   build: ./requirements/mariadb
+  #   networks:
+  #     - inception
+  #   command:
+    # restart: always
+
   wordpress:
     volumes:
       - word:/var/www
@@ -10,6 +18,9 @@ services:
     networks:
       - inception
     command: php-fpm7.4 -F
+    depends_on:
+      - mariadb
+    restart: always
 
   nginx:
     volumes:
@@ -22,6 +33,7 @@ services:
     command: nginx -g "daemon off;"
     depends_on:
       - wordpress 
+    restart: always
 
 # TODO how to do?
 volumes:
@@ -30,3 +42,4 @@ volumes:
 
 networks:
   inception:
+  db:
