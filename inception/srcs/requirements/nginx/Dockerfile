@@ -7,7 +7,7 @@ COPY ./tools /test
 RUN chmod +x ./test/certification.sh && ./test/certification.sh
 
 # copy nginx configration
-COPY ./nginx.conf /etc/nginx/sites-available/default
+COPY ./tools/nginx.conf /etc/nginx/sites-available/default
 
 # TODO 실행.
 EXPOSE 443
