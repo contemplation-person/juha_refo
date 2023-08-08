@@ -10,6 +10,7 @@ RUN wp core download --path=/var/www/php_wp --allow-root
 
 COPY ./tools/wp-config.php /var/www/php_wp/wp-config-sample.php
 COPY ./tools/www.conf /etc/php/7.4/fpm/php-fpm.conf
+
 # TODO docker compose copy
 # RUN mkdir -p /var/www/html
 

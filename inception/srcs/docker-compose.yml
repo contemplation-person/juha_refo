@@ -18,8 +18,8 @@ services:
     networks:
       - inception
     command: php-fpm7.4 -F
-    depends_on:
-      - mariadb
+    # depends_on:
+      # - mariadb
     restart: always
 
   nginx:
