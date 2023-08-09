@@ -3,12 +3,12 @@ version: '3'
 services:
   # mariadb:
   #   volumes:
-  #     - ./
+  #     - ./requirements/mariadb/mariadb-db:/db
   #   build: ./requirements/mariadb
   #   networks:
-  #     - inception
-  #   command:
-    # restart: always
+  #     - db 
+  #   command: mariadbd
+  #   restart: always
 
   wordpress:
     volumes:
@@ -17,6 +17,7 @@ services:
       context: ./requirements/wordpress/
     networks:
       - inception
+      # - db
     command: php-fpm7.4 -F
     # depends_on:
       # - mariadb
@@ -36,9 +37,10 @@ services:
     restart: always
 
 # TODO how to do?
+
 volumes:
-  db-data:
   word:
+
 
 networks:
   inception:
