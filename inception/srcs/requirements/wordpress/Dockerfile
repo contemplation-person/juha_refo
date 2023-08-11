@@ -15,7 +15,7 @@ COPY ./tools/www.conf /etc/php/7.4/fpm/php-fpm.conf
 # RUN mkdir -p /var/www/html
 
 # TODO erase line
-RUN apt install -y vim tmux zsh git && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# RUN apt install -y vim tmux zsh git && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # CMD zsh
 
 

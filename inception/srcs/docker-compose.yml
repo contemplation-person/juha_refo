@@ -33,15 +33,18 @@ services:
       - inception
     command: nginx -g "daemon off;"
     depends_on:
-      - wordpress 
+      - wordpress
     restart: always
 
 # TODO how to do?
-
 volumes:
   word:
-
+    driver: local
+    driver_opts:
+      o: bind
+      type: volume
+      device: /Users/juha/Desktop/42/inception/srcs/requirements/wordpress/wp-data
 
 networks:
   inception:
-  db:
+  # db:
