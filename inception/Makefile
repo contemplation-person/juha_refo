@@ -7,7 +7,7 @@ all: up
 re: fclean all
 
 up: 
-	mkdir -p ./srcs/requirements/wordpress/data
+	mkdir -p ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/mariadb-db
 	cd srcs && ${DOCKER_COMPOSE} up --build
 
 ls:
@@ -31,6 +31,7 @@ vclean:
 	docker volume prune -f
 
 clean:
+	docker compose down
 	make cclean
 	make vclean
 
@@ -39,5 +40,5 @@ fclean:
 	make cclean
 	make iclean 
 	make vclean
-	rm -rf ./srcs/requirements/wordpress/data
+	rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/mariadb-db
 	docker system prune -af

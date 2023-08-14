@@ -9,5 +9,4 @@ RUN ./etc/init.d/mariadb start
 # TODO delete line
 RUN apt install -y vim tmux zsh git && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# RUN mysql -u root -p
 EXPOSE 3306

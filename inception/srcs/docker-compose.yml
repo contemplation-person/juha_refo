@@ -1,14 +1,20 @@
 version: '3'
 
 services:
-  # mariadb:
-  #   volumes:
-  #     - ./requirements/mariadb/mariadb-db:/db
-  #   build: ./requirements/mariadb
-  #   networks:
-  #     - db 
-  #   command: mariadbd
-  #   restart: always
+  mariadb:
+    volumes:
+      - ./requirements/mariadb/mariadb-db:/db
+    build: ./requirements/mariadb
+    networks:
+      - inception
+    command: mariadbd
+    restart: always
+  # mariadb healthcheck하기
+    # healthcheck: 
+    #   test: exit 0 || exit 1
+    #   interval: 30s
+    #   timeout: 30s
+    #   retries: 3
 
   wordpress:
     volumes:
@@ -17,12 +23,20 @@ services:
       context: ./requirements/wordpress/
     networks:
       - inception
-      # - db
-    # command: ./mkdir.sh && php-fpm7.4 -F
     command: ./mkdir.sh 
-    # depends_on:
-      # - mariadb
+    depends_on:
+      - mariadb
+      # mariadb:
+        # condition: service_healthy
     restart: always
+    env_file:
+      - .env
+  # mariadb healthcheck하기
+    # healthcheck: 
+    #   test: exit 0 || exit 1
+    #   interval: 30s
+    #   timeout: 30s
+    #   retries: 3
 
   nginx:
     volumes:
@@ -35,6 +49,8 @@ services:
     command: nginx -g "daemon off;"
     depends_on:
       - wordpress
+      # wordpress:
+        # condition: service_healthy
     restart: always
 
 # TODO how to do?
@@ -49,4 +65,3 @@ volumes:
 
 networks:
   inception:
-  # db:
