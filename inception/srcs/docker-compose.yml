@@ -12,7 +12,7 @@ services:
 
   wordpress:
     volumes:
-      - word:/var/www/
+      - word:/wp/
     build:
       context: ./requirements/wordpress/
     networks:
@@ -26,7 +26,7 @@ services:
 
   nginx:
     volumes:
-      - word:/var/www/
+      - word:/wp/
     build: ./requirements/nginx
     ports:
       - "443:443"

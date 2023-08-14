@@ -12,12 +12,12 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
-# RUN mkdir -p /var/www/php_wp
-# RUN wp core download --path=/var/www/php_wp --allow-root
+# RUN mkdir -p /wp/php_wp
+# RUN wp core download --path=/wp/php_wp --allow-root
 
 
 # TODO docker compose copy
-# RUN mkdir -p /var/www/html
+# RUN mkdir -p /wp/html
 
 # TODO erase line
 # RUN apt install -y vim tmux zsh git && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

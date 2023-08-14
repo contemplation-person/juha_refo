@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 확인할 디렉토리 이름
-dir_name="/var/www/php_wp"
+dir_name="/wp/php_wp"
 
 # 디렉토리 존재 여부 확인
 if [ -d "$dir_name" ]; then
