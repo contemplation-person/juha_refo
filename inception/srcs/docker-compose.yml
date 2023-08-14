@@ -12,20 +12,21 @@ services:
 
   wordpress:
     volumes:
-      - word:/var/www
+      - word:/var/www/
     build:
       context: ./requirements/wordpress/
     networks:
       - inception
       # - db
-    command: php-fpm7.4 -F
+    # command: ./mkdir.sh && php-fpm7.4 -F
+    command: ./mkdir.sh 
     # depends_on:
       # - mariadb
     restart: always
 
   nginx:
     volumes:
-      - word:/var/www
+      - word:/var/www/
     build: ./requirements/nginx
     ports:
       - "443:443"
@@ -42,8 +43,9 @@ volumes:
     driver: local
     driver_opts:
       o: bind
-      type: volume
-      device: /Users/juha/Desktop/42/inception/srcs/requirements/wordpress/wp-data
+      type: none
+      #device: /Users/juha/goinfre/wp-data
+      device: ./requirements/wordpress/data/
 
 networks:
   inception:

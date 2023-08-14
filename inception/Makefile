@@ -1,3 +1,5 @@
+DOCKER_COMPOSE := ~/goinfre/docker-compose-darwin-x86_64
+
 .PHONY : all down iclean vclean fclean re
 
 all: up
@@ -5,8 +7,8 @@ all: up
 re: fclean all
 
 up: 
-	mkdir ./srcs/requirements/wordpress/wp-data
-	cd srcs && docker compose up
+	mkdir -p ./srcs/requirements/wordpress/data
+	cd srcs && ${DOCKER_COMPOSE} up --build
 
 ls:
 	docker container ls -a
@@ -15,7 +17,8 @@ ls:
 	docker network ls
 
 down:
-	cd srcs && docker compose down
+# cd srcs && ${DOCKER_COMPOSE} down -v
+	cd srcs && ${DOCKER_COMPOSE} down --rmi all -v
 
 cclean:
 	docker container prune -f
@@ -24,12 +27,17 @@ iclean:
 	docker image prune -af
 
 vclean:
+	docker volume rm -f srcs_word
 	docker volume prune -f
+
+clean:
+	make cclean
+	make vclean
 
 fclean: 
 	make down 
-	rm -rf ./srcs/requirements/wordpress/wp-data
 	make cclean
 	make iclean 
 	make vclean
+	rm -rf ./srcs/requirements/wordpress/data
 	docker system prune -af
