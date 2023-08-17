@@ -7,7 +7,7 @@ COPY ./tools/wp-config.php .
 COPY ./tools/www.conf /etc/php/7.4/fpm/php-fpm.conf
 COPY ./tools/mkdir.sh .
 
-RUN mkdir -p /run/php && chmod 755 /run/php
+RUN mkdir -p -m 755 /run/php
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp

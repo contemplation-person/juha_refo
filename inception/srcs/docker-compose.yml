@@ -60,7 +60,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      #device: /Users/juha/goinfre/wp-data
+      # device: /Users/juha/goinfre/data
       device: ./requirements/wordpress/data/
 
 networks:

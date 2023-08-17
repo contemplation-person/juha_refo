@@ -1,4 +1,5 @@
 DOCKER_COMPOSE := ~/goinfre/docker-compose-darwin-x86_64
+# DOCKER_COMPOSE := docker compose
 
 .PHONY : all down iclean vclean fclean re
 
@@ -17,7 +18,7 @@ ls:
 	docker network ls
 
 down:
-# cd srcs && ${DOCKER_COMPOSE} down -v
+	cd srcs && ${DOCKER_COMPOSE} down -v
 	cd srcs && ${DOCKER_COMPOSE} down --rmi all -v
 
 cclean:
@@ -40,5 +41,5 @@ fclean:
 	make cclean
 	make iclean 
 	make vclean
-	rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/mariadb-db
+	rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data/* -y
 	docker system prune -af
