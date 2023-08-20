@@ -3,11 +3,11 @@ version: '3'
 services:
   mariadb:
     volumes:
-      - ./requirements/mariadb/mariadb-db:/db
+      - ./requirements/mariadb/data:/var/lib/mysql
     build: ./requirements/mariadb
     networks:
       - inception
-    command: mariadbd
+    command: ./setup.sh
     restart: always
   # mariadb healthcheck하기
     # healthcheck: 

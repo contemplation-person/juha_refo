@@ -5,8 +5,9 @@ RUN apt update && apt install -y vim tmux zsh git && sh -c "$(curl -fsSL https:/
 
 RUN apt update && apt upgrade -y && apt install mariadb-server -y
 
-# COPY my.cnf /etc/mysql/.
+COPY my.cnf /etc/mysql/.
 COPY setup.sh .
+COPY setup_table .
 
 RUN mkdir -p -m 755 /run/mysqld/
 RUN chown mysql:mysql /run/mysqld
