@@ -1,5 +1,10 @@
 FLUSH PRIVILEGES;
-CREATE DATABASE WordPressDB; 
-CREATE USER juha@localhost IDENTIFIED BY 'helloworld'; 
-GRANT ALL ON WordPressDB.* TO juha@localhost IDENTIFIED BY 'helloworld' WITH GRANT OPTION; 
+
+CREATE DATABASE IF NOT EXISTS WordPressDB; 
+CREATE USER IF NOT EXISTS 'juha'@'%' IDENTIFIED BY 'helloworld'; 
+-- GRANT ALL ON WordPressDB.* TO "juha"@"%" IDENTIFIED BY 'helloworld' WITH GRANT OPTION; 
+GRANT ALL PRIVILEGES ON WordPressDB.* TO "juha"@"%";
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'helloworld';
+
 FLUSH PRIVILEGES;

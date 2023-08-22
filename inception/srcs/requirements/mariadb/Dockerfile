@@ -10,7 +10,8 @@ COPY setup.sh .
 COPY setup_table .
 
 RUN mkdir -p -m 755 /run/mysqld/
-RUN chown mysql:mysql /run/mysqld
-
+RUN chown -R mysql:mysql /run/mysqld /var/lib/mysql
 
 EXPOSE 3306
+
+ENTRYPOINT ./setup.sh
