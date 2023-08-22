@@ -15,7 +15,7 @@ services:
   wordpress:
     container_name: wordpress
     volumes:
-      - word:/wp/
+      - word:/var/www
     build:
       context: ./requirements/wordpress/
     networks:
@@ -29,13 +29,12 @@ services:
   nginx:
     container_name: nginx
     volumes:
-      - word:/wp/
+      - word:/var/www
     build: ./requirements/nginx
     ports:
       - "443:443"
     networks:
       - inception
-    command: nginx -g "daemon off;"
     depends_on:
       - wordpress
     restart: always

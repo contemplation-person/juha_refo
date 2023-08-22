@@ -10,10 +10,9 @@ else
     mkdir -p $dir_name
     wp core download --path=$dir_name --allow-root
     # exist wordpress config check website
-
-    wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpass --dbhost=$dbhost --path=$dir_name --allow-root
-
-    wp core install --url=$url --admin_user=$admin --admin_password=$adminPassword --admin_email=$adminEmail --path=$dir_name --skip-email --allow-root
+    # wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpass --dbhost=$dbhost --path=$dir_name --allow-root
+    mv /wp-config.php $dir_name
+    wp core install --url=$url --title="juha's inception" --admin_user=$admin --admin_password=$adminPassword --admin_email=$adminEmail --path=$dir_name --skip-email --allow-root
 	wp user create $newUser $newEmail --path=$dir_name --role=author --user_pass=$newPassword --allow-root
 
     chown -R www-data:www-data $dir_name

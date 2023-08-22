@@ -2,13 +2,13 @@ FROM debian:bullseye
 
 RUN apt update && apt upgrade -y && apt install curl php7.4-fpm php-mysql mariadb-client -y 
 
-# COPY ./tools/wp-config.php .
+COPY ./tools/wp-config.php .
 COPY ./tools/www.conf /etc/php/7.4/fpm/php-fpm.conf
 COPY ./tools/mkdir.sh .
 
 RUN mkdir -p -m 755 /run/php
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-RUN chmod +x wp-cli.phar
+RUN chmod 755 wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
 # TODO erase line

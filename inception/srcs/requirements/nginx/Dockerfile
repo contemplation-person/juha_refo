@@ -12,5 +12,4 @@ COPY ./tools/nginx.conf /etc/nginx/sites-available/default
 
 # TODO 실행.
 EXPOSE 443
-# EXPOSE 80
-# ENTRYPOINT nginx -g "daemon off;"
+ENTRYPOINT nginx -g "daemon off;"
