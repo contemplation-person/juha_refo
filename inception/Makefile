@@ -8,7 +8,7 @@ all: up
 re: fclean all
 
 up: 
-	mkdir -p -m 755 ./srcs/requirements/wordpress/data 
+	mkdir -p -m 755 ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data
 	cd srcs && ${DOCKER_COMPOSE} up --build
 
 ls:
@@ -18,7 +18,6 @@ ls:
 	docker network ls
 
 down:
-	cd srcs && ${DOCKER_COMPOSE} down -v
 	cd srcs && ${DOCKER_COMPOSE} down --rmi all -v
 
 cclean:
@@ -37,7 +36,7 @@ clean:
 	make vclean
 
 fclean: 
-	rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data/* -y
+	rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data -y
 	make down 
 	make cclean
 	make iclean 
