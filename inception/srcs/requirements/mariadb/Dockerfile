@@ -1,16 +1,14 @@
 FROM debian:bullseye
 
-# TODO delete line
-# RUN apt update && apt install -y vim tmux zsh git && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+COPY setup.sh .
+COPY setup_table .
 
 RUN apt update && apt upgrade -y && apt install mariadb-server -y
 
 COPY my.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
-COPY setup.sh .
-COPY setup_table .
 
-RUN mkdir -p -m 755 /run/mysqld/
-RUN chown -R mysql:mysql /run/mysqld /var/lib/mysql
+RUN mkdir -p -m 755 /run/mysqld/ \
+&& chown -R mysql:mysql /run/mysqld /var/lib/mysql
 
 EXPOSE 3306
 
