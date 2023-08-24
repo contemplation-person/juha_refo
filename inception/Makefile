@@ -1,5 +1,5 @@
-DOCKER_COMPOSE := ~/Desktop/docker-compose-darwin-x86_64
-# DOCKER_COMPOSE := docker compose
+# DOCKER_COMPOSE := ~/Desktop/docker-compose-darwin-x86_64
+DOCKER_COMPOSE := docker compose
 
 .PHONY : all down iclean vclean fclean re
 
@@ -36,7 +36,7 @@ clean:
 	make vclean
 
 fclean: 
-	rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data -y
+	sudo rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data
 	make down 
 	make cclean
 	make iclean 
