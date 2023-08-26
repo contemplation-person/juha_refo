@@ -12,12 +12,10 @@ else
     # exist wordpress config check website
     # wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpass --dbhost=$dbhost --path=$dirName --allow-root
     mv /wp-config.php $dirName
-    wp core install --url=$url --title="juha's inception" --admin_user=$admin --admin_password=$adminPassword --admin_email=$adminEmail --path=$dirName --skip-email --allow-root
-	wp user create $newUser $newEmail --path=$dirName --role=author --user_pass=$newPassword --allow-root
+    wp core install --url=$url --title="juha's inception" --admin_user=$admin --admin_password=$adminPass --admin_email=$adminEmail --path=$dirName --skip-email --allow-root
+	wp user create $newUser $newEmail --path=$dirName --role=author --user_pass=$newPass --allow-root
 
     chown -R www-data:www-data $dirName
-# erase this
-# mv /wp-config.php $dirName
 fi
 
 php-fpm7.4 -F
