@@ -27,7 +27,6 @@ iclean:
 	docker image prune -af
 
 vclean:
-	docker volume rm -f srcs_word
 	docker volume prune -f
 
 clean:
