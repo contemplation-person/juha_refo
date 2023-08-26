@@ -11,6 +11,8 @@ services:
         aliases:
           - mariadb
     restart: always
+    env_file:
+      - .env
 
   wordpress:
     container_name: wordpress
