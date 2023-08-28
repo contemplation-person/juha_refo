@@ -1,7 +1,6 @@
 FROM debian:bullseye
 
 COPY setup.sh .
-COPY setup_table .
 
 RUN apt update && apt upgrade -y && apt install mariadb-server -y
 
