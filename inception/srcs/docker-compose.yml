@@ -4,7 +4,7 @@ services:
   mariadb:
     container_name: mariadb
     volumes:
-      - ./requirements/mariadb/data:/var/lib/mysql
+      - /home/login/data/mysql:/var/lib/mysql
     build: ./requirements/mariadb
     networks:
       inception:
@@ -49,7 +49,7 @@ volumes:
       o: bind
       type: none
       # device: /Users/juha/goinfre/data
-      device: ./requirements/wordpress/data/
+      device: /home/login/data/word
 
 networks:
   inception:
