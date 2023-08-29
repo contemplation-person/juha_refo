@@ -1,5 +1,4 @@
-DOCKER_COMPOSE := ~/Desktop/docker-compose-darwin-x86_64
-# DOCKER_COMPOSE := docker compose
+DOCKER_COMPOSE := docker compose
 
 .PHONY : all down iclean vclean fclean re
 
@@ -8,7 +7,7 @@ all: up
 re: fclean all
 
 up: 
-	mkdir -p -m 755 ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data
+	sudo mkdir -p -m 755 /home/login/data/mysql /home/login/data/word
 	cd srcs && ${DOCKER_COMPOSE} up --build
 
 ls:
@@ -35,8 +34,7 @@ clean:
 	make vclean
 
 fclean: 
-# sudo rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data
-	rm -rf ./srcs/requirements/wordpress/data ./srcs/requirements/mariadb/data
+	sudo rm -rf /home/login/data/mysql /home/login/data/word
 	make down 
 	make cclean
 	make iclean 
