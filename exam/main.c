@@ -123,24 +123,22 @@ int main(int argc, char **argv) {
 	fd_set copy_write;
 	fd_set copy_read;
 
-	make_fd_zero(&origin_write);
-	make_fd_zero(&origin_read);
-
+	FD_ZERO(&origin_read);
+	FD_ZERO(&origin_write);
 	FD_SET(sockfd, &origin_read);
-
 	int fd_max = sockfd;
 	struct timeval _timeout;
 	_timeout.tv_sec = 0;
 	_timeout.tv_usec = 0;
 
-	char *buf = malloc(300000);
-	char *add = malloc(300000);
-	char *msg = malloc(300000);
+	char *buf = malloc(30000);
+	char *add = malloc(30000);
+	char *msg = malloc(30000);
 
 	int add_str_len = 0;
 
-	memset(buf,0,300000);
-	memset(msg,0,300000);
+	memset(buf,0,30000);
+	memset(msg,0,30000);
 	
 	printf("fd_max: %d\n", fd_max);
 	while(42)
@@ -154,22 +152,24 @@ int main(int argc, char **argv) {
 		if (select(fd_max+1, &copy_read, &copy_write, NULL, &_timeout) == -1)
 		{
 			ft_printf("fatal_error");
+			close(sockfd);
 			exit(0);
 		}
 
-		for(int clientfd = 0; clientfd < fd_max; clientfd++)
+		for(int clientfd = 0; clientfd <= fd_max; clientfd++)
 		{
-			if(FD_ISSET(clientfd, &copy_write))
+			if(msg != NULL && FD_ISSET(clientfd, &copy_write))
 			{
 				ft_printf("write");
 				send(clientfd, msg, ft_strlen(msg), 0); 
-				if (fd_max -1 == clientfd)
-					memset(msg,0, 300000);
+				if (fd_max - 1 == clientfd)
+					memset(msg,0, 30000);
 			}
+
 			if(FD_ISSET(clientfd, &copy_read))
 			{
 				ft_printf("fd_isset_read\n");
-				memset(add, 0, 300000);
+				memset(add, 0, 30000);
 				if (clientfd == sockfd)
 				{
 					connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t*)&len);
@@ -179,13 +179,14 @@ int main(int argc, char **argv) {
 					} 
 					else
 						ft_printf("server acccept the client...\n");
+
 					if (connfd > fd_max)
 						fd_max = connfd;
 					FD_SET(connfd, &origin_read);
 					FD_SET(connfd, &origin_write);
 					ft_printf("test");
 				}
-				add_str_len = recv(clientfd, add, 300000, 0);
+				add_str_len = recv(clientfd, add, 30000, 0);
 				if (!add_str_len)
 				{
 					FD_CLR(clientfd, &origin_read);
