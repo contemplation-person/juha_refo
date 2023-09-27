@@ -58,6 +58,7 @@ typedef enum
 {
 	NO,
 	YES,
+	BUFLEN = 100000,
 	CLIENT_NUM = 1000,
 	ALLIVER = 0,
 	LEFT,
@@ -84,13 +85,13 @@ void exit_all(t_node *client, int socketfd)
 		if (!client[fd].status)
 			continue;
 		free(client[fd].str);
-		close(fd)
+		close(fd);
 	}
 	ft_stderr("fatal");
 	close(socketfd);
 }
 
-int join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int flag, int sockfd)
+void join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int flag, int sockfd)
 {
 	char add[64] = {0,};
 		
@@ -103,15 +104,15 @@ int join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int 
 			sprintf(add, "alliver %d \n ", exception_fd);
 			if (!str_join(clients[fd].str, add))
 			{
-				exit_all(clients, socketfd);
+				exit_all(clients, sockfd);
 			}
 		} 
 		else if (flag == ODINALY)
 		{
-			sprintf(add, "client %s : ", exception_fd);
+			sprintf(add, "client %d : ", exception_fd);
 			if (!str_join(clients[fd].str, add) || !str_join(clients[fd].str, send_msg))
 			{
-				exit_all(clients);
+				exit_all(clients, sockfd);
 			}
 		}
 		else
@@ -119,7 +120,7 @@ int join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int 
 			sprintf(add, "left %d \n ", exception_fd);
 			if (!str_join(clients[fd].str, add))
 			{
-				exit_all(clients, socketfd);
+				exit_all(clients, sockfd);
 			}
 		}
 	}
@@ -175,11 +176,12 @@ int main(int argc, char **argv) {
 	fd_set copy_write_set;
 	fd_set copy_read_set;
 
-	FD_ZERO(&origin_read_set)
-	FD_ZERO(&origin_write_set)
+	FD_ZERO(&origin_read_set);
+	FD_ZERO(&origin_write_set);
 	FD_SET(sockfd, &origin_read_set);
 
 	int fd_max = sockfd;
+	char add[BUFLEN] = {0,};
 	int id = 0;
 
 	while (42)
@@ -188,14 +190,19 @@ int main(int argc, char **argv) {
 		copy_write_set = origin_write_set;
 		for (int fd = 0; fd < fd_max; fd++)
 		{
-			if (select(fd_max + 1, &copy_read, &copy_write, NULL, NULL) == -1)
+			if (select(fd_max + 1, &copy_read_set, &copy_write_set, NULL, NULL) == -1)
 			{
 				exit_all(clients, sockfd);
 			}
 
 			if (FD_ISSET(fd, &copy_write_set))
 			{
-
+				bzero(add, BUFLEN);
+				if (extract_message(&clients[fd].str, &add) == -1)
+				{
+					exit_all(clients, sockfd);
+				}
+				write(fd, add, strlen(add));
 			}
 			if (FD_ISSET(fd, &copy_read_set))
 			{
@@ -211,14 +218,18 @@ int main(int argc, char **argv) {
 					clients[fd].status = YES;
 					clients[fd].id = id;
 					clients[fd].str = NULL;
-					join_msg(clients, fd_max, connfd, NULL, LEFT, sockfd);
+					join_msg(clients, fd_max, connfd, NULL, ALLIVER, sockfd);
 					id++;
 				}
 				else
 				{
-
-					
-					
+					bzero(add, BUFLEN);
+					if (1 > recv(fd, add, BUFLEN, 0))
+					{
+						join_msg(clients, fd_max, fd, NULL, LEFT, sockfd);
+						continue ;
+					}
+					join_msg(clients, fd_max, fd, add, ODINALY, sockfd);
 				}
 			}
 		}
