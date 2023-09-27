@@ -63,6 +63,7 @@ typedef enum
 	LEFT,
 	ODINALY,
 } t_enum;
+
 typedef struct
 {
 	int status;
@@ -70,18 +71,26 @@ typedef struct
 	char *str;
 } t_node;
 
-void exit_all(t_node *client)
+void ft_stderr(char *str)
+{
+	write(2, str, strlen(str));
+	write(2, "\n", 1);
+}
+
+void exit_all(t_node *client, int socketfd)
 {
 	for (int fd = 0; fd < CLIENT_NUM; fd++)
 	{
 		if (!client[fd].status)
 			continue;
 		free(client[fd].str);
-		close(fd);
+		close(fd)
 	}
+	ft_stderr("fatal");
+	close(socketfd);
 }
 
-int join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int flag)
+int join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int flag, int sockfd)
 {
 	char add[64] = {0,};
 		
@@ -94,9 +103,24 @@ int join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int 
 			sprintf(add, "alliver %d \n ", exception_fd);
 			if (!str_join(clients[fd].str, add))
 			{
+				exit_all(clients, socketfd);
+			}
+		} 
+		else if (flag == ODINALY)
+		{
+			sprintf(add, "client %s : ", exception_fd);
+			if (!str_join(clients[fd].str, add) || !str_join(clients[fd].str, send_msg))
+			{
 				exit_all(clients);
 			}
-
+		}
+		else
+		{
+			sprintf(add, "left %d \n ", exception_fd);
+			if (!str_join(clients[fd].str, add))
+			{
+				exit_all(clients, socketfd);
+			}
 		}
 	}
 }
