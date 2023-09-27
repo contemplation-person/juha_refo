@@ -127,7 +127,7 @@ void join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int
 }
 
 int main(int argc, char **argv) {
-	if (argc > 2)
+	if (argc != 2)
 		ft_stderr("wrong argc");
 	int sockfd, connfd, len;
 	struct sockaddr_in servaddr, cli; 
@@ -186,38 +186,46 @@ int main(int argc, char **argv) {
 
 	while (42)
 	{
+		// FD_COPY(&origin_read_set, &copy_read_set);
 		copy_read_set = origin_read_set;
 		copy_write_set = origin_write_set;
-		for (int fd = 0; fd < fd_max; fd++)
+		if (select(fd_max + 1, &copy_read_set, &copy_write_set, NULL, NULL) == -1)
 		{
-			if (select(fd_max + 1, &copy_read_set, &copy_write_set, NULL, NULL) == -1)
-			{
-				exit_all(clients, sockfd);
-			}
-
+			exit_all(clients, sockfd);
+		}
+		// fprintf(stderr, "fprintf : %d\n", fd_max);
+		for (int fd = 0; fd <= fd_max; fd++)
+		{
+			fprintf(stderr, "fd_max: %d\n", fd_max), sleep(1);
 			if (FD_ISSET(fd, &copy_write_set))
 			{
+				if (!clients[fd].str)
+					break;
 				bzero(add, BUFLEN);
-				if (extract_message(&clients[fd].str, &add) == -1)
+				char *write_msg;
+				if (extract_message(&clients[fd].str, &write_msg) == -1)
 				{
 					exit_all(clients, sockfd);
 				}
-				write(fd, add, strlen(add));
+				write(fd, write_msg, strlen(write_msg));
 			}
 			if (FD_ISSET(fd, &copy_read_set))
 			{
+				fprintf(stderr, "test: %d\n", fd), sleep(1);
 				if (fd == sockfd)
 				{
 					connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
 					if (connfd < 0)
 						continue;
+
 					FD_SET(connfd, &origin_read_set);
 					FD_SET(connfd, &origin_write_set);
+
 					if (fd_max < connfd)
 						fd_max = connfd;
-					clients[fd].status = YES;
-					clients[fd].id = id;
-					clients[fd].str = NULL;
+					clients[connfd].status = YES;
+					clients[connfd].id = id;
+					clients[connfd].str = NULL;
 					join_msg(clients, fd_max, connfd, NULL, ALLIVER, sockfd);
 					id++;
 				}
@@ -227,6 +235,9 @@ int main(int argc, char **argv) {
 					if (1 > recv(fd, add, BUFLEN, 0))
 					{
 						join_msg(clients, fd_max, fd, NULL, LEFT, sockfd);
+						FD_CLR(fd, &origin_read_set);
+						FD_CLR(fd, &origin_write_set);
+						close(fd);
 						continue ;
 					}
 					join_msg(clients, fd_max, fd, add, ODINALY, sockfd);
