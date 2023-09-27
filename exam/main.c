@@ -127,18 +127,18 @@ int join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int 
 
 int main(int argc, char **argv) {
 	if (argc > 2)
-		ft_printf("wrong argc");
+		ft_stderr("wrong argc");
 	int sockfd, connfd, len;
 	struct sockaddr_in servaddr, cli; 
 
 	// socket create and verification 
 	sockfd = socket(AF_INET, SOCK_STREAM, 0); 
 	if (sockfd == -1) { 
-		ft_printf("socket creation failed...\n"); 
+		ft_stderr("socket creation failed...\n"); 
 		exit(0); 
 	} 
 	else
-		ft_printf("Socket successfully created..\n"); 
+		ft_stderr("Socket successfully created..\n"); 
 	bzero(&servaddr, sizeof(servaddr)); 
 
 	// assign IP, PORT 
@@ -155,18 +155,20 @@ int main(int argc, char **argv) {
 
 	// Binding newly created socket to given IP and verification 
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0) { 
-		ft_printf("socket bind failed...\n"); 
+		ft_stderr("socket bind failed...\n"); 
 		close(sockfd);
 		exit(0); 
 	} 
 	else
-		ft_printf("Socket successfully binded..\n");
+		ft_stderr("Socket successfully binded..\n");
 	if (listen(sockfd, 1000) != 0) {
-		ft_printf("cannot listen\n"); 
+		ft_stderr("cannot listen\n"); 
 		close(sockfd);
 		exit(0); 
 	}
 	len = sizeof(cli);
+	t_node clients[1000];
+	bzero(clients, sizeof(t_node) * 1000);
 
 	fd_set origin_write_set;
 	fd_set origin_read_set;
@@ -178,6 +180,7 @@ int main(int argc, char **argv) {
 	FD_SET(sockfd, &origin_read_set);
 
 	int fd_max = sockfd;
+	int id = 0;
 
 	while (42)
 	{
@@ -187,9 +190,7 @@ int main(int argc, char **argv) {
 		{
 			if (select(fd_max + 1, &copy_read, &copy_write, NULL, NULL) == -1)
 			{
-				ft_printf("fatal_error");
-				close(sockfd);
-				exit(1);
+				exit_all(clients, sockfd);
 			}
 
 			if (FD_ISSET(fd, &copy_write_set))
@@ -202,13 +203,21 @@ int main(int argc, char **argv) {
 				{
 					connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
 					if (connfd < 0)
-					{
-						ft_printf("server acccept failed...\n");
-						exit(1);
-					}
+						continue;
+					FD_SET(connfd, &origin_read_set);
+					FD_SET(connfd, &origin_write_set);
+					if (fd_max < connfd)
+						fd_max = connfd;
+					clients[fd].status = YES;
+					clients[fd].id = id;
+					clients[fd].str = NULL;
+					join_msg(clients, fd_max, connfd, NULL, LEFT, sockfd);
+					id++;
 				}
 				else
 				{
+
+					
 					
 				}
 			}
