@@ -54,28 +54,53 @@ char *str_join(char *buf, char *add)
 	return (newbuf);
 }
 
-int ft_strlen(char *str)
+typedef enum
 {
-	if (str == NULL) return 0;
-	int i = 0;
-	while (str[i])
-		i++;
-	return i;
+	NO,
+	YES,
+	CLIENT_NUM = 1000,
+	ALLIVER = 0,
+	LEFT,
+	ODINALY,
+} t_enum;
+typedef struct
+{
+	int status;
+	int id;
+	char *str;
+} t_node;
+
+void exit_all(t_node *client)
+{
+	for (int fd = 0; fd < CLIENT_NUM; fd++)
+	{
+		if (!client[fd].status)
+			continue;
+		free(client[fd].str);
+		close(fd);
+	}
 }
 
-void ft_printf(char *str)
+int join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int flag)
 {
-	if (str == NULL) return ;
-	write(1, str, ft_strlen(str));
+	char add[64] = {0,};
+		
+	for(int fd = 0; fd < fd_max; fd++)
+	{
+		if (exception_fd == fd && !(clients[fd].status))
+			continue;
+		if (flag == ALLIVER)
+		{
+			sprintf(add, "alliver %d \n ", exception_fd);
+			if (!str_join(clients[fd].str, add))
+			{
+				exit_all(clients);
+			}
+
+		}
+	}
 }
 
-
-void make_fd_zero(fd_set *target)
-{
-	memset(target, 0, sizeof(fd_set));
-}
-
-	
 int main(int argc, char **argv) {
 	if (argc > 2)
 		ft_printf("wrong argc");
@@ -107,99 +132,64 @@ int main(int argc, char **argv) {
 	// Binding newly created socket to given IP and verification 
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0) { 
 		ft_printf("socket bind failed...\n"); 
+		close(sockfd);
 		exit(0); 
 	} 
 	else
 		ft_printf("Socket successfully binded..\n");
 	if (listen(sockfd, 1000) != 0) {
 		ft_printf("cannot listen\n"); 
+		close(sockfd);
 		exit(0); 
 	}
 	len = sizeof(cli);
 
-	// init select
-	fd_set origin_write;
-	fd_set origin_read;
-	fd_set copy_write;
-	fd_set copy_read;
+	fd_set origin_write_set;
+	fd_set origin_read_set;
+	fd_set copy_write_set;
+	fd_set copy_read_set;
 
-	FD_ZERO(&origin_read);
-	FD_ZERO(&origin_write);
-	FD_SET(sockfd, &origin_read);
+	FD_ZERO(&origin_read_set)
+	FD_ZERO(&origin_write_set)
+	FD_SET(sockfd, &origin_read_set);
+
 	int fd_max = sockfd;
-	struct timeval _timeout;
-	_timeout.tv_sec = 0;
-	_timeout.tv_usec = 0;
 
-	char *buf = malloc(30000);
-	char *add = malloc(30000);
-	char *msg = malloc(30000);
-
-	int add_str_len = 0;
-
-	memset(buf,0,30000);
-	memset(msg,0,30000);
-	
-	printf("fd_max: %d\n", fd_max);
-	while(42)
+	while (42)
 	{
-		//init write, read
-		//FD_COPY(&origin_write, &copy_write);
-		//FD_COPY(&origin_read, &copy_read);
-
-		copy_write = origin_write;
-		copy_read = origin_read;
-		if (select(fd_max+1, &copy_read, &copy_write, NULL, &_timeout) == -1)
+		copy_read_set = origin_read_set;
+		copy_write_set = origin_write_set;
+		for (int fd = 0; fd < fd_max; fd++)
 		{
-			ft_printf("fatal_error");
-			close(sockfd);
-			exit(0);
-		}
-
-		for(int clientfd = 0; clientfd <= fd_max; clientfd++)
-		{
-			if(msg != NULL && FD_ISSET(clientfd, &copy_write))
+			if (select(fd_max + 1, &copy_read, &copy_write, NULL, NULL) == -1)
 			{
-				ft_printf("write");
-				send(clientfd, msg, ft_strlen(msg), 0); 
-				if (fd_max - 1 == clientfd)
-					memset(msg,0, 30000);
+				ft_printf("fatal_error");
+				close(sockfd);
+				exit(1);
 			}
 
-			if(FD_ISSET(clientfd, &copy_read))
+			if (FD_ISSET(fd, &copy_write_set))
 			{
-				ft_printf("fd_isset_read\n");
-				memset(add, 0, 30000);
-				if (clientfd == sockfd)
-				{
-					connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t*)&len);
-					if (connfd < 0) { 
-						ft_printf("server acccept failed...\n"); 
-						exit(0); 
-					} 
-					else
-						ft_printf("server acccept the client...\n");
 
-					if (connfd > fd_max)
-						fd_max = connfd;
-					FD_SET(connfd, &origin_read);
-					FD_SET(connfd, &origin_write);
-					ft_printf("test");
-				}
-				add_str_len = recv(clientfd, add, 30000, 0);
-				if (!add_str_len)
+			}
+			if (FD_ISSET(fd, &copy_read_set))
+			{
+				if (fd == sockfd)
 				{
-					FD_CLR(clientfd, &origin_read);
-					FD_CLR(clientfd, &origin_write);
-					close(clientfd);
-				} else if (add_str_len > 0) {
-					str_join(buf, add);
-					if (!(*msg))
-						extract_message(&buf, &msg);
+					connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
+					if (connfd < 0)
+					{
+						ft_printf("server acccept failed...\n");
+						exit(1);
+					}
+				}
+				else
+				{
+					
 				}
 			}
-
 		}
-
 	}
+	// init select
+
 }
