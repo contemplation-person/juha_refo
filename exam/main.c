@@ -211,7 +211,7 @@ int main(int argc, char **argv) {
 			}
 			if (FD_ISSET(fd, &copy_read_set))
 			{
-				fprintf(stderr, "test: %d\n", fd), sleep(1);
+				// fprintf(stderr, "test: %d\n", fd), sleep(1);
 				if (fd == sockfd)
 				{
 					connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
@@ -223,6 +223,7 @@ int main(int argc, char **argv) {
 
 					if (fd_max < connfd)
 						fd_max = connfd;
+
 					clients[connfd].status = YES;
 					clients[connfd].id = id;
 					clients[connfd].str = NULL;
@@ -235,6 +236,10 @@ int main(int argc, char **argv) {
 					if (1 > recv(fd, add, BUFLEN, 0))
 					{
 						join_msg(clients, fd_max, fd, NULL, LEFT, sockfd);
+						clients[fd].status = NO;
+						clients[fd].id = 0;
+						free(clients[fd].str);
+						clients[fd].str = NULL;
 						FD_CLR(fd, &origin_read_set);
 						FD_CLR(fd, &origin_write_set);
 						close(fd);
@@ -245,6 +250,4 @@ int main(int argc, char **argv) {
 			}
 		}
 	}
-	// init select
-
 }
