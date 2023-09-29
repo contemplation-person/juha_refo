@@ -54,211 +54,144 @@ char *str_join(char *buf, char *add)
 	return (newbuf);
 }
 
-typedef enum
+void ft_printf(char *str)
 {
-	NO,
-	YES,
-	BUFLEN = 100000,
-	CLIENT_NUM = 1000,
-	ALLIVER = 0,
-	LEFT,
-	ODINALY,
-} t_enum;
+	write(1, str, strlen(str));
+	exit(1);
+}
 
 typedef struct
 {
-	int status;
 	int id;
-	char *str;
+	char *rb;
+	char *wb;
 } t_node;
 
-void ft_stderr(char *str)
+typedef enum
 {
-	write(2, str, strlen(str));
-	write(2, "\n", 1);
+	CLIENT_lEN = 1000,
+	BUFFLEN = 100000,
+	LEFT = 0,
+	ALLIVER = 0,
+	ODINALY,
+} t_enum_all;
+
+void exit_error()
+{
+
 }
 
-void exit_all(t_node *client, int socketfd)
+int init_client(t_node *client, int fd)
 {
-	for (int fd = 0; fd < CLIENT_NUM; fd++)
-	{
-		if (!client[fd].status)
-			continue;
-		free(client[fd].str);
-		close(fd);
-	}
-	ft_stderr("fatal");
-	close(socketfd);
+	client[fd].id = -1;
+	if (client[fd].rb != 0)
+		free(client[fd].rb);
+	if (client[fd].wb != 0)
+		free(client[fd].wb);
+	client[fd].rb = 0;
+	client[fd].wb = 0;
+	return (0);
 }
 
-void join_msg(t_node *clients, int fd_max, int exception_fd, char *send_msg, int flag, int sockfd)
+void init_clients(t_node *client)
 {
-	char add[64] = {
-			0,
-	};
 
-	for (int fd = 0; fd < fd_max; fd++)
+	for (int fd = 0; fd < CLIENT_lEN; fd++)
 	{
-		if (exception_fd == fd && !(clients[fd].status))
-			continue;
-		if (flag == ALLIVER)
-		{
-			sprintf(add, "alliver %d \n ", exception_fd);
-			if (!str_join(clients[fd].str, add))
-			{
-				exit_all(clients, sockfd);
-			}
-		}
-		else if (flag == ODINALY)
-		{
-			sprintf(add, "client %d : ", exception_fd);
-			if (!str_join(clients[fd].str, add) || !str_join(clients[fd].str, send_msg))
-			{
-				exit_all(clients, sockfd);
-			}
-		}
-		else
-		{
-			sprintf(add, "left %d \n ", exception_fd);
-			if (!str_join(clients[fd].str, add))
-			{
-				exit_all(clients, sockfd);
-			}
-		}
+		init_client(client, fd)
 	}
 }
 
 int main(int argc, char **argv)
 {
-	if (argc != 2)
-		ft_stderr("wrong argc");
-	int sockfd, connfd, len;
+	if (argc != 2) 
+		ft_printf("no ARGUMENTS\n");
+	int sockfd, connfd, len, port;
 	struct sockaddr_in servaddr, cli;
+
+	port = atoi(argv[1]);
+	if (port < 0 || port > 65535)
+		ft_printf("wrong port\n");
 
 	// socket create and verification
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
 	{
-		ft_stderr("socket creation failed...\n");
-		exit(0);
+		ft_printf("socket creation failed...\n");
+		exit(1);
 	}
-	else
-		ft_stderr("Socket successfully created..\n");
 	bzero(&servaddr, sizeof(servaddr));
 
 	// assign IP, PORT
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
-
-	int port;
-
-	if (argc == 1)
-		port = 8081;
-	else
-		port = atoi(argv[1]);
 	servaddr.sin_port = htons(port);
 
 	// Binding newly created socket to given IP and verification
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
 	{
-		ft_stderr("socket bind failed...\n");
+		ft_printf("socket bind failed...\n");
 		close(sockfd);
-		exit(0);
+		exit(1);
 	}
-	else
-		ft_stderr("Socket successfully binded..\n");
-	if (listen(sockfd, 1000) != 0)
+	if (listen(sockfd, 10) != 0)
 	{
-		ft_stderr("cannot listen\n");
+		ft_printf("cannot listen\n");
 		close(sockfd);
-		exit(0);
+		exit(1);
 	}
 	len = sizeof(cli);
-	t_node clients[1000];
-	bzero(clients, sizeof(t_node) * 1000);
 
-	fd_set origin_write_set;
-	fd_set origin_read_set;
-	fd_set copy_write_set;
-	fd_set copy_read_set;
+	t_node client[1000];
+	init_clients(client);
 
-	FD_ZERO(&origin_read_set);
-	FD_ZERO(&origin_write_set);
-	FD_SET(sockfd, &origin_read_set);
+	fd_set fd_read_set;
+	fd_set fd_write_set;
+	fd_set fd_copy_read_set;
+	fd_set fd_copy_write_set;
 
-	int fd_max = sockfd;
-	char add[BUFLEN] = {
-			0,
-	};
+	FD_ZERO(&fd_read_set);
+	FD_ZERO(&fd_write_set);
+	FD_SET(sockfd, &fd_read_set);
+
+	int max_fd = sockfd;
 	int id = 0;
 
 	while (42)
 	{
-		FD_COPY(&origin_read_set, &copy_read_set);
-		// copy_read_set = origin_read_set;
+		fd_copy_read_set = fd_read_set;
+		fd_copy_write_set = fd_write_set;
 
-		fprintf(stderr, "origin_read_set : %d\n", origin_read_set);
-		copy_write_set = origin_write_set;
-		if (select(fd_max + 1, &copy_read_set, &copy_write_set, NULL, NULL) == -1)
+		if (select(max_fd + 1, &fd_copy_read_set, &fd_copy_write_set, NULL, NULL) == -1)
 		{
-			exit_all(clients, sockfd);
+			ft_printf("select error\n");
+			close(sockfd);
+			exit(1);
 		}
-		// fprintf(stderr, "fprintf : %d\n", fd_max);
-		for (int fd = 0; fd <= fd_max; fd++)
+
+		for (int fd = 0; fd <= max_fd; fd++)
 		{
-			fprintf(stderr, "fd_max: %d\n", fd_max);
-			if (FD_ISSET(fd, &copy_read_set))
+			if (FD_ISSET(fd, &fd_copy_read_set))
 			{
-				fprintf(stderr, "test: %d\n", fd);
-				if (fd == sockfd)
+				if (fd != sockfd)
 				{
-					connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
-					fprintf(stderr, "connect fd : %d\n", connfd);
-
-					if (connfd < 0)
-						continue;
-
-					FD_SET(connfd, &origin_read_set);
-					FD_SET(connfd, &origin_write_set);
-
-					if (fd_max < connfd)
-						fd_max = connfd;
-
-					clients[connfd].status = YES;
-					clients[connfd].id = id;
-					clients[connfd].str = NULL;
-					join_msg(clients, fd_max, connfd, NULL, ALLIVER, sockfd);
-					id++;
+					//add buf
+					add_rb(client, max_fd, fd, &fd_write_set, sockfd);
 				}
 				else
 				{
-					bzero(add, BUFLEN);
-					if (1 > recv(fd, add, BUFLEN, 0))
+					connfd = accept(sockfd, (struct sockaddr *)&cli, &len);
+					if (connfd >= 0)
 					{
-						join_msg(clients, fd_max, fd, NULL, LEFT, sockfd);
-						clients[fd].status = NO;
-						clients[fd].id = 0;
-						free(clients[fd].str);
-						clients[fd].str = NULL;
-						FD_CLR(fd, &origin_read_set);
-						FD_CLR(fd, &origin_write_set);
-						close(fd);
-						continue;
+						register_client(client, connfd, &id, &fd_read_set, &max_fd);
 					}
-					join_msg(clients, fd_max, fd, add, ODINALY, sockfd);
 				}
 			}
-			if (FD_ISSET(fd, &copy_write_set))
+			if (FD_ISSET(fd, &fd_copy_write_set))
 			{
-				if (!clients[fd].str)
-					break;
-				bzero(add, BUFLEN);
-				char *write_msg;
-				if (extract_message(&clients[fd].str, &write_msg) == -1)
-				{
-					exit_all(clients, sockfd);
-				}
-				write(fd, write_msg, strlen(write_msg));
+				if (send_message(client, fd))
+					init_client(client, fd);
+				// send buf
 			}
 		}
 	}
