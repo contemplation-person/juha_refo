@@ -196,7 +196,7 @@ int main(int argc, char **argv)
 	{
 		FD_COPY(&origin_read_set, &copy_read_set);
 		// copy_read_set = origin_read_set;
-	
+
 		fprintf(stderr, "origin_read_set : %d\n", origin_read_set);
 		copy_write_set = origin_write_set;
 		if (select(fd_max + 1, &copy_read_set, &copy_write_set, NULL, NULL) == -1)
@@ -243,13 +243,13 @@ int main(int argc, char **argv)
 						FD_CLR(fd, &origin_read_set);
 						FD_CLR(fd, &origin_write_set);
 						close(fd);
-						continue ;
+						continue;
 					}
 					join_msg(clients, fd_max, fd, add, ODINALY, sockfd);
 				}
 			}
 			if (FD_ISSET(fd, &copy_write_set))
-		{
+			{
 				if (!clients[fd].str)
 					break;
 				bzero(add, BUFLEN);
