@@ -9,8 +9,8 @@
 
 int extract_message(char **buf, char **msg)
 {
-	char	*newbuf;
-	int	i;
+	char *newbuf;
+	int i;
 
 	*msg = 0;
 	if (*buf == 0)
@@ -36,8 +36,8 @@ int extract_message(char **buf, char **msg)
 
 char *str_join(char *buf, char *add)
 {
-	char	*newbuf;
-	int		len;
+	char *newbuf;
+	int len;
 
 	if (buf == 0)
 		len = 0;
@@ -91,11 +91,13 @@ void exit_all(t_node *client, int socketfd)
 	close(socketfd);
 }
 
-void join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int flag, int sockfd)
+void join_msg(t_node *clients, int fd_max, int exception_fd, char *send_msg, int flag, int sockfd)
 {
-	char add[64] = {0,};
-		
-	for(int fd = 0; fd < fd_max; fd++)
+	char add[64] = {
+			0,
+	};
+
+	for (int fd = 0; fd < fd_max; fd++)
 	{
 		if (exception_fd == fd && !(clients[fd].status))
 			continue;
@@ -106,7 +108,7 @@ void join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int
 			{
 				exit_all(clients, sockfd);
 			}
-		} 
+		}
 		else if (flag == ODINALY)
 		{
 			sprintf(add, "client %d : ", exception_fd);
@@ -126,25 +128,27 @@ void join_msg(t_node *clients, int fd_max, int exception_fd, char* send_msg, int
 	}
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 	if (argc != 2)
 		ft_stderr("wrong argc");
 	int sockfd, connfd, len;
-	struct sockaddr_in servaddr, cli; 
+	struct sockaddr_in servaddr, cli;
 
-	// socket create and verification 
-	sockfd = socket(AF_INET, SOCK_STREAM, 0); 
-	if (sockfd == -1) { 
-		ft_stderr("socket creation failed...\n"); 
-		exit(0); 
-	} 
+	// socket create and verification
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	if (sockfd == -1)
+	{
+		ft_stderr("socket creation failed...\n");
+		exit(0);
+	}
 	else
-		ft_stderr("Socket successfully created..\n"); 
-	bzero(&servaddr, sizeof(servaddr)); 
+		ft_stderr("Socket successfully created..\n");
+	bzero(&servaddr, sizeof(servaddr));
 
-	// assign IP, PORT 
-	servaddr.sin_family = AF_INET; 
-	servaddr.sin_addr.s_addr = htonl(2130706433); //127.0.0.1
+	// assign IP, PORT
+	servaddr.sin_family = AF_INET;
+	servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
 
 	int port;
 
@@ -152,20 +156,22 @@ int main(int argc, char **argv) {
 		port = 8081;
 	else
 		port = atoi(argv[1]);
-	servaddr.sin_port = htons(port); 
+	servaddr.sin_port = htons(port);
 
-	// Binding newly created socket to given IP and verification 
-	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0) { 
-		ft_stderr("socket bind failed...\n"); 
+	// Binding newly created socket to given IP and verification
+	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
+	{
+		ft_stderr("socket bind failed...\n");
 		close(sockfd);
-		exit(0); 
-	} 
+		exit(0);
+	}
 	else
 		ft_stderr("Socket successfully binded..\n");
-	if (listen(sockfd, 1000) != 0) {
-		ft_stderr("cannot listen\n"); 
+	if (listen(sockfd, 1000) != 0)
+	{
+		ft_stderr("cannot listen\n");
 		close(sockfd);
-		exit(0); 
+		exit(0);
 	}
 	len = sizeof(cli);
 	t_node clients[1000];
@@ -181,13 +187,17 @@ int main(int argc, char **argv) {
 	FD_SET(sockfd, &origin_read_set);
 
 	int fd_max = sockfd;
-	char add[BUFLEN] = {0,};
+	char add[BUFLEN] = {
+			0,
+	};
 	int id = 0;
 
 	while (42)
 	{
-		// FD_COPY(&origin_read_set, &copy_read_set);
-		copy_read_set = origin_read_set;
+		FD_COPY(&origin_read_set, &copy_read_set);
+		// copy_read_set = origin_read_set;
+	
+		fprintf(stderr, "origin_read_set : %d\n", origin_read_set);
 		copy_write_set = origin_write_set;
 		if (select(fd_max + 1, &copy_read_set, &copy_write_set, NULL, NULL) == -1)
 		{
@@ -196,25 +206,15 @@ int main(int argc, char **argv) {
 		// fprintf(stderr, "fprintf : %d\n", fd_max);
 		for (int fd = 0; fd <= fd_max; fd++)
 		{
-			fprintf(stderr, "fd_max: %d\n", fd_max), sleep(1);
-			if (FD_ISSET(fd, &copy_write_set))
-			{
-				if (!clients[fd].str)
-					break;
-				bzero(add, BUFLEN);
-				char *write_msg;
-				if (extract_message(&clients[fd].str, &write_msg) == -1)
-				{
-					exit_all(clients, sockfd);
-				}
-				write(fd, write_msg, strlen(write_msg));
-			}
+			fprintf(stderr, "fd_max: %d\n", fd_max);
 			if (FD_ISSET(fd, &copy_read_set))
 			{
-				// fprintf(stderr, "test: %d\n", fd), sleep(1);
+				fprintf(stderr, "test: %d\n", fd);
 				if (fd == sockfd)
 				{
 					connfd = accept(sockfd, (struct sockaddr *)&cli, (socklen_t *)&len);
+					fprintf(stderr, "connect fd : %d\n", connfd);
+
 					if (connfd < 0)
 						continue;
 
@@ -247,6 +247,18 @@ int main(int argc, char **argv) {
 					}
 					join_msg(clients, fd_max, fd, add, ODINALY, sockfd);
 				}
+			}
+			if (FD_ISSET(fd, &copy_write_set))
+		{
+				if (!clients[fd].str)
+					break;
+				bzero(add, BUFLEN);
+				char *write_msg;
+				if (extract_message(&clients[fd].str, &write_msg) == -1)
+				{
+					exit_all(clients, sockfd);
+				}
+				write(fd, write_msg, strlen(write_msg));
 			}
 		}
 	}
