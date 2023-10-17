@@ -92,8 +92,8 @@ void add_(int connfd, t_client *client, fd_set *r_fd_set, fd_set *w_fd_set, int 
     if (fd != connfd && client[fd].id != -1)
     {
       client[fd].wb = str_join(client[fd].wb, buf);
+      FD_SET(fd, w_fd_set);
     }
-    FD_SET(fd, w_fd_set);
   }
   client[connfd].id = *id;
   FD_SET(connfd, r_fd_set);
@@ -104,23 +104,28 @@ int recv_from_(int target_fd, t_client *client, fd_set *w_fd_set, fd_set *r_fd_s
 {
   char r_tmp_buf[BUF_LEN] = {0};
   char *w_tmp_buf = NULL;
+  char *tmp = NULL;
 
   // success recv
   if (0 < recv(target_fd, r_tmp_buf, BUF_LEN, 0))
   {
     sprintf(prifix_msg, "client %d: ", client[target_fd].id);
-    client[target_fd].rb = str_join(client[target_fd].rb, prifix_msg);
     client[target_fd].rb = str_join(client[target_fd].rb, r_tmp_buf);
-    if (-1 == extract_message(&client[target_fd].rb, &w_tmp_buf))
-      return 0;
-    for (int fd = 0; fd <= fd_max; fd++)
-    {
-      if (fd != target_fd && client[fd].id != -1)
-      {
-        client[fd].wb = str_join(client[fd].wb, w_tmp_buf);
-        FD_SET(fd, w_fd_set);
-      }
+    while (0 < extract_message(&client[target_fd].rb, &w_tmp_buf)) {
+      tmp = str_join(tmp, prifix_msg);
+      tmp = str_join(tmp, w_tmp_buf);
+      free(w_tmp_buf);
     }
+    if (tmp) {
+      for (int fd = 0; fd <= fd_max; fd++)
+      {
+        if (fd != target_fd && client[fd].id != -1)
+        {
+          client[fd].wb = str_join(client[fd].wb, tmp);
+          FD_SET(fd, w_fd_set);
+        }
+      }
+    } 
   }
   else
   {
@@ -142,7 +147,6 @@ int recv_from_(int target_fd, t_client *client, fd_set *w_fd_set, fd_set *r_fd_s
     FD_CLR(target_fd, r_fd_set);
     close(target_fd);
   }
-  free(w_tmp_buf);
   return 1;
 }
 
@@ -160,28 +164,18 @@ void close_(t_client *client, int fd_max)
   close(3);
 }
 
-void send_to(t_client *client, int fd_max, fd_set *w_fd_set)
+void send_to(t_client *client, int fd, fd_set *w_fd_set)
 {
   char *str = NULL;
   size_t len;
-
-  for (int fd = 0; fd <= fd_max; fd++)
-  {
-    if (!client[fd].wb)
-    {
-      FD_CLR(fd, w_fd_set);
-      continue;
-    }
-    if (client[fd].id != -1)
-    {
-      len = send(fd, client[fd].wb, strlen(client[fd].wb), 0);
-      if (strlen(client[fd].wb) != len)
-      {
-        str = str_join(str, client[fd].wb + len);
-      }
-      free(client[fd].wb);
-      client[fd].wb = str;
-    }
+  size_t buf_len = strlen(client[fd].wb);
+  
+  len = send(fd, client[fd].wb, buf_len, 0);
+  str = str_join(str, client[fd].wb + len);
+  free(client[fd].wb);
+  client[fd].wb = str;
+  if (len == buf_len) {
+    FD_CLR(fd, w_fd_set);
   }
 }
 
@@ -234,7 +228,7 @@ int main(int argc, char **argv)
 
   int id = 0;
   int fd_max = sockfd;
-  char prifix_msg[30] = {0};
+  char prifix_msg[50] = {0};
 
   t_client client[CLIENT_NUM];
   init(client);
@@ -280,7 +274,7 @@ int main(int argc, char **argv)
       }
       if (FD_ISSET(fd, &w_copy_fd_set))
       {
-        send_to(client, fd_max, &w_fd_set);
+        send_to(client, fd, &w_fd_set);
       }
     }
   }
