@@ -215,7 +215,7 @@ int main(int argc, char **argv)
   servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
   servaddr.sin_port = htons(port);
   int test = 0;
-  setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void *)&test, 1);
+  setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &test, 1);
 
   // Binding newly created socket to given IP and verification
   if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
