@@ -100,22 +100,22 @@ void add_(int connfd, t_client *client, fd_set *r_fd_set, fd_set *w_fd_set, int 
   (*id)++;
 }
 
-int recv_from_(int fd, t_client *client, fd_set *w_fd_set, fd_set *r_fd_set, int fd_max, char *prifix_msg)
+int recv_from_(int target_fd, t_client *client, fd_set *w_fd_set, fd_set *r_fd_set, int fd_max, char *prifix_msg)
 {
   char r_tmp_buf[BUF_LEN] = {0};
   char *w_tmp_buf = NULL;
 
   // success recv
-  if (0 < recv(fd, r_tmp_buf, BUF_LEN, 0))
+  if (0 < recv(target_fd, r_tmp_buf, BUF_LEN, 0))
   {
-    sprintf(prifix_msg, "client %d: ", client[fd].id);
-    client[fd].rb = str_join(client[fd].rb, prifix_msg);
-    client[fd].rb = str_join(client[fd].rb, r_tmp_buf);
-    if (-1 == extract_message(&client[fd].rb, &w_tmp_buf))
+    sprintf(prifix_msg, "client %d: ", client[target_fd].id);
+    client[target_fd].rb = str_join(client[target_fd].rb, prifix_msg);
+    client[target_fd].rb = str_join(client[target_fd].rb, r_tmp_buf);
+    if (-1 == extract_message(&client[target_fd].rb, &w_tmp_buf))
       return 0;
     for (int fd = 0; fd <= fd_max; fd++)
     {
-      if (client[fd].id != -1)
+      if (fd != target_fd && client[fd].id != -1)
       {
         client[fd].wb = str_join(client[fd].wb, w_tmp_buf);
         FD_SET(fd, w_fd_set);
@@ -127,20 +127,20 @@ int recv_from_(int fd, t_client *client, fd_set *w_fd_set, fd_set *r_fd_set, int
     for (int fd = 0; fd <= fd_max; fd++)
     {
       sprintf(prifix_msg, "server: client %d just left\n", client[fd].id);
-      if (client[fd].id != -1)
+      if (fd != target_fd && client[fd].id != -1)
       {
         client[fd].wb = str_join(client[fd].wb, prifix_msg);
         FD_SET(fd, w_fd_set);
       }
     }
-    client[fd].id = -1;
-    free(client[fd].wb);
-    free(client[fd].rb);
-    client[fd].wb = NULL;
-    client[fd].rb = NULL;
-    FD_CLR(fd, w_fd_set);
-    FD_CLR(fd, r_fd_set);
-    close(fd);
+    client[target_fd].id = -1;
+    free(client[target_fd].wb);
+    free(client[target_fd].rb);
+    client[target_fd].wb = NULL;
+    client[target_fd].rb = NULL;
+    FD_CLR(target_fd, w_fd_set);
+    FD_CLR(target_fd, r_fd_set);
+    close(target_fd);
   }
   free(w_tmp_buf);
   return 1;
@@ -167,16 +167,17 @@ void send_to(t_client *client, int fd_max, fd_set *w_fd_set)
 
   for (int fd = 0; fd <= fd_max; fd++)
   {
+    if (!client[fd].wb)
+    {
+      FD_CLR(fd, w_fd_set);
+      continue;
+    }
     if (client[fd].id != -1)
     {
       len = send(fd, client[fd].wb, strlen(client[fd].wb), 0);
       if (strlen(client[fd].wb) != len)
       {
         str = str_join(str, client[fd].wb + len);
-      }
-      else
-      {
-        FD_CLR(fd, w_fd_set);
       }
       free(client[fd].wb);
       client[fd].wb = str;
@@ -213,6 +214,8 @@ int main(int argc, char **argv)
   servaddr.sin_family = AF_INET;
   servaddr.sin_addr.s_addr = htonl(2130706433); // 127.0.0.1
   servaddr.sin_port = htons(port);
+  int test = 0;
+  setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void *)&test, 1);
 
   // Binding newly created socket to given IP and verification
   if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
@@ -231,7 +234,7 @@ int main(int argc, char **argv)
 
   int id = 0;
   int fd_max = sockfd;
-  char prifix_msg[30];
+  char prifix_msg[30] = {0};
 
   t_client client[CLIENT_NUM];
   init(client);
@@ -245,8 +248,6 @@ int main(int argc, char **argv)
   FD_ZERO(&r_fd_set);
   FD_SET(sockfd, &r_fd_set);
 
-  int test = 0;
-  setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void *)&test, 1);
 
   while (42)
   {
