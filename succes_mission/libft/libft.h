@@ -13,6 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_list
 {
