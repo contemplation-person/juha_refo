@@ -15,5 +15,9 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	if (fd < 0) return ;
+	int len = write(fd, &c, 1);
+	if (len < 0) return ;
+	while (len != 1)
+		len = write(fd, &c, 1);
 }
