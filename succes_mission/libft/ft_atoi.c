@@ -31,12 +31,12 @@ int	ft_atoi(const char *str)
 	cnt = change_size_t(str);
 	if (is_minus == -1)
 	{
-		if (cnt >= 9223372036854775808U)
+		if (cnt >= LLONG_MIN)
 			return (0);
 	}
 	else
 	{
-		if (cnt >= 9223372036854775807)
+		if (cnt >= LLONG_MAX)
 			return (-1);
 	}
 	return ((int)cnt * is_minus);
