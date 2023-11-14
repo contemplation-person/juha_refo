@@ -12,94 +12,69 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+static ssize_t ft_strlen(const char *s, unsigned char target_char)
 {
-	static t_list	*head;
-	t_list			*fd_lst;
-
-	fd_lst = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	if (!get_list(&head, &fd_lst, fd))
-		return (0);
-	if (!read_str(&fd_lst, fd))
-	{
-		if (free_lst(&head, &fd_lst))
-			return (NULL);
-	}
-	return (ret_str(&head, &fd_lst));
-}
-
-t_success	join_str(t_list **fd_lst, char **str, ssize_t read_len)
-{
-	char		*temp;
-	ssize_t		i;
+	ssize_t i;
 
 	i = 0;
-	temp = (char *)malloc((*fd_lst)->buf_len + read_len);
-	if (!temp)
-		return (ERROR);
-	ft_memcpy(temp, (*fd_lst)->buf, (*fd_lst)->buf_len);
-	ft_memcpy(temp + (*fd_lst)->buf_len, *str, read_len);
-	free(*str);
-	free((*fd_lst)->buf);
-	(*fd_lst)->buf_len = (*fd_lst)->buf_len + read_len;
-	(*fd_lst)->buf = temp;
-	while (i < (*fd_lst)->buf_len)
-	{
-		if (temp[i] == '\n')
-			return (SUCCESS);
+	if (s == NULL)
+		return (0);
+	while (s[i] && target_char != s[i])
 		i++;
-	}
-	return (CONTINUE);
+	return (i);
 }
 
-t_success	read_str(t_list **fd_lst, int fd)
+static void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char		*str;
-	ssize_t		read_len;
-	t_success	state;
+	unsigned char	*temp;
+	size_t			cnt;
 
-	str = (char *)malloc(BUFFER_SIZE);
-	if (!str)
-		return (ERROR);
-	read_len = read(fd, str, BUFFER_SIZE);
-	if (read_len < 0 || (read_len == 0 && (*fd_lst)->buf_len == 0))
+	temp = (unsigned char *)src;
+	cnt = 0;
+	while (cnt < n)
 	{
-		free(str);
-		return (ERROR);
+		((unsigned char *)dst)[cnt] = temp[cnt];
+		cnt++;
 	}
-	if (read_len == 0)
-	{
-		free(str);
-		return (CONTINUE);
-	}
-	state = join_str(fd_lst, &str, read_len);
-	if (state == SUCCESS)
-		return (state);
-	if (state == CONTINUE)
-		return (read_str(fd_lst, fd));
-	return (ERROR);
+	return (dst);
 }
 
-void	set_fd_list(t_list **fd_lst, t_list *prev, int fd)
+int str_join(t_gnl *gnl, int gnl_fd, char *tmp_str)
 {
-	(*fd_lst)->fd = fd;
-	(*fd_lst)->prev = prev;
-	(*fd_lst)->next = NULL;
-	(*fd_lst)->buf_len = 0;
-	(*fd_lst)->buf = 0;
+	char *sum_buf;
+	int sum_len;
+	int	tmp_len;
+	
+	tmp_len = ft_strlen(tmp_str, '\0');
+	sum_len = tmp_len + gnl[gnl_fd].rb_capacity;
+	sum_buf = malloc(sum_len + 1);
+	if (!sum_buf)
+		return (-1);
+	ft_memcpy(sum_buf, gnl[gnl_fd].rb, gnl[gnl_fd].rb_capacity);
+	ft_memcpy(sum_buf[gnl[gnl_fd].rb_capacity], tmp_str, tmp_len);
+	sum_buf[sum_len] = '\0';
+	free(gnl[gnl_fd].rb);
+	gnl[gnl_fd].rb = sum_buf;
+	gnl[gnl_fd].rb_capacity = sum_len;
+	return sum_len;
 }
 
-ssize_t	get_ret_len(t_list **fd_lst)
+char *get_next_line(int fd)
 {
-	ssize_t	ret_len;
+	static t_gnl gnl[OPEN_MAX];
+	char tmp_str[BUFFER_SIZE];
+	int gnl_fd = fd - 1;
+	int read_len;
 
-	ret_len = 0;
-	while (ret_len < (*fd_lst)->buf_len)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1)
+		return (NULL);
+	read_len = read(fd, tmp_str, BUFFER_SIZE - 1);
+	while (read_len > 0)
 	{
-		if ((*fd_lst)->buf[ret_len++] == '\n')
-			break ;
+		tmp_str[read_len] = '\0';
+		str_join(gnl, gnl_fd, tmp_str);
+		read_len = read(fd, tmp_str, BUFFER_SIZE);
 	}
-	return (ret_len);
+	// line
+	return ();
 }
