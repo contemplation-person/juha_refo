@@ -27,7 +27,6 @@
 
 typedef struct s_gnl
 {
-	int 				fd;
 	char				*rb;
 	int					rb_capacity;
 }t_gnl;
