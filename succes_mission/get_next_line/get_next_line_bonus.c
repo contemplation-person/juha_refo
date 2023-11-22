@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/05/12 18:45:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/11/22 19:56:27 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 static size_t ft_strlen(const char *s, unsigned char target_char)
 {
@@ -102,6 +102,13 @@ char *get_next_line(int fd)
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1)
 		return (NULL);
 	read_len = read(fd, tmp_str, BUFFER_SIZE);
+	if (read_len == -1)
+	{
+		free(gnl[fd_index].rb);
+		gnl[fd_index].rb = NULL;
+		gnl[fd_index].rb_capacity = 0;
+		return (NULL);
+	}
 	while (read_len > 0)
 	{
 		tmp_str[read_len] = '\0';

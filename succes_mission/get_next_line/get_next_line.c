@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:26:35 by juha              #+#    #+#             */
-/*   Updated: 2022/05/12 21:40:46 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/11/22 20:23:41 by juha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static int str_join(char **dst, int dst_len, char *src, int src_len)
 	sum_buf = malloc(sum_len + 1);
 	if (!sum_buf)
 		return (-1);
+	for (int i = 0; i < sum_len + 1; i++)
+		sum_buf[i] = 0;
 	ft_memcpy(sum_buf, *dst, dst_len);
 	ft_memcpy(&sum_buf[dst_len], src, src_len);
 	sum_buf[sum_len] = '\0';
@@ -76,10 +78,13 @@ static char *pass_one_line(t_gnl *gnl, int fd_index)
 		{
 			free(ret_str);
 			free(save_str);
+			ret_str = 0;
+			save_str = 0;
 			len = 0;
 			return (NULL);
 		}
 		free(gnl[fd_index].rb);
+		gnl[fd_index].rb = NULL;
 	}
 	else
 	{
@@ -94,7 +99,7 @@ static char *pass_one_line(t_gnl *gnl, int fd_index)
 
 char *get_next_line(int fd)
 {
-	static t_gnl gnl[OPEN_MAX];
+	static t_gnl gnl[OPEN_MAX] = {0,};
 	char tmp_str[BUFFER_SIZE + 1];
 	int fd_index = fd - 1;
 	int read_len;
@@ -102,6 +107,13 @@ char *get_next_line(int fd)
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1)
 		return (NULL);
 	read_len = read(fd, tmp_str, BUFFER_SIZE);
+	if (read_len == -1)
+	{
+		free(gnl[fd_index].rb);
+		gnl[fd_index].rb = NULL;
+		gnl[fd_index].rb_capacity = 0;
+		return (NULL);
+	}
 	while (read_len > 0)
 	{
 		tmp_str[read_len] = '\0';
