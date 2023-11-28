@@ -1,0 +1,12 @@
+[submodule "succes_mission/pong-nyan"]
+	path = succes_mission/pong-nyan
+	url = https://github.com/pong-nyan/pong-nyan
+[submodule "succes_mission/IRC"]
+	path = succes_mission/IRC
+	url = https://github.com/5Circle42IRC/IRC
+[submodule "succes_mission/minishell"]
+	path = succes_mission/minishell
+	url = https://github.com/contemplation-person/minishell
+[submodule "succes_mission/philosopher"]
+	path = succes_mission/philosopher
+	url = https://github.com/contemplation-person/philosopher
