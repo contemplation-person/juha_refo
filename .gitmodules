@@ -7,9 +7,6 @@
 [submodule "succes_mission/minishell"]
 	path = succes_mission/minishell
 	url = https://github.com/contemplation-person/minishell
-[submodule "succes_mission/philosopher"]
-	path = succes_mission/philosopher
-	url = https://github.com/contemplation-person/philosopher
 [submodule "succes_mission/trancendence/pong-nyan"]
 	path = succes_mission/trancendence/pong-nyan
 	url = git@github.com:pong-nyan/pong-nyan.git
