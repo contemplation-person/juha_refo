@@ -6,7 +6,7 @@ This repository is the outcome of my project-based learning (PBL) at 42 Seoul.
 ### contents
 |Project name|Simple explanation|Skill|Collaboration|
 |---|---|---|---|
-|[pong-nyan](https://github.com/pong-nyan/pong-nyan/tree/33c0c451e01b6fa4921665fc78dd165a5ff368ee "pong-nyan")|make ping-pong game website|Typescript, next, nest, docker, postgresql, metter.js|5 people|
+|[pong-nyan](https://github.com/pong-nyan/pong-nyan/tree/33c0c451e01b6fa4921665fc78dd165a5ff368ee "pong-nyan")|make [ping-pong game](https://docs.pong-nyan.site/) website|Typescript, next, nest, docker, postgresql, metter.js|5 people|
 |[IRC](https://github.com/5Circle42IRC/IRC/tree/4136d45d78612c07b6d22208b89892a9fe776f35 "IRC")|make [irc](https://datatracker.ietf.org/doc/html/rfc1459) chatting program|cpp|3 people|
 |[inception](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/inception "inception")|written Dockerfiles for WordPress, Nginx, and MariaDB, and bundled them together using Docker Compose, then deployed them to Docker.|docker|single project|
 |[CPP](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/CPP "CPP")|I have acquired fundamental C++ skills.|cpp|single project|
