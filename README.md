@@ -24,19 +24,38 @@ All assignments were written for the Intel Mac environment.
 ---
 ## Detail
 ### pong-nyan
+![main](image/ts_main_page.png)
+---
 * In this assignment, the login function was implemented using Oauth.
+![Oauth](image/ts_Oauth_login.png)
+---
 * If users wish, they can set up 2FA using Google Authenticator.
+![2fa](image/ts_2fa.png)
+---
 * We have implemented an advanced game that combines the basic ping pong game and pinball.
+![game](image/ts_game_page.png)
+![game](image/ts_original_game.png)
+![scoreboard1](image/ts_scoreboard.png)
+![scoreboard1](image/ts_scoreboard_full.png)
+---
 * Chat channels and chat rooms have also been implemented, and user profiles can also be changed.
-* User match records are stored in postgresql.
+![chat](image/ts_chatting_channel.png)
+![chat](image/ts_chatting_page.png)
+---
 * We also implemented a score page that shows each user's recorded score.
+![score](image/ts_rank_page.png)
+---
 * We used nginx to connect the socket, front, and backend.
+* User match records are stored in postgresql.
 * A docker compose file was created to allow development regardless of the development environment, nest was used for the backend, and react and next were used for the frontend.
+![docker](image/ts_docker.png)
+---
 * Rather than using a separate library to maintain the state, we implemented it individually using drilling technology.
 
 ### IRC
-![Alt text](image/IRC.png)
+![IRC](image/IRC.png)
 * We created a chat server using the basic Internet Relay Chat Protocol.
 * I created a server using multiplexing technology using the select function.
 * I was in charge of server implementation and implemented the channel topic and mode.
 
+### INCEPTION
