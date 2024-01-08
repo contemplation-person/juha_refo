@@ -20,7 +20,7 @@ All assignments were written for the Intel Mac environment.
 |4|[CPP](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/CPP "CPP")|I have acquired fundamental [C++](https://en.cppreference.com/w/) skills.|cpp|single project|
 |5|[philo](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/philo "philo")|I implemented the well-known Dining Philosophers problem and experimented with multi-threading.|C|single project|
 |6|[minishell](https://github.com/contemplation-person/minishell/tree/66994c69098979f35fe7778f190e06af55e2f7a3 "minishell")|make small shell|C|2 people|
-|7|[so_long](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/so_long "so_long")|Implementing a Small 2D Game using MLX|C|single project
+|[7](#so_long)|[so_long](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/so_long "so_long")|Implementing a Small 2D Game using MLX|C|single project
 |[8](#pipex)|[pipex](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/pipex "pipex")|Implementing Pipe Communication.|C|single project|
 |[9](#printf)|[printf](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/printf "printf")|Implementing c function printf, using the Variadic Arguments|C|single project|
 |[10](#libft)|[libft](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/libft "libft")|Creating My Own Library|C|single project|
@@ -67,6 +67,9 @@ All assignments were written for the Intel Mac environment.
 [top](#contents)
 
 ### INCEPTION
+
+### so_long
+* It's a simple 2D program where you pass through the exit after collecting all the coins.
 
 ### Pipex
 ![pipex](image/pipex.png)

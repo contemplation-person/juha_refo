@@ -31,8 +31,7 @@ LIB_DIR		=	./libft
 
 $(NAME): $(OBJS)
 	@make bonus -C $(LIB_DIR)
-	@mv $(LIB_DIR)/libft.a ./libft.a
-	$(CC) $(CPPFLAGS) $(OBJS) -L./ -lft -L./minilibx_opengl_20191021 -lmlx -framework OpenGL \
+	$(CC) $(CPPFLAGS) $(OBJS) -L./libft -lft -L./minilibx_opengl_20191021 -lmlx -framework OpenGL \
 	-framework AppKit -o $(NAME)
 	
 all: $(NAME)
