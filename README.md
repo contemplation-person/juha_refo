@@ -11,15 +11,15 @@ All assignments were written for the Intel Mac environment.
 |index|Project name|Simple explanation|Skill|Collaboration|
 |:---:|:---:|---|:---:|:---:|
 |[1](#pong-nyan)|[pong-nyan](https://github.com/pong-nyan/pong-nyan/tree/33c0c451e01b6fa4921665fc78dd165a5ff368ee "pong-nyan")|make [ping-pong game](https://docs.pong-nyan.site/) website|Typescript, next, nest, docker, postgresql, metter.js|5 people|
-|[2](#IRC)|[IRC](https://github.com/5Circle42IRC/IRC/tree/4136d45d78612c07b6d22208b89892a9fe776f35 "IRC")|make [irc](https://datatracker.ietf.org/doc/html/rfc1459) chatting program|cpp|3 people|
-|3|[inception](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/inception "inception")|written Dockerfiles for WordPress, Nginx, and MariaDB, and bundled them together using Docker Compose, then deployed them to Docker.|docker|single project|
+|[2](#irc)|[IRC](https://github.com/5Circle42IRC/IRC/tree/4136d45d78612c07b6d22208b89892a9fe776f35 "IRC")|make [irc](https://datatracker.ietf.org/doc/html/rfc1459) chatting program|cpp|3 people|
+|[3](#inception)|[inception](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/inception "inception")|written Dockerfiles for WordPress, Nginx, and MariaDB, and bundled them together using Docker Compose, then deployed them to Docker.|docker|single project|
 |4|[CPP](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/CPP "CPP")|I have acquired fundamental [C++](https://en.cppreference.com/w/) skills.|cpp|single project|
 |5|[philo](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/philo "philo")|I implemented the well-known Dining Philosophers problem and experimented with multi-threading.|C|single project|
 |6|[minishell](https://github.com/contemplation-person/minishell/tree/66994c69098979f35fe7778f190e06af55e2f7a3 "minishell")|make small shell|C|2 people|
 |7|[so_long](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/so_long "so_long")|Implementing a Small 2D Game using MLX|C|single project
 |8|[pipex](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/pipex "pipex")|Implementing Pipe Communication.|C|single project|
-|9|[printf](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/printf "printf")|Implementing c function printf, using the va Variable|C|single project|
-|10|[libft](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/libft "libft")|Creating My Own Library|C|single project|
+|[9](#printf)|[printf](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/printf "printf")|Implementing c function printf, using the Variadic Arguments|C|single project|
+|[10](#libft)|[libft](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/libft "libft")|Creating My Own Library|C|single project|
 
 ---
 ## Detail
@@ -52,6 +52,8 @@ All assignments were written for the Intel Mac environment.
 ---
 * Rather than using a separate library to maintain the state, we implemented it individually using drilling technology.
 
+[contents](#contents)
+
 ### IRC
 ![IRC](image/IRC.png)
 * We created a chat server using the basic Internet Relay Chat Protocol.
@@ -59,6 +61,10 @@ All assignments were written for the Intel Mac environment.
 * I was in charge of server implementation and implemented the channel topic and mode.
 
 ### INCEPTION
+
+### Printf
+![Printf](image/printf.png)
+* %c, %s, %p, %d, %i, %u, %x, %X, %% of actual printf were implemented using variable arguments.
 
 ### Libft
 ![Libft](image/libft.png)
