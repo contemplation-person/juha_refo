@@ -69,7 +69,24 @@ All assignments were written for the Intel Mac environment.
 ### INCEPTION
 
 ### so_long
+![so_long](image/so_long.png)
 * It's a simple 2D program where you pass through the exit after collecting all the coins.
+
+Usage    
+```bash
+cd juha_refo/success_mission/so_long
+make; ./so_long ./map/13.ber
+```
+Movement keys: 
+    Up   : w 
+    Down : s 
+    Left : a 
+    Right: d
+
+game clear condition
+* Collect all the coins and exit pipe
+
+[top](#contents)
 
 ### Pipex
 ![pipex](image/pipex.png)
