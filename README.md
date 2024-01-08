@@ -59,3 +59,8 @@ All assignments were written for the Intel Mac environment.
 * I was in charge of server implementation and implemented the channel topic and mode.
 
 ### INCEPTION
+
+### Libft
+![Libft](image/libft.png)
+* The libft task is to create my own static C library.
+* Some functions were created identically to the standard C library, and functions such as list functions and get_next_line were created as needed.
