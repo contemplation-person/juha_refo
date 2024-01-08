@@ -52,7 +52,7 @@ All assignments were written for the Intel Mac environment.
 ---
 * Rather than using a separate library to maintain the state, we implemented it individually using drilling technology.
 
-[contents](#contents)
+[top](#contents)
 
 ### IRC
 ![IRC](image/IRC.png)
@@ -60,13 +60,37 @@ All assignments were written for the Intel Mac environment.
 * I created a server using multiplexing technology using the select function.
 * I was in charge of server implementation and implemented the channel topic and mode.
 
+[top](#contents)
+
 ### INCEPTION
+
+### Pipex
+![pipex](image/pipex.png)
+* The task is to implement pipes, a shell command-line option. 
+
+Usage
+```bash
+make; ./pipex [input_filename] [cmd] [cmd] [output_filename]
+```
+[top](#contents)
 
 ### Printf
 ![Printf](image/printf.png)
 * %c, %s, %p, %d, %i, %u, %x, %X, %% of actual printf were implemented using variable arguments.
 
+Usage
+```bash
+make
+```
+[top](#contents)
+
 ### Libft
 ![Libft](image/libft.png)
 * The libft task is to create my own static C library.
 * Some functions were created identically to the standard C library, and functions such as list functions and get_next_line were created as needed.
+
+Usage
+```bash
+make
+```
+[top](#contents)
