@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:18:44 by juha              #+#    #+#             */
-/*   Updated: 2022/11/19 01:21:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/11/17 19:21:25 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	init_time(t_info *info)
 	}
 }
 
-/*atexit code 로 leaks 체크?*/
 int	main(int argc, char **argv)
 {
 	t_info				info;
