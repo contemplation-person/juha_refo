@@ -1,7 +1,7 @@
 
 # Hi Juha_refo
 
-Usages
+Usage
 ```shell
 git clone git@github.com:contemplation-person/juha_refo.git --recursive-submodul
 ```
@@ -19,7 +19,7 @@ All assignments were written for the Intel Mac environment.
 |[3](#inception)|[inception](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/inception "inception")|written Dockerfiles for WordPress, Nginx, and MariaDB, and bundled them together using Docker Compose, then deployed them to Docker.|docker|single project|
 |4|[CPP](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/CPP "CPP")|I have acquired fundamental [C++](https://en.cppreference.com/w/) skills.|cpp|single project|
 |5|[philo](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/philo "philo")|I implemented the well-known Dining Philosophers problem and experimented with multi-threading.|C|single project|
-|6|[minishell](https://github.com/contemplation-person/minishell/tree/66994c69098979f35fe7778f190e06af55e2f7a3 "minishell")|make small shell|C|2 people|
+|[6](#minishell)|[minishell](https://github.com/contemplation-person/minishell/tree/66994c69098979f35fe7778f190e06af55e2f7a3 "minishell")|make small shell|C|2 people|
 |[7](#so_long)|[so_long](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/so_long "so_long")|Implementing a Small 2D Game using MLX|C|single project
 |[8](#pipex)|[pipex](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/pipex "pipex")|Implementing Pipe Communication.|C|single project|
 |[9](#printf)|[printf](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/printf "printf")|Implementing c function printf, using the Variadic Arguments|C|single project|
@@ -68,7 +68,45 @@ All assignments were written for the Intel Mac environment.
 
 ### INCEPTION
 
-### so_long
+### philo
+
+### Minishell
+![minishell](image/minishell.png)
+
+Usage    
+```bash
+cd juha_refo/success_mission/minishell
+make; ./minishell
+```
+
+* It's an assignment to create a small shell.
+* Handle ’ (single quote) which should prevent the shell from interpreting the meta- characters in the quoted sequence.
+* Handle " (double quote) which should prevent the shell from interpreting the meta- characters in the quoted sequence except for $ (dollar sign).
+* Implement redirections:
+* < should redirect input.
+* > should redirect output.
+* << should be given a delimiter, then read the input until a line containing the delimiter is seen. However, it doesn’t have to update the history!
+* >> should redirect output in append mode.
+* Implement pipes (| character). The output of each command in the pipeline is connected to the input of the next command via a pipe.
+* Handle environment variables ($ followed by a sequence of characters) which should expand to their values.
+* Handle $? which should expand to the exit status of the most recently executed foreground pipeline.
+* Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
+* In interactive mode:
+* ctrl-C displays a new prompt on a new line.
+* ctrl-D exits the shell.
+* ctrl-\ does nothing.
+* Your shell must implement the following builtins:
+* echo with option -n
+* cd with only a relative or absolute path
+* pwd with no options
+* export with no options
+* unset with no options
+* env with no options or arguments
+* exit with no options
+
+[top](#contents)
+
+### So_long
 ![so_long](image/so_long.png)
 * It's a simple 2D program where you pass through the exit after collecting all the coins.
 
