@@ -1,6 +1,10 @@
 
 # Hi Juha_refo
 
+Usages
+```shell
+git clone git@github.com:contemplation-person/juha_refo.git --recursive-submodul
+```
 ## summary
 
 This repository is the outcome of my project-based learning (PBL) at 42 Seoul.  
@@ -17,7 +21,7 @@ All assignments were written for the Intel Mac environment.
 |5|[philo](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/philo "philo")|I implemented the well-known Dining Philosophers problem and experimented with multi-threading.|C|single project|
 |6|[minishell](https://github.com/contemplation-person/minishell/tree/66994c69098979f35fe7778f190e06af55e2f7a3 "minishell")|make small shell|C|2 people|
 |7|[so_long](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/so_long "so_long")|Implementing a Small 2D Game using MLX|C|single project
-|8|[pipex](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/pipex "pipex")|Implementing Pipe Communication.|C|single project|
+|[8](#pipex)|[pipex](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/pipex "pipex")|Implementing Pipe Communication.|C|single project|
 |[9](#printf)|[printf](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/printf "printf")|Implementing c function printf, using the Variadic Arguments|C|single project|
 |[10](#libft)|[libft](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/libft "libft")|Creating My Own Library|C|single project|
 
@@ -70,6 +74,7 @@ All assignments were written for the Intel Mac environment.
 
 Usage
 ```bash
+cd juha_refo/success_mission/printf
 make; ./pipex [input_filename] [cmd] [cmd] [output_filename]
 ```
 [top](#contents)
@@ -80,6 +85,7 @@ make; ./pipex [input_filename] [cmd] [cmd] [output_filename]
 
 Usage
 ```bash
+cd juha_refo/success_mission/printf
 make
 ```
 [top](#contents)
@@ -91,6 +97,7 @@ make
 
 Usage
 ```bash
+cd juha_refo/success_mission/libft
 make
 ```
 [top](#contents)
