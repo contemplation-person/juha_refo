@@ -17,7 +17,7 @@ All assignments were written for the Intel Mac environment.
 |[1](#pong-nyan)|[pong-nyan](https://github.com/pong-nyan/pong-nyan/tree/33c0c451e01b6fa4921665fc78dd165a5ff368ee "pong-nyan")|make [ping-pong game](https://docs.pong-nyan.site/) website|Typescript, next, nest, docker, postgresql, metter.js|5 people|
 |[2](#irc)|[IRC](https://github.com/5Circle42IRC/IRC/tree/4136d45d78612c07b6d22208b89892a9fe776f35 "IRC")|make [irc](https://datatracker.ietf.org/doc/html/rfc1459) chatting program|cpp|3 people|
 |[3](#inception)|[inception](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/inception "inception")|written Dockerfiles for WordPress, Nginx, and MariaDB, and bundled them together using Docker Compose, then deployed them to Docker.|docker|single project|
-|4|[CPP](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/CPP "CPP")|I have acquired fundamental [C++](https://en.cppreference.com/w/) skills.|cpp|single project|
+|[4](#cpp)|[CPP](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/CPP "CPP")|I have acquired fundamental [C++](https://en.cppreference.com/w/) skills.|cpp|single project|
 |[5](#philo)|[philo](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/philo "philo")|I implemented the well-known Dining Philosophers problem and experimented with multi-threading.|C|single project|
 |[6](#minishell)|[minishell](https://github.com/contemplation-person/minishell/tree/66994c69098979f35fe7778f190e06af55e2f7a3 "minishell")|make small shell|C|2 people|
 |[7](#so_long)|[so_long](https://github.com/contemplation-person/juha_refo/tree/main/succes_mission/so_long "so_long")|Implementing a Small 2D Game using MLX|C|single project
@@ -67,7 +67,16 @@ All assignments were written for the Intel Mac environment.
 [top](#contents)
 
 ### INCEPTION
+### CPP
+#### 00
+![cpp00](image/CPP_zero.png)
+* Module 00 - 00 is a simple project that prints a sentence.
+* Module 00 - 01 is creating the phonebook.
 
+#### 01
+
+
+[top](#contents)
 ### philo
 ![Philosophers](image/philo.png)
 * A program that implements the famous dining philosophers problem in code.
@@ -101,9 +110,9 @@ make; ./minishell
 * Handle " (double quote) which should prevent the shell from interpreting the meta- characters in the quoted sequence except for $ (dollar sign).
 * Implement redirections:
 * < should redirect input.
-* > should redirect output.
+* \> should redirect output.
 * << should be given a delimiter, then read the input until a line containing the delimiter is seen. However, it doesn’t have to update the history!
-* >> should redirect output in append mode.
+* \>> should redirect output in append mode.
 * Implement pipes (| character). The output of each command in the pipeline is connected to the input of the next command via a pipe.
 * Handle environment variables ($ followed by a sequence of characters) which should expand to their values.
 * Handle $? which should expand to the exit status of the most recently executed foreground pipeline.
