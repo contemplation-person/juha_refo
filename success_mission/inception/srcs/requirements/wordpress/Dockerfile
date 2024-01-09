@@ -9,7 +9,8 @@ COPY ./tools/mkdir.sh .
 RUN mkdir -p -m 755 /run/php \
 && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 && chmod 755 wp-cli.phar \
-&& mv wp-cli.phar /usr/local/bin/wp
+&& mv wp-cli.phar /usr/local/bin/wp \
+&& chmod 755 mkdir.sh
 
 EXPOSE 9000
 ENTRYPOINT /mkdir.sh

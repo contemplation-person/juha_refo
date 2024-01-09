@@ -7,7 +7,7 @@ RUN apt update && apt upgrade -y && apt install mariadb-server -y
 COPY my.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN mkdir -p -m 755 /run/mysqld/ \
-&& chown -R mysql:mysql /run/mysqld /var/lib/mysql
+&& chown -R mysql:mysql /run/mysqld /var/lib/mysql && chmod 755 setup.sh
 
 EXPOSE 3306
 
