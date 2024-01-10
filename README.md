@@ -66,7 +66,30 @@ All assignments were written for the Intel Mac environment.
 
 [top](#contents)
 
+---
 ### INCEPTION
+* This is a project that involves writing Dockerfiles and Docker Compose files to make Docker and Docker Compose work. To verify this, you need to make nginx, MariaDB, and WordPress run, and display the WordPress page.
+---
+
+![shell_prompt](image/in_operating_docker.png)
+![shell_prompt](image/in_operating_docker_two.png)
+* The shell prompt runs Docker based on the Dockerfile and Docker Compose file I have written.
+
+---
+![basic_webpage](image/in_basic_page.png)
+![basic_weblogin](image/in_login_page.png)
+* When you navigate from the default page to the login page, you can log in.
+
+---
+![basic_dashboard](image/in_basic_dashboard.png)
+![Bulletin_board](image/in_wrriting_word.png)
+![basic_Bulletin_board](image/in_writing_list_dashboard.png)
+![basic_Bulletin_board](image/in_writing_list_page.png)
+* Write a post on the bulletin board.
+
+[top](#contents)
+
+---
 ### CPP
 #### 00
 ![cpp00](image/CPP_zero.png)
@@ -77,6 +100,8 @@ All assignments were written for the Intel Mac environment.
 
 
 [top](#contents)
+
+---
 ### philo
 ![Philosophers](image/philo.png)
 * A program that implements the famous dining philosophers problem in code.
