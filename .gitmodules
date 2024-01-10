@@ -1,6 +1,3 @@
-[submodule "succes_mission/pong-nyan"]
-	path = succes_mission/pong-nyan
-	url = https://github.com/pong-nyan/pong-nyan
 [submodule "succes_mission/IRC"]
 	path = succes_mission/IRC
 	url = https://github.com/5Circle42IRC/IRC
