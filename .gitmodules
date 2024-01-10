@@ -4,3 +4,6 @@
 [submodule "succes_mission/minishell"]
 	path = succes_mission/minishell
 	url = https://github.com/contemplation-person/minishell
+[submodule "success_mission/pong-nyan"]
+	path = success_mission/pong-nyan
+	url = git@github.com:pong-nyan/pong-nyan.git
