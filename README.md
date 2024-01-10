@@ -91,14 +91,111 @@ All assignments were written for the Intel Mac environment.
 
 ---
 ### CPP
-#### 00
+[chapter 00](#cpp-00) : I have learned about namespaces, classes, member functions, stdio streams, initialization lists, static, const, and some other basic stuff.
+
+[chapter 01](#cpp-01) : I have learned about Memory allocation, pointers to members, references, switch statement.
+
+#### CPP 00
+* my first cpp programming
+
 ![cpp00](image/CPP_zero.png)
 * Module 00 - 00 is a simple project that prints a sentence.
 * Module 00 - 01 is creating the phonebook.
 
-#### 01
+Usage
+```bash
+cd juha_refo/success_mission/CPP/CPP00/ex*
+make
+```
+[cpp](#cpp)  
+[top](#contents)
 
+---
 
+#### CPP 01
+
+![cpp01_00](image/CPP01_00.png)
+* This program used C++ memory allocation techniques to create an object called "zombie."
+
+Usage
+```bash
+cd juha_refo/success_mission/CPP/CPP01/ex00
+make
+./Zombie
+```
+---
+
+![cpp01_01](image/CPP01_01.png)
+* I have written a C++ program that allocates and deallocates a zombie array.
+
+Usage
+```bash
+cd juha_refo/success_mission/CPP/CPP01/ex01
+make
+./Zombie 
+```
+
+---
+
+![cpp01_02](image/CPP01_02.png)
+* I studied pointers and references, and confirmed the differences through output.
+
+Usage
+```bash
+cd juha_refo/success_mission/CPP/CPP01/ex02
+make
+./Brain
+```
+---
+
+![cpp01_03](image/CPP01_03.png)
+* I gained a clearer understanding of the differences between pointers and references through the specific situation of equipping weapons.
+
+Usage
+```bash
+cd juha_refo/success_mission/CPP/CPP01/ex03
+make
+./Human
+```
+---
+
+![cpp01_04](image/CPP01_04.png)
+* A program that reads the content of a file and replaces specific words or sentences with others.
+
+Usage
+```bash
+cd juha_refo/success_mission/CPP/CPP01/ex03
+make
+./Replace infile "let it" "go"
+```
+
+---
+
+![cpp01_05](image/CPP01_05.png)
+* The assignment is to learn writing elegant code using the switch statement.
+* command : debug, info, warning, error
+
+Usage
+```bash
+cd juha_refo/success_mission/CPP/CPP01/ex03
+make
+./Harl debug
+```
+
+---
+
+![cpp01_06](image/CPP01_06.png)
+* The assignment is to learn writing elegant code using the switch statement.
+* command : debug, info, warning, error
+
+Usage
+```bash
+cd juha_refo/success_mission/CPP/CPP01/ex03
+make
+./Harl debug
+```
+
+[cpp](#cpp)  
 [top](#contents)
 
 ---
