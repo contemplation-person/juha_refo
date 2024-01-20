@@ -12,7 +12,7 @@ All assignments were written for the Intel Mac environment.
 
 ## contents
 
-|index|Project name|Simple explanation|Skill|Collaboration|
+|index (readme)|Project name (refo)|Simple explanation|Skill|Collaboration|
 |:---:|:---:|---|:---:|:---:|
 |[1](#pong-nyan)|[pong-nyan](https://github.com/pong-nyan/pong-nyan/tree/33c0c451e01b6fa4921665fc78dd165a5ff368ee "pong-nyan")|make [ping-pong game](https://docs.pong-nyan.site/) website|Typescript, next, nest, docker, postgresql, metter.js|5 people|
 |[2](#irc)|[IRC](https://github.com/5Circle42IRC/IRC/tree/4136d45d78612c07b6d22208b89892a9fe776f35 "IRC")|make [irc](https://datatracker.ietf.org/doc/html/rfc1459) chatting program|cpp|3 people|
@@ -27,7 +27,12 @@ All assignments were written for the Intel Mac environment.
 
 ---
 ## Detail
+<!-- pong-nyan -->
 ### pong-nyan
+
+<details>
+<summary>web programming</summary>
+
 ![main](image/ts_main_page.png)
 ---
 * In this assignment, the login function was implemented using Oauth.
@@ -56,18 +61,24 @@ All assignments were written for the Intel Mac environment.
 * Rather than using a separate library to maintain the state, we implemented it individually using drilling technology.
 
 [top](#contents)
+</details>
 
 ---
 ### IRC
+
+<details>
+
 ![IRC](image/IRC.png)
-* We created a chat server using the basic Internet Relay Chat Protocol.
+<summary>We created a chat server using the basic Internet Relay Chat Protocol. (socket programming)</summary>
 * I created a server using multiplexing technology using the select function.
 * I was in charge of server implementation and implemented the channel topic and mode.
-
 [top](#contents)
+</details>
 
 ---
 ### INCEPTION
+<details>
+<summary>docker programming</summary>
 * This is a project that involves writing Dockerfiles and Docker Compose files to make Docker and Docker Compose work. To verify this, you need to make nginx, MariaDB, and WordPress run, and display the WordPress page.
 ---
 
@@ -89,14 +100,13 @@ All assignments were written for the Intel Mac environment.
 
 [top](#contents)
 
+</details>
+
 ---
 ### CPP
-[chapter 00](#cpp-00) : I have learned about namespaces, classes, member functions, stdio streams, initialization lists, static, const, and some other basic stuff.
 
-[chapter 01](#cpp-01) : I have learned about Memory allocation, pointers to members, references, switch statement.
-
-#### CPP 00
-* my first cpp programming
+<details>
+<summary> chapter 00 : I have learned about namespaces, classes, member functions, stdio streams, initialization lists, static, const, and some other basic stuff.  </summary>
 
 ![cpp00](image/CPP_zero.png)
 * Module 00 - 00 is a simple project that prints a sentence.
@@ -107,12 +117,11 @@ Usage
 cd juha_refo/success_mission/CPP/CPP00/ex*
 make
 ```
-[cpp](#cpp)  
-[top](#contents)
+</details>
 
----
 
-#### CPP 01
+<details>
+<summary> chapter 01 : I have learned about Memory allocation, pointers to members, references, switch statement.</summary>
 
 ![cpp01_00](image/CPP01_00.png)
 * This program used C++ memory allocation techniques to create an object called "zombie."
@@ -194,14 +203,20 @@ cd juha_refo/success_mission/CPP/CPP01/ex03
 make
 ./Harl debug
 ```
+</details>
+<details>
+<summary>chapter 02 : I have learned about Memory allocation, pointers to members,references, switch statement</summary>
 
-[cpp](#cpp)  
+</details>
+
 [top](#contents)
 
 ---
 ### philo
+<details>
+
 ![Philosophers](image/philo.png)
-* A program that implements the famous dining philosophers problem in code.
+<summary>A program that implements the famous dining philosophers problem in code.</summary>
 * I used multithreading to write the program.
 * The output may vary depending on the user's computer environment.
 
@@ -216,9 +231,13 @@ make; ./philo 20 500 200 200 4
 #./philo [Number of philosophers] [Total survival time] [Eating time] [Sleeping time] [Meal time per philosopher]
 ```
 [top](#contents)
+</details>
 
 ---
 ### Minishell
+<details>
+<summary>It's an assignment to create a small shell.</summary>
+
 ![minishell](image/minishell.png)
 
 Usage    
@@ -227,7 +246,6 @@ cd juha_refo/success_mission/minishell
 make; ./minishell
 ```
 
-* It's an assignment to create a small shell.
 * Handle ’ (single quote) which should prevent the shell from interpreting the meta- characters in the quoted sequence.
 * Handle " (double quote) which should prevent the shell from interpreting the meta- characters in the quoted sequence except for $ (dollar sign).
 * Implement redirections:
@@ -253,11 +271,14 @@ make; ./minishell
 * exit with no options
 
 [top](#contents)
+</details>
 
 ---
 ### So_long
+<details>
+
 ![so_long](image/so_long.png)
-* It's a simple 2D program where you pass through the exit after collecting all the coins.
+<summary> It's a simple 2D program where you pass through the exit after collecting all the coins. </summary>
 
 Usage    
 ```bash
@@ -274,11 +295,14 @@ game clear condition
 * Collect all the coins and exit pipe
 
 [top](#contents)
+</details>
 
 ---
 ### Pipex
+<details>
+<summary> The task is to implement pipes, a shell command-line option. </summary>
+
 ![pipex](image/pipex.png)
-* The task is to implement pipes, a shell command-line option. 
 
 Usage
 ```bash
@@ -286,9 +310,13 @@ cd juha_refo/success_mission/printf
 make; ./pipex [input_filename] [cmd] [cmd] [output_filename]
 ```
 [top](#contents)
+</details>
 
 ---
 ### Printf
+<details>
+<summary>make printf function</summary>
+
 ![Printf](image/printf.png)
 * %c, %s, %p, %d, %i, %u, %x, %X, %% of actual printf were implemented using variable arguments.
 
@@ -298,11 +326,14 @@ cd juha_refo/success_mission/printf
 make
 ```
 [top](#contents)
+</details>
 
 ---
 ### Libft
+<details>
+<summary> The libft task is to create my own static C library. </summary>
+
 ![Libft](image/libft.png)
-* The libft task is to create my own static C library.
 * Some functions were created identically to the standard C library, and functions such as list functions and get_next_line were created as needed.
 
 Usage
@@ -311,3 +342,4 @@ cd juha_refo/success_mission/libft
 make
 ```
 [top](#contents)
+</details>
