@@ -1,9 +1,15 @@
-[submodule "succes_mission/pong-nyan"]
-	path = succes_mission/pong-nyan
-	url = https://github.com/pong-nyan/pong-nyan
 [submodule "succes_mission/IRC"]
 	path = succes_mission/IRC
 	url = https://github.com/5Circle42IRC/IRC
 [submodule "succes_mission/minishell"]
 	path = succes_mission/minishell
 	url = https://github.com/contemplation-person/minishell
+[submodule "success_mission/pong-nyan"]
+	path = success_mission/pong-nyan
+	url = git@github.com:pong-nyan/pong-nyan.git
+[submodule "success_mission/IRC"]
+	path = success_mission/IRC
+	url = git@github.com:5Circle42IRC/IRC.git
+[submodule "success_mission/minishell"]
+	path = success_mission/minishell
+	url = git@github.com:contemplation-person/minishell.git
