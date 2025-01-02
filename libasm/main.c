@@ -39,6 +39,8 @@ int main() {
 	printf("2. real strcpy: %d\n", strcpy(test_cpy, null));
 	printf("2. real strcpy result: %s\n", test_cpy);
 	
+	ft_write(1, "test", 5);
+	
 //	printf("3. my strcpy: %d\n", ft_strcpy(test_cpy, NULL));
 //	printf("3. my strcpy result: %s\n", test_cpy);
 
