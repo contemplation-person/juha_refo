@@ -1,7 +1,9 @@
 import sys
 
+
 def ErrorMessage(context):
     print("AssertionError:", context)
+
 
 argc = len(sys.argv)
 
@@ -12,7 +14,6 @@ try:
         raise AssertionError("more than one argument is provided")
 
     number = int(sys.argv[1])
-
 
     if (number % 2):
         print("I'm Odd.")
