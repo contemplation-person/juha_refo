@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('\bscope\b')

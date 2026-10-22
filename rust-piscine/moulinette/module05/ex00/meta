@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('\bmax(_by(_key)?)?\(' 'cmp::' '\.(fold|reduce)\(')

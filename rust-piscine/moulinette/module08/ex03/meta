@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('Atomic' 'mpsc' '\bscope\b')

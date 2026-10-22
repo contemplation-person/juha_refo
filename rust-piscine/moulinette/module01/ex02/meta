@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('\.r?split(n|_once|_whitespace|_ascii_whitespace|_terminator|_inclusive)?\(' '\.r?find\(' 'trim' '\.position\(')

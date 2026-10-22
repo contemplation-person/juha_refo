@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('\bVec\b' 'vec!' 'VecDeque' 'LinkedList' 'collections')

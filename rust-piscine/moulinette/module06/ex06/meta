@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('\.(windows|tuple_windows|zip)\(')

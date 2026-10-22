@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('\.(map|for_each|filter|filter_map|any|all|count|fold|position|find|collect|sum|extend)\(')

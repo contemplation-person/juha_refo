@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('\.collect' '\.to_vec' '\bextend' 'vec!\[[^]]')

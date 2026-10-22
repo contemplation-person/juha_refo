@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('\.parse' 'from_str' '\bi64\b' '\bi128\b' '\bu64\b' '\bu128\b')

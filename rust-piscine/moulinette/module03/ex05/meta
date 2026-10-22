@@ -1,0 +1,2 @@
+KIND=lib
+FORBIDDEN=('from_str_radix')
